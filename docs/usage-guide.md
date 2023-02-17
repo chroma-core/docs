@@ -180,13 +180,17 @@ collection.get(
 
 Chroma supports filtering queries by `metadata` and `document` contents. The `where` filter is used to filter by `metadata`, and the `where_document` filter is used to filter by `document` contents.
 
+##### Filtering by metadata
 In order to filter on metadata, you must supply a `where` filter dictionary to the query. The dictionary must have the following structure:
 
 ```python
 {
     "metadata_field": {
         <Operator>: <Value>
-    }
+    },
+    "metadata_field": {
+        <Operator>: <Value>
+    },
 }
 ```
 
@@ -199,6 +203,22 @@ Filtering metadata supports the following operators:
 - `$lt` - less than (int, float)
 - `$lte` - less than or equal to (int, float)
 
+Using the $eq operator is equivalent to using the `where` filter.
+```python
+{
+    "metadata_field": "search_string"
+}
+
+# is equivalent to
+
+{
+    "metadata_field": {
+        "$eq": "search_string"
+    }
+}
+
+```
+##### Filtering by document contents
 In order to filter on document contents, you must supply a `where_document` filter dictionary to the query. The dictionary must have the following structure:
 
 ```python
@@ -207,12 +227,13 @@ In order to filter on document contents, you must supply a `where_document` filt
 }
 ``` 
 
+
 Filtering document contents supports the following operators:
 - `$contains` - if the document contains the string (string)
 
-You can also use the logical operators $and and $or to combine multiple filters.
+You can also use the logical operators `$and` and `$or` to combine multiple filters.
 
-An AND operator will return results that match all of the filters in the list.
+An `$and` operator will return results that match all of the filters in the list.
 ```python
 {
     "$and": [
@@ -230,7 +251,7 @@ An AND operator will return results that match all of the filters in the list.
 }
 ```
 
-An OR operator will return results that match any of the filters in the list.
+An `$or` operator will return results that match any of the filters in the list.
 ```python
 {
     "$or": [
