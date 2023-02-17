@@ -222,14 +222,14 @@ Using the $eq operator is equivalent to using the `where` filter.
 In order to filter on document contents, you must supply a `where_document` filter dictionary to the query. The dictionary must have the following structure:
 
 ```python
+# Filtering for a search_string
 {
-    <Operator>: <Value>
+    "$contains": "search_string"
 }
 ``` 
 
 
-Filtering document contents supports the following operators:
-- `$contains` - if the document contains the string (string)
+##### Using logical operators
 
 You can also use the logical operators `$and` and `$or` to combine multiple filters.
 
