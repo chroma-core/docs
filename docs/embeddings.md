@@ -39,6 +39,38 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
 
 You can pass in an optional `model_name` argument, which lets you choose which OpenAI embeddings model to use. By default, Chroma uses `text-embedding-ada-002`. You can see a list of all available models [here](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings).
 
+## Cohere
+
+Chroma also provides a convenient wrapper around Cohere's embedding API. This embedding function runs remotely on Cohere’s servers, and requires an API key. You can get an API key by signing up for an account at [Cohere](https://dashboard.cohere.ai/welcome/register).
+
+This embedding function relies on the `cohere` python package, which you can install with `pip install cohere`.
+
+```python
+cohere_ef  = embedding_functions.CohereEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="large")
+cohere_ef(texts=["document1","document2"])
+```
+
+You can pass in an optional `model_name` argument, which lets you choose which Cohere embeddings model to use. By default, Chroma uses `large` model. You can see the available models under `Get embeddings` section [here](https://docs.cohere.ai/reference/embed).
+
+### Multilingual model example
+
+```python
+cohere_ef  = embedding_functions.CohereEmbeddingFunction(
+        api_key="YOUR_API_KEY", 
+        model_name="multilingual-22-12")
+
+multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!', 
+        'Hallo von Cohere!', 'Bonjour de Cohere!', 
+        '¡Hola desde Cohere!', 'Olá do Cohere!', 
+        'Ciao da Cohere!', '您好，来自 Cohere！',
+        'कोहेरे से नमस्ते!'  ]
+
+cohere_ef(texts=multilingual_texts)
+
+```
+
+For more information on multilingual model you can read [here](https://docs.cohere.ai/docs/multilingual-language-models).
+
 ## Custom Embedding Functions
 
 You can create your own embedding function to use with Chroma, it just needs to implement the `EmbeddingFunction` protocol.
