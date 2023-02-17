@@ -143,12 +143,14 @@ You can query by a set of `query_embeddings`.
 collection.query(
     query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...]
     n_results=10,
-    where={"style": "style1"}
+    where={"metadata_field": "is_equal_to_this"},
+    where_document={"$contains":"search_string"}
 )
 ```
 
 The query will return the `n_results` closest matches to each `query_embedding`, in order.
 An optional `where` filter dictionary can be supplied to filter the results by the `metadata` associated with each document.
+Additionally, an optional `where_document` filter dictionary can be supplied to filter the results by contents of the document.
 
 If the supplied `query_embeddings` are not the same dimension as the collection, an exception will be raised.
 
@@ -156,9 +158,10 @@ You can also query by a set of `query_texts`. Chroma will first embed each `quer
 
 ```python
 collection.query(
-    query_texts=["doc10","thus spake zarathustra", ...]
+    query_texts=["doc10", "thus spake zarathustra", ...]
     n_results=10,
-    where={"style": "style1"}
+    where={"metadata_field": "is_equal_to_this"},
+    where_document={"$contains":"search_string"}
 )
 ```
 
@@ -171,7 +174,80 @@ collection.get(
 )
 ```
 
-`.get` also supports the `where` filter. If no `ids` are supplied, it will return all items in the collection that match the `where` filter.
+`.get` also supports the `where` and `where_document` filters. If no `ids` are supplied, it will return all items in the collection that match the `where` and `where_document` filters.
+
+### Using Where filters
+
+Chroma supports filtering queries by `metadata` and `document` contents. The `where` filter is used to filter by `metadata`, and the `where_document` filter is used to filter by `document` contents.
+
+In order to filter on metadata, you must supply a `where` filter dictionary to the query. The dictionary must have the following structure:
+
+```python
+{
+    "metadata_field": {
+        <Operator>: <Value>
+    }
+}
+```
+
+Filtering metadata supports the following operators:
+
+- `$eq` - equal to (string, int, float)
+- `$ne` - not equal to (string, int, float)
+- `$gt` - greater than (int, float)
+- `$gte` - greater than or equal to (int, float)
+- `$lt` - less than (int, float)
+- `$lte` - less than or equal to (int, float)
+
+In order to filter on document contents, you must supply a `where_document` filter dictionary to the query. The dictionary must have the following structure:
+
+```python
+{
+    <Operator>: <Value>
+}
+``` 
+
+Filtering document contents supports the following operators:
+- `$contains` - if the document contains the string (string)
+
+You can also use the logical operators $and and $or to combine multiple filters.
+
+An AND operator will return results that match all of the filters in the list.
+```python
+{
+    "$and": [
+        {
+            "metadata_field": {
+                <Operator>: <Value>
+            }
+        },
+        {
+            "metadata_field": {
+                <Operator>: <Value>
+            }
+        }
+    ]
+}
+```
+
+An OR operator will return results that match any of the filters in the list.
+```python
+{
+    "$or": [
+        {
+            "metadata_field": {
+                <Operator>: <Value>
+            }
+        },
+        {
+            "metadata_field": {
+                <Operator>: <Value>
+            }
+        }
+    ]
+}
+```
+
 
 ### Updating data in a collection
 
