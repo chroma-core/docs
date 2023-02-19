@@ -20,11 +20,19 @@ AWS Free Tier. This template uses a `t3.small` EC2 instance, which
 costs about two cents an hour, or $15 for a full month. If you follow these
 instructions, AWS will bill you accordingly.
 
+:warning: This basic stack doesn't support any kind of authentication;
+anyone who knows your server IP will be able to add and query for
+embeddings. To secure this endpoint, you'll need to put it behind
+[AWS API Gateway](https://aws.amazon.com/api-gateway/) or add your own
+authenticating proxy.
+
 :warning: By default, this template saves all data on a single
 volume. When you delete or replace it, the data will disappear. For
 serious production use (with high availability, backups, etc) please
 read and understand the CloudFormation template and use it as a basis
 for what you need, or reach out to the Chroma team for assistance.
+
+
 
 ### Step 1: Get an AWS Account
 
