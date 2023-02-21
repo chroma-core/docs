@@ -74,7 +74,7 @@ collection = client.get_collection(name="my_collection", embedding_function=emb_
 ```
 
 :::caution
-If you later wish to `get_collection`, you MUST do so with the embedding function supplied.
+If you later wish to `get_collection`, you MUST do so with the embedding function you supplied while creating the collection
 :::
 
 The embedding function takes text as input, and performs tokenization and embedding. If no embedding function is supplied, Chroma will use [sentence transfomer](https://www.sbert.net/index.html) as a default.
