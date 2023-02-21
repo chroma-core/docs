@@ -66,15 +66,20 @@ Chroma uses collection names in the url, so there are a few restrictions on nami
 - The name must not contain two consecutive dots.
 - The name must not be a valid IP address.
 
-Chroma collections are created with a name and an optional embedding function.
+Chroma collections are created with a name and an optional embedding function. If you supply an embedding function, you must supply it every time you get the collection.
 
 ```python
-collection = client.create_collection(name="my_collection", embedding_function=emb_fn, metric="dot", dimension=768)
+collection = client.create_collection(name="my_collection", embedding_function=emb_fn)
+collection = client.get_collection(name="my_collection", embedding_function=emb_fn)
 ```
+
+:::caution
+If you later wish to `get_collection`, you MUST do so with the embedding function supplied.
+:::
 
 The embedding function takes text as input, and performs tokenization and embedding. If no embedding function is supplied, Chroma will use [sentence transfomer](https://www.sbert.net/index.html) as a default.
 
-You can learn more about [🧬 embedding functions](./embedding-functions.md), and how to create your own.
+You can learn more about [🧬 embedding functions](./embeddings.md), and how to create your own.
 
 Existing collections can be retrieved by name with `.get_collection`, and deleted with `.delete_collection`.
 
