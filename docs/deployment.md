@@ -33,7 +33,6 @@ read and understand the CloudFormation template and use it as a basis
 for what you need, or reach out to the Chroma team for assistance.
 
 
-
 ### Step 1: Get an AWS Account
 
 You will need an AWS Account. You can use one you already have, or
@@ -89,6 +88,17 @@ pairs to override aspects of the stack. Available keys are:
 When you launch the Chroma client library to actually use Chroma, all
 you need to do is configure it to use the server's IP address and port
 `8000`. You can do this in two ways:
+
+### Step 6: Clean Up (optional).
+
+To destroy the stack and remove all AWS resources, use the AWS CLI `delete-stack` command.
+
+```
+aws cloudformation delete-stack --stack-name my-chroma-stack
+```
+
+:warning: This will destroy all the data in your Chroma database,
+unless you've taken a snapshot or otherwise backed it up.
 
 ###### Using Environment Variables
 
