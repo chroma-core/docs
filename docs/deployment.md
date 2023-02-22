@@ -83,6 +83,24 @@ pairs to override aspects of the stack. Available keys are:
 - `Region` - the AWS region into which to deploy (default: `us-east-1`)
 - `KeyName` - the AWS EC2 KeyPair to use, allowing to to access the instance via SSH (default: none)
 
+To set a CloudFormation stack's parameters using the AWS CLI, use the
+`--parameters` command line option. Parameters must be specified using
+the format `ParameterName={parameter},ParameterValue={value}`.
+
+For example, the following command launches a new stack similar to the
+above, but in the `us-west-1` region, on a `m5.4xlarge` EC2 instance,
+and adding a KeyPair named `mykey` so anyone with the associated
+private key can SSH into the machine:
+
+
+```
+aws cloudformation create-stack --stack-name my-chroma-stack --template-url https://s3.amazonaws.com/public.trychroma.com/cloudformation/latest/chroma.cf.json \
+    --parameters ParameterKey=KeyName,ParameterValue=mykey \
+                 ParameterKey=Region,ParameterValue=us-west-1 \
+                 ParameterKey=InstanceType,ParameterValue=m5.4xlarge
+```
+
+
 ### Step 5: Configure the Chroma Library
 
 When you launch the Chroma client library to actually use Chroma, all
