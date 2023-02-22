@@ -107,17 +107,6 @@ When you launch the Chroma client library to actually use Chroma, all
 you need to do is configure it to use the server's IP address and port
 `8000`. You can do this in two ways:
 
-### Step 6: Clean Up (optional).
-
-To destroy the stack and remove all AWS resources, use the AWS CLI `delete-stack` command.
-
-```
-aws cloudformation delete-stack --stack-name my-chroma-stack
-```
-
-:warning: This will destroy all the data in your Chroma database,
-unless you've taken a snapshot or otherwise backed it up.
-
 ###### Using Environment Variables
 
 
@@ -138,3 +127,14 @@ chroma = chromadb.Client(Settings(chroma_api_impl="rest",
                                   chroma_server_host="<server IP address>",
                                   chroma_server_http_port=8000))
 ```
+
+### Step 6: Clean Up (optional).
+
+To destroy the stack and remove all AWS resources, use the AWS CLI `delete-stack` command.
+
+```
+aws cloudformation delete-stack --stack-name my-chroma-stack
+```
+
+:warning: This will destroy all the data in your Chroma database,
+unless you've taken a snapshot or otherwise backed it up.
