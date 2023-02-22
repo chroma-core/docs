@@ -96,7 +96,7 @@ you need to do is configure it to use the server's IP address and port
 ```
 export CHROMA_API_IMPL=rest
 export CHROMA_SERVER_HOST=<server IP address>
-export CHROMA_SERVER_HTTP_PORT=8000g
+export CHROMA_SERVER_HTTP_PORT=8000
 ```
 
 
