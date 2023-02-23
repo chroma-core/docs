@@ -57,6 +57,9 @@ collection = client.create_collection("testname")
 # get an existing collection
 collection = client.get_collection("testname")
 
+# get a collection or create if it doesn't exist already
+collection = client.get_collection("testname")
+
 # delete a collection
 client.delete_collection("testname")
 ```
