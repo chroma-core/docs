@@ -23,7 +23,7 @@ import TabItem from '@theme/TabItem';
 
 ### Run the backend
 
-Run `docker-compose up -d --build` to run a production backend in Docker on your local computer. Simply update your API initialization and then use the API the same way as before.
+Run `docker-compose up -d --build` to run a backend in Docker on your local computer. 
 
 ## Initialize client - JS
 

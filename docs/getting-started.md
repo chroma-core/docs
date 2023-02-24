@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 ***
 
-Chroma is a database for building AI applications with embeddings. It comes with everything you need to get started built in, and runs on your machine. A hosted version is coming soon!
+Chroma is a database for building AI applications with embeddings. It comes with everything you need to get started built in, and runs on your machine. A [hosted version](mailto:hello@trychroma.com) is coming soon!
 
 ### 1. Install
 
@@ -201,8 +201,6 @@ Find [chromadb on PyPI](https://pypi.org/project/chromadb/).
 
 </TabItem>
 </Tabs>
-
-
 
 
 ## 📚 Next steps
