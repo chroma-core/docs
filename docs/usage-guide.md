@@ -181,6 +181,7 @@ The embedding function takes text as input, and performs tokenization and embedd
 
 You can learn more about [🧬 embedding functions](./embeddings.md), and how to create your own.
 
+
 <Tabs groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
@@ -194,10 +195,12 @@ await client.deleteCollection("my_collection") # Delete a collection and all ass
 </TabItem>
 <TabItem value="py" label="Python">
 
-Existing collections can be retrieved by name with `.get_collection`, and deleted with `.delete_collection`.
+Existing collections can be retrieved by name with `.get_collection`, and deleted with `.delete_collection`. You can also use `.get_or_create_collection` to get a collection if it exists, or create it if it doesn't.
+
 
 ```python
 collection = client.get_collection(name="test") # Get a collection object from an existing collection, by name. Will raise an exception of it's not found.
+collection = client.get_or_create_collection(name="test") # Get a collection object from an existing collection, by name. If it doesn't exist, create it.
 client.delete_collection(name="my_collection") # Delete a collection and all associated embeddings, documents, and metadata. ⚠️ This is destructive and not reversible
 ```
 
@@ -432,6 +435,22 @@ collection.get(
 
 
 `.get` also supports the `where` and `where_document` filters. If no `ids` are supplied, it will return all items in the collection that match the `where` and `where_document` filters.
+
+##### Choosing which data is returned
+When using get or query you can use the include parameter to specify which data you want returned. By default, Chroma will return the `ids`, `embeddings`, `documents`, `metadatas` and in the case of query, the `distances` of the results. You can specify which of these you want returned by passing an array of included field names to the includes parameter of the query or get method.
+
+```python
+
+# Only get IDs
+collection.get(
+    include=["ids"]
+)
+
+collection.query(
+    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...],
+    include=["ids"]
+)
+```
 
 ### Using Where filters
 
