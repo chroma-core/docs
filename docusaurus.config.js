@@ -56,10 +56,16 @@ const config = {
       navbar: {
         title: 'Chroma',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'chroma logo',
           src: 'img/chroma.svg',
         },
         items: [
+          {
+            position: 'left',
+            html: '<div><div class="custom-tag">Python</div><div class="custom-tag">Javascript</div></div>',
+            href: '#',
+            docId: "blah"
+          },
           {
             href: 'https://discord.gg/MMeYNTmh3x',
             label: 'Discord',
