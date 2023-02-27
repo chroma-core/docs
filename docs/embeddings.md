@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 <div class="select-language">Select a language</div>
 
-<Tabs groupId="lang" queryString="lang">
+<Tabs queryString groupId="lang">
 <TabItem value="py" label="Python"></TabItem>
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
@@ -20,7 +20,7 @@ Embeddings are the A.I-native way to represent any kind of data, making them the
 
 Chroma provides lightweight wrappers around popular embedding providers, making it easy to use them in your apps. You can set an embedding function when you create a Chroma collection, which will be used automatically, or you can call them directly yourself.
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 
@@ -54,7 +54,7 @@ You can pass in an optional `model_name` argument, which lets you choose which S
 
 Chroma provides a convenient wrapper around OpenAI's embedding API. This embedding function runs remotely on OpenAI's servers, and requires an API key. You can get an API key by signing up for an account at [OpenAI](https://openai.com/api/).
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -91,7 +91,7 @@ You can pass in an optional `model_name` argument, which lets you choose which O
 
 Chroma also provides a convenient wrapper around Cohere's embedding API. This embedding function runs remotely on Cohere’s servers, and requires an API key. You can get an API key by signing up for an account at [Cohere](https://dashboard.cohere.ai/welcome/register).
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -125,7 +125,7 @@ You can pass in an optional `model_name` argument, which lets you choose which C
 
 ### Multilingual model example
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -170,7 +170,7 @@ For more information on multilingual model you can read [here](https://docs.cohe
 
 ## Custom Embedding Functions
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 You can create your own embedding function to use with Chroma, it just needs to implement the `EmbeddingFunction` protocol. The `.generate` method in a class is strictly all you need.

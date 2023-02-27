@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 <div class="select-language">Select a language</div>
 
-<Tabs groupId="lang" queryString="lang">
+<Tabs queryString groupId="lang" queryString>
 <TabItem value="py" label="Python"></TabItem>
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
@@ -21,7 +21,7 @@ Chroma is a database for building AI applications with embeddings. It comes with
 
 ### 1. Install
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 
@@ -41,7 +41,7 @@ pip install chromadb
 
 ### 2. Get the Chroma Client
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```js
@@ -74,7 +74,7 @@ chroma_client = chromadb.Client()
 
 Collections are where you'll store your embeddings, documents, and any additional metadata. You can create a collection with a name:
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 For this example, we want to generate embeddings from text. OpenAI's `ada-002` model is popular, free, and a quick [signup](https://openai.com/api/). Grab your API key and come back. Chroma's API is polymorphic (it can run in the browser or server-side), but OpenAIs is not. So run this example server-side.
@@ -103,7 +103,7 @@ collection = chroma_client.create_collection(name="my_collection")
 
 ### 4. Add some text documents to the collection
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 Chroma will store your text, and handle tokenization, embedding, and indexing automatically.
@@ -137,7 +137,7 @@ collection.add(
 
 If you have already generated embeddings yourself, you can load them directly in:
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```js
@@ -170,7 +170,7 @@ collection.add(
 
 You can query the collection with a list of query texts, and Chroma will return the `n` most similar results. It's that easy!
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```js

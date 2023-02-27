@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 <div class="select-language">Select a language</div>
 
-<Tabs groupId="lang" queryString="lang">
+<Tabs queryString groupId="lang">
 <TabItem value="py" label="Python"></TabItem>
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 
 ## Initiating the Chroma client
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```js
@@ -56,7 +56,7 @@ The `persist_directory` is where Chroma will store its database files on disk, a
 </Tabs>
 
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 The client object has a few useful convenience methods.
@@ -91,7 +91,7 @@ docker-compose up -d --build
 
 Then update your chroma client to point at the docker container. Default: `localhost:8000`
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 The JS client then talks to the chroma server backend. This can run on your local computer or be easily deployed to AWS.
@@ -141,7 +141,7 @@ Chroma uses collection names in the url, so there are a few restrictions on nami
 
 Chroma collections are created with a name and an optional embedding function. If you supply an embedding function, you must supply it every time you get the collection.
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```js
@@ -182,7 +182,7 @@ The embedding function takes text as input, and performs tokenization and embedd
 You can learn more about [🧬 embedding functions](./embeddings.md), and how to create your own.
 
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 Existing collections can be retrieved by name with `.getCollection`, and deleted with `.deleteCollection`.
@@ -210,7 +210,7 @@ client.delete_collection(name="my_collection") # Delete a collection and all ass
 
 Collections have a few useful convenience methods.
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -238,7 +238,7 @@ Add data to Chroma with `.add`.
 
 Raw documents:
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -278,7 +278,7 @@ An optional list of `metadata` dictionaries can be supplied for each document, t
 
 Alternatively, you can supply a list of document-associated `embeddings` directly, and Chroma will store the associated documents without embedding them itself.
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -312,7 +312,7 @@ If the supplied `embeddings` are not the same dimension as the collection, an ex
 
 You can also store documents elsewhere, and just supply a list of `embeddings` and `metadata` to Chroma. You can use the `ids` to associate the embeddings with your documents stored elsewhere.
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -345,7 +345,7 @@ Chroma collections can be queried in a variety of ways, using the `.query` metho
 
 You can query by a set of `query_embeddings`.
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -387,7 +387,7 @@ If the supplied `query_embeddings` are not the same dimension as the collection,
 
 You can also query by a set of `query_texts`. Chroma will first embed each `query_text` with the collection's embedding function, and then perform the query with the generated embedding.
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -545,7 +545,7 @@ An `$or` operator will return results that match any of the filters in the list.
 }
 ```
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 </TabItem>
@@ -578,7 +578,7 @@ If the supplied `embeddings` are not the same dimension as the collection, an ex
 Chroma supports deleting items from a collection by `id` using `.delete`. The embeddings, documents, and metadata associated with each item will be deleted.
 ⚠️ Naturally, this is a destructive operation, and cannot be undone.
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 ```javascript
