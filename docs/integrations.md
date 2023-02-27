@@ -9,14 +9,14 @@ import TabItem from '@theme/TabItem';
 
 <div class="select-language">Select a language</div>
 
-<Tabs groupId="lang" queryString="lang">
+<Tabs queryString groupId="lang">
 <TabItem value="py" label="Python"></TabItem>
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
 
 ***
 
-<Tabs groupId="lang" className="hideTabSwitcher">
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="js" label="JavaScript">
 
 
