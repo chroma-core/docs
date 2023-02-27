@@ -24,15 +24,24 @@ Chroma prioritizes:
 
 - simplicity and developer productivity
 - analysis on top of search
-- it also happens to be very fast!
+- it also happens to be very quick
 
-Chroma consists of a python client SDK, and a server application. Check out the [Colab notebook demo](https://colab.research.google.com/drive/1QEzFyqnoFxq7LUGyP1vzR4iLt9PpCDXv?usp=sharing).
+Chroma consists of a `Python` client SDK, `JavaScript/TypeScript` client SDK and a server application. Check out the [Colab demo](https://colab.research.google.com/drive/1QEzFyqnoFxq7LUGyP1vzR4iLt9PpCDXv?usp=sharing).(yes, it can run in a notebook 😄)
 
-Chroma is licensed under <underline>Apache 2.0</underline>.
+Chroma is licensed under [Apache 2.0](https://github.com/chroma-core/chroma/blob/main/LICENSE)
 
+### Python
+In Python, Chroma can run `in-memory` or in `client/server` mode.
 ```bash
 pip install chromadb
 ```
+
+### JavaScript
+In JavaScript, Chroma runs in `client/server` mode and talks to a Python backend.
+```bash
+npm install --save chromadb # yarn add chromadb
+```
+
 
 Continue with the full [getting started guide](./getting-started.md).
 
@@ -45,3 +54,20 @@ Continue with the full [getting started guide](./getting-started.md).
 [💬 Join Community Discord](https://discord.gg/MMeYNTmh3x) <br/>
 [@trychroma](https://twitter.com/trychroma) 
 
+
+***
+
+### Language Support
+
+<div class="special_table"></div>
+
+|        | Python     | Javascript | Other?      |
+|--------|------------|------------|------------|
+| in-memory | ✅      | ➖        |  ❓        |
+| client/server | ✅ | ✅        |  ❓        |
+
+<br/>
+
+We welcome contributions for other langauges! 
+
+Learn more on the [Community Discord](https://discord.gg/MMeYNTmh3x). 
