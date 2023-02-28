@@ -529,12 +529,17 @@ div.special_table + table, th, td {
 }
 
 .custom-tag:hover {
-  cursor: default;
-  color: #000;
+  background-color: #e5e5e5;
 }
 
 .select-language {
   font-size: 1em;
   font-weight: bolder;
   margin-bottom: 8px;
+}
+
+.navbar__link:has(div.custom-tag) {
+  padding: 0px;
+  margin: 0px;
+  margin-left: 5px;
 }

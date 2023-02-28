@@ -62,8 +62,14 @@ const config = {
         items: [
           {
             position: 'left',
-            html: '<div><div class="custom-tag">Python</div><div class="custom-tag">Javascript</div></div>',
-            href: '#',
+            html: '<div><div class="custom-tag">Python</div></div>',
+            href: '?lang=py',
+            docId: "blah"
+          },
+          {
+            position: 'left',
+            html: '<div><div class="custom-tag">Javascript</div></div>',
+            href: '?lang=js',
             docId: "blah"
           },
           {
