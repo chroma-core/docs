@@ -45,7 +45,8 @@ interface. There are
 [several ways](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-prereqs.html)
 to configure the AWS CLI, but for the purposes of these examples we
 will presume that you have
-[obtained an AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html).
+[obtained an AWS access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
+and will be using environment variables to configure AWS.
 
 Export the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables in your shell:
 
@@ -53,6 +54,13 @@ Export the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables
 ```
 export AWS_ACCESS_KEY_ID=****************
 export AWS_SECRET_ACCESS_KEY=**********************
+```
+
+You can also configure AWS to use a region of your choice using the
+`AWS_REGION` environment variable:
+
+```
+export AWS_REGION=us-east-1
 ```
 
 ### Step 3: Run CloudFormation
@@ -80,7 +88,6 @@ The CloudFormation template allows you to pass particular key/value
 pairs to override aspects of the stack. Available keys are:
 
 - `InstanceType` - the AWS instance type to run (default: `t3.small`)
-- `Region` - the AWS region into which to deploy (default: `us-east-1`)
 - `KeyName` - the AWS EC2 KeyPair to use, allowing to to access the instance via SSH (default: none)
 
 To set a CloudFormation stack's parameters using the AWS CLI, use the
@@ -88,17 +95,18 @@ To set a CloudFormation stack's parameters using the AWS CLI, use the
 the format `ParameterName={parameter},ParameterValue={value}`.
 
 For example, the following command launches a new stack similar to the
-above, but in the `us-west-1` region, on a `m5.4xlarge` EC2 instance,
-and adding a KeyPair named `mykey` so anyone with the associated
-private key can SSH into the machine:
+above, but on a `m5.4xlarge` EC2 instance, and adding a KeyPair named
+`mykey` so anyone with the associated private key can SSH into the
+machine:
 
 
 ```
 aws cloudformation create-stack --stack-name my-chroma-stack --template-url https://s3.amazonaws.com/public.trychroma.com/cloudformation/latest/chroma.cf.json \
     --parameters ParameterKey=KeyName,ParameterValue=mykey \
-                 ParameterKey=Region,ParameterValue=us-west-1 \
                  ParameterKey=InstanceType,ParameterValue=m5.4xlarge
 ```
+
+
 
 
 ### Step 5: Configure the Chroma Library

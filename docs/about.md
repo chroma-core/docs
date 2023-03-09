@@ -7,7 +7,7 @@ sidebar_position: 5
 ## Who we are
 
 :::tip We are hiring
-We are hiring software engineers and applied research scientists. <br/><br/>Email [jeff@trychroma.com](mailto:jeff@trychroma.com)
+We are hiring software engineers and applied research scientists.
 :::
 
 [➡️ View open roles on Notion](https://www.notion.so/trychroma/careers-chroma-9d017c3007c7478ebd85bad854101497?pvs=4)

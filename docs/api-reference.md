@@ -5,7 +5,114 @@ title: "📖 API Reference"
 
 # 📖 API Reference
 
-## Initialize client
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<div class="select-language">Select a language</div>
+
+<Tabs queryString groupId="lang">
+<TabItem value="py" label="Python"></TabItem>
+<TabItem value="js" label="JavaScript"></TabItem>
+</Tabs>
+
+***
+
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="js" label="JavaScript">
+
+### Run the backend
+
+Run `docker-compose up -d --build` to run a backend in Docker on your local computer. 
+
+## Initialize client - JS
+
+```javascript
+import { ChromaClient } from 'chromadb'
+const chroma_client = new ChromaClient();
+```
+
+## Methods on Client
+
+### Methods related to Collections
+
+:::note Collection naming
+Collections are similar to AWS s3 buckets in their naming requirements because they are used in URLs in the REST API. Here's the [full list](/api-guide#creating-inspecting-and-deleting-collections).
+:::
+
+```javascript
+// list all collections
+await client.listCollections()
+
+// make a new collection
+const collection = await client.createCollection("testname")
+
+// get an existing collection
+const collection = await client.getCollection("testname")
+
+// delete a collection
+await client.deleteCollection("testname")
+```
+
+### Utility methods
+
+```javascript
+// resets entire database - this *cant* be undone!
+await client.reset()
+```
+
+## Methods on Collection
+
+```javascript
+// get the number of items in a collection
+await collection.count()
+
+// add new items to a collection
+// either one at a time
+await collection.add(
+    "id1",
+    [1.5, 2.9, 3.4],
+    {"source": "my_source"},
+    "This is a document",
+) 
+// or many, up to 100k+!
+await collection.add(
+    ["uri9", "uri10"],
+    [[1.5, 2.9, 3.4], [9.8, 2.3, 2.9]],
+    [{"style": "style1"}, {"style": "style2"}],
+    ["This is a document", 'that is a document']
+)
+// including just documents
+await collection.add(
+    ["uri9", "uri10"], 
+    undefined,
+    [{"style": "style1"}, {"style": "style2"}],
+    ["doc1000101", "doc288822"],
+)
+
+// get items from a collection
+await collection.get()
+
+// convenience, get first 5 items from a collection
+await collection.peek()
+
+// do nearest neighbor search to find similar embeddings or documents, supports filtering
+await collection.query(
+    query_embeddings=[[1.1, 2.3, 3.2], [5.1, 4.3, 2.2]],
+    n_results=2,
+    where={"style": "style2"}
+)
+
+// delete items
+await collection.delete()
+
+```
+
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+## Initialize client - Python
 
 ### In-memory chroma
 
@@ -125,3 +232,7 @@ collection.delete()
 # advanced: manually create the embedding search index
 collection.create_index()
 ```
+
+</TabItem>
+</Tabs>
+
