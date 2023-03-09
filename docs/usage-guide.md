@@ -437,7 +437,7 @@ collection.get(
 `.get` also supports the `where` and `where_document` filters. If no `ids` are supplied, it will return all items in the collection that match the `where` and `where_document` filters.
 
 ##### Choosing which data is returned
-When using get or query you can use the include parameter to specify which data you want returned. By default, Chroma will return the `documents`, `metadatas` and in the case of query, the `distances` of the results. The `ids` are always returned. You can specify which of these you want returned by passing an array of included field names to the includes parameter of the query or get method.
+When using get or query you can use the include parameter to specify which data you want returned - any of `embeddings`, `documents`, `metadatas`, and for query, `distances`. By default, Chroma will return the `documents`, `metadatas` and in the case of query, the `distances` of the results. 'embeddings` are excluded by default for performance and the `ids` are always returned. You can specify which of these you want returned by passing an array of included field names to the includes parameter of the query or get method.
 
 ```python
 
