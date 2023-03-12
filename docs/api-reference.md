@@ -165,7 +165,7 @@ collection = client.create_collection("testname")
 collection = client.get_collection("testname")
 
 # get a collection or create if it doesn't exist already
-collection = client.get_collection("testname")
+collection = client.get_or_create_collection("testname")
 
 # delete a collection
 client.delete_collection("testname")
