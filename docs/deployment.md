@@ -15,7 +15,7 @@ for Render
 
 ## Render
 <a href="https://render.com/deploy?repo=https://github.com/chroma-core/chroma">
-<img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render">
+<img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render"/>
 </a>
 
 ## Simple AWS Deployment
