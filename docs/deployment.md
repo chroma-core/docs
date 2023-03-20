@@ -12,6 +12,13 @@ There are many possible configurations, but for convenience we have
 provided a very simple AWS CloudFormation template to experiment with
 deploying Chroma to EC2 on AWS.
 
+## Hosted Chroma
+We want to offer hosted Chroma and we need your help. 
+
+Fill out the survey to jump the waitlist. Coming Q3 2023.
+
+[📝 30 second survey](https://airtable.com/shrOAiDUtS2ILy5vZ)
+
 ## Simple AWS Deployment
 
 :warning: Chroma and its underlying database need at least 2gb of RAM,
