@@ -21,11 +21,7 @@ Embeddings are the A.I-native way to represent any kind of data, making them the
 Chroma provides lightweight wrappers around popular embedding providers, making it easy to use them in your apps. You can set an embedding function when you create a Chroma collection, which will be used automatically, or you can call them directly yourself.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
 
-
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 To get Chroma's embedding functions, import the `chromadb.utils.embedding_functions` module.
@@ -46,6 +42,11 @@ sentence_transformer_ef = embedding_functions.SentenceTransformerEmbeddingFuncti
 You can pass in an optional `model_name` argument, which lets you choose which Sentence Transformers model to use. By default, Chroma uses `all-MiniLM-L6-v2`. You can see a list of all available models [here](https://www.sbert.net/docs/pretrained_models.html).
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+
+
+</TabItem>
 </Tabs>
 
 
@@ -55,6 +56,18 @@ You can pass in an optional `model_name` argument, which lets you choose which S
 Chroma provides a convenient wrapper around OpenAI's embedding API. This embedding function runs remotely on OpenAI's servers, and requires an API key. You can get an API key by signing up for an account at [OpenAI](https://openai.com/api/).
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+This embedding function relies on the `openai` python package, which you can install with `pip install openai`.
+
+```python
+openai_ef = embedding_functions.OpenAIEmbeddingFunction(
+                api_key="YOUR_API_KEY",
+                model_name="text-embedding-ada-002"
+            )
+```
+
+</TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -70,18 +83,7 @@ const collection = await client.getCollection("name", {}, embedder)
 ```
 
 </TabItem>
-<TabItem value="py" label="Python">
 
-This embedding function relies on the `openai` python package, which you can install with `pip install openai`.
-
-```python
-openai_ef = embedding_functions.OpenAIEmbeddingFunction(
-                api_key="YOUR_API_KEY",
-                model_name="text-embedding-ada-002"
-            )
-```
-
-</TabItem>
 </Tabs>
 
 
@@ -92,6 +94,16 @@ You can pass in an optional `model_name` argument, which lets you choose which O
 Chroma also provides a convenient wrapper around Cohere's embedding API. This embedding function runs remotely on Cohere’s servers, and requires an API key. You can get an API key by signing up for an account at [Cohere](https://dashboard.cohere.ai/welcome/register).
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+This embedding function relies on the `cohere` python package, which you can install with `pip install cohere`.
+
+```python
+cohere_ef  = embedding_functions.CohereEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="large")
+cohere_ef(texts=["document1","document2"])
+```
+
+</TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -107,16 +119,7 @@ const collectionGet = await client.getCollection("name", {}, embedder)
 ```
 
 </TabItem>
-<TabItem value="py" label="Python">
 
-This embedding function relies on the `cohere` python package, which you can install with `pip install cohere`.
-
-```python
-cohere_ef  = embedding_functions.CohereEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="large")
-cohere_ef(texts=["document1","document2"])
-```
-
-</TabItem>
 </Tabs>
 
 
@@ -126,24 +129,6 @@ You can pass in an optional `model_name` argument, which lets you choose which C
 ### Multilingual model example
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-```javascript
-const {CohereEmbeddingFunction} = require('chromadb');
-const embedder = new CohereEmbeddingFunction("apiKey")
-
-multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!', 
-        'Hallo von Cohere!', 'Bonjour de Cohere!', 
-        '¡Hola desde Cohere!', 'Olá do Cohere!', 
-        'Ciao da Cohere!', '您好，来自 Cohere！',
-        'कोहेरे से नमस्ते!'  ]
-
-const embeddings = embedder.generate(multilingual_texts)
-
-```
-
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 ```python
@@ -162,6 +147,25 @@ cohere_ef(texts=multilingual_texts)
 ```
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+const {CohereEmbeddingFunction} = require('chromadb');
+const embedder = new CohereEmbeddingFunction("apiKey")
+
+multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!', 
+        'Hallo von Cohere!', 'Bonjour de Cohere!', 
+        '¡Hola desde Cohere!', 'Olá do Cohere!', 
+        'Ciao da Cohere!', '您好，来自 Cohere！',
+        'कोहेरे से नमस्ते!'  ]
+
+const embeddings = embedder.generate(multilingual_texts)
+
+```
+
+
+</TabItem>
+
 </Tabs>
 
 
@@ -171,6 +175,23 @@ For more information on multilingual model you can read [here](https://docs.cohe
 ## Custom Embedding Functions
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+You can create your own embedding function to use with Chroma, it just needs to implement the `EmbeddingFunction` protocol.
+
+```python
+from chromadb.api.types import Documents, EmbeddingFunction, Embeddings
+
+class MyEmbeddingFunction(EmbeddingFunction):
+    def __call__(self, texts: Documents) -> Embeddings:
+        # embed the documents somehow
+        return embeddings
+```
+
+We welcome contributions! If you create an embedding function that you think would be useful to others, please consider [submitting a pull request](https://github.com/chroma-core/chroma) to add it to Chroma's `embedding_functions` module.
+
+
+</TabItem>
 <TabItem value="js" label="JavaScript">
 
 You can create your own embedding function to use with Chroma, it just needs to implement the `EmbeddingFunction` protocol. The `.generate` method in a class is strictly all you need.
@@ -191,23 +212,7 @@ class MyEmbeddingFunction {
 ```
 
 </TabItem>
-<TabItem value="py" label="Python">
 
-You can create your own embedding function to use with Chroma, it just needs to implement the `EmbeddingFunction` protocol.
-
-```python
-from chromadb.api.types import Documents, EmbeddingFunction, Embeddings
-
-class MyEmbeddingFunction(EmbeddingFunction):
-    def __call__(self, texts: Documents) -> Embeddings:
-        # embed the documents somehow
-        return embeddings
-```
-
-We welcome contributions! If you create an embedding function that you think would be useful to others, please consider [submitting a pull request](https://github.com/chroma-core/chroma) to add it to Chroma's `embedding_functions` module.
-
-
-</TabItem>
 </Tabs>
 
 We welcome pull requests to add new Embedding Functions to the community.

@@ -21,19 +21,6 @@ import TabItem from '@theme/TabItem';
 ## Initiating the Chroma client
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-```js
-import { ChromaClient } from 'chromadb'
-```
-
-The JS client talks to a chroma server backend. This can run on your local computer via `docker` (see below) or be easily deployed to AWS.
-
-```js
-const client = new ChromaClient();
-```
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 ```python
@@ -53,19 +40,24 @@ client = chromadb.Client(Settings(
 The `persist_directory` is where Chroma will store its database files on disk, and load them on start.
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+import { ChromaClient } from 'chromadb'
+```
+
+The JS client talks to a chroma server backend. This can run on your local computer via `docker` (see below) or be easily deployed to AWS.
+
+```js
+const client = new ChromaClient();
+```
+
+</TabItem>
+
 </Tabs>
 
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-The client object has a few useful convenience methods.
-
-```javascript
-await client.reset() # Empties and completely resets the database. ⚠️ This is destructive and not reversible.
-```
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 The client object has a few useful convenience methods.
@@ -76,6 +68,16 @@ client.reset() # Empties and completely resets the database. ⚠️ This is dest
 ```
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+The client object has a few useful convenience methods.
+
+```javascript
+await client.reset() # Empties and completely resets the database. ⚠️ This is destructive and not reversible.
+```
+
+</TabItem>
+
 </Tabs>
 
 
@@ -92,16 +94,6 @@ docker-compose up -d --build
 Then update your chroma client to point at the docker container. Default: `localhost:8000`
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-The JS client then talks to the chroma server backend. This can run on your local computer or be easily deployed to AWS.
-
-```js
-import { ChromaClient } from 'chromadb'
-const client = new ChromaClient();
-```
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 ```python
@@ -123,6 +115,17 @@ The `persist_directory` is where Chroma will store its database files on disk, a
 That's it! Chroma's API will seamlessly move over from `in-memory` mode to `client-server` with just this change.
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+The JS client then talks to the chroma server backend. This can run on your local computer or be easily deployed to AWS.
+
+```js
+import { ChromaClient } from 'chromadb'
+const client = new ChromaClient();
+```
+
+</TabItem>
+
 </Tabs>
 
 
@@ -142,6 +145,20 @@ Chroma uses collection names in the url, so there are a few restrictions on nami
 Chroma collections are created with a name and an optional embedding function. If you supply an embedding function, you must supply it every time you get the collection.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+```python
+collection = client.create_collection(name="my_collection", embedding_function=emb_fn)
+collection = client.get_collection(name="my_collection", embedding_function=emb_fn)
+```
+
+:::caution
+If you later wish to `get_collection`, you MUST do so with the embedding function you supplied while creating the collection
+:::
+
+The embedding function takes text as input, and performs tokenization and embedding. If no embedding function is supplied, Chroma will use [sentence transfomer](https://www.sbert.net/index.html) as a default.
+
+</TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```js
@@ -162,20 +179,7 @@ If you later wish to `getCollection`, you MUST do so with the embedding function
 The embedding function takes text as input, and performs tokenization and embedding. 
 
 </TabItem>
-<TabItem value="py" label="Python">
 
-```python
-collection = client.create_collection(name="my_collection", embedding_function=emb_fn)
-collection = client.get_collection(name="my_collection", embedding_function=emb_fn)
-```
-
-:::caution
-If you later wish to `get_collection`, you MUST do so with the embedding function you supplied while creating the collection
-:::
-
-The embedding function takes text as input, and performs tokenization and embedding. If no embedding function is supplied, Chroma will use [sentence transfomer](https://www.sbert.net/index.html) as a default.
-
-</TabItem>
 </Tabs>
 
 
@@ -183,16 +187,6 @@ You can learn more about [🧬 embedding functions](./embeddings.md), and how to
 
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-Existing collections can be retrieved by name with `.getCollection`, and deleted with `.deleteCollection`.
-
-```javascript
-const collection = await client.getCollection("test") # Get a collection object from an existing collection, by name. Will raise an exception of it's not found.
-await client.deleteCollection("my_collection") # Delete a collection and all associated embeddings, documents, and metadata. ⚠️ This is destructive and not reversible
-```
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 Existing collections can be retrieved by name with `.get_collection`, and deleted with `.delete_collection`. You can also use `.get_or_create_collection` to get a collection if it exists, or create it if it doesn't.
@@ -205,20 +199,23 @@ client.delete_collection(name="my_collection") # Delete a collection and all ass
 ```
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+Existing collections can be retrieved by name with `.getCollection`, and deleted with `.deleteCollection`.
+
+```javascript
+const collection = await client.getCollection("test") # Get a collection object from an existing collection, by name. Will raise an exception of it's not found.
+await client.deleteCollection("my_collection") # Delete a collection and all associated embeddings, documents, and metadata. ⚠️ This is destructive and not reversible
+```
+
+</TabItem>
+
 </Tabs>
 
 
 Collections have a few useful convenience methods.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-```javascript
-await collection.peek() // returns a list of the first 10 items in the collection
-await collection.count() // returns the number of items in the collection
-```
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 ```python
@@ -228,6 +225,15 @@ collection.modify(name="new_name") # Rename the collection
 ```
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+await collection.peek() // returns a list of the first 10 items in the collection
+await collection.count() // returns the number of items in the collection
+```
+
+</TabItem>
+
 </Tabs>
 
 
@@ -239,6 +245,17 @@ Add data to Chroma with `.add`.
 Raw documents:
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+```python
+collection.add(
+    documents=["lorem ipsum...", "doc2", "doc3", ...],
+    metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
+    ids=["id1", "id2", "id3", ...]
+)
+```
+
+</TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -256,17 +273,7 @@ await collection.add(
 ```
 
 </TabItem>
-<TabItem value="py" label="Python">
 
-```python
-collection.add(
-    documents=["lorem ipsum...", "doc2", "doc3", ...],
-    metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
-    ids=["id1", "id2", "id3", ...]
-)
-```
-
-</TabItem>
 </Tabs>
 
 
@@ -279,6 +286,18 @@ An optional list of `metadata` dictionaries can be supplied for each document, t
 Alternatively, you can supply a list of document-associated `embeddings` directly, and Chroma will store the associated documents without embedding them itself.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+```python
+await collection.add(
+    documents=["doc1", "doc2", "doc3", ...],
+    embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
+    metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
+    ids=["id1", "id2", "id3", ...]
+)
+```
+
+</TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -292,18 +311,7 @@ await collection.add(
 ```
 
 </TabItem>
-<TabItem value="py" label="Python">
 
-```python
-await collection.add(
-    documents=["doc1", "doc2", "doc3", ...],
-    embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
-    metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
-    ids=["id1", "id2", "id3", ...]
-)
-```
-
-</TabItem>
 </Tabs>
 
 
@@ -313,17 +321,6 @@ If the supplied `embeddings` are not the same dimension as the collection, an ex
 You can also store documents elsewhere, and just supply a list of `embeddings` and `metadata` to Chroma. You can use the `ids` to associate the embeddings with your documents stored elsewhere.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-```javascript
-await collection.add(
-    ["id1", "id2", "id3", ...], 
-    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...], 
-    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
-)
-```
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 ```python
@@ -335,6 +332,18 @@ collection.add(
 ```
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+await collection.add(
+    ["id1", "id2", "id3", ...], 
+    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...], 
+    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
+)
+```
+
+</TabItem>
+
 </Tabs>
 
 
@@ -346,6 +355,18 @@ Chroma collections can be queried in a variety of ways, using the `.query` metho
 You can query by a set of `query_embeddings`.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+```python
+collection.query(
+    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...]
+    n_results=10,
+    where={"metadata_field": "is_equal_to_this"},
+    where_document={"$contains":"search_string"}
+)
+```
+
+</TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```javascript
@@ -363,18 +384,7 @@ const result = await collection.query(
 ```
 
 </TabItem>
-<TabItem value="py" label="Python">
 
-```python
-collection.query(
-    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...]
-    n_results=10,
-    where={"metadata_field": "is_equal_to_this"},
-    where_document={"$contains":"search_string"}
-)
-```
-
-</TabItem>
 </Tabs>
 
 
@@ -388,27 +398,6 @@ If the supplied `query_embeddings` are not the same dimension as the collection,
 You can also query by a set of `query_texts`. Chroma will first embed each `query_text` with the collection's embedding function, and then perform the query with the generated embedding.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-```javascript
-await collection.query(
-    undefined, // query_embeddings
-    10, // n_results
-    {"metadata_field": "is_equal_to_this"}, // where
-    ["doc10", "thus spake zarathustra", ...], // query_text
-)
-```
-
-You can also retrieve items from a collection by `id` using `.get`.
-
-```javascript
-await collection.get(
-	["id1", "id2", "id3", ...], //ids
-	{"style": "style1"} // where
-)
-```
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 ```python
@@ -430,6 +419,28 @@ collection.get(
 ```
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+await collection.query(
+    undefined, // query_embeddings
+    10, // n_results
+    {"metadata_field": "is_equal_to_this"}, // where
+    ["doc10", "thus spake zarathustra", ...], // query_text
+)
+```
+
+You can also retrieve items from a collection by `id` using `.get`.
+
+```javascript
+await collection.get(
+	["id1", "id2", "id3", ...], //ids
+	{"style": "style1"} // where
+)
+```
+
+</TabItem>
+
 </Tabs>
 
 
@@ -546,9 +557,6 @@ An `$or` operator will return results that match any of the filters in the list.
 ```
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 ### Updating data in a collection
@@ -565,6 +573,10 @@ collection.update(
 ```
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+</TabItem>
+
 </Tabs>
 
 
@@ -579,16 +591,6 @@ Chroma supports deleting items from a collection by `id` using `.delete`. The em
 ⚠️ Naturally, this is a destructive operation, and cannot be undone.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="js" label="JavaScript">
-
-```javascript
-await collection.delete(
-    ["id1", "id2", "id3",...], //ids
-	{"chapter": "20"} //where
-)
-```
-
-</TabItem>
 <TabItem value="py" label="Python">
 
 ```python
@@ -599,6 +601,17 @@ collection.delete(
 ```
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+await collection.delete(
+    ["id1", "id2", "id3",...], //ids
+	{"chapter": "20"} //where
+)
+```
+
+</TabItem>
+
 </Tabs>
 
 
