@@ -17,6 +17,19 @@ import TabItem from '@theme/TabItem';
 ***
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+## 🦜️🔗 Langchain - python
+
+Learn more at [LangChain's Chroma Documentation](https://langchain.readthedocs.io/en/latest/reference/modules/vectorstore.html?highlight=chroma#langchain.vectorstores.Chroma)
+
+## 🦙 GPT-index / LlamaIndex
+
+Learn more on `GPT-index`/`LlamaIndex` [Vector Store page](https://gpt-index.readthedocs.io/en/latest/how_to/vector_stores.html)
+
+
+
+</TabItem>
 <TabItem value="js" label="JavaScript">
 
 
@@ -59,19 +72,7 @@ export const run = async () => {
 
 
 </TabItem>
-<TabItem value="py" label="Python">
 
-## 🦜️🔗 Langchain - python
-
-Learn more at [LangChain's Chroma Documentation](https://langchain.readthedocs.io/en/latest/reference/modules/vectorstore.html?highlight=chroma#langchain.vectorstores.Chroma)
-
-## 🦙 GPT-index / LlamaIndex
-
-Learn more on `GPT-index`/`LlamaIndex` [Vector Store page](https://gpt-index.readthedocs.io/en/latest/how_to/vector_stores.html)
-
-
-
-</TabItem>
 </Tabs>
 
 
