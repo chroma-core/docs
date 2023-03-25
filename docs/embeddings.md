@@ -1,3 +1,4 @@
+
 ---
 sidebar_position: 4
 ---
@@ -126,24 +127,6 @@ const collectionGet = await client.getCollection("name", {}, embedder)
 
 You can pass in an optional `model_name` argument, which lets you choose which Cohere embeddings model to use. By default, Chroma uses `large` model. You can see the available models under `Get embeddings` section [here](https://docs.cohere.ai/reference/embed).
 
-## Instructor models
-
-The [instructor-embeddings](https://github.com/HKUNLP/instructor-embedding) library is another option, especially when running on a machine with a cuda-capable GPU. They are a good local alternative to OpenAI (see the [Massive Text Embedding Benchmark](https://huggingface.co/blog/mteb) rankings).  The embedding function requires the InstructorEmbedding package. To install it, run ```pip install InstructorEmbedding```.
-
-There are three models available. The default is `hkunlp/instructor-base`, and for better performance you can use `hkunlp/instructor-large` or `hkunlp/instructor-xl`. You can also specify whether to use `cpu` (default) or `cuda`. For example:
-
-```python
-#uses base model and cpu
-ef = embedding_functions.InstructorEmbeddingFunction() 
-```
-or
-```python
-ef = embedding_functions.InstructorEmbeddingFunction(
-model_name="hkunlp/instructor-xl", device="cuda")
-```
-Keep in mind that the large and xl models are 1.5GB and 5GB respectively, and are best suited to running on a GPU.
-
-
 ### Multilingual model example
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
@@ -190,6 +173,23 @@ const embeddings = embedder.generate(multilingual_texts)
 
 For more information on multilingual model you can read [here](https://docs.cohere.ai/docs/multilingual-language-models).
 
+## Instructor models
+
+The [instructor-embeddings](https://github.com/HKUNLP/instructor-embedding) library is another option, especially when running on a machine with a cuda-capable GPU. They are a good local alternative to OpenAI (see the [Massive Text Embedding Benchmark](https://huggingface.co/blog/mteb) rankings).  The embedding function requires the InstructorEmbedding package. To install it, run ```pip install InstructorEmbedding```.
+
+There are three models available. The default is `hkunlp/instructor-base`, and for better performance you can use `hkunlp/instructor-large` or `hkunlp/instructor-xl`. You can also specify whether to use `cpu` (default) or `cuda`. For example:
+
+```python
+#uses base model and cpu
+ef = embedding_functions.InstructorEmbeddingFunction() 
+```
+or
+```python
+ef = embedding_functions.InstructorEmbeddingFunction(
+model_name="hkunlp/instructor-xl", device="cuda")
+```
+Keep in mind that the large and xl models are 1.5GB and 5GB respectively, and are best suited to running on a GPU.
+
 ## Custom Embedding Functions
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
@@ -234,3 +234,4 @@ class MyEmbeddingFunction {
 </Tabs>
 
 We welcome pull requests to add new Embedding Functions to the community.
+
