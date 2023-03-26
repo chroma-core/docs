@@ -29,6 +29,8 @@ We will only track usage details that help us make product decisions, specifical
 
 We **do not** collect personally-identifiable or sensitive information, such as: usernames, hostnames, file names, environment variables, or hostnames of systems being tested.
 
+To view the list of events we track, you may reference the **[code](https://github.com/chroma-core/chroma/blob/main/chromadb/telemetry/events.py)**
+
 ## **Where is telemetry information stored?**
 
 We use **[Posthog](https://posthog.com/)** to store and visualize telemetry data.
