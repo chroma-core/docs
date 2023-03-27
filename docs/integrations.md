@@ -25,7 +25,7 @@ Learn more at [LangChain's Chroma Documentation](https://langchain.readthedocs.i
 
 ## 🦙 GPT-index / LlamaIndex
 
-Learn more on `GPT-index`/`LlamaIndex` [Vector Store page](https://gpt-index.readthedocs.io/en/latest/how_to/vector_stores.html)
+Learn more on `GPT-index`/`LlamaIndex` [Vector Store page](https://gpt-index.readthedocs.io/en/latest/how_to/integrations/vector_stores.html).
 
 
 
