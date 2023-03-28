@@ -5,6 +5,16 @@ title: "☁️ Deployment"
 
 # ☁️ Deployment
 
+:::info Changes to Chroma
+Chroma is planning a big migration and breaking change by the end of May, if not sooner. This will enable Chroma to scale much further and more smoothly than the current version as well as enable features like serverless and more!
+
+We are committed to helping users who are using the existing Clickhouse version with a seamless transition. 
+:::
+
+:::note SCABILITY
+The default Cloudformation machine is 2GB t3.small. This scales well up to ~600k embeddings. If you need more room, please use a larger machine.
+:::
+
 You can also deploy Chroma on a long-running server, and connect to it
 remotely.
 
