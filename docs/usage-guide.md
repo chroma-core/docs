@@ -96,8 +96,6 @@ Then update your chroma client to point at the docker container. Default: `local
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-By default Chroma uses an in-memory database, which gets persisted on exit and loaded on start (if it exists). This is fine for many experimental / prototyping workloads, limited by your machine's memory.
-
 ```python
 import chromadb
 from chromadb.config import Settings
@@ -107,7 +105,7 @@ chroma_client = chroma.Client(Settings(chroma_api_impl="rest",
                                     ))
 ```
 
-That's it! Chroma's API will seamlessly move over from `in-memory` mode to `client-server` with just this change.
+That's it! Chroma's API will seamlessly turn from `in-memory` mode to `client-server` with just this change.
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
