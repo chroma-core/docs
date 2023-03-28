@@ -98,21 +98,14 @@ Then update your chroma client to point at the docker container. Default: `local
 
 ```python
 import chromadb
-```
-
-By default Chroma uses an in-memory database, which gets persisted on exit and loaded on start (if it exists). This is fine for many experimental / prototyping workloads, limited by your machine's memory.
-
-```python
 from chromadb.config import Settings
-client = chromadb.Client(Settings(
-    chroma_db_impl="duckdb+parquet",
-    persist_directory="/path/to/persist/directory" # Optional, defaults to .chromadb/ in the current directory
-))
+chroma_client = chroma.Client(Settings(chroma_api_impl="rest",
+                                        chroma_server_host="localhost",
+                                        chroma_server_http_port="8000"
+                                    ))
 ```
 
-The `persist_directory` is where Chroma will store its database files on disk, and load them on start.
-
-That's it! Chroma's API will seamlessly move over from `in-memory` mode to `client-server` with just this change.
+That's it! Chroma's API will run in `client-server` mode with just this change.
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
