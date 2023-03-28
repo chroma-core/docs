@@ -105,7 +105,7 @@ chroma_client = chroma.Client(Settings(chroma_api_impl="rest",
                                     ))
 ```
 
-That's it! Chroma's API will seamlessly turn from `in-memory` mode to `client-server` with just this change.
+That's it! Chroma's API will run in `client-server` mode with just this change.
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
