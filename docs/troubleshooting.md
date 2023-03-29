@@ -10,6 +10,15 @@ import TabItem from '@theme/TabItem';
 
 Occasionally users have technical issues installing or using Chroma and this page serves as a manifest of those.
 
+
+## Docker build issues
+
+**Symptom**: build fails
+
+**Reason**: Docker's default is to allocate 2GB of RAM
+
+**Solution**: Increase Docker's RAM to 4GB+
+
 ## Platform Specific Build Issues
 
 
