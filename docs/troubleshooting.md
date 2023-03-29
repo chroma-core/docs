@@ -16,17 +16,27 @@ Occasionally users have technical issues installing or using Chroma and this pag
 <Tabs queryString groupId="env">
 <TabItem value="windows" label="Windows">
 
-Windows
+*Blank for now*
 
 </TabItem>
 <TabItem value="mac" label="Mac">
 
-Mac
+*Blank for now*
 
 </TabItem>
 <TabItem value="linux" label="Linux">
 
-Mac
+### Ubuntu 20.04, Python 3.9
+
+`Hnswlib` fails to build on `pip install`
+
+Error:
+```
+No such file or Directory
+#include <Python.h>
+```
+
+Solution: `sudo apt install libpython3.9-dev`
 
 </TabItem>
 
