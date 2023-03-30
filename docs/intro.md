@@ -68,6 +68,6 @@ Continue with the full [getting started guide](./getting-started.md).
 
 <br/>
 
-We welcome contributions for other langauges! 
+We welcome contributions for other languages! 
 
 Learn more on the [Community Discord](https://discord.gg/MMeYNTmh3x). 
