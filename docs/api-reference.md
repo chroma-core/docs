@@ -122,6 +122,14 @@ collection.add(
 # update items in a collection
 collection.update()
 
+# upsert items. new items will be added, existing items will be updated.
+collection.upsert(
+    ids=["id1", "id2", "id3", ...],
+    embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
+    metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
+    documents=["doc1", "doc2", "doc3", ...],
+)
+
 # get items from a collection
 collection.get()
 
