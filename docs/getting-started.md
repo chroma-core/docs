@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 ***
 
-Chroma is a database for building AI applications with embeddings. It comes with everything you need to get started built in, and runs on your machine. A [hosted version](mailto:hello@trychroma.com) is coming soon!
+Chroma is a database for building AI applications with embeddings. It comes with everything you need to get started built in, and runs on your machine. A [hosted version](https://airtable.com/shrOAiDUtS2ILy5vZ) is coming soon!
 
 ### 1. Install
 
@@ -55,10 +55,10 @@ chroma_client = chromadb.Client()
 
 ```js
 const {ChromaClient} = require('chromadb');
-const chroma_client = new ChromaClient();
+const client = new ChromaClient();
 ```
 
-To connect to Chroma's backend - you either need to connect to a hosted version of chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma. 
+To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma. 
 
 ```bash
 git clone git@github.com:chroma-core/chroma.git
@@ -95,7 +95,7 @@ Please take steps to secure your API when interacting with frontend systems.
 ```js
 const {OpenAIEmbeddingFunction} = require('chromadb');
 const embedder = new OpenAIEmbeddingFunction("your_api_key")
-const collection = await chroma_client.createCollection("my_collection", {}, embedder)
+const collection = await client.createCollection("my_collection", {}, embedder)
 ```
 
 </TabItem>

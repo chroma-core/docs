@@ -153,7 +153,7 @@ Run `docker-compose up -d --build` to run a backend in Docker on your local comp
 
 ```javascript
 import { ChromaClient } from 'chromadb'
-const chroma_client = new ChromaClient();
+const client = new ChromaClient();
 ```
 
 ## Methods on Client
