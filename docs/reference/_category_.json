@@ -1,6 +1,6 @@
 {
     "position": 20,
-    "label": "📑 API Docs",
+    "label": "📑 Python API Docs",
     "collapsible": true,
     "collapsed": true,
     "className": "notbold"
