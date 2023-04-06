@@ -36,4 +36,15 @@ It is important that our values around this are very clear!
 
 What code will be open source? As a general rule, any feature which an individual developer would find useful will be 100% open source forever. This approach, popularized by Gitlab, is called [buyer-based open source](https://about.gitlab.com/company/stewardship/). We believe that this is essential to accomplishing our mission.
 
-Currently we don’t have any specific plans or timelines (it will be a while) to monetize Chroma. We are 100% focused on building valuable open source software with the community and for the community.
+Currently we don’t have any specific plans to monetize Chroma, we are working on a hosted service that will be launched as a free technical preview to make it easier for developers to get going. We are 100% focused on building valuable open source software with the community and for the community.
+
+
+## Our investors
+
+Chroma raised an $18M seed round led by Astasia Myers from Quiet Capital. Joining the round are angels including Naval Ravikant, Max and Jack Altman, Jordan Tigani (Motherduck), Guillermo Rauch (Vercel), Akshay Kothari (Notion), Amjad Masad (Replit), Spencer Kimball (CockroachDB), and other founders and leaders from ScienceIO, Gumroad, MongoDB, Scale, Hugging Face, Jasper and more. 
+
+![](https://www.trychroma.com/investors.png)
+
+Chroma has also raised a pre-seed in May 2022, led by Anthony Goldbloom (Kaggle) from AIX Ventures, James Cham from Bloomberg Beta, and Nat Friedman and Daniel Gross (AI Grant).
+
+We're excited to work with a deep set of investors and enterpreneurs who have invested in and built some of the most successful open-source projects in the world.
