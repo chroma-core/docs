@@ -26,6 +26,9 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  customFields:{
+    mendableAnonKey: "d1b1790d-5423-4ab9-9f41-94f6b57488a1",
+},
   
   plugins: [
     [
@@ -36,6 +39,9 @@ const config = {
         enableInDevelopment: true, // optional
       },
     ],
+    [
+        'docusaurus-node-polyfills', { excludeAliases: ['console']}
+    ]
   ],
 
   presets: [
