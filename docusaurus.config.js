@@ -133,6 +133,14 @@ const config = {
                 label: 'GitHub',
                 href: 'https://github.com/chroma-core/chroma',
               },
+              {
+                label: 'Privacy',
+                href: 'https://trychroma.com/privacy',
+              },
+              {
+                label: 'Terms',
+                href: 'https://trychroma.com/terms',
+              },
             ],
           },
         ],
