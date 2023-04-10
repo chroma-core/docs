@@ -543,3 +543,11 @@ div.special_table + table, th, td {
   margin: 0px;
   margin-left: 5px;
 }
+
+.small-text {
+  font-size: 0.8em;
+}
+
+.em {
+  font-style: italic;
+}

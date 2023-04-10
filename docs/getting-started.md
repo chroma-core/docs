@@ -27,6 +27,7 @@ Chroma is a database for building AI applications with embeddings. It comes with
 ```py
 pip install chromadb
 ```
+<span class="small-text em">* chromadb currently does not support Python 3.11 because of pytorch</span>
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
