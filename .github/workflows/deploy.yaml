@@ -1,0 +1,20 @@
+name: Update EnhanceDocs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-enhancedocs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: enhancedocs/enhancedocs-github-action@0.1.0
+        with:
+          api-key: ${{ secrets.ENHANCEDOCS_API_KEY }}
+      - name: Build EnhanceDocs
+        run: enhancedocs build docs
+      - name: Publish EnhanceDocs
+        run: enhancedocs push <replace_with_project_id>
