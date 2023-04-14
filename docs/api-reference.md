@@ -42,6 +42,9 @@ client = chromadb.Client(Settings(chroma_db_impl="duckdb+parquet",
                                 ))
 ```
 
+If you are using a Jupyter Notebook, you will need to call `client.persist()` manually.
+
+
 ### Run chroma just as a client to talk to a backend service
 
 For production use cases, an in-memory database will not cut it. Run `docker-compose up -d --build` to run a production backend in Docker on your local computer. Simply update your API initialization and then use the API the same way as before.
