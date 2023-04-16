@@ -273,8 +273,7 @@ await collection.add(
 
 If Chroma is passed a list of `documents`, it will automatically tokenize and embed them with the collection's embedding function (the default will be used if none was supplied at collection creation). Chroma will also store the `documents` themselves. If the documents are too large to embed using the chosen embedding function, an exception will be raised.
 
-Each document must have a unique associated `id`. Chroma does not track uniqueness of ids for you, it is up to the caller to not add the same id twice.
-An optional list of `metadata` dictionaries can be supplied for each document, to store additional information and enable filtering.
+Each document must have a unique associated `id`. Trying to `.add` the same ID twice will result in an error. An optional list of `metadata` dictionaries can be supplied for each document, to store additional information and enable filtering.
 
 Alternatively, you can supply a list of document-associated `embeddings` directly, and Chroma will store the associated documents without embedding them itself.
 
