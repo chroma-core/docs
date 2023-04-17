@@ -9,17 +9,17 @@ title: "🛣️ Roadmap"
 
 Join our weekly [Community Calls](http://google.com/)!
 
-**The goal of this doc is to align core and community efforts for the project.**
+**The goal of this doc is to align *core* and *community* efforts for the project.**
 
-## Core Team Current Focus
+## Core Team 
 
 Try to steer clear of contributing to these unless you have talked to us!
 
-### ⚔️ Robust Test Suite
+### Current Focus
 
-The core team is implementing a [hypothesis-based](https://hypothesis.readthedocs.io/en/latest/) testing suite to battle-harden Chroma’s APIs. This is a big undertaking and has taken over a week. We’re investing the time in this now to enable high development velocity in the near future and to be able to accept community contributions without fear of regressions or bugs.
+**A Robust Test Suite**. The core team is implementing a [hypothesis-based](https://hypothesis.readthedocs.io/en/latest/) testing suite to battle-harden Chroma’s APIs. This is a big undertaking and has taken over a week. We’re investing the time in this now to enable high development velocity in the near future and to be able to accept community contributions without fear of regressions or bugs.
 
-## Core Team Near-term Focus
+### Near-term Focus
 
 Not an exhaustive list, but these are some of the core team’s biggest priorities over the coming few months.
 
@@ -44,9 +44,9 @@ It doesn’t make sense for developers to embed the same information over and ov
 
 We'd like suggestions for:
 
-- "small"
-- "medium"
-- "large"
+- "small" (<100 rows)
+- "medium" (<5MB)
+- "large" (>1GB)
 
 datasets for people to stress test Chroma in a variety of scenarios.
 
