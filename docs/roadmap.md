@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 9
 title: "🛣️ Roadmap"
 ---
 
@@ -54,8 +54,8 @@ datasets for people to stress test Chroma in a variety of scenarios.
 
 Chroma does ship with Sentence Transformers by default for embeddings, but we are otherwise unopinionated about what embeddings you use. Having a library of information that has been embedded with many models, alongside example query sets would make it much easier for empirical work to be done on the effectiveness of various models across different domains.
 
-- https://huggingface.co/blog/mteb
-- https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526?gi=ee46baab0d8f
+- [Preliminary reading on Embeddings](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526?gi=ee46baab0d8f)
+- [Huggingface Benchmark of a bunch of Embeddings](https://huggingface.co/blog/mteb)
 - [notable issues with GPT3 Embeddings](https://twitter.com/Nils_Reimers/status/1487014195568775173) and alternatives to consider
 
 
