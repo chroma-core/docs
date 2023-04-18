@@ -7,11 +7,9 @@ title: "🛣️ Roadmap"
 
 > Last updated: `April 16, 2023`
 
-Join our weekly [Community Calls](http://google.com/)!
-
 **The goal of this doc is to align *core* and *community* efforts for the project.**
 
-## Core Team 
+## Core Team (Chroma Employees)
 
 Try to steer clear of contributing to these unless you have talked to us!
 
@@ -28,15 +26,19 @@ Not an exhaustive list, but these are some of the core team’s biggest prioriti
 
 ## Community Contributions Sought
 
+This is where you have a lot more free rein to contribute (without having to sync with us first)!
+
+If you're unsure about your contribution idea, feel free to chat with us (@chroma) in the `#general` channel in [our Discord](https://discord.gg/rahcMUU5XV)! We'd love to support you however we can.
+
 ### Example Templates
 
 We can always use [more integrations](https://docs.trychroma.com/integrations) with the rest of the AI ecosystem. Please let us know if you're working on one and need help!
 
-Other great starting points for Chroma (please send PRs for more):
+Other great starting points for Chroma (please send PRs for more [here](https://github.com/chroma-core/docs/tree/swyx/addRoadmap/docs)):
 - [Google Colab](https://colab.research.google.com/drive/1QEzFyqnoFxq7LUGyP1vzR4iLt9PpCDXv?usp=sharing)
 - [Replit Template](https://replit.com/@swyx/BasicChromaStarter?v=1)
 
-For those integrations we do have, like `LangChain` and `LlamaIndex`, we do always want more tutorials, demos, workshops, videos, and podcasts.
+For those integrations we do have, like `LangChain` and `LlamaIndex`, we do always want more tutorials, demos, workshops, videos, and podcasts (we've done some pods [on our blog](https://trychroma.com/blog)).
 
 ### Example Datasets
 
@@ -57,7 +59,6 @@ Chroma does ship with Sentence Transformers by default for embeddings, but we ar
 - [Preliminary reading on Embeddings](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526?gi=ee46baab0d8f)
 - [Huggingface Benchmark of a bunch of Embeddings](https://huggingface.co/blog/mteb)
 - [notable issues with GPT3 Embeddings](https://twitter.com/Nils_Reimers/status/1487014195568775173) and alternatives to consider
-
 
 ### Experimental Algorithms
 
