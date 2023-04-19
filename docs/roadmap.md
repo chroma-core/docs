@@ -5,32 +5,49 @@ title: "🛣️ Roadmap"
 
 # 🛣️ Roadmap
 
-> Last updated: `April 16, 2023`
+:::note Last updated
+`April 16, 2023`
+:::
 
-**The goal of this doc is to align *core* and *community* efforts for the project.**
+The goal of this doc is to align *core* and *community* efforts for the project and to share what's in store for this year!
 
-## Core Team (Chroma Employees)
+**Sections**
+- What is the core Chroma team working on right now?
+- What will Chroma prioritize over the next 6mo?
+- What areas are great for community contributions?
 
-Try to steer clear of contributing to these unless you have talked to us!
+## What is the core Chroma team working on right now?
 
-### Current Focus
+**✅ A Robust Test Suite**
 
-**A Robust Test Suite**. The core team is implementing a [hypothesis-based](https://hypothesis.readthedocs.io/en/latest/) testing suite to battle-harden Chroma’s APIs. This is a big undertaking and has taken over a week. We’re investing the time in this now to enable high development velocity in the near future and to be able to accept community contributions without fear of regressions or bugs.
+The core team is implementing a [hypothesis-based](https://hypothesis.readthedocs.io/en/latest/) testing suite to battle-harden Chroma’s APIs. This is a big undertaking and has taken over a week. We’re investing the time in this now to enable high development velocity in the near future and to be able to accept community contributions without fear of regressions or bugs.
 
-### Near-term Focus
+## What will Chroma prioritize over the next 6mo?
 
-Not an exhaustive list, but these are some of the core team’s biggest priorities over the coming few months.
+**Next Milestone: ☁️ Launch Hosted Chroma**
 
 - 🕸️ Replacing Clickhouse with a custom Distributed System
 - 🌩️ Standing up that distributed system as a managed service (aka "Hosted Chroma" - [sign up for waitlist](https://airtable.com/shrOAiDUtS2ILy5vZ)!)
 
-## Community Contributions Sought
+**Areas we will invest in**
+
+Not an exhaustive list, but these are some of the core team’s biggest priorities over the coming few months. Use caution when contributing in these areas and please check-in with the core team first.
+
+- ⏩ **Workflow**: Building tools for answer questions like: what embedding model should I use? And how should I chunk up my documents?
+- 🌌 **Visualization**: Building visualization tool to give developers greater intuition embedding spaces
+- 🔀 **Query Planner**: Building tools to enable per-query and post-query transforms
+- 🔧 **Developer experience**: Extending Chroma into a CLI
+- 📦 **Easier Data Sharing**: Working on formats for serialization and easier data sharing of embedding Collections
+- 🔍 **Improving recall**: Fine-tuning embedding transforms through human feedback
+- 🧠 **Analytical horsepower**: Clustering, deduplication, classification and more
+
+## What areas are great for community contributions?
 
 This is where you have a lot more free rein to contribute (without having to sync with us first)!
 
 If you're unsure about your contribution idea, feel free to chat with us (@chroma) in the `#general` channel in [our Discord](https://discord.gg/rahcMUU5XV)! We'd love to support you however we can.
 
-### Example Templates
+### ⚙️ Example Templates
 
 We can always use [more integrations](https://docs.trychroma.com/integrations) with the rest of the AI ecosystem. Please let us know if you're working on one and need help!
 
@@ -40,7 +57,7 @@ Other great starting points for Chroma (please send PRs for more [here](https://
 
 For those integrations we do have, like `LangChain` and `LlamaIndex`, we do always want more tutorials, demos, workshops, videos, and podcasts (we've done some pods [on our blog](https://trychroma.com/blog)).
 
-### Example Datasets
+### 📦 Example Datasets
 
 It doesn’t make sense for developers to embed the same information over and over again with the same embedding model.
 
@@ -52,7 +69,7 @@ We'd like suggestions for:
 
 datasets for people to stress test Chroma in a variety of scenarios.
 
-### Embeddings Comparison
+### ⚖️ Embeddings Comparison
 
 Chroma does ship with Sentence Transformers by default for embeddings, but we are otherwise unopinionated about what embeddings you use. Having a library of information that has been embedded with many models, alongside example query sets would make it much easier for empirical work to be done on the effectiveness of various models across different domains.
 
@@ -60,7 +77,7 @@ Chroma does ship with Sentence Transformers by default for embeddings, but we ar
 - [Huggingface Benchmark of a bunch of Embeddings](https://huggingface.co/blog/mteb)
 - [notable issues with GPT3 Embeddings](https://twitter.com/Nils_Reimers/status/1487014195568775173) and alternatives to consider
 
-### Experimental Algorithms
+### ⚗️ Experimental Algorithms
 
 If you have a research background, please consider adding to our `ExperimentalAPI`s. For example:
 
@@ -72,7 +89,7 @@ If you have a research background, please consider adding to our `ExperimentalAP
 - Expanded vector search (MMR, Polytope)
 - Your research
 
-### Additional Client SDKs
+### 🧑‍💻️ Additional Client SDKs
 
 We will be happy to work with people maintaining additional client SDKs as part of the community. Specifically: 
 
