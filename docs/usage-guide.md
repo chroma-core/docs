@@ -39,6 +39,10 @@ client = chromadb.Client(Settings(
 
 The `persist_directory` is where Chroma will store its database files on disk, and load them on start.
 
+:::note Jupyter Notebooks
+In a Jupyter Notebook, you will need to manually call `client.persist()`. The garbage collection will not call the `__del__` method. 
+:::
+
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
