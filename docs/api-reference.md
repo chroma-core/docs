@@ -216,10 +216,18 @@ await collection.add(
 )
 // including just documents
 await collection.add(
-    ["uri9", "uri10"], 
+    ["uri9", "uri10"],
     undefined,
     [{"style": "style1"}, {"style": "style2"}],
     ["doc1000101", "doc288822"],
+)
+// or use upsert, so records will be updated if they already exist
+// (instead of throwing an error)
+await collection.upsert(
+    "id1",
+    [1.5, 2.9, 3.4],
+    {"source": "my_source"},
+    "This is a document",
 )
 
 // get items from a collection

@@ -580,6 +580,9 @@ If the supplied `embeddings` are not the same dimension as the collection, an ex
 
 Chroma also supports an `upsert` operation, which updates existing items, or adds them if they don't yet exist.
 
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
 ```python
 collection.upsert(
     ids=["id1", "id2", "id3", ...],
@@ -588,6 +591,20 @@ collection.upsert(
     documents=["doc1", "doc2", "doc3", ...],
 )
 ```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+await collection.upsert(
+    ["id1", "id2", "id3"],
+    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2]],
+    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}],
+    ["doc1", "doc2", "doc3"]
+)
+```
+</TabItem>
+</Tabs>
 
 If an `id` is not present in the collection, the corresponding items will be created as per `add`. Items with existing `id`s will be updated as per `update`.
 
