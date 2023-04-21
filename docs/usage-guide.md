@@ -45,6 +45,9 @@ The `persist_directory` is where Chroma will store its database files on disk, a
 ```js
 import { ChromaClient } from 'chromadb'
 ```
+:::note Connecting to the backend
+To connect with the JS client, you must connect to a backend running Chroma. See `Running Chroma in client/server mode` for how to do this. 
+:::
 
 The JS client talks to a chroma server backend. This can run on your local computer via `docker` (see below) or be easily deployed to AWS.
 
@@ -76,6 +79,8 @@ The client object has a few useful convenience methods.
 await client.reset() # Empties and completely resets the database. ⚠️ This is destructive and not reversible.
 ```
 
+
+
 </TabItem>
 
 </Tabs>
@@ -85,6 +90,9 @@ await client.reset() # Empties and completely resets the database. ⚠️ This i
 
 ## Running Chroma in client/server mode
 
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
 Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode, run the docker container:
 
 ```bash
@@ -92,9 +100,6 @@ docker-compose up -d --build
 ```
 
 Then update your chroma client to point at the docker container. Default: `localhost:8000`
-
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
 
 ```python
 import chromadb
@@ -109,6 +114,14 @@ That's it! Chroma's API will run in `client-server` mode with just this change.
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
+
+To run Chroma in client server mode, run the docker container:
+
+```bash
+docker-compose up -d --build
+```
+
+Then update your chroma client to point at the docker container. Default: `localhost:8000`
 
 The JS client then talks to the chroma server backend. This can run on your local computer or be easily deployed to AWS.
 
