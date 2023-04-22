@@ -115,7 +115,7 @@ That's it! Chroma's API will run in `client-server` mode with just this change.
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-To run Chroma in client server mode, run the docker container:
+Chroma can be run in-memory in Python (without Docker), but this feature is not yet available in JS (this is on our roadmap). To run Chroma in client server mode, run the docker container:
 
 ```bash
 docker-compose up -d --build
