@@ -189,6 +189,18 @@ model_name="hkunlp/instructor-xl", device="cuda")
 ```
 Keep in mind that the large and xl models are 1.5GB and 5GB respectively, and are best suited to running on a GPU.
 
+## Google PaLM API models
+
+[Google PaLM APIs](https://developers.googleblog.com/2023/03/announcing-palm-api-and-makersuite.html) are currently in private preview, but if you are part of this preview, you can use them with Chroma via the `GooglePalmEmbeddingFunction`.
+
+To use the PaLM embedding API, you must have `google.generativeai` Python package installed and have the API key. To use:
+
+```python
+palm_embedding = embedding_functions.GooglePalmEmbeddingFunction(
+    api_key=api_key, model=model_name)
+
+```
+
 ## Custom Embedding Functions
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
