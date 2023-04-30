@@ -60,7 +60,7 @@ chroma_client = chroma.Client(Settings(chroma_api_impl="rest",
 ### Methods related to Collections
 
 :::note Collection naming
-Collections are similar to AWS s3 buckets in their naming requirements because they are used in URLs in the REST API. Here's the [full list](/api-guide#creating-inspecting-and-deleting-collections).
+Collections are similar to AWS s3 buckets in their naming requirements because they are used in URLs in the REST API. Here's the [full list](/usage-guide#creating-inspecting-and-deleting-collections).
 :::
 
 ```python
@@ -161,7 +161,7 @@ const client = new ChromaClient();
 ### Methods related to Collections
 
 :::note Collection naming
-Collections are similar to AWS s3 buckets in their naming requirements because they are used in URLs in the REST API. Here's the [full list](/api-guide#creating-inspecting-and-deleting-collections).
+Collections are similar to AWS s3 buckets in their naming requirements because they are used in URLs in the REST API. Here's the [full list](/usage-guide#creating-inspecting-and-deleting-collections).
 :::
 
 ```javascript
