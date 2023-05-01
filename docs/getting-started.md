@@ -213,7 +213,7 @@ Find [chromadb on npm](https://www.npmjs.com/package/chromadb).
 ## 📚 Next steps
 
 - Chroma is designed to be simple enough to get started with quickly and flexible enough to meet many use-cases. You can use your own embedding models, query Chroma with your own embeddings, and filter on metadata. To learn more about Chroma, check out the [Usage Guide](./usage-guide.md) and [API Reference](./api-reference.md).
-- Chroma is integrated in [LangChain](https://langchain.readthedocs.io/en/latest/reference/modules/vectorstore.html?highlight=chroma#langchain.vectorstores.Chroma) (`python` and `js`), making it easy to build AI applications with Chroma. Check out the [integrations](./integrations.md) page to learn more.
+- Chroma is integrated in [LangChain](https://python.langchain.com/en/latest/modules/indexes/vectorstores.html?highlight=chroma#langchain.vectorstores.Chroma) (`python` and `js`), making it easy to build AI applications with Chroma. Check out the [integrations](./integrations.md) page to learn more.
 - You can [deploy a persistent instance](./deployment) of Chroma to an external server, to make it easier to work on larger projects or with a team.
 
 ## Coming Soon
