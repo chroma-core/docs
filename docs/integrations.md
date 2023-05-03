@@ -48,10 +48,10 @@ import TabItem from '@theme/TabItem';
 Here is an [example in LangChainJS](https://github.com/hwchase17/langchainjs/blob/main/examples/src/chains/chat_vector_db_chroma.ts)
 
 ```javascript
-import { OpenAI } from "langchain/llms";
+import { OpenAI } from "langchain/llms/openai";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
-import { Chroma } from "langchain/vectorstores";
-import { OpenAIEmbeddings } from "langchain/embeddings";
+import { Chroma } from "langchain/vectorstores/chroma";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import * as fs from "fs";
 
