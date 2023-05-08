@@ -595,6 +595,36 @@ If an `id` is not found in the collection, an exception will be raised. If `docu
 
 If the supplied `embeddings` are not the same dimension as the collection, an exception will be raised.
 
+Chroma also supports an `upsert` operation, which updates existing items, or adds them if they don't yet exist.
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+```python
+collection.upsert(
+    ids=["id1", "id2", "id3", ...],
+    embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
+    metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
+    documents=["doc1", "doc2", "doc3", ...],
+)
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+await collection.upsert(
+    ["id1", "id2", "id3"],
+    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2]],
+    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}],
+    ["doc1", "doc2", "doc3"]
+)
+```
+</TabItem>
+</Tabs>
+
+If an `id` is not present in the collection, the corresponding items will be created as per `add`. Items with existing `id`s will be updated as per `update`.
+
 ### Deleting data from a collection
 
 Chroma supports deleting items from a collection by `id` using `.delete`. The embeddings, documents, and metadata associated with each item will be deleted.
