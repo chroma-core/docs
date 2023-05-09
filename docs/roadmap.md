@@ -6,7 +6,7 @@ title: "🛣️ Roadmap"
 # 🛣️ Roadmap
 
 :::note Last updated
-`April 16, 2023`
+`May 8, 2023`
 :::
 
 The goal of this doc is to align *core* and *community* efforts for the project and to share what's in store for this year!
@@ -18,9 +18,18 @@ The goal of this doc is to align *core* and *community* efforts for the project 
 
 ## What is the core Chroma team working on right now?
 
+This week we are working through the backlog of Github issues and PRs and adding lots of new functionality. A few issues we are looking to address:
+- 🐍 A more minimal python-client only build target
+- ✋ Google PaLM embedding support
+- 🎣 OpenAI ChatGPT Retrieval Plugin
+- 🐋 Support for Conda and Dockerhub
+- and more! 
+
+## What did the Chroma team just complete?
+
 **✅ A Robust Test Suite**
 
-The core team is implementing a [hypothesis-based](https://hypothesis.readthedocs.io/en/latest/) testing suite to battle-harden Chroma’s APIs. This is a big undertaking and has taken over a week. We’re investing the time in this now to enable high development velocity in the near future and to be able to accept community contributions without fear of regressions or bugs.
+The core team implemented a [hypothesis-based](https://hypothesis.readthedocs.io/en/latest/) testing suite to battle-harden Chroma’s APIs. This was a big undertaking. We invested the time in this now to enable high development velocity in the near future and to be able to accept community contributions without fear of regressions or bugs.
 
 ## What will Chroma prioritize over the next 6mo?
 
