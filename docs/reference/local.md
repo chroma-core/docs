@@ -45,6 +45,7 @@ Create a new collection with the given name and metadata.
 **Raises**:
 
 - `ValueError` - If the collection already exists and get_or_create is False
+- `ValueError` - If the collection name is invalid
   
 
 **Examples**:

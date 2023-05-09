@@ -1,8 +1,7 @@
 {
   "items": [
-    "reference/local",
-    "reference/Collection"
-    
+    "reference/Collection",
+    "reference/local"
   ],
   "label": "Reference Docs",
   "type": "category"

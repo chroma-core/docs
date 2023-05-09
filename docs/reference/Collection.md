@@ -28,8 +28,7 @@ The total number of embeddings added to the database
 def add(ids: OneOrMany[ID],
         embeddings: Optional[OneOrMany[Embedding]] = None,
         metadatas: Optional[OneOrMany[Metadata]] = None,
-        documents: Optional[OneOrMany[Document]] = None,
-        increment_index: bool = True)
+        documents: Optional[OneOrMany[Document]] = None)
 ```
 
 Add embeddings to the data store.
@@ -51,6 +50,10 @@ Add embeddings to the data store.
 **Raises**:
 
 - `ValueError` - If you don&#x27;t provide either embeddings or documents
+- `ValueError` - If the length of ids, embeddings, metadatas, or documents don&#x27;t match
+- `ValueError` - If you don&#x27;t provide an embedding function and don&#x27;t provide embeddings
+- `ValueError` - If you provide both embeddings and documents
+- `ValueError` - If you provide an id that already exists
 
 #### get
 
@@ -79,11 +82,6 @@ all embeddings up to limit starting at offset.
 **Returns**:
 
 - `GetResult` - A GetResult object containing the results.
-  
-
-**Raises**:
-
-- `ValueError` - If you provide both ids and a where filter
 
 #### peek
 
@@ -177,6 +175,24 @@ Update the embeddings, metadatas or documents for provided ids.
 **Returns**:
 
   None
+
+#### upsert
+
+```python
+def upsert(ids: OneOrMany[ID],
+           embeddings: Optional[OneOrMany[Embedding]] = None,
+           metadatas: Optional[OneOrMany[Metadata]] = None,
+           documents: Optional[OneOrMany[Document]] = None)
+```
+
+Update the embeddings, metadatas or documents for provided ids, or create them if they don&#x27;t exist.
+
+**Arguments**:
+
+- `ids` - The ids of the embeddings to update
+- `embeddings` - The embeddings to add. If None, embeddings will be computed based on the documents using the embedding_function set for the Collection. Optional.
+- `metadatas` - The metadata to associate with the embeddings. When querying, you can filter on this metadata. Optional.
+- `documents` - The documents to associate with the embeddings. Optional.
 
 #### delete
 
