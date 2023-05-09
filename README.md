@@ -27,3 +27,15 @@ This command generates static content into the `build` directory and can be serv
 ### Deployment
 
 Vercel handles deploying main to https://docs.trychroma.com
+
+### Generating Javascript Docs
+
+1. Have chroma as a sibling to the the docs dir, eg 
+```
+/docs
+/chroma
+```
+
+2. Update `scripts/generateJSDocs.sh`, `sidebar.json` if you need to expose more files other than Collection and Client
+
+3. Run `yarn rebuild-js-docs`

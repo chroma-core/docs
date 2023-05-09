@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "ES2015",
+            "DOM"
+        ],
+        "target": "es5",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true
+    },
+    "include": [
+        "../chroma/clients/js/src/index.ts"
+    ]
+}
