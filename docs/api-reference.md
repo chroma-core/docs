@@ -49,7 +49,7 @@ For production use cases, an in-memory database will not cut it. Run `docker-com
 ```python
 import chromadb
 from chromadb.config import Settings
-chroma_client = chroma.Client(Settings(chroma_api_impl="rest",
+chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
                                         chroma_server_host="localhost",
                                         chroma_server_http_port="8000"
                                     ))
