@@ -19,14 +19,24 @@ import TabItem from '@theme/TabItem';
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-## 🦜️🔗 Langchain - python
+## 🦜️🔗 Langchain
 
-Learn more at [LangChain's Chroma Documentation](https://langchain.readthedocs.io/en/latest/reference/modules/vectorstore.html?highlight=chroma#langchain.vectorstores.Chroma)
+- [LangChain + Chroma](https://blog.langchain.dev/langchain-chroma/) on the LangChain blog
+- [Harrison's `chroma-langchain` demo repo](https://github.com/hwchase17/chroma-langchain)
+  - [question answering over documents](https://github.com/hwchase17/chroma-langchain/blob/master/qa.ipynb) - ([Replit version](https://replit.com/@swyx/LangChainChromaStarter#main.py))
+  - [to use Chroma as a persistent database](https://github.com/hwchase17/chroma-langchain/blob/master/persistent-qa.ipynb)
+- Tutorials
+  - [Chroma and LangChain tutorial](https://github.com/grumpyp/chroma-langchain-tutorial) - The demo showcases how to pull data from the English Wikipedia using their API. The project also demonstrates how to vectorize data in chunks and get embeddings using OpenAI embeddings model.
+  - [Create a Voice-based ChatGPT Clone That Can Search on the Internet and local files](https://betterprogramming.pub/how-to-create-a-voice-based-chatgpt-clone-that-can-search-on-the-internet-24d7f570ea8)
+- [LangChain's Chroma Documentation](https://langchain.readthedocs.io/en/latest/reference/modules/vectorstore.html?highlight=chroma#langchain.vectorstores.Chroma)
 
-## 🦙 GPT-index / LlamaIndex
+## 🦙 LlamaIndex
 
-Learn more on `GPT-index`/`LlamaIndex` [Vector Store page](https://gpt-index.readthedocs.io/en/latest/how_to/integrations/vector_stores.html).
+> *formerly known as GPT-index*
 
+- `LlamaIndex` [Vector Store page](https://gpt-index.readthedocs.io/en/latest/how_to/integrations/vector_stores.html)
+- Demo: https://github.com/jerryjliu/llama_index/blob/main/examples/vector_indices/ChromaIndexDemo.ipynb
+- [Chroma Loader on Llamahub](https://llamahub.ai/l/chroma)
 
 
 </TabItem>
@@ -54,12 +64,12 @@ export const run = async () => {
   const text = fs.readFileSync("state_of_the_union.txt", "utf8");
   /* Split the text into chunks */
   const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000 });
-  const docs = textSplitter.createDocuments([text]);
+  const docs = await textSplitter.createDocuments([text]);
   /* Create the vectorstore */
   const vectorStore = await Chroma.fromDocuments(
     docs,
     new OpenAIEmbeddings(),
-    "state_of_the_union"
+    { collectionName: "state_of_the_union" }
   );
   /* Create the chain */
   const chain = ChatVectorDBQAChain.fromLLM(model, vectorStore);

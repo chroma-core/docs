@@ -60,7 +60,7 @@ chroma_client = chroma.Client(Settings(chroma_api_impl="rest",
 ### Methods related to Collections
 
 :::note Collection naming
-Collections are similar to AWS s3 buckets in their naming requirements because they are used in URLs in the REST API. Here's the [full list](/api-guide#creating-inspecting-and-deleting-collections).
+Collections are similar to AWS s3 buckets in their naming requirements because they are used in URLs in the REST API. Here's the [full list](/usage-guide#creating-inspecting-and-deleting-collections).
 :::
 
 ```python
@@ -122,6 +122,14 @@ collection.add(
 # update items in a collection
 collection.update()
 
+# upsert items. new items will be added, existing items will be updated.
+collection.upsert(
+    ids=["id1", "id2", "id3", ...],
+    embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
+    metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
+    documents=["doc1", "doc2", "doc3", ...],
+)
+
 # get items from a collection
 collection.get()
 
@@ -153,7 +161,7 @@ Run `docker-compose up -d --build` to run a backend in Docker on your local comp
 
 ```javascript
 import { ChromaClient } from 'chromadb'
-const chroma_client = new ChromaClient();
+const client = new ChromaClient();
 ```
 
 ## Methods on Client
@@ -161,7 +169,7 @@ const chroma_client = new ChromaClient();
 ### Methods related to Collections
 
 :::note Collection naming
-Collections are similar to AWS s3 buckets in their naming requirements because they are used in URLs in the REST API. Here's the [full list](/api-guide#creating-inspecting-and-deleting-collections).
+Collections are similar to AWS s3 buckets in their naming requirements because they are used in URLs in the REST API. Here's the [full list](/usage-guide#creating-inspecting-and-deleting-collections).
 :::
 
 ```javascript
@@ -208,10 +216,18 @@ await collection.add(
 )
 // including just documents
 await collection.add(
-    ["uri9", "uri10"], 
+    ["uri9", "uri10"],
     undefined,
     [{"style": "style1"}, {"style": "style2"}],
     ["doc1000101", "doc288822"],
+)
+// or use upsert, so records will be updated if they already exist
+// (instead of throwing an error)
+await collection.upsert(
+    "id1",
+    [1.5, 2.9, 3.4],
+    {"source": "my_source"},
+    "This is a document",
 )
 
 // get items from a collection

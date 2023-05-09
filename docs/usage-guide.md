@@ -39,12 +39,19 @@ client = chromadb.Client(Settings(
 
 The `persist_directory` is where Chroma will store its database files on disk, and load them on start.
 
+:::note Jupyter Notebooks
+In a normal python program, `.persist()` will happening automatically if you set it. But in a Jupyter Notebook you will need to **manually** call `client.persist()`.
+:::
+
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```js
 import { ChromaClient } from 'chromadb'
 ```
+:::note Connecting to the backend
+To connect with the JS client, you must connect to a backend running Chroma. See `Running Chroma in client/server mode` for how to do this. 
+:::
 
 The JS client talks to a chroma server backend. This can run on your local computer via `docker` (see below) or be easily deployed to AWS.
 
@@ -76,6 +83,8 @@ The client object has a few useful convenience methods.
 await client.reset() # Empties and completely resets the database. ⚠️ This is destructive and not reversible.
 ```
 
+
+
 </TabItem>
 
 </Tabs>
@@ -85,6 +94,9 @@ await client.reset() # Empties and completely resets the database. ⚠️ This i
 
 ## Running Chroma in client/server mode
 
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
 Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode, run the docker container:
 
 ```bash
@@ -92,9 +104,6 @@ docker-compose up -d --build
 ```
 
 Then update your chroma client to point at the docker container. Default: `localhost:8000`
-
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
 
 ```python
 import chromadb
@@ -109,6 +118,14 @@ That's it! Chroma's API will run in `client-server` mode with just this change.
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
+
+Chroma can be run in-memory in Python (without Docker), but this feature is not yet available in JS (this is on our roadmap). To run Chroma in client server mode, run the docker container:
+
+```bash
+docker-compose up -d --build
+```
+
+Then update your chroma client to point at the docker container. Default: `localhost:8000`
 
 The JS client then talks to the chroma server backend. This can run on your local computer or be easily deployed to AWS.
 
@@ -186,7 +203,7 @@ Existing collections can be retrieved by name with `.get_collection`, and delete
 
 
 ```python
-collection = client.get_collection(name="test") # Get a collection object from an existing collection, by name. Will raise an exception of it's not found.
+collection = client.get_collection(name="test") # Get a collection object from an existing collection, by name. Will raise an exception if it's not found.
 collection = client.get_or_create_collection(name="test") # Get a collection object from an existing collection, by name. If it doesn't exist, create it.
 client.delete_collection(name="my_collection") # Delete a collection and all associated embeddings, documents, and metadata. ⚠️ This is destructive and not reversible
 ```
@@ -577,6 +594,36 @@ collection.update(
 If an `id` is not found in the collection, an exception will be raised. If `documents` are supplied without corresponding `embeddings`, the embeddings will be recomupted with the collection's embedding function.
 
 If the supplied `embeddings` are not the same dimension as the collection, an exception will be raised.
+
+Chroma also supports an `upsert` operation, which updates existing items, or adds them if they don't yet exist.
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+```python
+collection.upsert(
+    ids=["id1", "id2", "id3", ...],
+    embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
+    metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
+    documents=["doc1", "doc2", "doc3", ...],
+)
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+await collection.upsert(
+    ["id1", "id2", "id3"],
+    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2]],
+    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}],
+    ["doc1", "doc2", "doc3"]
+)
+```
+</TabItem>
+</Tabs>
+
+If an `id` is not present in the collection, the corresponding items will be created as per `add`. Items with existing `id`s will be updated as per `update`.
 
 ### Deleting data from a collection
 

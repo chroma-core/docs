@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 ***
 
-Chroma is a database for building AI applications with embeddings. It comes with everything you need to get started built in, and runs on your machine. A [hosted version](mailto:hello@trychroma.com) is coming soon!
+Chroma is a database for building AI applications with embeddings. It comes with everything you need to get started built in, and runs on your machine. A [hosted version](https://airtable.com/shrOAiDUtS2ILy5vZ) is coming soon!
 
 ### 1. Install
 
@@ -27,6 +27,7 @@ Chroma is a database for building AI applications with embeddings. It comes with
 ```py
 pip install chromadb
 ```
+<span class="small-text em">* chromadb currently does not support Python 3.11 because of pytorch</span>
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
@@ -55,10 +56,10 @@ chroma_client = chromadb.Client()
 
 ```js
 const {ChromaClient} = require('chromadb');
-const chroma_client = new ChromaClient();
+const client = new ChromaClient();
 ```
 
-To connect to Chroma's backend - you either need to connect to a hosted version of chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma. 
+To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma. 
 
 ```bash
 git clone git@github.com:chroma-core/chroma.git
@@ -95,7 +96,7 @@ Please take steps to secure your API when interacting with frontend systems.
 ```js
 const {OpenAIEmbeddingFunction} = require('chromadb');
 const embedder = new OpenAIEmbeddingFunction("your_api_key")
-const collection = await chroma_client.createCollection("my_collection", {}, embedder)
+const collection = await client.createCollection("my_collection", {}, embedder)
 ```
 
 </TabItem>
@@ -212,7 +213,7 @@ Find [chromadb on npm](https://www.npmjs.com/package/chromadb).
 ## 📚 Next steps
 
 - Chroma is designed to be simple enough to get started with quickly and flexible enough to meet many use-cases. You can use your own embedding models, query Chroma with your own embeddings, and filter on metadata. To learn more about Chroma, check out the [Usage Guide](./usage-guide.md) and [API Reference](./api-reference.md).
-- Chroma is integrated in [LangChain](https://langchain.readthedocs.io/en/latest/reference/modules/vectorstore.html?highlight=chroma#langchain.vectorstores.Chroma) (`python` and `js`), making it easy to build AI applications with Chroma. Check out the [integrations](./integrations.md) page to learn more.
+- Chroma is integrated in [LangChain](https://python.langchain.com/en/latest/modules/indexes/vectorstores.html?highlight=chroma#langchain.vectorstores.Chroma) (`python` and `js`), making it easy to build AI applications with Chroma. Check out the [integrations](./integrations.md) page to learn more.
 - You can [deploy a persistent instance](./deployment) of Chroma to an external server, to make it easier to work on larger projects or with a team.
 
 ## Coming Soon
