@@ -36,7 +36,22 @@ This command generates static content into the `build` directory and can be serv
 
 3. Run `pydoc-markdown`
 
-4. Update the frontmatter for the generated docs to set the page titles and their positions
+4. Update the frontmatter for the generated docs to set the page titles and their positions (manual for now)
+
+```
+---
+sidebar_label: Client
+title: Client
+sidebar_position: 1
+---
+```
+```
+---
+sidebar_label: Collection
+title: Collection
+sidebar_position: 2
+---
+```
 
 ### Deployment
 
