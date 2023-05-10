@@ -67,6 +67,16 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
             )
 ```
 
+To use the OpenAI embedding models on other platforms such as Azure, you can use the `api_base` and `api_type` parameters: 
+```python
+openai_ef = embedding_functions.OpenAIEmbeddingFunction(
+                api_key="YOUR_API_KEY",
+                api_base="YOUR_API_BASE_PATH",
+                api_type="azure",
+                model_name="text-embedding-ada-002"
+            )
+```
+
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
