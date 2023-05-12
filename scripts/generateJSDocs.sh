@@ -1,6 +1,6 @@
 rm -rf ./docs/js_reference
 
-npx typedoc
+npx typedoc --disableSources --hideBreadcrumbs true --hideInPageTOC true
 
 cd ./docs/js_reference
 
@@ -28,6 +28,8 @@ cat <<EOT > sidebar.json
 }
 EOT
 
+
 # delete a few files
+rm README.md
 rm modules.md
 rm -rf classes

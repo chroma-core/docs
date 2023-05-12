@@ -1,201 +1,218 @@
-[chromadb](../README.md) / [Exports](../modules.md) / ChromaClient
-
-# Class: ChromaClient
-
-Represents a ChromaClient for managing collections of embeddings.
-
-## Table of contents
-
-### Constructors
-
-- [constructor](ChromaClient.md#constructor)
-
-### Properties
-
-- [api](ChromaClient.md#api)
-
-### Methods
-
-- [createCollection](ChromaClient.md#createcollection)
-- [deleteCollection](ChromaClient.md#deletecollection)
-- [getCollection](ChromaClient.md#getcollection)
-- [getOrCreateCollection](ChromaClient.md#getorcreatecollection)
-- [heartbeat](ChromaClient.md#heartbeat)
-- [listCollections](ChromaClient.md#listcollections)
-- [persist](ChromaClient.md#persist)
-- [reset](ChromaClient.md#reset)
-- [version](ChromaClient.md#version)
+---
+sidebar_label: Client
+title: Client
+sidebar_position: 1
+---
 
 ## Constructors
 
 ### constructor
 
-• **new ChromaClient**(`basePath?`)
+• **new ChromaClient**(`params?`)
 
 Creates a new ChromaClient instance.
+
+**`Example`**
+
+```typescript
+const client = new ChromaClient({
+  path: "http://localhost:8000"
+});
+```
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `basePath?` | `string` | (Optional) The base URL of the Chroma API. Default is "http://localhost:8000". |
-
-#### Defined in
-
-[index.ts:539](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L539)
-
-## Properties
-
-### api
-
-• `Private` **api**: `ApiApi`
-
-#### Defined in
-
-[index.ts:533](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L533)
+| `params` | `Object` | The parameters for creating a new client |
+| `params.path?` | `string` | The base path for the Chroma API. |
 
 ## Methods
 
 ### createCollection
 
-▸ **createCollection**(`name`, `metadata?`, `embeddingFunction?`): `Promise`<[`Collection`](Collection.md)\>
+▸ **createCollection**(`params`): `Promise`<[`Collection`](Collection.md)\>
 
-Creates a new collection.
+Creates a new collection with the specified properties.
+
+**`Throws`**
+
+If there is an issue creating the collection.
+
+**`Example`**
+
+```typescript
+const collection = await client.createCollection({
+  name: "my_collection",
+  metadata: {
+    "description": "My first collection"
+  }
+});
+```
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `name` | `string` | The name of the new collection. |
-| `metadata?` | `object` | (Optional) An object containing metadata for the new collection. |
-| `embeddingFunction?` | `CallableFunction` | (Optional) A callable function for generating embeddings. |
+| `params` | `Object` | The parameters for creating a new collection. |
+| `params.embeddingFunction?` | `CallableFunction` | Optional custom embedding function for the collection. |
+| `params.metadata?` | `Metadata` | Optional metadata associated with the collection. |
+| `params.name` | `string` | The name of the collection. |
 
 #### Returns
 
 `Promise`<[`Collection`](Collection.md)\>
 
-A Promise that resolves to the created Collection instance.
-
-#### Defined in
-
-[index.ts:577](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L577)
+A promise that resolves to the created collection.
 
 ___
 
 ### deleteCollection
 
-▸ **deleteCollection**(`name`): `Promise`<`any`\>
+▸ **deleteCollection**(`params`): `Promise`<`void`\>
 
-Deletes a collection.
+Deletes a collection with the specified name.
 
-#### Parameters
+**`Throws`**
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `name` | `string` | The name of the collection to be deleted. |
+If there is an issue deleting the collection.
 
-#### Returns
+**`Example`**
 
-`Promise`<`any`\>
-
-A Promise that resolves to the result of the deletion operation.
-
-#### Defined in
-
-[index.ts:660](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L660)
-
-___
-
-### getCollection
-
-▸ **getCollection**(`name`, `embeddingFunction?`): `Promise`<[`Collection`](Collection.md)\>
-
-Retrieves an existing collection.
+```typescript
+await client.deleteCollection({
+ name: "my_collection"
+});
+```
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `name` | `string` | The name of the collection to be retrieved. |
-| `embeddingFunction?` | `CallableFunction` | (Optional) A callable function for generating embeddings. |
-
-#### Returns
-
-`Promise`<[`Collection`](Collection.md)\>
-
-A Collection instance representing the retrieved collection.
-
-#### Defined in
-
-[index.ts:638](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L638)
-
-___
-
-### getOrCreateCollection
-
-▸ **getOrCreateCollection**(`name`, `metadata?`, `embeddingFunction?`): `Promise`<[`Collection`](Collection.md)\>
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `name` | `string` |
-| `metadata?` | `object` |
-| `embeddingFunction?` | `CallableFunction` |
-
-#### Returns
-
-`Promise`<[`Collection`](Collection.md)\>
-
-#### Defined in
-
-[index.ts:597](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L597)
-
-___
-
-### heartbeat
-
-▸ **heartbeat**(): `Promise`<`any`\>
-
-#### Returns
-
-`Promise`<`any`\>
-
-#### Defined in
-
-[index.ts:560](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L560)
-
-___
-
-### listCollections
-
-▸ **listCollections**(): `Promise`<`any`\>
-
-Lists all collections.
-
-#### Returns
-
-`Promise`<`any`\>
-
-A Promise that resolves to an array of collections.
-
-#### Defined in
-
-[index.ts:627](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L627)
-
-___
-
-### persist
-
-▸ **persist**(): `Promise`<`void`\>
+| `params` | `Object` | The parameters for deleting a collection. |
+| `params.name` | `string` | The name of the collection. |
 
 #### Returns
 
 `Promise`<`void`\>
 
-#### Defined in
+A promise that resolves when the collection is deleted.
 
-[index.ts:566](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L566)
+___
+
+### getCollection
+
+▸ **getCollection**(`params`): `Promise`<[`Collection`](Collection.md)\>
+
+Gets a collection with the specified name.
+
+**`Throws`**
+
+If there is an issue getting the collection.
+
+**`Example`**
+
+```typescript
+const collection = await client.getCollection({
+  name: "my_collection"
+});
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | `Object` | The parameters for getting a collection. |
+| `params.embeddingFunction?` | `CallableFunction` | Optional custom embedding function for the collection. |
+| `params.name` | `string` | The name of the collection. |
+
+#### Returns
+
+`Promise`<[`Collection`](Collection.md)\>
+
+A promise that resolves to the collection.
+
+___
+
+### getOrCreateCollection
+
+▸ **getOrCreateCollection**(`params`): `Promise`<[`Collection`](Collection.md)\>
+
+Gets or creates a collection with the specified properties.
+
+**`Throws`**
+
+If there is an issue getting or creating the collection.
+
+**`Example`**
+
+```typescript
+const collection = await client.getOrCreateCollection({
+  name: "my_collection",
+  metadata: {
+    "description": "My first collection"
+  }
+});
+```
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | `Object` | The parameters for creating a new collection. |
+| `params.embeddingFunction?` | `CallableFunction` | Optional custom embedding function for the collection. |
+| `params.metadata?` | `Metadata` | Optional metadata associated with the collection. |
+| `params.name` | `string` | The name of the collection. |
+
+#### Returns
+
+`Promise`<[`Collection`](Collection.md)\>
+
+A promise that resolves to the got or created collection.
+
+___
+
+### heartbeat
+
+▸ **heartbeat**(): `Promise`<`number`\>
+
+Returns a heartbeat from the Chroma API.
+
+**`Example`**
+
+```typescript
+const heartbeat = await client.heartbeat();
+```
+
+#### Returns
+
+`Promise`<`number`\>
+
+A promise that resolves to the heartbeat from the Chroma API.
+
+___
+
+### listCollections
+
+▸ **listCollections**(): `Promise`<`CollectionType`[]\>
+
+Lists all collections.
+
+**`Throws`**
+
+If there is an issue listing the collections.
+
+**`Example`**
+
+```typescript
+const collections = await client.listCollections();
+```
+
+#### Returns
+
+`Promise`<`CollectionType`[]\>
+
+A promise that resolves to a list of collection names.
 
 ___
 
@@ -203,28 +220,40 @@ ___
 
 ▸ **reset**(): `Promise`<`Reset200Response`\>
 
-Resets the ChromaClient state.
+Resets the state of the object by making an API call to the reset endpoint.
+
+**`Throws`**
+
+If there is an issue resetting the state.
+
+**`Example`**
+
+```typescript
+await client.reset();
+```
 
 #### Returns
 
 `Promise`<`Reset200Response`\>
 
-A Promise that resolves when the ChromaClient state is reset.
-
-#### Defined in
-
-[index.ts:551](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L551)
+A promise that resolves when the reset operation is complete.
 
 ___
 
 ### version
 
-▸ **version**(): `Promise`<`any`\>
+▸ **version**(): `Promise`<`string`\>
+
+Returns the version of the Chroma API.
+
+**`Example`**
+
+```typescript
+const version = await client.version();
+```
 
 #### Returns
 
-`Promise`<`any`\>
+`Promise`<`string`\>
 
-#### Defined in
-
-[index.ts:555](https://github.com/chroma-core/chroma/blob/f9b8f7c/clients/js/src/index.ts#L555)
+A promise that resolves to the version of the Chroma API.
