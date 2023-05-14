@@ -13,16 +13,20 @@ class LocalAPI(API)
 #### heartbeat
 
 ```python
-def heartbeat()
+def heartbeat() -> int
 ```
 
 Ping the database to ensure it is alive
+
+**Returns**:
+
+  The current time in milliseconds
 
 #### create\_collection
 
 ```python
 def create_collection(name: str,
-                      metadata: Optional[Dict] = None,
+                      metadata: Optional[Metadata] = None,
                       embedding_function: Optional[Callable] = None,
                       get_or_create: bool = False) -> Collection
 ```
@@ -50,18 +54,20 @@ Create a new collection with the given name and metadata.
 
 **Examples**:
 
-  &gt;&gt;&gt; client.create_collection(&quot;my_collection&quot;)
-  collection(name=&quot;my_collection&quot;, metadata={})
+  ```python
+  client.create_collection("my_collection")
+  # collection(name="my_collection", metadata={})
   
-  &gt;&gt;&gt; client.create_collection(&quot;my_collection&quot;, metadata={&quot;foo&quot;: &quot;bar&quot;})
-  collection(name=&quot;my_collection&quot;, metadata={&quot;foo&quot;: &quot;bar&quot;})
+  client.create_collection("my_collection", metadata={"foo": "bar"})
+  # collection(name="my_collection", metadata={"foo": "bar"})
+  ```
 
 #### get\_or\_create\_collection
 
 ```python
 def get_or_create_collection(
         name: str,
-        metadata: Optional[Dict] = None,
+        metadata: Optional[Metadata] = None,
         embedding_function: Optional[Callable] = None) -> Collection
 ```
 
@@ -81,8 +87,10 @@ Get or create a collection with the given name and metadata.
 
 **Examples**:
 
-  &gt;&gt;&gt; client.get_or_create_collection(&quot;my_collection&quot;)
-  collection(name=&quot;my_collection&quot;, metadata={})
+  ```python
+  client.get_or_create_collection("my_collection")
+  # collection(name="my_collection", metadata={})
+  ```
 
 #### get\_collection
 
@@ -112,8 +120,10 @@ Get a collection with the given name.
 
 **Examples**:
 
-  &gt;&gt;&gt; client.get_collection(&quot;my_collection&quot;)
-  collection(name=&quot;my_collection&quot;, metadata={})
+  ```python
+  client.get_collection("my_collection")
+  # collection(name="my_collection", metadata={})
+  ```
 
 #### list\_collections
 
@@ -130,13 +140,15 @@ List all collections.
 
 **Examples**:
 
-  &gt;&gt;&gt; client.list_collections()
-  [collection(name=&quot;my_collection&quot;, metadata={})]
+  ```python
+  client.list_collections()
+  # [collection(name="my_collection", metadata={})]
+  ```
 
 #### delete\_collection
 
 ```python
-def delete_collection(name: str)
+def delete_collection(name: str) -> None
 ```
 
 Delete a collection with the given name.
@@ -153,12 +165,14 @@ Delete a collection with the given name.
 
 **Examples**:
 
-  &gt;&gt;&gt; client.delete_collection(&quot;my_collection&quot;)
+  ```python
+  client.delete_collection("my_collection")
+  ```
 
 #### reset
 
 ```python
-def reset()
+def reset() -> bool
 ```
 
 Reset the database. This will delete all collections and items.
@@ -170,7 +184,7 @@ Reset the database. This will delete all collections and items.
 #### persist
 
 ```python
-def persist()
+def persist() -> bool
 ```
 
 Persist the database to disk.
@@ -182,7 +196,7 @@ Persist the database to disk.
 #### get\_version
 
 ```python
-def get_version()
+def get_version() -> str
 ```
 
 Get the version of Chroma.

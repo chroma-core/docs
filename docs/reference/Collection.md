@@ -28,7 +28,8 @@ The total number of embeddings added to the database
 def add(ids: OneOrMany[ID],
         embeddings: Optional[OneOrMany[Embedding]] = None,
         metadatas: Optional[OneOrMany[Metadata]] = None,
-        documents: Optional[OneOrMany[Document]] = None)
+        documents: Optional[OneOrMany[Document]] = None,
+        increment_index: bool = True) -> None
 ```
 
 Add embeddings to the data store.
@@ -49,9 +50,9 @@ Add embeddings to the data store.
 
 **Raises**:
 
-- `ValueError` - If you don&#x27;t provide either embeddings or documents
-- `ValueError` - If the length of ids, embeddings, metadatas, or documents don&#x27;t match
-- `ValueError` - If you don&#x27;t provide an embedding function and don&#x27;t provide embeddings
+- `ValueError` - If you don't provide either embeddings or documents
+- `ValueError` - If the length of ids, embeddings, metadatas, or documents don't match
+- `ValueError` - If you don't provide an embedding function and don't provide embeddings
 - `ValueError` - If you provide both embeddings and documents
 - `ValueError` - If you provide an id that already exists
 
@@ -72,11 +73,11 @@ all embeddings up to limit starting at offset.
 **Arguments**:
 
 - `ids` - The ids of the embeddings to get. Optional.
-- `where` - A Where type dict used to filter results by. E.g. {&quot;color&quot; : &quot;red&quot;, &quot;price&quot;: 4.20}. Optional.
+- `where` - A Where type dict used to filter results by. E.g. `{"color" : "red", "price": 4.20}`. Optional.
 - `limit` - The number of documents to return. Optional.
 - `offset` - The offset to start returning results from. Useful for paging results with limit. Optional.
-- `where_document` - A WhereDocument type dict used to filter by the documents. E.g. {$contains: {&quot;text&quot;: &quot;hello&quot;}}. Optional.
-- `include` - A list of what to include in the results. Can contain &quot;embeddings&quot;, &quot;metadatas&quot;, &quot;documents&quot;. Ids are always included. Defaults to [&quot;metadatas&quot;, &quot;documents&quot;]. Optional.
+- `where_document` - A WhereDocument type dict used to filter by the documents. E.g. `{$contains: {"text": "hello"}}`. Optional.
+- `include` - A list of what to include in the results. Can contain `"embeddings"`, `"metadatas"`, `"documents"`. Ids are always included. Defaults to `["metadatas", "documents"]`. Optional.
   
 
 **Returns**:
@@ -120,9 +121,9 @@ Get the n_results nearest neighbor embeddings for provided query_embeddings or q
 - `query_embeddings` - The embeddings to get the closes neighbors of. Optional.
 - `query_texts` - The document texts to get the closes neighbors of. Optional.
 - `n_results` - The number of neighbors to return for each query_embedding or query_text. Optional.
-- `where` - A Where type dict used to filter results by. E.g. {&quot;color&quot; : &quot;red&quot;, &quot;price&quot;: 4.20}. Optional.
-- `where_document` - A WhereDocument type dict used to filter by the documents. E.g. {$contains: {&quot;text&quot;: &quot;hello&quot;}}. Optional.
-- `include` - A list of what to include in the results. Can contain &quot;embeddings&quot;, &quot;metadatas&quot;, &quot;documents&quot;, &quot;distances&quot;. Ids are always included. Defaults to [&quot;metadatas&quot;, &quot;documents&quot;, &quot;distances&quot;]. Optional.
+- `where` - A Where type dict used to filter results by. E.g. `{"color" : "red", "price": 4.20}`. Optional.
+- `where_document` - A WhereDocument type dict used to filter by the documents. E.g. `{$contains: {"text": "hello"}}`. Optional.
+- `include` - A list of what to include in the results. Can contain `"embeddings"`, `"metadatas"`, `"documents"`, `"distances"`. Ids are always included. Defaults to `["metadatas", "documents", "distances"]`. Optional.
   
 
 **Returns**:
@@ -132,13 +133,14 @@ Get the n_results nearest neighbor embeddings for provided query_embeddings or q
 
 **Raises**:
 
-- `ValueError` - If you don&#x27;t provide either query_embeddings or query_texts
+- `ValueError` - If you don't provide either query_embeddings or query_texts
 - `ValueError` - If you provide both query_embeddings and query_texts
 
 #### modify
 
 ```python
-def modify(name: Optional[str] = None, metadata=None)
+def modify(name: Optional[str] = None,
+           metadata: Optional[Metadata] = None) -> None
 ```
 
 Modify the collection name or metadata
@@ -159,7 +161,7 @@ Modify the collection name or metadata
 def update(ids: OneOrMany[ID],
            embeddings: Optional[OneOrMany[Embedding]] = None,
            metadatas: Optional[OneOrMany[Metadata]] = None,
-           documents: Optional[OneOrMany[Document]] = None)
+           documents: Optional[OneOrMany[Document]] = None) -> None
 ```
 
 Update the embeddings, metadatas or documents for provided ids.
@@ -182,10 +184,11 @@ Update the embeddings, metadatas or documents for provided ids.
 def upsert(ids: OneOrMany[ID],
            embeddings: Optional[OneOrMany[Embedding]] = None,
            metadatas: Optional[OneOrMany[Metadata]] = None,
-           documents: Optional[OneOrMany[Document]] = None)
+           documents: Optional[OneOrMany[Document]] = None,
+           increment_index: bool = True) -> None
 ```
 
-Update the embeddings, metadatas or documents for provided ids, or create them if they don&#x27;t exist.
+Update the embeddings, metadatas or documents for provided ids, or create them if they don't exist.
 
 **Arguments**:
 
@@ -199,7 +202,7 @@ Update the embeddings, metadatas or documents for provided ids, or create them i
 ```python
 def delete(ids: Optional[IDs] = None,
            where: Optional[Where] = None,
-           where_document: Optional[WhereDocument] = None)
+           where_document: Optional[WhereDocument] = None) -> List[str]
 ```
 
 Delete the embeddings based on ids and/or a where filter
@@ -207,8 +210,8 @@ Delete the embeddings based on ids and/or a where filter
 **Arguments**:
 
 - `ids` - The ids of the embeddings to delete
-- `where` - A Where type dict used to filter the delection by. E.g. {&quot;color&quot; : &quot;red&quot;, &quot;price&quot;: 4.20}. Optional.
-- `where_document` - A WhereDocument type dict used to filter the deletion by the document content. E.g. {$contains: {&quot;text&quot;: &quot;hello&quot;}}. Optional.
+- `where` - A Where type dict used to filter the delection by. E.g. `{"color" : "red", "price": 4.20}`. Optional.
+- `where_document` - A WhereDocument type dict used to filter the deletion by the document content. E.g. `{$contains: {"text": "hello"}}`. Optional.
   
 
 **Returns**:
