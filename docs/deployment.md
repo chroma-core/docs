@@ -3,6 +3,14 @@ sidebar_position: 8
 title: "☁️ Deployment"
 ---
 
+:::caution Alpha Status
+Chroma Server is currently in Alpha.
+- [x] Alpha <- Currently
+- [ ] Beta - ~1 month away
+- [ ] Full production
+- [ ] GA - General Availability
+:::
+
 # ☁️ Deployment
 
 You can also deploy Chroma on a long-running server, and connect to it
