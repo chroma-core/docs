@@ -4,9 +4,9 @@ title: "☁️ Deployment"
 ---
 
 :::caution Alpha Status
-Chroma Server is currently in Alpha.
+Chroma Server is currently in Alpha. We are working hard to move Chroma from a in-memory single-process oriented library to a distributed production-grade DB!
 - [x] Alpha <- Currently
-- [ ] Beta - ~1 month away
+- [ ] Technical Preview - ~1 month away, powered by a completely new backend
 - [ ] Full production
 - [ ] GA - General Availability
 :::
