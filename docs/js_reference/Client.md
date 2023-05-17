@@ -18,12 +18,6 @@ sidebar_position: 1
 | :------ | :------ |
 | `basePath?` | `string` |
 
-## Properties
-
-### api
-
-• `Private` **api**: `ApiApi`
-
 ## Methods
 
 ### createCollection
@@ -112,16 +106,6 @@ ___
 #### Returns
 
 `Promise`<`any`\>
-
-___
-
-### persist
-
-▸ **persist**(): `Promise`<`void`\>
-
-#### Returns
-
-`Promise`<`void`\>
 
 ___
 
