@@ -10,7 +10,7 @@ mv classes/Collection.md Collection.md
 cat <<EOT > _category_.json
 {
     "position": 20,
-    "label": "📑 Javascript API Docs",
+    "label": "⚪️ JS Docs",
     "collapsible": true,
     "collapsed": true,
     "className": "notbold"
