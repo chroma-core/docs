@@ -29,6 +29,34 @@ cat <<EOT > sidebar.json
 EOT
 
 
+FILE="Client.md"
+TEMP_FILE=$(mktemp)
+cat <<- EOF > $TEMP_FILE
+---
+sidebar_label: Client
+title: Client
+sidebar_position: 1
+---
+
+EOF
+cat $FILE >> $TEMP_FILE
+mv $TEMP_FILE $FILE
+
+
+FILE="Collection.md"
+TEMP_FILE=$(mktemp)
+cat <<- EOF > $TEMP_FILE
+---
+sidebar_label: Collection
+title: Collection
+sidebar_position: 2
+---
+
+EOF
+cat $FILE >> $TEMP_FILE
+mv $TEMP_FILE $FILE
+
+
 # delete a few files
 rm README.md
 rm modules.md

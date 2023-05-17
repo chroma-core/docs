@@ -36,23 +36,7 @@ Vercel handles deploying main to https://docs.trychroma.com
 /chroma
 ```
 
-2. Update `scripts/generateJSDocs.sh`, `sidebar.json` if you need to expose more files other than Collection and Client
+2. Update `scripts/jsDocs.sh`, `sidebar.json` if you need to expose more files other than Collection and Client
 
-3. Run `yarn rebuild-js-docs`
+3. Run `yarn gen-js`
 
-4. Update the frontmatter for the generated docs to set the page titles and their positions (manual for now)
-
-```
----
-sidebar_label: Client
-title: Client
-sidebar_position: 1
----
-```
-```
----
-sidebar_label: Collection
-title: Collection
-sidebar_position: 2
----
-```
