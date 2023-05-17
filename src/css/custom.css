@@ -544,6 +544,11 @@ div.special_table + table, th, td {
   margin-left: 5px;
 }
 
+
+.notbold a {
+  font-weight: 400 !important;
+}
+  
 .small-text {
   font-size: 0.8em;
 }

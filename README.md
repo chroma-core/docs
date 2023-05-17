@@ -24,6 +24,18 @@ $ yarn build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+### Generating Python Docs
+
+1. Have chroma as a sibling to the the docs dir, eg 
+```
+/docs
+/chroma
+```
+
+2. Update `pydoc-markdown.yml` if you need to expose more files other than Collection and Client
+
+3. Run `yarn gen-python`
+
 ### Deployment
 
 Vercel handles deploying main to https://docs.trychroma.com

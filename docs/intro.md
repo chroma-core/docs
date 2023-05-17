@@ -35,7 +35,7 @@ Chroma consists of a `Python` client SDK, `JavaScript/TypeScript` client SDK and
 Chroma is licensed under [Apache 2.0](https://github.com/chroma-core/chroma/blob/main/LICENSE)
 
 ### Python
-In Python, Chroma can run `in-memory` or in `client/server` mode.
+In Python, Chroma can run `in-memory` or in `client/server` (in alpha) mode.
 ```bash
 pip install chromadb
 ```
