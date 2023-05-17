@@ -4,7 +4,37 @@ title: Collection
 sidebar_position: 2
 ---
 
+# Class: Collection
+
+## Constructors
+
+### constructor
+
+• **new Collection**(`name`, `id`, `api`, `metadata?`, `embeddingFunction?`)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `id` | `string` |
+| `api` | `ApiApi` |
+| `metadata?` | `object` |
+| `embeddingFunction?` | `CallableFunction` |
+
 ## Properties
+
+### api
+
+• `Private` **api**: `ApiApi`
+
+___
+
+### embeddingFunction
+
+• **embeddingFunction**: `undefined` \| `CallableFunction`
+
+___
 
 ### id
 
@@ -14,7 +44,7 @@ ___
 
 ### metadata
 
-• **metadata**: `undefined` \| `Metadata`
+• **metadata**: `undefined` \| `object`
 
 ___
 
@@ -26,317 +56,222 @@ ___
 
 ### add
 
-▸ **add**(`params`): `Promise`<`boolean`\>
-
-Add items to the collection
-
-**`Example`**
-
-```typescript
-const response = await collection.add({
-  ids: ["id1", "id2"],
-  embeddings: [[1, 2, 3], [4, 5, 6]],
-  metadatas: [{ "key": "value" }, { "key": "value" }],
-  documents: ["document1", "document2"]
-});
-```
+▸ **add**(`ids`, `embeddings`, `metadatas?`, `documents?`, `increment_index?`): `Promise`<`any`\>
 
 #### Parameters
 
-| Name | Type | Description |
+| Name | Type | Default value |
 | :------ | :------ | :------ |
-| `params` | `Object` | The parameters for the query. |
-| `params.documents?` | `string` \| `Documents` | Optional documents of the items to add. |
-| `params.embeddings?` | `Embedding` \| `Embeddings` | Optional embeddings of the items to add. |
-| `params.ids` | `string` \| `IDs` | IDs of the items to add. |
-| `params.metadatas?` | `Metadata` \| `Metadatas` | Optional metadata of the items to add. |
+| `ids` | `string` \| `string`[] | `undefined` |
+| `embeddings` | `undefined` \| `number`[] \| `number`[][] | `undefined` |
+| `metadatas?` | `object` \| `object`[] | `undefined` |
+| `documents?` | `string` \| `string`[] | `undefined` |
+| `increment_index` | `boolean` | `true` |
 
 #### Returns
 
-`Promise`<`boolean`\>
-
-- The response from the API. True if successful.
+`Promise`<`any`\>
 
 ___
 
 ### count
 
-▸ **count**(): `Promise`<`number`\>
-
-Count the number of items in the collection
-
-**`Example`**
-
-```typescript
-const response = await collection.count();
-```
+▸ **count**(): `Promise`<`any`\>
 
 #### Returns
 
-`Promise`<`number`\>
+`Promise`<`any`\>
 
-- The response from the API.
+___
+
+### createIndex
+
+▸ **createIndex**(): `Promise`<`CreateIndex200Response`\>
+
+#### Returns
+
+`Promise`<`CreateIndex200Response`\>
 
 ___
 
 ### delete
 
-▸ **delete**(`params?`): `Promise`<`string`[]\>
-
-Deletes items from the collection.
-
-**`Throws`**
-
-If there is an issue deleting items from the collection.
-
-**`Example`**
-
-```typescript
-const results = await collection.delete({
-  ids: "some_id",
-  where: {"name": {"$eq": "John Doe"}},
-  where_document: {"$contains":"search_string"}
-});
-```
+▸ **delete**(`ids?`, `where?`, `where_document?`): `Promise`<`any`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params` | `Object` | The parameters for deleting items from the collection. |
-| `params.ids?` | `string` \| `IDs` | Optional ID or array of IDs of items to delete. |
-| `params.where?` | `Where` | Optional query condition to filter items to delete based on metadata values. |
-| `params.where_document?` | `WhereDocument` | Optional query condition to filter items to delete based on document content. |
+| Name | Type |
+| :------ | :------ |
+| `ids?` | `string`[] |
+| `where?` | `object` |
+| `where_document?` | `object` |
 
 #### Returns
 
-`Promise`<`string`[]\>
-
-A promise that resolves to the IDs of the deleted items.
+`Promise`<`any`\>
 
 ___
 
 ### get
 
-▸ **get**(`params?`): `Promise`<`GetResponse`\>
-
-Get items from the collection
-
-**`Example`**
-
-```typescript
-const response = await collection.get({
-  ids: ["id1", "id2"],
-  where: { "key": "value" },
-  limit: 10,
-  offset: 0,
-  include: ["embeddings", "metadatas", "documents"],
-  where_document: { $contains: "value" },
-});
-```
+▸ **get**(`ids?`, `where?`, `limit?`, `offset?`, `include?`, `where_document?`): `Promise`<`any`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params` | `Object` | The parameters for the query. |
-| `params.ids?` | `string` \| `IDs` | Optional IDs of the items to get. |
-| `params.include?` | `IncludeEnum`[] | Optional list of items to include in the response. |
-| `params.limit?` | `number` | Optional limit on the number of items to get. |
-| `params.offset?` | `number` | Optional offset on the items to get. |
-| `params.where?` | `Where` | Optional where clause to filter items by. |
-| `params.where_document?` | `WhereDocument` | Optional where clause to filter items by. |
+| Name | Type |
+| :------ | :------ |
+| `ids?` | `string`[] |
+| `where?` | `object` |
+| `limit?` | `number` |
+| `offset?` | `number` |
+| `include?` | `IncludeEnum`[] |
+| `where_document?` | `object` |
 
 #### Returns
 
-`Promise`<`GetResponse`\>
-
-- The response from the server.
+`Promise`<`any`\>
 
 ___
 
 ### modify
 
-▸ **modify**(`params?`): `Promise`<`void`\>
-
-Modify the collection name or metadata
-
-**`Example`**
-
-```typescript
-const response = await collection.modify({
-  name: "new name",
-  metadata: { "key": "value" },
-});
-```
+▸ **modify**(`name?`, `metadata?`): `Promise`<`any`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params` | `Object` | The parameters for the query. |
-| `params.metadata?` | `Metadata` | Optional new metadata for the collection. |
-| `params.name?` | `string` | Optional new name for the collection. |
+| Name | Type |
+| :------ | :------ |
+| `name?` | `string` |
+| `metadata?` | `object` |
 
 #### Returns
 
-`Promise`<`void`\>
-
-- The response from the API.
+`Promise`<`any`\>
 
 ___
 
 ### peek
 
-▸ **peek**(`params?`): `Promise`<`GetResponse`\>
-
-Peek inside the collection
-
-**`Throws`**
-
-If there is an issue executing the query.
-
-**`Example`**
-
-```typescript
-const results = await collection.peek({
-  limit: 10
-});
-```
+▸ **peek**(`limit?`): `Promise`<`any`\>
 
 #### Parameters
 
-| Name | Type | Description |
+| Name | Type | Default value |
 | :------ | :------ | :------ |
-| `params` | `Object` | The parameters for the query. |
-| `params.limit?` | `number` | Optional number of results to return (default is 10). |
+| `limit` | `number` | `10` |
 
 #### Returns
 
-`Promise`<`GetResponse`\>
-
-A promise that resolves to the query results.
+`Promise`<`any`\>
 
 ___
 
 ### query
 
-▸ **query**(`params`): `Promise`<`QueryResponse`\>
-
-Performs a query on the collection using the specified parameters.
-
-**`Throws`**
-
-If there is an issue executing the query.
-
-**`Example`**
-
-```ts
-// Query the collection using embeddings
-const results = await collection.query({
-  query_embeddings: [[0.1, 0.2, ...], ...],
-  n_results: 10,
-  where: {"name": {"$eq": "John Doe"}},
-  include: ["metadata", "document"]
-});
-```
-
-**`Example`**
-
-```js
-// Query the collection using query text
-const results = await collection.query({
-  query_text: "some text",
-  n_results: 10,
-  where: {"name": {"$eq": "John Doe"}},
-  include: ["metadata", "document"]
-});
-```
+▸ **query**(`query_embeddings`, `n_results?`, `where?`, `query_text?`, `where_document?`, `include?`): `Promise`<`any`\>
 
 #### Parameters
 
-| Name | Type | Description |
+| Name | Type | Default value |
 | :------ | :------ | :------ |
-| `params` | `Object` | The parameters for the query. |
-| `params.include?` | `IncludeEnum`[] | Optional array of fields to include in the result, such as "metadata" and "document". |
-| `params.n_results?` | `number` | Optional number of results to return (default is 10). |
-| `params.query_embeddings?` | `Embedding` \| `Embeddings` | Optional query embeddings to use for the search. |
-| `params.query_text?` | `string` \| `string`[] | Optional query text(s) to search for in the collection (renamed to 'query_texts' in the future). |
-| `params.where?` | `Where` | Optional query condition to filter results based on metadata values. |
-| `params.where_document?` | `WhereDocument` | Optional query condition to filter results based on document content. |
+| `query_embeddings` | `undefined` \| `number`[] \| `number`[][] | `undefined` |
+| `n_results` | `number` | `10` |
+| `where?` | `object` | `undefined` |
+| `query_text?` | `string` \| `string`[] | `undefined` |
+| `where_document?` | `object` | `undefined` |
+| `include?` | `IncludeEnum`[] | `undefined` |
 
 #### Returns
 
-`Promise`<`QueryResponse`\>
+`Promise`<`any`\>
 
-A promise that resolves to the query results.
+___
+
+### setMetadata
+
+▸ `Private` **setMetadata**(`metadata`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `metadata` | `undefined` \| `object` |
+
+#### Returns
+
+`void`
+
+___
+
+### setName
+
+▸ `Private` **setName**(`name`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+
+#### Returns
+
+`void`
 
 ___
 
 ### update
 
-▸ **update**(`params`): `Promise`<`boolean`\>
-
-Update the embeddings, documents, and/or metadatas of existing items
-
-**`Example`**
-
-```typescript
-const response = await collection.update({
-  ids: ["id1", "id2"],
-  embeddings: [[1, 2, 3], [4, 5, 6]],
-  metadatas: [{ "key": "value" }, { "key": "value" }],
-  documents: ["new document 1", "new document 2"],
-});
-```
+▸ **update**(`ids`, `embeddings?`, `metadatas?`, `documents?`): `Promise`<`any`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params` | `Object` | The parameters for the query. |
-| `params.documents?` | `string` \| `Documents` | Optional documents to update. |
-| `params.embeddings?` | `Embedding` \| `Embeddings` | Optional embeddings to update. |
-| `params.ids` | `string` \| `IDs` | The IDs of the items to update. |
-| `params.metadatas?` | `Metadata` \| `Metadatas` | Optional metadatas to update. |
+| Name | Type |
+| :------ | :------ |
+| `ids` | `string` \| `string`[] |
+| `embeddings?` | `number`[] \| `number`[][] |
+| `metadatas?` | `object` \| `object`[] |
+| `documents?` | `string` \| `string`[] |
 
 #### Returns
 
-`Promise`<`boolean`\>
-
-- The API Response. True if successful. Else, error.
+`Promise`<`any`\>
 
 ___
 
 ### upsert
 
-▸ **upsert**(`params`): `Promise`<`boolean`\>
-
-Upsert items to the collection
-
-**`Example`**
-
-```typescript
-const response = await collection.upsert({
-  ids: ["id1", "id2"],
-  embeddings: [[1, 2, 3], [4, 5, 6]],
-  metadatas: [{ "key": "value" }, { "key": "value" }],
-  documents: ["document1", "document2"],
-});
-```
+▸ **upsert**(`ids`, `embeddings`, `metadatas?`, `documents?`, `increment_index?`): `Promise`<`any`\>
 
 #### Parameters
 
-| Name | Type | Description |
+| Name | Type | Default value |
 | :------ | :------ | :------ |
-| `params` | `Object` | The parameters for the query. |
-| `params.documents?` | `string` \| `Documents` | Optional documents of the items to add. |
-| `params.embeddings?` | `Embedding` \| `Embeddings` | Optional embeddings of the items to add. |
-| `params.ids` | `string` \| `IDs` | IDs of the items to add. |
-| `params.metadatas?` | `Metadata` \| `Metadatas` | Optional metadata of the items to add. |
+| `ids` | `string` \| `string`[] | `undefined` |
+| `embeddings` | `undefined` \| `number`[] \| `number`[][] | `undefined` |
+| `metadatas?` | `object` \| `object`[] | `undefined` |
+| `documents?` | `string` \| `string`[] | `undefined` |
+| `increment_index` | `boolean` | `true` |
 
 #### Returns
 
-`Promise`<`boolean`\>
+`Promise`<`any`\>
 
-- The response from the API. True if successful.
+___
+
+### validate
+
+▸ `Private` **validate**(`require_embeddings_or_documents`, `ids`, `embeddings`, `metadatas?`, `documents?`): `Promise`<(`undefined` \| `object`[] \| (`undefined` \| `string`)[])[]\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `require_embeddings_or_documents` | `boolean` |
+| `ids` | `string` \| `string`[] |
+| `embeddings` | `undefined` \| `number`[] \| `number`[][] |
+| `metadatas?` | `object` \| `object`[] |
+| `documents?` | `string` \| `string`[] |
+
+#### Returns
+
+`Promise`<(`undefined` \| `object`[] \| (`undefined` \| `string`)[])[]\>

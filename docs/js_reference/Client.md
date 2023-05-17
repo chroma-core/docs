@@ -4,215 +4,124 @@ title: Client
 sidebar_position: 1
 ---
 
+# Class: ChromaClient
+
 ## Constructors
 
 ### constructor
 
-• **new ChromaClient**(`params?`)
-
-Creates a new ChromaClient instance.
-
-**`Example`**
-
-```typescript
-const client = new ChromaClient({
-  path: "http://localhost:8000"
-});
-```
+• **new ChromaClient**(`basePath?`)
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params` | `Object` | The parameters for creating a new client |
-| `params.path?` | `string` | The base path for the Chroma API. |
+| Name | Type |
+| :------ | :------ |
+| `basePath?` | `string` |
+
+## Properties
+
+### api
+
+• `Private` **api**: `ApiApi`
 
 ## Methods
 
 ### createCollection
 
-▸ **createCollection**(`params`): `Promise`<[`Collection`](Collection.md)\>
-
-Creates a new collection with the specified properties.
-
-**`Throws`**
-
-If there is an issue creating the collection.
-
-**`Example`**
-
-```typescript
-const collection = await client.createCollection({
-  name: "my_collection",
-  metadata: {
-    "description": "My first collection"
-  }
-});
-```
+▸ **createCollection**(`name`, `metadata?`, `embeddingFunction?`): `Promise`<[`Collection`](Collection.md)\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params` | `Object` | The parameters for creating a new collection. |
-| `params.embeddingFunction?` | `CallableFunction` | Optional custom embedding function for the collection. |
-| `params.metadata?` | `Metadata` | Optional metadata associated with the collection. |
-| `params.name` | `string` | The name of the collection. |
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `metadata?` | `object` |
+| `embeddingFunction?` | `CallableFunction` |
 
 #### Returns
 
 `Promise`<[`Collection`](Collection.md)\>
-
-A promise that resolves to the created collection.
 
 ___
 
 ### deleteCollection
 
-▸ **deleteCollection**(`params`): `Promise`<`void`\>
-
-Deletes a collection with the specified name.
-
-**`Throws`**
-
-If there is an issue deleting the collection.
-
-**`Example`**
-
-```typescript
-await client.deleteCollection({
- name: "my_collection"
-});
-```
+▸ **deleteCollection**(`name`): `Promise`<`any`\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params` | `Object` | The parameters for deleting a collection. |
-| `params.name` | `string` | The name of the collection. |
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
 
 #### Returns
 
-`Promise`<`void`\>
-
-A promise that resolves when the collection is deleted.
+`Promise`<`any`\>
 
 ___
 
 ### getCollection
 
-▸ **getCollection**(`params`): `Promise`<[`Collection`](Collection.md)\>
-
-Gets a collection with the specified name.
-
-**`Throws`**
-
-If there is an issue getting the collection.
-
-**`Example`**
-
-```typescript
-const collection = await client.getCollection({
-  name: "my_collection"
-});
-```
+▸ **getCollection**(`name`, `embeddingFunction?`): `Promise`<[`Collection`](Collection.md)\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params` | `Object` | The parameters for getting a collection. |
-| `params.embeddingFunction?` | `CallableFunction` | Optional custom embedding function for the collection. |
-| `params.name` | `string` | The name of the collection. |
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `embeddingFunction?` | `CallableFunction` |
 
 #### Returns
 
 `Promise`<[`Collection`](Collection.md)\>
-
-A promise that resolves to the collection.
 
 ___
 
 ### getOrCreateCollection
 
-▸ **getOrCreateCollection**(`params`): `Promise`<[`Collection`](Collection.md)\>
-
-Gets or creates a collection with the specified properties.
-
-**`Throws`**
-
-If there is an issue getting or creating the collection.
-
-**`Example`**
-
-```typescript
-const collection = await client.getOrCreateCollection({
-  name: "my_collection",
-  metadata: {
-    "description": "My first collection"
-  }
-});
-```
+▸ **getOrCreateCollection**(`name`, `metadata?`, `embeddingFunction?`): `Promise`<[`Collection`](Collection.md)\>
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `params` | `Object` | The parameters for creating a new collection. |
-| `params.embeddingFunction?` | `CallableFunction` | Optional custom embedding function for the collection. |
-| `params.metadata?` | `Metadata` | Optional metadata associated with the collection. |
-| `params.name` | `string` | The name of the collection. |
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `metadata?` | `object` |
+| `embeddingFunction?` | `CallableFunction` |
 
 #### Returns
 
 `Promise`<[`Collection`](Collection.md)\>
 
-A promise that resolves to the got or created collection.
-
 ___
 
 ### heartbeat
 
-▸ **heartbeat**(): `Promise`<`number`\>
-
-Returns a heartbeat from the Chroma API.
-
-**`Example`**
-
-```typescript
-const heartbeat = await client.heartbeat();
-```
+▸ **heartbeat**(): `Promise`<`any`\>
 
 #### Returns
 
-`Promise`<`number`\>
-
-A promise that resolves to the heartbeat from the Chroma API.
+`Promise`<`any`\>
 
 ___
 
 ### listCollections
 
-▸ **listCollections**(): `Promise`<`CollectionType`[]\>
-
-Lists all collections.
-
-**`Throws`**
-
-If there is an issue listing the collections.
-
-**`Example`**
-
-```typescript
-const collections = await client.listCollections();
-```
+▸ **listCollections**(): `Promise`<`any`\>
 
 #### Returns
 
-`Promise`<`CollectionType`[]\>
+`Promise`<`any`\>
 
-A promise that resolves to a list of collection names.
+___
+
+### persist
+
+▸ **persist**(): `Promise`<`void`\>
+
+#### Returns
+
+`Promise`<`void`\>
 
 ___
 
@@ -220,40 +129,16 @@ ___
 
 ▸ **reset**(): `Promise`<`Reset200Response`\>
 
-Resets the state of the object by making an API call to the reset endpoint.
-
-**`Throws`**
-
-If there is an issue resetting the state.
-
-**`Example`**
-
-```typescript
-await client.reset();
-```
-
 #### Returns
 
 `Promise`<`Reset200Response`\>
-
-A promise that resolves when the reset operation is complete.
 
 ___
 
 ### version
 
-▸ **version**(): `Promise`<`string`\>
-
-Returns the version of the Chroma API.
-
-**`Example`**
-
-```typescript
-const version = await client.version();
-```
+▸ **version**(): `Promise`<`any`\>
 
 #### Returns
 
-`Promise`<`string`\>
-
-A promise that resolves to the version of the Chroma API.
+`Promise`<`any`\>
