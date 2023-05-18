@@ -97,11 +97,35 @@ await client.reset() # Empties and completely resets the database. ⚠️ This i
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode, run the docker container:
+Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode, run the docker container using the following steps:
 
-```bash
-docker-compose up -d --build
-```
+	1. Download `docker-compose.server.example.yml` file and `config` folder along with both the files inside from [GitHub Repo](https://github.com/chroma-core/chroma)
+	2. Rename `docker-compose.server.example.yml` to `docker-compose.yml`
+	3. Install docker on your local machine. [`Docker Engine`](https://docs.docker.com/engine/install/) or [`Docker Desktop`](https://docs.docker.com/desktop/install/)
+	4. Install docker compose [`Docker Compose`](https://docs.docker.com/compose/install/)
+	
+	- Use following command to manage containers
+	
+	- __Command to Start Containers__
+	``` bash
+	docker compose up -d
+	or 
+	docker-compose up -d
+	```
+
+	- __Command to Stop Containers__
+	``` bash
+	docker compose down
+	or 
+	docker-compose down
+	```
+	- __Command to Stop Containers and delete volumes__
+	This is distructive command. With this command volumes created earlier will be deleted along with data stored.
+	``` bash
+	docker compose down -v
+	or 
+	docker-compose down -v
+	```
 
 Then update your chroma client to point at the docker container. Default: `localhost:8000`
 
