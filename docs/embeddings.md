@@ -31,24 +31,25 @@ from chromadb.utils import embedding_functions
 ```
 
 
-## Default: Sentence Transformers
+## Default: all-MiniLM-L6-v2
 
-By default, Chroma uses [Sentence Transformers](https://www.sbert.net/) to create embeddings. Sentence Transformers is a library for creating sentence and document embeddings that can be used for a wide variety of tasks. It is based on the [Transformers](https://huggingface.co/transformers/) library from Hugging Face. This embedding function runs locally on your machine, and may require you download the model files (this will happen automatically).
+By default, Chroma uses the [Sentence Transformers](https://www.sbert.net/) `all-MiniLM-L6-v2` model to create embeddings. This embedding model can create sentence and document embeddings that can be used for a wide variety of tasks. This embedding function runs locally on your machine, and may require you download the model files (this will happen automatically).
 
 ```python
-sentence_transformer_ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+default_ef = embedding_functions.DefaultEmbeddingFunction()
 ```
-
-You can pass in an optional `model_name` argument, which lets you choose which Sentence Transformers model to use. By default, Chroma uses `all-MiniLM-L6-v2`. You can see a list of all available models [here](https://www.sbert.net/docs/pretrained_models.html).
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
-
-
-
 </TabItem>
 </Tabs>
 
+## Sentence Transformers
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+</TabItem>
+</Tabs>
 
 
 ## OpenAI
