@@ -484,10 +484,7 @@ In order to filter on metadata, you must supply a `where` filter dictionary to t
 {
     "metadata_field": {
         <Operator>: <Value>
-    },
-    "metadata_field": {
-        <Operator>: <Value>
-    },
+    }
 }
 ```
 
