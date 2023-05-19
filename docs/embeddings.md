@@ -21,7 +21,6 @@ Embeddings are the A.I-native way to represent any kind of data, making them the
 Chroma provides lightweight wrappers around popular embedding providers, making it easy to use them in your apps. You can set an embedding function when you create a Chroma collection, which will be used automatically, or you can call them directly yourself.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-
 <TabItem value="py" label="Python">
 
 To get Chroma's embedding functions, import the `chromadb.utils.embedding_functions` module.
@@ -40,9 +39,14 @@ default_ef = embedding_functions.DefaultEmbeddingFunction()
 ```
 
 </TabItem>
+
+
 <TabItem value="js" label="JavaScript">
 </TabItem>
 </Tabs>
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
 
 ## Sentence Transformers
 
