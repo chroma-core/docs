@@ -46,6 +46,14 @@ default_ef = embedding_functions.DefaultEmbeddingFunction()
 
 ## Sentence Transformers
 
+Chroma can also use any [Sentence Transformers](https://www.sbert.net/) model to create embeddings.
+
+```python
+sentence_transformer_ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+```
+
+You can pass in an optional `model_name` argument, which lets you choose which Sentence Transformers model to use. By default, Chroma uses `all-MiniLM-L6-v2`. You can see a list of all available models [here](https://www.sbert.net/docs/pretrained_models.html).
+
 </TabItem>
 <TabItem value="js" label="JavaScript">
 </TabItem>
