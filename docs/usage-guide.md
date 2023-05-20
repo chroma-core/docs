@@ -167,7 +167,7 @@ If you later wish to `get_collection`, you MUST do so with the embedding functio
 :::
 
 The embedding function takes text as input, and performs tokenization and embedding. If no embedding function is supplied, Chroma will use [sentence transfomer](https://www.sbert.net/index.html) as a default.
-
+	
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
@@ -246,6 +246,33 @@ await collection.count() // returns the number of items in the collection
 
 </Tabs>
 
+### Changing the distance function
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+	
+`create_collection` also takes an optional `metadata` argument which can be used to customize the distance method of the emedding space by setting the value of `hnsw:space`
+```python
+ collection = client.create_collection(
+        name="collection_name",
+        metadata={ "hnsw:space": "cosine" },
+    )
+```
+
+</TabItem>
+	
+<TabItem value="js" label="Javascript">
+
+`createCollection` also takes an optional `metadata` argument which can be used to customize the distance method of the emedding space by setting the value of `hnsw:space`
+
+```js
+ let collection = client.createCollection("collection_name", undefined, metadata={ "hnsw:space": "cosine" })
+```
+
+</TabItem>
+	
+</Tabs>
+
+Valid options for `hnsw:space` are "l2", "ip, "or "cosine". The equations for each can be found in the docs for Hnswlib [here](https://github.com/nmslib/hnswlib/tree/master#python-bindings).
 
 
 ### Adding data to a Collection
