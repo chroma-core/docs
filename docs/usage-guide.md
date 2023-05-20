@@ -167,7 +167,7 @@ If you later wish to `get_collection`, you MUST do so with the embedding functio
 :::
 
 The embedding function takes text as input, and performs tokenization and embedding. If no embedding function is supplied, Chroma will use [sentence transfomer](https://www.sbert.net/index.html) as a default.
-	
+
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
