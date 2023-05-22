@@ -60,4 +60,5 @@ mv $TEMP_FILE $FILE
 # delete a few files
 rm README.md
 rm modules.md
+rm -rf interfaces
 rm -rf classes
