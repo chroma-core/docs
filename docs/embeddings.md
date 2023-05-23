@@ -85,7 +85,7 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
 
 ```javascript
 const {OpenAIEmbeddingFunction} = require('chromadb');
-const embedder = new OpenAIEmbeddingFunction("apiKey")
+const embedder = new OpenAIEmbeddingFunction({openai_api_key: "apiKey"})
 
 // use directly 
 const embeddings = embedder.generate(["document1","document2"])

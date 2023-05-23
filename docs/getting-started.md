@@ -95,7 +95,7 @@ Please take steps to secure your API when interacting with frontend systems.
 
 ```js
 const {OpenAIEmbeddingFunction} = require('chromadb');
-const embedder = new OpenAIEmbeddingFunction("your_api_key")
+const embedder = new OpenAIEmbeddingFunction({openai_api_key: "your_api_key"})
 const collection = await client.createCollection({name: "my_collection", embeddingFunction: embedder})
 ```
 
