@@ -178,8 +178,8 @@ import { ChromaClient } from 'chromadb'
 The JS client talks to a chroma server backend. This can run on your local computer or be easily deployed to AWS.
 
 ```js
-let collection = await client.createCollection("my_collection", undefined, embedding_function=emb_fn)
-let collection2 = await client.getCollection("my_collection", embedding_function=emb_fn)
+let collection = await client.createCollection({name:"my_collection", embeddingFunction: emb_fn})
+let collection2 = await client.getCollection({name:"my_collection", embeddingFunction: emb_fn})
 ```
 
 :::caution
@@ -214,8 +214,8 @@ client.delete_collection(name="my_collection") # Delete a collection and all ass
 Existing collections can be retrieved by name with `.getCollection`, and deleted with `.deleteCollection`.
 
 ```javascript
-const collection = await client.getCollection("test") # Get a collection object from an existing collection, by name. Will raise an exception of it's not found.
-await client.deleteCollection("my_collection") # Delete a collection and all associated embeddings, documents, and metadata. ⚠️ This is destructive and not reversible
+const collection = await client.getCollection({name: "test"}) # Get a collection object from an existing collection, by name. Will raise an exception of it's not found.
+await client.deleteCollection({name: "my_collection"}) # Delete a collection and all associated embeddings, documents, and metadata. ⚠️ This is destructive and not reversible
 ```
 
 </TabItem>
@@ -298,12 +298,11 @@ collection.add(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.add(
-    ["id1", "id2", "id3", ...],
-    undefined,
-    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
-    ["lorem ipsum...", "doc2", "doc3", ...], 
-)
+await collection.add({
+    ids: ["id1", "id2", "id3", ...],
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
+    documents: ["lorem ipsum...", "doc2", "doc3", ...], 
+})
 // input order
 // ids - required
 // embeddings - optional
@@ -328,7 +327,7 @@ Alternatively, you can supply a list of document-associated `embeddings` directl
 <TabItem value="py" label="Python">
 
 ```python
-await collection.add(
+collection.add(
     documents=["doc1", "doc2", "doc3", ...],
     embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
     metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
@@ -340,12 +339,12 @@ await collection.add(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.add(
-    ["id1", "id2", "id3", ...], 
-    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
-    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
-    ["lorem ipsum...", "doc2", "doc3", ...], 
-)
+await collection.add({
+    ids: ["id1", "id2", "id3", ...], 
+    embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
+    documents: ["lorem ipsum...", "doc2", "doc3", ...], 
+})
 
 ```
 
@@ -374,11 +373,11 @@ collection.add(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.add(
-    ["id1", "id2", "id3", ...], 
-    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...], 
-    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
-)
+await collection.add({
+    ids: ["id1", "id2", "id3", ...], 
+    embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...], 
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
+})
 ```
 
 </TabItem>
@@ -409,12 +408,11 @@ collection.query(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-const result = await collection.query(
-    [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...],
-    10, 
-    {"metadata_field": "is_equal_to_this"}, 
-    undefined,
-)
+const result = await collection.query({
+    queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...],
+    nResults: 10, 
+    where: {"metadata_field": "is_equal_to_this"}, 
+})
 // input order
 // query_embeddings - optional
 // n_results - required
@@ -461,21 +459,20 @@ collection.get(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.query(
-    undefined, // query_embeddings
-    10, // n_results
-    {"metadata_field": "is_equal_to_this"}, // where
-    ["doc10", "thus spake zarathustra", ...], // query_text
-)
+await collection.query({
+    nResults: 10, // n_results
+    where: {"metadata_field": "is_equal_to_this"}, // where
+    queryTexts: ["doc10", "thus spake zarathustra", ...], // query_text
+})
 ```
 
 You can also retrieve items from a collection by `id` using `.get`.
 
 ```javascript
-await collection.get(
-	["id1", "id2", "id3", ...], //ids
-	{"style": "style1"} // where
-)
+await collection.get({
+	ids: ["id1", "id2", "id3", ...], //ids
+	where: {"style": "style1"} // where
+})
 ```
 
 </TabItem>
@@ -639,12 +636,12 @@ collection.upsert(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.upsert(
-    ["id1", "id2", "id3"],
-    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2]],
-    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}],
-    ["doc1", "doc2", "doc3"]
-)
+await collection.upsert({
+    ids: ["id1", "id2", "id3"],
+    embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2]],
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}],
+    documents: ["doc1", "doc2", "doc3"]
+})
 ```
 </TabItem>
 </Tabs>
@@ -670,10 +667,10 @@ collection.delete(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.delete(
-    ["id1", "id2", "id3",...], //ids
-	{"chapter": "20"} //where
-)
+await collection.delete({
+    ids: ["id1", "id2", "id3",...], //ids
+	where: {"chapter": "20"} //where
+})
 ```
 
 </TabItem>

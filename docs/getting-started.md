@@ -95,8 +95,8 @@ Please take steps to secure your API when interacting with frontend systems.
 
 ```js
 const {OpenAIEmbeddingFunction} = require('chromadb');
-const embedder = new OpenAIEmbeddingFunction("your_api_key")
-const collection = await client.createCollection("my_collection", {}, embedder)
+const embedder = new OpenAIEmbeddingFunction({openai_api_key: "your_api_key"})
+const collection = await client.createCollection({name: "my_collection", embeddingFunction: embedder})
 ```
 
 </TabItem>
@@ -126,12 +126,11 @@ collection.add(
 Chroma will store your text, and handle tokenization, embedding, and indexing automatically.
 
 ```js
-await collection.add(
-    ["id1", "id2"],
-    undefined,
-    [{"source": "my_source"}, {"source": "my_source"}],
-    ["This is a document", "This is another document"],
-) 
+await collection.add({
+    ids: ["id1", "id2"],
+    metadatas: [{"source": "my_source"}, {"source": "my_source"}],
+    documents: ["This is a document", "This is another document"],
+}) 
 ```
 
 </TabItem>
@@ -158,12 +157,12 @@ collection.add(
 <TabItem value="js" label="JavaScript">
 
 ```js
-await collection.add(
-    ["id1", "id2"],
-    [[1.2, 2.3, 4.5], [6.7, 8.2, 9.2]],
-    [{"source": "my_source"}, {"source": "my_source"}],
-    ["This is a document", "This is another document"],
-) 
+await collection.add({
+    ids: ["id1", "id2"],
+    embeddings: [[1.2, 2.3, 4.5], [6.7, 8.2, 9.2]],
+    where: [{"source": "my_source"}, {"source": "my_source"}],
+    documents: ["This is a document", "This is another document"]
+}) 
 ```
 
 </TabItem>
@@ -195,12 +194,10 @@ Find [chromadb on PyPI](https://pypi.org/project/chromadb/).
 <TabItem value="js" label="JavaScript">
 
 ```js
-const results = await collection.query(
-    undefined, 
-    2, 
-    undefined, 
-    ["This is a query document"]
-) 
+const results = await collection.query({
+    nResults: 2, 
+    queryTexts: ["This is a query document"]
+}) 
 ```
 
 Find [chromadb on npm](https://www.npmjs.com/package/chromadb).

@@ -177,13 +177,13 @@ Collections are similar to AWS s3 buckets in their naming requirements because t
 await client.listCollections()
 
 // make a new collection
-const collection = await client.createCollection("testname")
+const collection = await client.createCollection({name: "testname"})
 
 // get an existing collection
-const collection = await client.getCollection("testname")
+const collection = await client.getCollection({name: "testname"})
 
 // delete a collection
-await client.deleteCollection("testname")
+await client.deleteCollection({name: "testname"})
 ```
 
 ### Utility methods
@@ -201,34 +201,33 @@ await collection.count()
 
 // add new items to a collection
 // either one at a time
-await collection.add(
-    "id1",
-    [1.5, 2.9, 3.4],
-    {"source": "my_source"},
-    "This is a document",
-) 
+await collection.add({
+    ids: "id1",
+    embeddings: [1.5, 2.9, 3.4],
+    metadatas: {"source": "my_source"},
+    documents: "This is a document",
+}) 
 // or many, up to 100k+!
-await collection.add(
-    ["uri9", "uri10"],
-    [[1.5, 2.9, 3.4], [9.8, 2.3, 2.9]],
-    [{"style": "style1"}, {"style": "style2"}],
-    ["This is a document", 'that is a document']
-)
+await collection.add({
+    ids: ["uri9", "uri10"],
+    embeddings: [[1.5, 2.9, 3.4], [9.8, 2.3, 2.9]],
+    metadatas: [{"style": "style1"}, {"style": "style2"}],
+    documents: ["This is a document", 'that is a document']
+})
 // including just documents
-await collection.add(
-    ["uri9", "uri10"],
-    undefined,
-    [{"style": "style1"}, {"style": "style2"}],
-    ["doc1000101", "doc288822"],
-)
+await collection.add({
+    ids: ["uri9", "uri10"],
+    metadatas: [{"style": "style1"}, {"style": "style2"}],
+    documents: ["doc1000101", "doc288822"],
+})
 // or use upsert, so records will be updated if they already exist
 // (instead of throwing an error)
-await collection.upsert(
-    "id1",
-    [1.5, 2.9, 3.4],
-    {"source": "my_source"},
-    "This is a document",
-)
+await collection.upsert({
+    ids: "id1",
+    embeddings: [1.5, 2.9, 3.4],
+    metadatas: {"source": "my_source"},
+    documents: "This is a document",
+})
 
 // get items from a collection
 await collection.get()
@@ -237,11 +236,11 @@ await collection.get()
 await collection.peek()
 
 // do nearest neighbor search to find similar embeddings or documents, supports filtering
-await collection.query(
-    query_embeddings=[[1.1, 2.3, 3.2], [5.1, 4.3, 2.2]],
-    n_results=2,
+await collection.query({
+    queryEmbeddings=[[1.1, 2.3, 3.2], [5.1, 4.3, 2.2]],
+    nResults=2,
     where={"style": "style2"}
-)
+})
 
 // delete items
 await collection.delete()
