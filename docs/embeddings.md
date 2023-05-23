@@ -91,8 +91,8 @@ const embedder = new OpenAIEmbeddingFunction("apiKey")
 const embeddings = embedder.generate(["document1","document2"])
 
 // pass documents to query for .add and .query
-const collection = await client.createCollection("name", {}, embedder)
-const collection = await client.getCollection("name", {}, embedder)
+const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
+const collection = await client.getCollection({name: "name", embeddingFunction: embedder})
 ```
 
 </TabItem>
@@ -127,8 +127,8 @@ const embedder = new CohereEmbeddingFunction("apiKey")
 const embeddings = embedder.generate(["document1","document2"])
 
 // pass documents to query for .add and .query
-const collection = await client.createCollection("name", {}, embedder)
-const collectionGet = await client.getCollection("name", {}, embedder)
+const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
+const collectionGet = await client.getCollection({name:"name", embeddingFunction: embedder})
 ```
 
 </TabItem>
