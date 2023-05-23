@@ -178,7 +178,7 @@ import { ChromaClient } from 'chromadb'
 The JS client talks to a chroma server backend. This can run on your local computer or be easily deployed to AWS.
 
 ```js
-let collection = await client.createCollection({name:"my_collection", embeddingFunction=emb_fn})
+let collection = await client.createCollection({name:"my_collection", embeddingFunction: emb_fn})
 let collection2 = await client.getCollection({name:"my_collection", embeddingFunction: emb_fn})
 ```
 
@@ -409,9 +409,9 @@ collection.query(
 
 ```javascript
 const result = await collection.query({
-   queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...],
+    queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...],
     nResults: 10, 
-    where:  {"metadata_field": "is_equal_to_this"}, 
+    where: {"metadata_field": "is_equal_to_this"}, 
 })
 // input order
 // query_embeddings - optional
