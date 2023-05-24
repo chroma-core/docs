@@ -116,6 +116,25 @@ chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
 
 That's it! Chroma's API will run in `client-server` mode with just this change.
 
+#### Using the python http-only client
+
+If you are running chroma in client-server mode. You may not require the full Chroma library and instead only the client library on your client machine. In this case, you can install the `chromadb-client` package. This package is a lightweight HTTP client for the server with a minimal dependency footprint.
+
+```python
+pip install chromadb-client
+```
+
+```python
+import chromadb
+from chromadb.config import Settings
+# Example setup of the client to connect to your chroma server
+client = chromadb.Client(Settings(chroma_api_impl="rest", chroma_server_host="localhost", chroma_server_port=8000))
+```
+
+Note that the `chromadb-client` package is a subset of the full Chroma library and does not include all the dependencies. If you want to use the full Chroma library, you can install the `chromadb` package instead. Most importantly, there is no default embedding function. If you add() documents without embeddings, you must have manually specified an embedding function and installed the dependencies for it.
+
+
+
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
