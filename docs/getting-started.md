@@ -195,8 +195,8 @@ Find [chromadb on PyPI](https://pypi.org/project/chromadb/).
 
 ```js
 const results = await collection.query({
-    nResults: 2, 
-    queryTexts: ["This is a query document"]
+    n_results: 2, 
+    query_text: ["This is a query document"]
 }) 
 ```
 
