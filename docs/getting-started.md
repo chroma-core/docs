@@ -78,6 +78,7 @@ cd chroma
 docker-compose up -d --build
 ```
 
+Refer to [this docker-compose file](https://github.com/chroma-core/chroma/blob/main/docker-compose.yml) for environment variables and other dependencies (eg: [clickhouse](https://clickhouse.com)).
 If you have build issues, please reach out for help in the active [Community Discord](https://discord.gg/MMeYNTmh3x). Most issues get fixed in a few minutes.
 
 ### 3. Create a collection
