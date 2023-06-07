@@ -59,7 +59,18 @@ const {ChromaClient} = require('chromadb');
 const client = new ChromaClient();
 ```
 
-To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma. 
+</TabItem>
+
+</Tabs>
+
+To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer.
+You can pull pre-built image using
+
+```bash
+docker pull ghcr.io/chroma-core/chroma:latest
+```
+
+or you can build the container from source using
 
 ```bash
 git clone https://github.com/chroma-core/chroma.git
@@ -68,10 +79,6 @@ docker-compose up -d --build
 ```
 
 If you have build issues, please reach out for help in the active [Community Discord](https://discord.gg/MMeYNTmh3x). Most issues get fixed in a few minutes.
-
-</TabItem>
-
-</Tabs>
 
 ### 3. Create a collection
 
