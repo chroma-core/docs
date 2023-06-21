@@ -120,7 +120,7 @@ chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
 That's it! Chroma's API will run in `client-server` mode with just this change.
 
 
-#### Run Chroma inside your application
+<!-- #### Run Chroma inside your application
 
 To run the Chroma docker from inside your application code, create a docker-compose file or add to the existing one you have.
 
@@ -133,7 +133,7 @@ Use following command to manage Dockerized Chroma:
 - __Command to Start Chroma__: `docker-compose up -d`
 - __Command to Stop Chroma__: `docker-compose down`
 - __Command to Stop Chroma and delete volumes__
-This is distructive command. With this command volumes created earlier will be deleted along with data stored.: `docker-compose down -v`
+This is distructive command. With this command volumes created earlier will be deleted along with data stored.: `docker-compose down -v` -->
 
 #### Using the python http-only client
 
