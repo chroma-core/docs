@@ -65,10 +65,15 @@ Continue with the full [getting started guide](./getting-started.md).
 
 <div class="special_table"></div>
 
-|        | Python     | Javascript | Other?      |
-|--------|------------|------------|------------|
-| in-memory | ✅      | ➖        |  ❓        |
-| client/server | ✅ | ✅        |  ❓        |
+|              | in-memory | client & server |
+|--------------|-----------|---------------|
+| Python       | ✅        | ✅            |
+| Javascript   | ➖        | ✅            |
+| Ruby   | ➖        | [from @mariochavez](https://github.com/mariochavez/chroma)           |
+| C#   | ➖        | *from Microsoft (coming soon)*          |
+| Other?       | ❓'
+        | ❓            |
+
 
 <br/>
 
