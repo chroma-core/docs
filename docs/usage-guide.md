@@ -116,6 +116,22 @@ chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
 
 That's it! Chroma's API will run in `client-server` mode with just this change.
 
+
+#### Run Chroma inside your application
+
+To run the Chroma docker from inside your application code, create a docker-compose file or add to the existing one you have.
+
+1. Download [`docker-compose.server.example.yml`](https://github.com/chroma-core/chroma/blob/main/docker-compose.server.example.yml) file and [`config`](https://github.com/chroma-core/chroma/tree/main/config) folder along with both the files inside from [GitHub Repo](https://github.com/chroma-core/chroma)
+2. Rename `docker-compose.server.example.yml` to `docker-compose.yml`
+3. Install docker on your local machine. [`Docker Engine`](https://docs.docker.com/engine/install/) or [`Docker Desktop`](https://docs.docker.com/desktop/install/)
+4. Install docker compose [`Docker Compose`](https://docs.docker.com/compose/install/)
+
+Use following command to manage Dockerized Chroma:
+- __Command to Start Chroma__: `docker-compose up -d`
+- __Command to Stop Chroma__: `docker-compose down`
+- __Command to Stop Chroma and delete volumes__
+This is distructive command. With this command volumes created earlier will be deleted along with data stored.: `docker-compose down -v`
+
 #### Using the python http-only client
 
 If you are running chroma in client-server mode. You may not require the full Chroma library and instead only the client library on your client machine. In this case, you can install the `chromadb-client` package. This package is a lightweight HTTP client for the server with a minimal dependency footprint.
@@ -132,6 +148,7 @@ client = chromadb.Client(Settings(chroma_api_impl="rest", chroma_server_host="lo
 ```
 
 Note that the `chromadb-client` package is a subset of the full Chroma library and does not include all the dependencies. If you want to use the full Chroma library, you can install the `chromadb` package instead. Most importantly, there is no default embedding function. If you add() documents without embeddings, you must have manually specified an embedding function and installed the dependencies for it.
+
 
 
 
