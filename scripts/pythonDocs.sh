@@ -53,5 +53,16 @@ fi
 # Create an empty backup file for compatibility with macOS/BSD sed
 sed -i.bak -e ':a' -e 'N' -e '$!ba' -e 's/---\n.*\n---/'"$new_section2"'/g' "$file2"
 
+# find all examples of "## " inside Collection.md and replace it with "# "
+sed -i.bak -e 's/## /# /g' "$file2"
+sed -i.bak -e 's/#### /### /g' "$file2"
+
+sed -i.bak -e 's/## /# /g' "$file"
+sed -i.bak -e 's/#### /### /g' "$file"
+
+# remove @override 
+sed -i.bak -e '/@override/d' "$file"
+
 # Remove the backup file
 rm "${file2}.bak"
+rm "${file}.bak"
