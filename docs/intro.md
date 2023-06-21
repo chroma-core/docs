@@ -71,8 +71,7 @@ Continue with the full [getting started guide](./getting-started.md).
 | Javascript   | ➖        | ✅            |
 | Ruby   | ➖        | [from @mariochavez](https://github.com/mariochavez/chroma)           |
 | C#   | ➖        | *from Microsoft (coming soon)*          |
-| Other?       | ❓'
-        | ❓            |
+| Other?       | ❓    | ❓            |
 
 
 <br/>
