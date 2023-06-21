@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 
 ***
 
-## Initiating the Chroma client
+## Initiating a persistent Chroma client
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
@@ -27,7 +27,7 @@ import TabItem from '@theme/TabItem';
 import chromadb
 ```
 
-By default Chroma uses an in-memory database, which gets persisted on exit and loaded on start (if it exists). This is fine for many experimental / prototyping workloads, limited by your machine's memory.
+You can configure Chroma to save and load from your local machine. Data will be persisted on exit and loaded on start (if it exists). This is useful for many experimental / prototyping workloads, limited by your machine's memory.
 
 ```python
 from chromadb.config import Settings
@@ -39,6 +39,9 @@ client = chromadb.Client(Settings(
 
 The `persist_directory` is where Chroma will store its database files on disk, and load them on start.
 
+:::info Use a single client at-a-time
+Having many in-memory clients that are loading and saving to the same path can cause strange behavior including data deletion. As a general practice, create an in-memory Chroma client once in your application, and pass it around instead of creating many clients.
+:::
 :::note Jupyter Notebooks
 In a normal python program, `.persist()` will happening automatically if you set it. But in a Jupyter Notebook you will need to **manually** call `client.persist()`.
 :::

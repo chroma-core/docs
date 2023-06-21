@@ -1,9 +1,15 @@
 ---
 sidebar_position: 5
-title: "📖 API Reference"
+title: "📖 API Cheatsheet"
 ---
 
-# 📖 API Reference
+# 📖 API Cheatsheet
+
+:::note 
+This is a quick cheatsheet of the API. For full API docs, refer to the JS and Python docs in the sidebar.
+:::
+
+***
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -145,9 +151,6 @@ collection.query(
 
 # delete items
 collection.delete()
-
-# advanced: manually create the embedding search index
-collection.create_index()
 ```
 
 </TabItem>

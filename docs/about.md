@@ -41,10 +41,10 @@ Currently we don’t have any specific plans to monetize Chroma, we are working 
 
 ## Our investors
 
-Chroma raised an $18M seed round led by Astasia Myers from Quiet Capital. Joining the round are angels including Naval Ravikant, Max and Jack Altman, Anthony Goldbloom (Kaggle, AIX Ventures), Jordan Tigani (Motherduck), Guillermo Rauch (Vercel), Akshay Kothari (Notion), Amjad Masad (Replit), Spencer Kimball (CockroachDB), and other founders and leaders from ScienceIO, Gumroad, MongoDB, Scale, Hugging Face, Jasper and more. 
+Chroma raised an $18M seed round led by Astasia Myers from Quiet Capital. Joining the round are angels including Naval Ravikant, Max and Jack Altman, Jordan Tigani (Motherduck), Guillermo Rauch (Vercel), Akshay Kothari (Notion), Amjad Masad (Replit), Spencer Kimball (CockroachDB), and other founders and leaders from ScienceIO, Gumroad, MongoDB, Scale, Hugging Face, Jasper and more. 
 
 ![](https://www.trychroma.com/investors.png)
 
-Chroma has also raised a pre-seed in May 2022, led by Anthony Goldbloom (Kaggle) from AIX Ventures, James Cham from Bloomberg Beta, and Nat Friedman and Daniel Gross (AI Grant).
+Chroma raised a pre-seed in May 2022, led by Anthony Goldbloom (Kaggle) from AIX Ventures, James Cham from Bloomberg Beta, and Nat Friedman and Daniel Gross (AI Grant).
 
 We're excited to work with a deep set of investors and enterpreneurs who have invested in and built some of the most successful open-source projects in the world.
