@@ -49,3 +49,18 @@ Here is what commonly happens.
 :::note
 We may add extra logic to warn if multiple in-memory clients are used with the same path.
 :::
+
+
+## Build error when running `pip install chromadb`
+
+If you encounter an error like this during setup
+```
+Failed to build hnswlib
+ERROR: Could not build wheels for hnswlib, which is required to install pyproject.toml-based projects
+```
+
+Try these few tips from the [community](https://github.com/chroma-core/chroma/issues/221):
+
+1. If you get the error: `clang: error: the clang compiler does not support '-march=native'`, set this ENV variable, `export HNSWLIB_NO_NATIVE=1` 
+2. If on Mac, install/update xcode dev tools, `xcode-select --install`
+3. If on Windows, try [these steps](https://github.com/chroma-core/chroma/issues/250#issuecomment-1540934224)
