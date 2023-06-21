@@ -28,8 +28,7 @@ The total number of embeddings added to the database
 def add(ids: OneOrMany[ID],
         embeddings: Optional[OneOrMany[Embedding]] = None,
         metadatas: Optional[OneOrMany[Metadata]] = None,
-        documents: Optional[OneOrMany[Document]] = None,
-        increment_index: bool = True) -> None
+        documents: Optional[OneOrMany[Document]] = None) -> None
 ```
 
 Add embeddings to the data store.
@@ -184,8 +183,7 @@ Update the embeddings, metadatas or documents for provided ids.
 def upsert(ids: OneOrMany[ID],
            embeddings: Optional[OneOrMany[Embedding]] = None,
            metadatas: Optional[OneOrMany[Metadata]] = None,
-           documents: Optional[OneOrMany[Document]] = None,
-           increment_index: bool = True) -> None
+           documents: Optional[OneOrMany[Document]] = None) -> None
 ```
 
 Update the embeddings, metadatas or documents for provided ids, or create them if they don't exist.
