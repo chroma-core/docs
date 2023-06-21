@@ -97,35 +97,11 @@ await client.reset() # Empties and completely resets the database. ⚠️ This i
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode, run the docker container using the following steps:
+Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode, run the docker container:
 
-1. Download `docker-compose.server.example.yml` file and `config` folder along with both the files inside from [GitHub Repo](https://github.com/chroma-core/chroma)
-2. Rename `docker-compose.server.example.yml` to `docker-compose.yml`
-3. Install docker on your local machine. [`Docker Engine`](https://docs.docker.com/engine/install/) or [`Docker Desktop`](https://docs.docker.com/desktop/install/)
-4. Install docker compose [`Docker Compose`](https://docs.docker.com/compose/install/)
-
-- Use following command to manage containers
-	
-	- __Command to Start Containers__
-	``` bash
-	docker compose up -d
-	or 
-	docker-compose up -d
-	```
-
-	- __Command to Stop Containers__
-	``` bash
-	docker compose down
-	or 
-	docker-compose down
-	```
-	- __Command to Stop Containers and delete volumes__
-	This is distructive command. With this command volumes created earlier will be deleted along with data stored.
-	``` bash
-	docker compose down -v
-	or 
-	docker-compose down -v
-	```
+```bash
+docker-compose up -d --build
+```
 
 Then update your chroma client to point at the docker container. Default: `localhost:8000`
 
@@ -139,6 +115,22 @@ chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
 ```
 
 That's it! Chroma's API will run in `client-server` mode with just this change.
+
+#### Run Chroma inside your application
+
+To run the Chroma docker from inside your application code, create a docker-compose file or add to the existing one you have.
+
+1. Download [`docker-compose.server.example.yml`](https://github.com/chroma-core/chroma/blob/main/docker-compose.server.example.yml) file and [`config`](https://github.com/chroma-core/chroma/tree/main/config) folder along with both the files inside from [GitHub Repo](https://github.com/chroma-core/chroma)
+2. Rename `docker-compose.server.example.yml` to `docker-compose.yml`
+3. Install docker on your local machine. [`Docker Engine`](https://docs.docker.com/engine/install/) or [`Docker Desktop`](https://docs.docker.com/desktop/install/)
+4. Install docker compose [`Docker Compose`](https://docs.docker.com/compose/install/)
+
+Use following command to manage Dockerized Chroma:
+- __Command to Start Chroma__: `docker-compose up -d`
+- __Command to Stop Chroma__: `docker-compose down`
+- __Command to Stop Chroma and delete volumes__
+This is distructive command. With this command volumes created earlier will be deleted along with data stored.: `docker-compose down -v`
+
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
