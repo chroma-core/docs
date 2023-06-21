@@ -21,7 +21,6 @@ Embeddings are the A.I-native way to represent any kind of data, making them the
 Chroma provides lightweight wrappers around popular embedding providers, making it easy to use them in your apps. You can set an embedding function when you create a Chroma collection, which will be used automatically, or you can call them directly yourself.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
-
 <TabItem value="py" label="Python">
 
 To get Chroma's embedding functions, import the `chromadb.utils.embedding_functions` module.
@@ -31,9 +30,27 @@ from chromadb.utils import embedding_functions
 ```
 
 
-## Default: Sentence Transformers
+## Default: all-MiniLM-L6-v2
 
-By default, Chroma uses [Sentence Transformers](https://www.sbert.net/) to create embeddings. Sentence Transformers is a library for creating sentence and document embeddings that can be used for a wide variety of tasks. It is based on the [Transformers](https://huggingface.co/transformers/) library from Hugging Face. This embedding function runs locally on your machine, and may require you download the model files (this will happen automatically).
+By default, Chroma uses the [Sentence Transformers](https://www.sbert.net/) `all-MiniLM-L6-v2` model to create embeddings. This embedding model can create sentence and document embeddings that can be used for a wide variety of tasks. This embedding function runs locally on your machine, and may require you download the model files (this will happen automatically).
+
+```python
+default_ef = embedding_functions.DefaultEmbeddingFunction()
+```
+
+</TabItem>
+
+
+<TabItem value="js" label="JavaScript">
+</TabItem>
+</Tabs>
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+## Sentence Transformers
+
+Chroma can also use any [Sentence Transformers](https://www.sbert.net/) model to create embeddings.
 
 ```python
 sentence_transformer_ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
@@ -43,12 +60,8 @@ You can pass in an optional `model_name` argument, which lets you choose which S
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
-
-
-
 </TabItem>
 </Tabs>
-
 
 
 ## OpenAI
@@ -67,19 +80,29 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
             )
 ```
 
+To use the OpenAI embedding models on other platforms such as Azure, you can use the `api_base` and `api_type` parameters: 
+```python
+openai_ef = embedding_functions.OpenAIEmbeddingFunction(
+                api_key="YOUR_API_KEY",
+                api_base="YOUR_API_BASE_PATH",
+                api_type="azure",
+                model_name="text-embedding-ada-002"
+            )
+```
+
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```javascript
 const {OpenAIEmbeddingFunction} = require('chromadb');
-const embedder = new OpenAIEmbeddingFunction("apiKey")
+const embedder = new OpenAIEmbeddingFunction({openai_api_key: "apiKey"})
 
 // use directly 
 const embeddings = embedder.generate(["document1","document2"])
 
 // pass documents to query for .add and .query
-const collection = await client.createCollection("name", {}, embedder)
-const collection = await client.getCollection("name", {}, embedder)
+const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
+const collection = await client.getCollection({name: "name", embeddingFunction: embedder})
 ```
 
 </TabItem>
@@ -114,8 +137,8 @@ const embedder = new CohereEmbeddingFunction("apiKey")
 const embeddings = embedder.generate(["document1","document2"])
 
 // pass documents to query for .add and .query
-const collection = await client.createCollection("name", {}, embedder)
-const collectionGet = await client.getCollection("name", {}, embedder)
+const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
+const collectionGet = await client.getCollection({name:"name", embeddingFunction: embedder})
 ```
 
 </TabItem>

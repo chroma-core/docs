@@ -1,7 +1,7 @@
 {
     "position": 20,
-    "label": "⚪️ Python Docs",
+    "label": "⚪️ JS Docs",
     "collapsible": true,
     "collapsed": true,
     "className": "notbold"
-  }
+}

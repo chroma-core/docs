@@ -4,13 +4,13 @@ title: Client
 sidebar_position: 1
 ---
 
-## LocalAPI Objects
+# LocalAPI Objects
 
 ```python
 class LocalAPI(API)
 ```
 
-#### heartbeat
+### heartbeat
 
 ```python
 def heartbeat() -> int
@@ -22,12 +22,13 @@ Ping the database to ensure it is alive
 
   The current time in milliseconds
 
-#### create\_collection
+### create\_collection
 
 ```python
 def create_collection(name: str,
-                      metadata: Optional[Metadata] = None,
-                      embedding_function: Optional[Callable] = None,
+                      metadata: Optional[CollectionMetadata] = None,
+                      embedding_function: Optional[EmbeddingFunction] = ef.
+                      DefaultEmbeddingFunction(),
                       get_or_create: bool = False) -> Collection
 ```
 
@@ -62,13 +63,15 @@ Create a new collection with the given name and metadata.
   # collection(name="my_collection", metadata={"foo": "bar"})
   ```
 
-#### get\_or\_create\_collection
+### get\_or\_create\_collection
 
 ```python
 def get_or_create_collection(
-        name: str,
-        metadata: Optional[Metadata] = None,
-        embedding_function: Optional[Callable] = None) -> Collection
+    name: str,
+    metadata: Optional[CollectionMetadata] = None,
+    embedding_function: Optional[EmbeddingFunction] = ef.
+    DefaultEmbeddingFunction()
+) -> Collection
 ```
 
 Get or create a collection with the given name and metadata.
@@ -92,12 +95,14 @@ Get or create a collection with the given name and metadata.
   # collection(name="my_collection", metadata={})
   ```
 
-#### get\_collection
+### get\_collection
 
 ```python
 def get_collection(
-        name: str,
-        embedding_function: Optional[Callable] = None) -> Collection
+    name: str,
+    embedding_function: Optional[EmbeddingFunction] = ef.
+    DefaultEmbeddingFunction()
+) -> Collection
 ```
 
 Get a collection with the given name.
@@ -125,7 +130,7 @@ Get a collection with the given name.
   # collection(name="my_collection", metadata={})
   ```
 
-#### list\_collections
+### list\_collections
 
 ```python
 def list_collections() -> Sequence[Collection]
@@ -145,7 +150,7 @@ List all collections.
   # [collection(name="my_collection", metadata={})]
   ```
 
-#### delete\_collection
+### delete\_collection
 
 ```python
 def delete_collection(name: str) -> None
@@ -169,10 +174,10 @@ Delete a collection with the given name.
   client.delete_collection("my_collection")
   ```
 
-#### reset
+### reset
 
 ```python
-def reset() -> bool
+def reset() -> None
 ```
 
 Reset the database. This will delete all collections and items.
@@ -181,7 +186,7 @@ Reset the database. This will delete all collections and items.
 
   True if the database was reset successfully
 
-#### persist
+### persist
 
 ```python
 def persist() -> bool
@@ -193,7 +198,7 @@ Persist the database to disk.
 
   True if the database was persisted successfully
 
-#### get\_version
+### get\_version
 
 ```python
 def get_version() -> str

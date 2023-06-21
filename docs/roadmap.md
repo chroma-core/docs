@@ -6,7 +6,7 @@ title: "🛣️ Roadmap"
 # 🛣️ Roadmap
 
 :::note Last updated
-`May 8, 2023`
+`Jun 7, 2023`
 :::
 
 The goal of this doc is to align *core* and *community* efforts for the project and to share what's in store for this year!
@@ -18,14 +18,16 @@ The goal of this doc is to align *core* and *community* efforts for the project 
 
 ## What is the core Chroma team working on right now?
 
-This week we are working through the backlog of Github issues and PRs and adding lots of new functionality. A few issues we are looking to address:
+- 🕸️ Replacing Clickhouse with a custom Distributed System
+- 🌩️ Standing up that distributed system as a managed service (aka "Hosted Chroma" - [sign up for waitlist](https://airtable.com/shrOAiDUtS2ILy5vZ)!)
+- 🐋 Support for Conda and Dockerhub
+
+## What did the Chroma team just complete?
+
+Features like:
 - 🐍 A more minimal python-client only build target
 - ✋ Google PaLM embedding support
 - 🎣 OpenAI ChatGPT Retrieval Plugin
-- 🐋 Support for Conda and Dockerhub
-- and more! 
-
-## What did the Chroma team just complete?
 
 **✅ A Robust Test Suite**
 
@@ -34,9 +36,6 @@ The core team implemented a [hypothesis-based](https://hypothesis.readthedocs.io
 ## What will Chroma prioritize over the next 6mo?
 
 **Next Milestone: ☁️ Launch Hosted Chroma**
-
-- 🕸️ Replacing Clickhouse with a custom Distributed System
-- 🌩️ Standing up that distributed system as a managed service (aka "Hosted Chroma" - [sign up for waitlist](https://airtable.com/shrOAiDUtS2ILy5vZ)!)
 
 **Areas we will invest in**
 
@@ -105,5 +104,7 @@ We will be happy to work with people maintaining additional client SDKs as part 
 - Ruby 
 - Clojure 
 - Elixir
+
+You can find the REST OpenAPI spec at `localhost:8000/openapi.json` when the backend is running.
 
 Please [reach out](https://discord.gg/MMeYNTmh3x) and talk to us before you get too far in your projects so that we can offer technical guidance/align on roadmap.

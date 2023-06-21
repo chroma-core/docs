@@ -1,0 +1,9 @@
+{
+    "entryPoints": [
+        "../chroma/clients/js/src/index.ts"
+    ],
+    "out": "./docs/js_reference",
+    "plugin": [
+        "typedoc-plugin-markdown"
+    ]
+}

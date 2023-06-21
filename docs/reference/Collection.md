@@ -4,13 +4,13 @@ title: Collection
 sidebar_position: 2
 ---
 
-## Collection Objects
+# Collection Objects
 
 ```python
 class Collection(BaseModel)
 ```
 
-#### count
+### count
 
 ```python
 def count() -> int
@@ -22,14 +22,13 @@ The total number of embeddings added to the database
 
 - `int` - The total number of embeddings added to the database
 
-#### add
+### add
 
 ```python
 def add(ids: OneOrMany[ID],
         embeddings: Optional[OneOrMany[Embedding]] = None,
         metadatas: Optional[OneOrMany[Metadata]] = None,
-        documents: Optional[OneOrMany[Document]] = None,
-        increment_index: bool = True) -> None
+        documents: Optional[OneOrMany[Document]] = None) -> None
 ```
 
 Add embeddings to the data store.
@@ -56,7 +55,7 @@ Add embeddings to the data store.
 - `ValueError` - If you provide both embeddings and documents
 - `ValueError` - If you provide an id that already exists
 
-#### get
+### get
 
 ```python
 def get(ids: Optional[OneOrMany[ID]] = None,
@@ -76,7 +75,7 @@ all embeddings up to limit starting at offset.
 - `where` - A Where type dict used to filter results by. E.g. `{"color" : "red", "price": 4.20}`. Optional.
 - `limit` - The number of documents to return. Optional.
 - `offset` - The offset to start returning results from. Useful for paging results with limit. Optional.
-- `where_document` - A WhereDocument type dict used to filter by the documents. E.g. `{$contains: {"text": "hello"}}`. Optional.
+- `where_document` - A WhereDocument type dict used to filter by the documents. E.g. `{$contains: "some text"}`. Optional.
 - `include` - A list of what to include in the results. Can contain `"embeddings"`, `"metadatas"`, `"documents"`. Ids are always included. Defaults to `["metadatas", "documents"]`. Optional.
   
 
@@ -84,7 +83,7 @@ all embeddings up to limit starting at offset.
 
 - `GetResult` - A GetResult object containing the results.
 
-#### peek
+### peek
 
 ```python
 def peek(limit: int = 10) -> GetResult
@@ -101,7 +100,7 @@ Get the first few results in the database up to limit
 
 - `GetResult` - A GetResult object containing the results.
 
-#### query
+### query
 
 ```python
 def query(
@@ -120,9 +119,9 @@ Get the n_results nearest neighbor embeddings for provided query_embeddings or q
 
 - `query_embeddings` - The embeddings to get the closes neighbors of. Optional.
 - `query_texts` - The document texts to get the closes neighbors of. Optional.
-- `n_results` - The number of neighbors to return for each query_embedding or query_text. Optional.
+- `n_results` - The number of neighbors to return for each query_embedding or query_texts. Optional.
 - `where` - A Where type dict used to filter results by. E.g. `{"color" : "red", "price": 4.20}`. Optional.
-- `where_document` - A WhereDocument type dict used to filter by the documents. E.g. `{$contains: {"text": "hello"}}`. Optional.
+- `where_document` - A WhereDocument type dict used to filter by the documents. E.g. `{$contains: "some text"}`. Optional.
 - `include` - A list of what to include in the results. Can contain `"embeddings"`, `"metadatas"`, `"documents"`, `"distances"`. Ids are always included. Defaults to `["metadatas", "documents", "distances"]`. Optional.
   
 
@@ -136,11 +135,11 @@ Get the n_results nearest neighbor embeddings for provided query_embeddings or q
 - `ValueError` - If you don't provide either query_embeddings or query_texts
 - `ValueError` - If you provide both query_embeddings and query_texts
 
-#### modify
+### modify
 
 ```python
 def modify(name: Optional[str] = None,
-           metadata: Optional[Metadata] = None) -> None
+           metadata: Optional[CollectionMetadata] = None) -> None
 ```
 
 Modify the collection name or metadata
@@ -155,7 +154,7 @@ Modify the collection name or metadata
 
   None
 
-#### update
+### update
 
 ```python
 def update(ids: OneOrMany[ID],
@@ -178,14 +177,13 @@ Update the embeddings, metadatas or documents for provided ids.
 
   None
 
-#### upsert
+### upsert
 
 ```python
 def upsert(ids: OneOrMany[ID],
            embeddings: Optional[OneOrMany[Embedding]] = None,
            metadatas: Optional[OneOrMany[Metadata]] = None,
-           documents: Optional[OneOrMany[Document]] = None,
-           increment_index: bool = True) -> None
+           documents: Optional[OneOrMany[Document]] = None) -> None
 ```
 
 Update the embeddings, metadatas or documents for provided ids, or create them if they don't exist.
@@ -196,13 +194,18 @@ Update the embeddings, metadatas or documents for provided ids, or create them i
 - `embeddings` - The embeddings to add. If None, embeddings will be computed based on the documents using the embedding_function set for the Collection. Optional.
 - `metadatas` - The metadata to associate with the embeddings. When querying, you can filter on this metadata. Optional.
 - `documents` - The documents to associate with the embeddings. Optional.
+  
 
-#### delete
+**Returns**:
+
+  None
+
+### delete
 
 ```python
 def delete(ids: Optional[IDs] = None,
            where: Optional[Where] = None,
-           where_document: Optional[WhereDocument] = None) -> List[str]
+           where_document: Optional[WhereDocument] = None) -> None
 ```
 
 Delete the embeddings based on ids and/or a where filter
@@ -211,7 +214,7 @@ Delete the embeddings based on ids and/or a where filter
 
 - `ids` - The ids of the embeddings to delete
 - `where` - A Where type dict used to filter the delection by. E.g. `{"color" : "red", "price": 4.20}`. Optional.
-- `where_document` - A WhereDocument type dict used to filter the deletion by the document content. E.g. `{$contains: {"text": "hello"}}`. Optional.
+- `where_document` - A WhereDocument type dict used to filter the deletion by the document content. E.g. `{$contains: "some text"}`. Optional.
   
 
 **Returns**:

@@ -116,6 +116,7 @@ chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
 
 That's it! Chroma's API will run in `client-server` mode with just this change.
 
+
 #### Run Chroma inside your application
 
 To run the Chroma docker from inside your application code, create a docker-compose file or add to the existing one you have.
@@ -130,6 +131,25 @@ Use following command to manage Dockerized Chroma:
 - __Command to Stop Chroma__: `docker-compose down`
 - __Command to Stop Chroma and delete volumes__
 This is distructive command. With this command volumes created earlier will be deleted along with data stored.: `docker-compose down -v`
+
+#### Using the python http-only client
+
+If you are running chroma in client-server mode. You may not require the full Chroma library and instead only the client library on your client machine. In this case, you can install the `chromadb-client` package. This package is a lightweight HTTP client for the server with a minimal dependency footprint.
+
+```python
+pip install chromadb-client
+```
+
+```python
+import chromadb
+from chromadb.config import Settings
+# Example setup of the client to connect to your chroma server
+client = chromadb.Client(Settings(chroma_api_impl="rest", chroma_server_host="localhost", chroma_server_port=8000))
+```
+
+Note that the `chromadb-client` package is a subset of the full Chroma library and does not include all the dependencies. If you want to use the full Chroma library, you can install the `chromadb` package instead. Most importantly, there is no default embedding function. If you add() documents without embeddings, you must have manually specified an embedding function and installed the dependencies for it.
+
+
 
 
 </TabItem>
@@ -194,8 +214,8 @@ import { ChromaClient } from 'chromadb'
 The JS client talks to a chroma server backend. This can run on your local computer or be easily deployed to AWS.
 
 ```js
-let collection = await client.createCollection("my_collection", undefined, embedding_function=emb_fn)
-let collection2 = await client.getCollection("my_collection", embedding_function=emb_fn)
+let collection = await client.createCollection({name:"my_collection", embeddingFunction: emb_fn})
+let collection2 = await client.getCollection({name:"my_collection", embeddingFunction: emb_fn})
 ```
 
 :::caution
@@ -230,8 +250,8 @@ client.delete_collection(name="my_collection") # Delete a collection and all ass
 Existing collections can be retrieved by name with `.getCollection`, and deleted with `.deleteCollection`.
 
 ```javascript
-const collection = await client.getCollection("test") # Get a collection object from an existing collection, by name. Will raise an exception of it's not found.
-await client.deleteCollection("my_collection") # Delete a collection and all associated embeddings, documents, and metadata. ⚠️ This is destructive and not reversible
+const collection = await client.getCollection({name: "test"}) # Get a collection object from an existing collection, by name. Will raise an exception of it's not found.
+await client.deleteCollection({name: "my_collection"}) # Delete a collection and all associated embeddings, documents, and metadata. ⚠️ This is destructive and not reversible
 ```
 
 </TabItem>
@@ -262,6 +282,35 @@ await collection.count() // returns the number of items in the collection
 
 </Tabs>
 
+### Changing the distance function
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+`create_collection` also takes an optional `metadata` argument which can be used to customize the distance method of the emedding space by setting the value of `hnsw:space`
+
+```python
+ collection = client.create_collection(
+        name="collection_name",
+        metadata={"hnsw:space": "cosine"}
+    )
+```
+
+</TabItem>
+	
+<TabItem value="js" label="Javascript">
+
+`createCollection` also takes an optional `metadata` argument which can be used to customize the distance method of the emedding space by setting the value of `hnsw:space`
+
+```js
+ let collection = client.createCollection("collection_name", undefined, metadata={ "hnsw:space": "cosine" })
+```
+
+</TabItem>
+	
+</Tabs>
+
+Valid options for `hnsw:space` are "l2", "ip, "or "cosine". The equations for each can be found in the docs for Hnswlib [here](https://github.com/nmslib/hnswlib/tree/master#python-bindings).
 
 
 ### Adding data to a Collection
@@ -285,12 +334,11 @@ collection.add(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.add(
-    ["id1", "id2", "id3", ...],
-    undefined,
-    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
-    ["lorem ipsum...", "doc2", "doc3", ...], 
-)
+await collection.add({
+    ids: ["id1", "id2", "id3", ...],
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
+    documents: ["lorem ipsum...", "doc2", "doc3", ...], 
+})
 // input order
 // ids - required
 // embeddings - optional
@@ -306,8 +354,7 @@ await collection.add(
 
 If Chroma is passed a list of `documents`, it will automatically tokenize and embed them with the collection's embedding function (the default will be used if none was supplied at collection creation). Chroma will also store the `documents` themselves. If the documents are too large to embed using the chosen embedding function, an exception will be raised.
 
-Each document must have a unique associated `id`. Chroma does not track uniqueness of ids for you, it is up to the caller to not add the same id twice.
-An optional list of `metadata` dictionaries can be supplied for each document, to store additional information and enable filtering.
+Each document must have a unique associated `id`. Trying to `.add` the same ID twice will result in an error. An optional list of `metadata` dictionaries can be supplied for each document, to store additional information and enable filtering.
 
 Alternatively, you can supply a list of document-associated `embeddings` directly, and Chroma will store the associated documents without embedding them itself.
 
@@ -315,7 +362,7 @@ Alternatively, you can supply a list of document-associated `embeddings` directl
 <TabItem value="py" label="Python">
 
 ```python
-await collection.add(
+collection.add(
     documents=["doc1", "doc2", "doc3", ...],
     embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
     metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
@@ -327,12 +374,12 @@ await collection.add(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.add(
-    ["id1", "id2", "id3", ...], 
-    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
-    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
-    ["lorem ipsum...", "doc2", "doc3", ...], 
-)
+await collection.add({
+    ids: ["id1", "id2", "id3", ...], 
+    embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
+    documents: ["lorem ipsum...", "doc2", "doc3", ...], 
+})
 
 ```
 
@@ -361,11 +408,11 @@ collection.add(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.add(
-    ["id1", "id2", "id3", ...], 
-    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...], 
-    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
-)
+await collection.add({
+    ids: ["id1", "id2", "id3", ...], 
+    embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...], 
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
+})
 ```
 
 </TabItem>
@@ -396,12 +443,11 @@ collection.query(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-const result = await collection.query(
-    [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...],
-    10, 
-    {"metadata_field": "is_equal_to_this"}, 
-    undefined,
-)
+const result = await collection.query({
+    queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...],
+    nResults: 10, 
+    where: {"metadata_field": "is_equal_to_this"}, 
+})
 // input order
 // query_embeddings - optional
 // n_results - required
@@ -448,21 +494,20 @@ collection.get(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.query(
-    undefined, // query_embeddings
-    10, // n_results
-    {"metadata_field": "is_equal_to_this"}, // where
-    ["doc10", "thus spake zarathustra", ...], // query_text
-)
+await collection.query({
+    nResults: 10, // n_results
+    where: {"metadata_field": "is_equal_to_this"}, // where
+    queryTexts: ["doc10", "thus spake zarathustra", ...], // query_text
+})
 ```
 
 You can also retrieve items from a collection by `id` using `.get`.
 
 ```javascript
-await collection.get(
-	["id1", "id2", "id3", ...], //ids
-	{"style": "style1"} // where
-)
+await collection.get({
+	ids: ["id1", "id2", "id3", ...], //ids
+	where: {"style": "style1"} // where
+})
 ```
 
 </TabItem>
@@ -500,10 +545,7 @@ In order to filter on metadata, you must supply a `where` filter dictionary to t
 {
     "metadata_field": {
         <Operator>: <Value>
-    },
-    "metadata_field": {
-        <Operator>: <Value>
-    },
+    }
 }
 ```
 
@@ -629,12 +671,12 @@ collection.upsert(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.upsert(
-    ["id1", "id2", "id3"],
-    [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2]],
-    [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}],
-    ["doc1", "doc2", "doc3"]
-)
+await collection.upsert({
+    ids: ["id1", "id2", "id3"],
+    embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2]],
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}],
+    documents: ["doc1", "doc2", "doc3"]
+})
 ```
 </TabItem>
 </Tabs>
@@ -660,10 +702,10 @@ collection.delete(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.delete(
-    ["id1", "id2", "id3",...], //ids
-	{"chapter": "20"} //where
-)
+await collection.delete({
+    ids: ["id1", "id2", "id3",...], //ids
+	where: {"chapter": "20"} //where
+})
 ```
 
 </TabItem>
