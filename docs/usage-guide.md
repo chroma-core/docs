@@ -290,7 +290,7 @@ await collection.count() // returns the number of items in the collection
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-`create_collection` also takes an optional `metadata` argument which can be used to customize the distance method of the emedding space by setting the value of `hnsw:space`
+`create_collection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`
 
 ```python
  collection = client.create_collection(
@@ -303,7 +303,7 @@ await collection.count() // returns the number of items in the collection
 	
 <TabItem value="js" label="Javascript">
 
-`createCollection` also takes an optional `metadata` argument which can be used to customize the distance method of the emedding space by setting the value of `hnsw:space`
+`createCollection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`
 
 ```js
  let collection = client.createCollection("collection_name", undefined, metadata={ "hnsw:space": "cosine" })
