@@ -290,12 +290,12 @@ await collection.count() // returns the number of items in the collection
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-`create_collection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`
+`create_collection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`. 
 
 ```python
  collection = client.create_collection(
         name="collection_name",
-        metadata={"hnsw:space": "cosine"}
+        metadata={"hnsw:space": "cosine"} # l2 is the default
     )
 ```
 
@@ -313,7 +313,7 @@ await collection.count() // returns the number of items in the collection
 	
 </Tabs>
 
-Valid options for `hnsw:space` are "l2", "ip, "or "cosine". The equations for each can be found in the docs for Hnswlib [here](https://github.com/nmslib/hnswlib/tree/master#python-bindings).
+Valid options for `hnsw:space` are "l2", "ip, "or "cosine". The **default** is "l2". The equations for each can be found in the docs for Hnswlib [here](https://github.com/nmslib/hnswlib/tree/master#python-bindings).
 
 
 ### Adding data to a Collection
