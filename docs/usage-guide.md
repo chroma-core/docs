@@ -30,11 +30,7 @@ import chromadb
 You can configure Chroma to save and load from your local machine. Data will be persisted on exit and loaded on start (if it exists). This is useful for many experimental / prototyping workloads, limited by your machine's memory.
 
 ```python
-from chromadb.config import Settings
-client = chromadb.Client(Settings(
-    chroma_db_impl="duckdb+parquet",
-    persist_directory="/path/to/persist/directory" # Optional, defaults to .chromadb/ in the current directory
-))
+client = chromadb.PersistentClient(path="/path/to/persist/directory")
 ```
 
 The `persist_directory` is where Chroma will store its database files on disk, and load them on start.
@@ -110,11 +106,7 @@ Then update your chroma client to point at the docker container. Default: `local
 
 ```python
 import chromadb
-from chromadb.config import Settings
-chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
-                                        chroma_server_host="localhost",
-                                        chroma_server_http_port="8000"
-                                    ))
+chroma_client = chromadb.HttpClient()
 ```
 
 That's it! Chroma's API will run in `client-server` mode with just this change.
@@ -147,7 +139,7 @@ pip install chromadb-client
 import chromadb
 from chromadb.config import Settings
 # Example setup of the client to connect to your chroma server
-client = chromadb.Client(Settings(chroma_api_impl="rest", chroma_server_host="localhost", chroma_server_port=8000))
+client = chromadb.HttpClient()
 ```
 
 Note that the `chromadb-client` package is a subset of the full Chroma library and does not include all the dependencies. If you want to use the full Chroma library, you can install the `chromadb` package instead. Most importantly, there is no default embedding function. If you add() documents without embeddings, you must have manually specified an embedding function and installed the dependencies for it.

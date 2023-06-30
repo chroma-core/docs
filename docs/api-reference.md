@@ -33,7 +33,7 @@ import TabItem from '@theme/TabItem';
 
 ```python
 import chromadb
-client = chromadb.Client()
+client = chromadb.EphemeralClient()
 ```
 
 ### In-memory chroma with saving/loading to disk
@@ -42,10 +42,7 @@ In this mode, Chroma will persist data between sessions. On load - it will load 
 
 ```python
 import chromadb
-from chromadb.config import Settings
-client = chromadb.Client(Settings(chroma_db_impl="duckdb+parquet",
-                                    persist_directory="/path/to/persist/directory"
-                                ))
+client = chromadb.PersistentClient(path="/path/to/persist/directory")
 ```
 
 ### Run chroma just as a client to talk to a backend service
@@ -55,10 +52,7 @@ For production use cases, an in-memory database will not cut it. Run `docker-com
 ```python
 import chromadb
 from chromadb.config import Settings
-chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
-                                        chroma_server_host="localhost",
-                                        chroma_server_http_port="8000"
-                                    ))
+chroma_client = chromadb.HttpClient()
 ```
 
 ## Methods on Client

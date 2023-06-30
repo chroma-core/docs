@@ -17,7 +17,7 @@ Set `anonymized_telemetry` in your clients settings to `false` to opt out of tel
 
 ```python
 from chromadb.config import Settings
-client = chromadb.Client(Settings(anonymized_telemetry=False))
+client = chromadb.Client(settings=Settings(anonymized_telemetry=False)) #This works for EphemeralClient, PersistantClient, and HttpClient as well
 ```
 
 ## **What do you track?**

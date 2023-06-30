@@ -48,7 +48,7 @@ npm install --save chromadb // yarn add chromadb
 
 ```python
 import chromadb
-chroma_client = chromadb.Client()
+chroma_client = chromadb.PersistentClient()
 ```
 
 </TabItem>
