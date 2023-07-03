@@ -80,8 +80,10 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
             )
 ```
 
-To use the OpenAI embedding models on other platforms such as Azure, you can use the `api_base` and `api_type` parameters: 
+To use the OpenAI embedding models on other platforms such as Azure, you can use the `api_base` and `api_type` parameters:  
+Moreover, the version must be specified in the environment variable `OPENAI_API_VERSION`.
 ```python
+os.environ['OPENAI_API_VERSION'] = '2023-05-15'
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(
                 api_key="YOUR_API_KEY",
                 api_base="YOUR_API_BASE_PATH",
