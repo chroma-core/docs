@@ -161,3 +161,7 @@ aws cloudformation delete-stack --stack-name my-chroma-stack
 
 :warning: This will destroy all the data in your Chroma database,
 unless you've taken a snapshot or otherwise backed it up.
+
+### Troubleshooting
+
+If you get an error saying `No default VPC for this user` when creating `ChromaInstanceSecurityGroup`, head to [AWS VPC section]( https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#vpcs) and create deafault VPC for your user
