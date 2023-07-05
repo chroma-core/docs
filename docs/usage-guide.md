@@ -401,7 +401,7 @@ You can also store documents elsewhere, and just supply a list of `embeddings` a
 
 ```python
 collection.add(
-    embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...
+    embeddings=[[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
     metadatas=[{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
     ids=["id1", "id2", "id3", ...]
 )
@@ -435,7 +435,7 @@ You can query by a set of `query_embeddings`.
 
 ```python
 collection.query(
-    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...]
+    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
     n_results=10,
     where={"metadata_field": "is_equal_to_this"},
     where_document={"$contains":"search_string"}
@@ -447,7 +447,7 @@ collection.query(
 
 ```javascript
 const result = await collection.query({
-    queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...],
+    queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
     nResults: 10, 
     where: {"metadata_field": "is_equal_to_this"}, 
 })
@@ -477,7 +477,7 @@ You can also query by a set of `query_texts`. Chroma will first embed each `quer
 
 ```python
 collection.query(
-    query_texts=["doc10", "thus spake zarathustra", ...]
+    query_texts=["doc10", "thus spake zarathustra", ...],
     n_results=10,
     where={"metadata_field": "is_equal_to_this"},
     where_document={"$contains":"search_string"}
@@ -532,7 +532,7 @@ collection.get(
 )
 
 collection.query(
-    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2] ...],
+    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
     include=["documents"]
 )
 ```
