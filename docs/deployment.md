@@ -103,7 +103,7 @@ The CloudFormation template allows you to pass particular key/value
 pairs to override aspects of the stack. Available keys are:
 
 - `InstanceType` - the AWS instance type to run (default: `t3.small`)
-- `KeyName` - the AWS EC2 KeyPair to use, allowing to to access the instance via SSH (default: none)
+- `KeyName` - the AWS EC2 KeyPair to use, allowing to access the instance via SSH (default: none)
 
 To set a CloudFormation stack's parameters using the AWS CLI, use the
 `--parameters` command line option. Parameters must be specified using
