@@ -162,6 +162,71 @@ aws cloudformation delete-stack --stack-name my-chroma-stack
 :warning: This will destroy all the data in your Chroma database,
 unless you've taken a snapshot or otherwise backed it up.
 
+### Upgrading the Chroma docker container to a new version
+
+NOTE: There is an issue when upgrading to a new version where your data still exists, but it's not searchable. This is being discussed:
+
+https://github.com/chroma-core/chroma/issues/770
+
+Login to the server and edit the `server:image:` in `/home/ec2-user/docker-compose.yml`
+
+```
+version: '3.9'
+
+networks:
+  net:
+    driver: bridge
+
+services:
+  server:
+    image: ghcr.io/chroma-core/chroma:0.3.26
+    volumes:
+      - index_data:/index_data
+    environment:
+      - CHROMA_DB_IMPL=clickhouse
+      - CLICKHOUSE_HOST=clickhouse
+      - CLICKHOUSE_PORT=8123
+    ports:
+      - 8000:8000
+    depends_on:
+      - clickhouse
+    networks:
+      - net
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:22.9-alpine
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - CLICKHOUSE_TCP_PORT=9000
+      - CLICKHOUSE_HTTP_PORT=8123
+    ports:
+      - '8123:8123'
+      - '9000:9000'
+    volumes:
+      - clickhouse_data:/bitnami/clickhouse
+      - backups:/backups
+      - ./config/backup_disk.xml:/etc/clickhouse-server/config.d/backup_disk.xml
+      - ./config/chroma_users.xml:/etc/clickhouse-server/users.d/chroma.xml
+    networks:
+      - net
+
+volumes:
+  clickhouse_data:
+    driver: local
+  index_data:
+    driver: local
+  backups:
+    driver: local
+```
+
+Save the file, then run the following. The first command pulls the new image version based on the file you updated above. The second command brings up the new image on your server.
+
+```
+docker-compose pull
+docker-compose up --detach
+```
+
+
 ### Troubleshooting
 
 If you get an error saying `No default VPC for this user` when creating `ChromaInstanceSecurityGroup`, head to [AWS VPC section]( https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#vpcs) and create deafault VPC for your user
