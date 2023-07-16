@@ -191,6 +191,34 @@ Chroma uses collection names in the url, so there are a few restrictions on nami
 - The name must not contain two consecutive dots.
 - The name must not be a valid IP address.
 
+## HuggingFace Embeddings
+
+Chroma also provides a convenient wrapper around HuggingFace's embedding API. This embedding function runs remotely on HuggingFace's servers, and requires an API key. You can get an API key by signing up for an account at [HuggingFace](https://huggingface.co/).
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+This embedding function relies on the `requests` python package, which you can install with `pip install requests`.
+
+```python
+from chromadb.utils import embedding_functions
+
+huggingface_ef = embedding_functions.HuggingFaceEmbeddingFunction(
+    api_key="YOUR_API_KEY",
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
+
+# Use the HuggingFace embedding function to generate embeddings
+embeddings = huggingface_ef(["document1", "document2", "document3"])
+```
+
+You can pass in an optional `model_name` argument, which lets you choose which HuggingFace model to use. By default, Chroma uses `sentence-transformers/all-MiniLM-L6-v2`. You can see a list of all available models [here](https://huggingface.co/models).
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+</TabItem>
+</Tabs>
+
 Chroma collections are created with a name and an optional embedding function. If you supply an embedding function, you must supply it every time you get the collection.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
