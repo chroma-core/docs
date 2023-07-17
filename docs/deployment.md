@@ -145,10 +145,7 @@ export CHROMA_SERVER_HTTP_PORT=8000
 ```
 import chromadb
 from chromadb.config import Settings
-
-chroma = chromadb.Client(Settings(chroma_api_impl="rest",
-                                  chroma_server_host="<server IP address>",
-                                  chroma_server_http_port=8000))
+chroma = chromadb.HttpClient(host=<server IP address>, port=8000)
 ```
 
 ### Step 6: Clean Up (optional).
