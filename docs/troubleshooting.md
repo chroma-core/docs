@@ -34,17 +34,15 @@ We may change `None` to something else to more clearly communicate why they were
 
 Users report that they are using Chroma, happily adding data, and then they go to check the `count()` or `query()` and only a single item or a very small fraction of their data is in Chroma. 
 
-Chroma has 3 modes: `in-memory`, `single-node`, and `distributed` (coming soon). The `in-memory` product should treated as a **singleton**. 
+Chroma has 3 clients: `Ephemeral`, `Persistent`, and `Http` (coming soon). The `Ephemeral` and `Persistent` clients should treated as a **singleton**. 
 
 Here is what commonly happens. 
 
-1. Create a new in-memory Chroma, #1 saving to `./db`, and add 10 items.
-2. Create another new in-memory Chroma, #2 saving to `./db`, and add 10 more items. Call this B.
-3. Exit the program
-4. Chroma uses [atExit](https://github.com/chroma-core/chroma/blob/d98be4d0bfb760155d9f85c9012952ef459c10a6/chromadb/db/duckdb.py#L447) to autosave your data from #1 and #2
-5. #2 gets saved first, and then #1 (reverse order), but when #1 gets saved it only "knows" about it's 10 records and stomps what things #2 had added.
+1. Create a new Chroma client, #1 saving to `./db`, and add 10 items.
+2. Create another new Chroma client, #2 saving to `./db`, and add 10 more items. Call this B.
+3. Chroma does not lock the database between clients, each client maintains its own locking structure, so these clients can overwrite each other.
 
-`Solution`: Don't keep multiple `in-memory` clients alive at once. 
+`Solution`: Don't use multiple `Ephemeral` or `Persistent` clients at the same time. Create one client and use it for all your operations.
 
 :::note
 We may add extra logic to warn if multiple in-memory clients are used with the same path.

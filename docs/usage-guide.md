@@ -27,23 +27,16 @@ import TabItem from '@theme/TabItem';
 import chromadb
 ```
 
-You can configure Chroma to save and load from your local machine. Data will be persisted on exit and loaded on start (if it exists). This is useful for many experimental / prototyping workloads, limited by your machine's memory.
+You can configure Chroma to save and load from your local machine. Data will be persisted automatically and loaded on start (if it exists).
 
 ```python
-from chromadb.config import Settings
-client = chromadb.Client(Settings(
-    chroma_db_impl="duckdb+parquet",
-    persist_directory="/path/to/persist/directory" # Optional, defaults to .chromadb/ in the current directory
-))
+client = chromadb.PersistentClient(path="/path/to/save/to")
 ```
 
-The `persist_directory` is where Chroma will store its database files on disk, and load them on start.
+The `path` is where Chroma will store its database files on disk, and load them on start.
 
 :::info Use a single client at-a-time
-Having many in-memory clients that are loading and saving to the same path can cause strange behavior including data deletion. As a general practice, create an in-memory Chroma client once in your application, and pass it around instead of creating many clients.
-:::
-:::note Jupyter Notebooks
-In a normal python program, `.persist()` will happening automatically if you set it. But in a Jupyter Notebook you will need to **manually** call `client.persist()`.
+Having many clients that are loading and saving to the same path can cause strange behavior including data deletion. As a general practice, create a Chroma client once in your application, and pass it around instead of creating many clients.
 :::
 
 </TabItem>
@@ -110,11 +103,7 @@ Then update your chroma client to point at the docker container. Default: `local
 
 ```python
 import chromadb
-from chromadb.config import Settings
-chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
-                                        chroma_server_host="localhost",
-                                        chroma_server_http_port="8000"
-                                    ))
+chroma_client = chromadb.HttpClient(host='localhost', port=8000)
 ```
 
 That's it! Chroma's API will run in `client-server` mode with just this change.
@@ -147,7 +136,7 @@ pip install chromadb-client
 import chromadb
 from chromadb.config import Settings
 # Example setup of the client to connect to your chroma server
-client = chromadb.Client(Settings(chroma_api_impl="rest", chroma_server_host="localhost", chroma_server_http_port=8000))
+client = chromadb.HttpClient(host='localhost', port=8000)
 ```
 
 Note that the `chromadb-client` package is a subset of the full Chroma library and does not include all the dependencies. If you want to use the full Chroma library, you can install the `chromadb` package instead. Most importantly, there is no default embedding function. If you add() documents without embeddings, you must have manually specified an embedding function and installed the dependencies for it.
@@ -357,7 +346,7 @@ await collection.add({
 
 If Chroma is passed a list of `documents`, it will automatically tokenize and embed them with the collection's embedding function (the default will be used if none was supplied at collection creation). Chroma will also store the `documents` themselves. If the documents are too large to embed using the chosen embedding function, an exception will be raised.
 
-Each document must have a unique associated `id`. Trying to `.add` the same ID twice will result in an error. An optional list of `metadata` dictionaries can be supplied for each document, to store additional information and enable filtering.
+Each document must have a unique associated `id`. Trying to `.add` the same ID twice will result in only the initial value being stored. An optional list of `metadata` dictionaries can be supplied for each document, to store additional information and enable filtering.
 
 Alternatively, you can supply a list of document-associated `embeddings` directly, and Chroma will store the associated documents without embedding them itself.
 
@@ -652,7 +641,7 @@ collection.update(
 
 
 
-If an `id` is not found in the collection, an exception will be raised. If `documents` are supplied without corresponding `embeddings`, the embeddings will be recomupted with the collection's embedding function.
+If an `id` is not found in the collection, an error will be logged and the update will be ignored. If `documents` are supplied without corresponding `embeddings`, the embeddings will be recomupted with the collection's embedding function.
 
 If the supplied `embeddings` are not the same dimension as the collection, an exception will be raised.
 

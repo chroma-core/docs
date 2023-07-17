@@ -1,7 +1,20 @@
 {
   "items": [
-    "reference/Collection",
-    "reference/local"
+    {
+      "items": [
+        "reference/__init__/__init__"
+      ],
+      "label": "__init__",
+      "type": "category"
+    },
+    {
+      "items": [
+        "reference/api/__init__"
+      ],
+      "label": "api",
+      "type": "category"
+    },
+    "reference/Collection"
   ],
   "label": "Reference Docs",
   "type": "category"

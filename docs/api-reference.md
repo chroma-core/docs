@@ -38,27 +38,20 @@ client = chromadb.Client()
 
 ### In-memory chroma with saving/loading to disk
 
-In this mode, Chroma will persist data between sessions. On load - it will load up the data in the directory you specify. And on exit - it will save to that directory.
+In this mode, Chroma will persist data between sessions. On load - it will load up the data in the directory you specify. And as you add data - it will save to that directory.
 
 ```python
 import chromadb
-from chromadb.config import Settings
-client = chromadb.Client(Settings(chroma_db_impl="duckdb+parquet",
-                                    persist_directory="/path/to/persist/directory"
-                                ))
+client = chromadb.PersistentClient(path="/path/to/data")
 ```
 
 ### Run chroma just as a client to talk to a backend service
 
-For production use cases, an in-memory database will not cut it. Run `docker-compose up -d --build` to run a production backend in Docker on your local computer. Simply update your API initialization and then use the API the same way as before.
+For many use cases, an in-memory database will not cut it. Run `docker-compose up -d --build` to run a persistent backend in Docker. Simply update your API initialization and then use the API the same way as before.
 
 ```python
 import chromadb
-from chromadb.config import Settings
-chroma_client = chromadb.Client(Settings(chroma_api_impl="rest",
-                                        chroma_server_host="localhost",
-                                        chroma_server_http_port="8000"
-                                    ))
+chroma_client = chromadb.HttpClient(host="localhost", port=8000)
 ```
 
 ## Methods on Client
