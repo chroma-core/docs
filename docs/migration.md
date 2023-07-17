@@ -100,3 +100,5 @@ chroma-migrate
 ```
 
 <img src="/img/chroma-migrate.png" />
+
+If you need any help with this migration, please reach out! We are on [Discord](https://discord.com/channels/1073293645303795742/1129286514845691975) ready to help.
