@@ -81,7 +81,7 @@ import chromadb
 from chromadb.config import Settings
 client = chromadb.PersistentClient(
     path="/path/to/persist/directory", 
-    settings=Settings(anonymized_telemtry=False))
+    settings=Settings(anonymized_telemetry=False))
 ```
 
 **New data layout**
