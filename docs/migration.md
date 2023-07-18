@@ -27,6 +27,7 @@ We will aim to provide:
 What's new in this version?
 - New easy way to create clients
 - Changed storage method
+- `.persist()` removed, `.reset()` no longer on by default
 
 **New Clients**
 
@@ -102,3 +103,15 @@ chroma-migrate
 <img src="/img/chroma-migrate.png" />
 
 If you need any help with this migration, please reach out! We are on [Discord](https://discord.com/channels/1073293645303795742/1129286514845691975) ready to help.
+
+** Persist & Reset**
+
+`.persist()` was in the old version of Chroma because writes were only flushed when forced to. Chroma `0.4.0` saves all writes to disk instantly and so `persist` is no longer needed.
+
+`.reset()`, which resets the entire database, used to by enabled-by-default which felt wrong. `0.4.0` has it disabled-by-default. You can enable it again by passing `allow_reset=True` to a Settings object. For example:
+
+```python
+import chromadb
+from chromadb.config import Settings
+client = chromadb.PersistentClient(path="./path/to/chroma", settings=Settings(allow_reset=True))
+```
