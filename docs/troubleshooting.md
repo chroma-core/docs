@@ -69,7 +69,7 @@ Chroma requires SQLite > 3.35, if you encounter issues with having too low of a 
 
 1. Install the latest version of Python 3.10, sometimes lower versions of python are bundled with older versions of SQLite.
 2. If you are on a Linux system, you can install pysqlite3-binary, `pip install pysqlite3-binary` and then override the default
-sqlite3 library before running Chroma with the steps here https://gist.github.com/defulmere/8b9695e415a44271061cc8e272f3c300. 
-Alternatively you can compile SQLite from scratch and replace the library in your python installation with the latest version as documented here https://github.com/coleifer/pysqlite3#building-a-statically-linked-library. 
+sqlite3 library before running Chroma with the steps [here](https://gist.github.com/defulmere/8b9695e415a44271061cc8e272f3c300). 
+Alternatively you can compile SQLite from scratch and replace the library in your python installation with the latest version as documented [here](https://github.com/coleifer/pysqlite3#building-a-statically-linked-library). 
 3. If you are on Windows, you can manually download the latest version of SQLite from https://www.sqlite.org/download.html and
-replace the DLL in your python installation's DLLs folder with the latest version. You can find your by running `os.path.dirname(sys.executable)` in python.
+replace the DLL in your python installation's DLLs folder with the latest version. You can find your python installation path by running `os.path.dirname(sys.executable)` in python.
