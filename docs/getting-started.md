@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
 
-***
+---
 
 Chroma is a database for building AI applications with embeddings. It comes with everything you need to get started built in, and runs on your machine. A [hosted version](https://airtable.com/shrOAiDUtS2ILy5vZ) is coming soon!
 
@@ -27,11 +27,11 @@ Chroma is a database for building AI applications with embeddings. It comes with
 ```py
 pip install chromadb
 ```
-<span class="small-text em">* chromadb currently does not support Python 3.11 because of pytorch</span>
+
+<span class="small-text em">\* chromadb currently does not support Python 3.11 because of pytorch</span>
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
-
 
 ```js
 npm install --save chromadb // yarn add chromadb
@@ -48,18 +48,18 @@ npm install --save chromadb // yarn add chromadb
 
 ```python
 import chromadb
-chroma_client = chromadb.Client()
+chroma_client = chromadb.EphemeralClient()
 ```
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```js
-const {ChromaClient} = require('chromadb');
+const { ChromaClient } = require("chromadb");
 const client = new ChromaClient();
 ```
 
-To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma. 
+To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma.
 
 ```bash
 git clone https://github.com/chroma-core/chroma.git
@@ -94,16 +94,19 @@ Please take steps to secure your API when interacting with frontend systems.
 :::
 
 ```js
-const {OpenAIEmbeddingFunction} = require('chromadb');
-const embedder = new OpenAIEmbeddingFunction({openai_api_key: "your_api_key"})
-const collection = await client.createCollection({name: "my_collection", embeddingFunction: embedder})
+const { OpenAIEmbeddingFunction } = require("chromadb");
+const embedder = new OpenAIEmbeddingFunction({
+  openai_api_key: "your_api_key",
+});
+const collection = await client.createCollection({
+  name: "my_collection",
+  embeddingFunction: embedder,
+});
 ```
 
 </TabItem>
 
 </Tabs>
-
-
 
 ### 4. Add some text documents to the collection
 
@@ -127,17 +130,15 @@ Chroma will store your text, and handle tokenization, embedding, and indexing au
 
 ```js
 await collection.add({
-    ids: ["id1", "id2"],
-    metadatas: [{"source": "my_source"}, {"source": "my_source"}],
-    documents: ["This is a document", "This is another document"],
-}) 
+  ids: ["id1", "id2"],
+  metadatas: [{ source: "my_source" }, { source: "my_source" }],
+  documents: ["This is a document", "This is another document"],
+});
 ```
 
 </TabItem>
 
 </Tabs>
-
-
 
 If you have already generated embeddings yourself, you can load them directly in:
 
@@ -158,18 +159,19 @@ collection.add(
 
 ```js
 await collection.add({
-    ids: ["id1", "id2"],
-    embeddings: [[1.2, 2.3, 4.5], [6.7, 8.2, 9.2]],
-    where: [{"source": "my_source"}, {"source": "my_source"}],
-    documents: ["This is a document", "This is another document"]
-}) 
+  ids: ["id1", "id2"],
+  embeddings: [
+    [1.2, 2.3, 4.5],
+    [6.7, 8.2, 9.2],
+  ],
+  where: [{ source: "my_source" }, { source: "my_source" }],
+  documents: ["This is a document", "This is another document"],
+});
 ```
 
 </TabItem>
 
 </Tabs>
-
-
 
 ### 5. Query the collection
 
@@ -189,15 +191,14 @@ By default data stored in Chroma is ephemeral making it easy to prototype script
 
 Find [chromadb on PyPI](https://pypi.org/project/chromadb/).
 
-
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```js
 const results = await collection.query({
-    nResults: 2, 
-    queryTexts: ["This is a query document"]
-}) 
+  nResults: 2,
+  queryTexts: ["This is a query document"],
+});
 ```
 
 Find [chromadb on npm](https://www.npmjs.com/package/chromadb).
@@ -205,7 +206,6 @@ Find [chromadb on npm](https://www.npmjs.com/package/chromadb).
 </TabItem>
 
 </Tabs>
-
 
 ## 📚 Next steps
 

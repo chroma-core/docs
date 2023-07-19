@@ -5,11 +5,11 @@ title: "📖 API Cheatsheet"
 
 # 📖 API Cheatsheet
 
-:::note 
+:::note
 This is a quick cheatsheet of the API. For full API docs, refer to the JS and Python docs in the sidebar.
 :::
 
-***
+---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -21,8 +21,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
 
-***
-
+---
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
@@ -33,7 +32,7 @@ import TabItem from '@theme/TabItem';
 
 ```python
 import chromadb
-client = chromadb.Client()
+client = chromadb.EphemeralClient()
 ```
 
 ### In-memory chroma with saving/loading to disk
@@ -151,12 +150,12 @@ collection.delete()
 
 ### Run the backend
 
-Run `docker-compose up -d --build` to run a backend in Docker on your local computer. 
+Run `docker-compose up -d --build` to run a backend in Docker on your local computer.
 
 ## Initialize client - JS
 
 ```javascript
-import { ChromaClient } from 'chromadb'
+import { ChromaClient } from "chromadb";
 const client = new ChromaClient();
 ```
 
@@ -170,23 +169,23 @@ Collections are similar to AWS s3 buckets in their naming requirements because t
 
 ```javascript
 // list all collections
-await client.listCollections()
+await client.listCollections();
 
 // make a new collection
-const collection = await client.createCollection({name: "testname"})
+const collection = await client.createCollection({ name: "testname" });
 
 // get an existing collection
-const collection = await client.getCollection({name: "testname"})
+const collection = await client.getCollection({ name: "testname" });
 
 // delete a collection
-await client.deleteCollection({name: "testname"})
+await client.deleteCollection({ name: "testname" });
 ```
 
 ### Utility methods
 
 ```javascript
 // resets entire database - this *cant* be undone!
-await client.reset()
+await client.reset();
 ```
 
 ## Methods on Collection
@@ -202,7 +201,7 @@ await collection.add({
     embeddings: [1.5, 2.9, 3.4],
     metadatas: {"source": "my_source"},
     documents: "This is a document",
-}) 
+})
 // or many, up to 100k+!
 await collection.add({
     ids: ["uri9", "uri10"],
@@ -243,8 +242,6 @@ await collection.delete()
 
 ```
 
-
 </TabItem>
 
 </Tabs>
-
