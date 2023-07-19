@@ -62,3 +62,14 @@ Try these few tips from the [community](https://github.com/chroma-core/chroma/is
 1. If you get the error: `clang: error: the clang compiler does not support '-march=native'`, set this ENV variable, `export HNSWLIB_NO_NATIVE=1` 
 2. If on Mac, install/update xcode dev tools, `xcode-select --install`
 3. If on Windows, try [these steps](https://github.com/chroma-core/chroma/issues/250#issuecomment-1540934224)
+
+## SQLite
+
+Chroma requires SQLite > 3.35, if you encounter issues with having too low of a SQLite version please try the following.
+
+1. Install the latest version of Python 3.10, sometimes lower versions of python are bundled with older versions of SQLite.
+2. If you are on a Linux system, you can install pysqlite3-binary, `pip install pysqlite3-binary` and then override the default
+sqlite3 library before running Chroma with the steps here https://gist.github.com/defulmere/8b9695e415a44271061cc8e272f3c300. 
+Alternatively you can compile SQLite from scratch and replace the library in your python installation with the latest version as documented here https://github.com/coleifer/pysqlite3#building-a-statically-linked-library. 
+3. If you are on Windows, you can manually download the latest version of SQLite from https://www.sqlite.org/download.html and
+replace the DLL in your python installation's DLLs folder with the latest version. You can find your by running `os.path.dirname(sys.executable)` in python.
