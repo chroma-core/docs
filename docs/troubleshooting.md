@@ -73,3 +73,4 @@ sqlite3 library before running Chroma with the steps [here](https://gist.github.
 Alternatively you can compile SQLite from scratch and replace the library in your python installation with the latest version as documented [here](https://github.com/coleifer/pysqlite3#building-a-statically-linked-library). 
 3. If you are on Windows, you can manually download the latest version of SQLite from https://www.sqlite.org/download.html and
 replace the DLL in your python installation's DLLs folder with the latest version. You can find your python installation path by running `os.path.dirname(sys.executable)` in python.
+4. If you are using a Debian based Docker container, older Debian versions do not have an up to date SQLite, please use `bookworm` or higher.
