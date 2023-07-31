@@ -1,18 +1,73 @@
 ---
-sidebar_label: api
-title: api
+sidebar_label: Client
+title: Client
+sidebar_position: 1
 ---
 
-## API Objects
+
+## EphemeralClient
+
+```python
+def EphemeralClient(settings: Settings = Settings()) -> API
+```
+
+Creates an in-memory instance of Chroma. This is useful for testing and
+development, but not recommended for production use.
+
+## PersistentClient
+
+```python
+def PersistentClient(path: str = "./chroma",
+                     settings: Settings = Settings()) -> API
+```
+
+Creates a persistent instance of Chroma that saves to disk. This is useful for
+testing and development, but not recommended for production use.
+
+**Arguments**:
+
+- `path` - The directory to save Chroma's data to. Defaults to "./chroma".
+
+## HttpClient
+
+```python
+def HttpClient(
+    host: str = "localhost",
+    port: str = "8000",
+    ssl: bool = False,
+    headers: Dict[str, str] = {},
+    settings: Settings = Settings()) -> API
+```
+
+Creates a client that connects to a remote Chroma server. This supports
+many clients connecting to the same server, and is the recommended way to
+use Chroma in production.
+
+**Arguments**:
+
+- `host` - The hostname of the Chroma server. Defaults to "localhost".
+- `port` - The port of the Chroma server. Defaults to "8000".
+- `ssl` - Whether to use SSL to connect to the Chroma server. Defaults to False.
+- `headers` - A dictionary of headers to send to the Chroma server. Defaults to {}.
+
+## Client
+
+```python
+def Client(settings: Settings = __settings) -> API
+```
+
+Return a running chroma.API instance
+
+
+# Client Methods
 
 ```python
 class API(Component, ABC)
 ```
 
-#### heartbeat
+## heartbeat
 
 ```python
-@abstractmethod
 def heartbeat() -> int
 ```
 
@@ -23,10 +78,9 @@ Used to check if the server is alive.
 
 - `int` - The current time in nanoseconds since epoch
 
-#### list\_collections
+## list\_collections
 
 ```python
-@abstractmethod
 def list_collections() -> Sequence[Collection]
 ```
 
@@ -39,15 +93,14 @@ List all collections.
 
 **Examples**:
 
-    ```python
-    client.list_collections()
-    # [collection(name="my_collection", metadata={})]
-    ```
+  ```python
+  client.list_collections()
+  # [collection(name="my_collection", metadata={})]
+  ```
 
-#### create\_collection
+## create\_collection
 
 ```python
-@abstractmethod
 def create_collection(name: str,
                       metadata: Optional[CollectionMetadata] = None,
                       embedding_function: Optional[EmbeddingFunction] = ef.
@@ -79,18 +132,17 @@ Create a new collection with the given name and metadata.
 
 **Examples**:
 
-    ```python
-    client.create_collection("my_collection")
-    # collection(name="my_collection", metadata={})
+  ```python
+  client.create_collection("my_collection")
+  # collection(name="my_collection", metadata={})
+  
+  client.create_collection("my_collection", metadata={"foo": "bar"})
+  # collection(name="my_collection", metadata={"foo": "bar"})
+  ```
 
-    client.create_collection("my_collection", metadata={"foo": "bar"})
-    # collection(name="my_collection", metadata={"foo": "bar"})
-    ```
-
-#### get\_collection
+## get\_collection
 
 ```python
-@abstractmethod
 def get_collection(
     name: str,
     embedding_function: Optional[EmbeddingFunction] = ef.
@@ -119,15 +171,14 @@ Get a collection with the given name.
 
 **Examples**:
 
-    ```python
-    client.get_collection("my_collection")
-    # collection(name="my_collection", metadata={})
-    ```
+  ```python
+  client.get_collection("my_collection")
+  # collection(name="my_collection", metadata={})
+  ```
 
-#### get\_or\_create\_collection
+## get\_or\_create\_collection
 
 ```python
-@abstractmethod
 def get_or_create_collection(
     name: str,
     metadata: Optional[CollectionMetadata] = None,
@@ -152,15 +203,14 @@ Get or create a collection with the given name and metadata.
 
 **Examples**:
 
-    ```python
-    client.get_or_create_collection("my_collection")
-    # collection(name="my_collection", metadata={})
-    ```
+  ```python
+  client.get_or_create_collection("my_collection")
+  # collection(name="my_collection", metadata={})
+  ```
 
-#### delete\_collection
+## delete\_collection
 
 ```python
-@abstractmethod
 def delete_collection(name: str) -> None
 ```
 
@@ -178,14 +228,13 @@ Delete a collection with the given name.
 
 **Examples**:
 
-    ```python
-    client.delete_collection("my_collection")
-    ```
+  ```python
+  client.delete_collection("my_collection")
+  ```
 
-#### reset
+## reset
 
 ```python
-@abstractmethod
 def reset() -> bool
 ```
 
@@ -195,46 +244,9 @@ Resets the database. This will delete all collections and entries.
 
 - `bool` - True if the database was reset successfully.
 
-#### raw\_sql
+## get\_version
 
 ```python
-@abstractmethod
-def raw_sql(sql: str) -> pd.DataFrame
-```
-
-Runs a raw SQL query against the database
-
-**Arguments**:
-
-- `sql` - The SQL query to run
-  
-
-**Returns**:
-
-- `pd.DataFrame` - A pandas dataframe containing the results of the query
-
-#### create\_index
-
-```python
-@abstractmethod
-def create_index(collection_name: str) -> bool
-```
-
-Creates an index for the given collection
-
-**Arguments**:
-
-- `collection_name` - The collection to create the index for. Defaults to None.
-  
-
-**Returns**:
-
-- `bool` - True if the index was created successfully
-
-#### get\_version
-
-```python
-@abstractmethod
 def get_version() -> str
 ```
 
@@ -244,10 +256,9 @@ Get the version of Chroma.
 
 - `str` - The version of Chroma
 
-#### get\_settings
+## get\_settings
 
 ```python
-@abstractmethod
 def get_settings() -> Settings
 ```
 
