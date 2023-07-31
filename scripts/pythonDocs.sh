@@ -1,35 +1,5 @@
 pydoc-markdown
 
-# new_section=$(cat <<EOF
-# ---
-# sidebar_label: Client
-# title: Client
-# sidebar_position: 1
-# ---
-# EOF
-# )
-
-# new_section=${new_section//$'\n'/\\n}
-
-# # write to a file 
-# echo "$new_section" > docs/reference/Client.md
-
-# file1 = "docs/reference/__init__/__init__.md"
-# file2 = "docs/reference/api/__init__.md"
-
-# # append the contents of file 1 to Client.md, but only after the 2nd case of "---"
-# sed -i.bak -e '/---/N;/---/N;s/---\n/---\n'"$new_section"'\n/' "$file1"
-# # sed -i.bak -e '/---/N;/---/N;s/---\n/---\n'"$new_section"'\n/' "$file2"
-# # sed -i.bak -e ':a' -e 'N' -e '$!ba' -e 's/---\n.*\n---/'"$new_section2"'/g' "$file2"
-
-# # append file1 and file2 to Client.md
-# # cat docs/reference/__init__/__init__.md docs/reference/api/__init__.md > docs/reference/Client.md
-
-# # now remove file1 and file2
-# rm $file1
-# rm $file2
-
-
 # Function to remove the block from the given file
 remove_block() {
   sed -e '/^---$/,/^---$/d' "$1" > "$1.tmp"
