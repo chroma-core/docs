@@ -141,6 +141,9 @@ blockquote {
 .navbar__brand {
   margin-right: 0px;
 }
+.navbar__logo {
+  width: 3em;
+}
 [data-theme='light'] .navbar__brand:hover {
   color: #000;
 } 
