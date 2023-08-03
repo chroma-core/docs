@@ -42,6 +42,25 @@ default_ef = embedding_functions.DefaultEmbeddingFunction()
 
 
 <TabItem value="js" label="JavaScript">
+
+
+
+## Transformers.js
+
+Chroma can use [Transformers.js](https://github.com/xenova/transformers.js) to create embeddings locally on the machine. Transformers uses the 'Xenova/all-MiniLM-L6-v2' model.
+
+```javascript
+const {TransformersEmbeddingFunction} = require('chromadb');
+const embedder = new TransformersEmbeddingFunction();
+
+// use directly 
+const embeddings = embedder.generate(["document1","document2"])
+
+// pass documents to query for .add and .query
+const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
+const collectionGet = await client.getCollection({name:"name", embeddingFunction: embedder})
+```
+
 </TabItem>
 </Tabs>
 
