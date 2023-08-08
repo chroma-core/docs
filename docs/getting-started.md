@@ -33,8 +33,8 @@ pip install chromadb
 <TabItem value="js" label="JavaScript">
 
 
-```js
-npm install --save chromadb // yarn add chromadb
+```sh
+npm install --save chromadb # yarn add chromadb
 ```
 
 </TabItem>
