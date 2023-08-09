@@ -265,7 +265,7 @@ palm_embedding = embedding_functions.GooglePalmEmbeddingFunction(
 You can create your own embedding function to use with Chroma, it just needs to implement the `EmbeddingFunction` protocol.
 
 ```python
-from chromadb.api.types import Documents, EmbeddingFunction, Embeddings
+from chromadb import Documents, EmbeddingFunction, Embeddings
 
 class MyEmbeddingFunction(EmbeddingFunction):
     def __call__(self, texts: Documents) -> Embeddings:
