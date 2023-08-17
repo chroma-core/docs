@@ -38,6 +38,15 @@ By default, Chroma uses the [Sentence Transformers](https://www.sbert.net/) `all
 default_ef = embedding_functions.DefaultEmbeddingFunction()
 ```
 
+:::tip
+Embedding functions can linked to a collection, which are used whenever you call `add`, `update`, `upsert` or `query`. You can also be use them directly which can be handy for debugging. 
+```py
+val = default_ef("foo")
+print(val)
+```
+-> [[0.05035809800028801, 0.0626462921500206, -0.061827320605516434...]]
+:::
+
 </TabItem>
 
 
