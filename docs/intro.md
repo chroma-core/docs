@@ -69,10 +69,12 @@ Continue with the full [getting started guide](./getting-started.md).
 |--------------|-----------|---------------|
 | Python       | ✅        | ✅            |
 | Javascript   | ➖        | ✅            |
-| Ruby   | ➖        | [from @mariochavez](https://github.com/mariochavez/chroma)           |
-| C#   | ➖        | *from Microsoft (coming soon)*          |
+| Ruby   | ➖        | ✅ [from @mariochavez](https://github.com/mariochavez/chroma)           |
+| Java | ➖  | ✅ [from @t_azarov](https://github.com/amikos-tech/chromadb-java-client) |
+| Go | ➖  | ✅ [from @t_azarov](https://github.com/amikos-tech/chroma-go) |
+| C#   | ➖        | ✅ [from @microsoft](https://github.com/microsoft/semantic-kernel/tree/main/dotnet/src/Connectors/Connectors.Memory.Chroma)       |
+| Rust | ➖ | ✅ [from @Anush008](https://crates.io/crates/chromadb) |
 | Other?       | ❓    | ❓            |
-
 
 <br/>
 

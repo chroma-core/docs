@@ -508,7 +508,7 @@ div.special_table + table tr th {
 }
 div.special_table + table tr td {
   padding: 5px 20px;
-  text-align: center;
+  text-align: left;
 }
 
 div.special_table + table tr:nth-child(even) {
