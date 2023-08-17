@@ -565,6 +565,11 @@ Using the $eq operator is equivalent to using the `where` filter.
 }
 
 ```
+
+:::note
+Where filters only search embeddings where the key exists. Eg if you search `collection.get(where={"version": {"$ne": 1}})`. Metadata that does not have the key `version` will not be returned.
+:::
+
 ##### Filtering by document contents
 In order to filter on document contents, you must supply a `where_document` filter dictionary to the query. The dictionary must have the following structure:
 
