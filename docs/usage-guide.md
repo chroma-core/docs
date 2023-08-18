@@ -567,7 +567,7 @@ Using the $eq operator is equivalent to using the `where` filter.
 ```
 
 :::note
-Where filters only search embeddings where the key exists. Eg if you search `collection.get(where={"version": {"$ne": 1}})`. Metadata that does not have the key `version` will not be returned.
+Where filters only search embeddings where the key exists. If you search `collection.get(where={"version": {"$ne": 1}})`. Metadata that does not have the key `version` will not be returned.
 :::
 
 ##### Filtering by document contents
