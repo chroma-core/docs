@@ -34,6 +34,8 @@ from chromadb.utils import embedding_functions
 
 By default, Chroma uses the [Sentence Transformers](https://www.sbert.net/) `all-MiniLM-L6-v2` model to create embeddings. This embedding model can create sentence and document embeddings that can be used for a wide variety of tasks. This embedding function runs locally on your machine, and may require you download the model files (this will happen automatically).
 
+Before using the default embedding function install related dependencies with `pip install chromadb[ef_default]`
+
 ```python
 default_ef = embedding_functions.DefaultEmbeddingFunction()
 ```
@@ -91,7 +93,7 @@ const embedder = new TransformersEmbeddingFunction();
 
 ## Sentence Transformers
 
-Chroma can also use any [Sentence Transformers](https://www.sbert.net/) model to create embeddings.
+Chroma can also use any [Sentence Transformers](https://www.sbert.net/) model to create embeddings. Install required dependencies with `pip install chromadb[ef_sentence_transformers]`
 
 ```python
 sentence_transformer_ef = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
@@ -112,7 +114,7 @@ Chroma provides a convenient wrapper around OpenAI's embedding API. This embeddi
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-This embedding function relies on the `openai` python package, which you can install with `pip install openai`.
+Before using the embedding function install related dependencies with `pip install chromadb[ef_openai]`
 
 ```python
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(
@@ -160,7 +162,7 @@ Chroma also provides a convenient wrapper around Cohere's embedding API. This em
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-This embedding function relies on the `cohere` python package, which you can install with `pip install cohere`.
+Before using the default embedding function install related dependencies with `pip install chromadb[ef_cohere]`
 
 ```python
 cohere_ef  = embedding_functions.CohereEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="large")
@@ -238,7 +240,7 @@ For more information on multilingual model you can read [here](https://docs.cohe
 
 ## Instructor models
 
-The [instructor-embeddings](https://github.com/HKUNLP/instructor-embedding) library is another option, especially when running on a machine with a cuda-capable GPU. They are a good local alternative to OpenAI (see the [Massive Text Embedding Benchmark](https://huggingface.co/blog/mteb) rankings).  The embedding function requires the InstructorEmbedding package. To install it, run ```pip install InstructorEmbedding```.
+The [instructor-embeddings](https://github.com/HKUNLP/instructor-embedding) library is another option, especially when running on a machine with a cuda-capable GPU. They are a good local alternative to OpenAI (see the [Massive Text Embedding Benchmark](https://huggingface.co/blog/mteb) rankings).  The embedding function requires the InstructorEmbedding package. To install it, run `pip install chromadb[ef_instructor]`.
 
 There are three models available. The default is `hkunlp/instructor-base`, and for better performance you can use `hkunlp/instructor-large` or `hkunlp/instructor-xl`. You can also specify whether to use `cpu` (default) or `cuda`. For example:
 
@@ -257,7 +259,7 @@ Keep in mind that the large and xl models are 1.5GB and 5GB respectively, and ar
 
 [Google PaLM APIs](https://developers.googleblog.com/2023/03/announcing-palm-api-and-makersuite.html) are currently in private preview, but if you are part of this preview, you can use them with Chroma via the `GooglePalmEmbeddingFunction`.
 
-To use the PaLM embedding API, you must have `google.generativeai` Python package installed and have the API key. To use:
+To use the PaLM embedding API, you must have `google.generativeai` Python package installed (`pip install chromadb[ef_google_palm]`) and have the API key. To use:
 
 ```python
 palm_embedding = embedding_functions.GooglePalmEmbeddingFunction(
@@ -272,7 +274,7 @@ Chroma also provides a convenient wrapper around HuggingFace's embedding API. Th
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-This embedding function relies on the `requests` python package, which you can install with `pip install requests`.
+This embedding function relies on the `requests` python package, which you can install with `pip install chromadb[ef_huggingface]`.
 
 ```python
 huggingface_ef = embedding_functions.HuggingFaceEmbeddingFunction(
