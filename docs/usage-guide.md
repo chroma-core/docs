@@ -712,3 +712,90 @@ await collection.delete({
 
 
 `.delete` also supports the `where` filter. If no `ids` are supplied, it will delete all items in the collection that match the `where` filter.
+
+
+## Authentication
+
+You can configure Chroma to use authentication when in server/client mode only.
+
+Supported authentication methods are:
+
+| Authentication Method | Description                                                                                                               | Status  |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------|---------|
+| Basic (Pre-emptive)   | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | `Alpha` |
+
+Client-side supported authentication methods per client:
+
+| Authentication Method | Python | JS | Javascript | Ruby | Java | Go | C# | Rust |
+|-----------------------|--------|----|------------|------|------|----|----|------|
+| Basic Auth            | ✅      | ➖  | ➖          | ➖    | ➖    | ➖  | ➖  | ➖    |
+
+Server-side supported authentication methods per server:
+
+| Authentication Method | Status    | 
+|-----------------------|-----------|
+| Basic Auth            | ✅ `Alpha` | 
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+### Server Setup
+
+#### CLI
+
+```bash
+export CHROMA_USER=admin
+export CHROMA_PASSWORD=admin
+docker run --rm --entrypoint htpasswd httpd:2 -Bbn ${CHROMA_USER} ${CHROMA_PASSWORD} > server.htpasswd
+CHROMA_SERVER_AUTH_CREDENTIALS_FILE="./server.htpasswd" \
+CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider' \
+CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider' \
+uvicorn chromadb.app:app --workers 1 --host 0.0.0.0 --port 8000  --proxy-headers --log-config log_config.yml
+```
+
+#### Docker
+
+```bash
+export CHROMA_USER=admin
+export CHROMA_PASSWORD=admin
+docker run --rm --entrypoint htpasswd httpd:2 -Bbn ${CHROMA_USER} ${CHROMA_PASSWORD} > server.htpasswd
+cat << EOF > .env
+CHROMA_SERVER_AUTH_CREDENTIALS_FILE="/chroma/server.htpasswd"
+CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider'
+CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider'
+EOF
+docker-compose up -d --build
+```
+
+#### Verify the Server
+
+Success:
+
+```bash
+curl -v http://localhost:8000/api/v1/collections -u admin:admin
+```
+
+Auth failure:
+
+```bash
+curl -v http://localhost:8000/api/v1/collections -u admin:admin1
+```
+
+### Client Setup
+
+```python
+import chromadb
+from chromadb.config import Settings
+
+client = chromadb.HttpClient(
+  settings=Settings(chroma_client_auth_provider="chromadb.auth.basic.BasicAuthClientProvider",chroma_client_auth_credentials="admin:admin"))
+client.heartbeat()  # this should work with or without authentication - it is a public endpoint
+
+client.get_version()  # this should work with or without authentication - it is a public endpoint
+
+client.list_collections()  # this is a protected endpoint and requires authentication
+```
+
+</TabItem>
+
+</Tabs>
