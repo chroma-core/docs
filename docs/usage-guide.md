@@ -797,5 +797,10 @@ client.list_collections()  # this is a protected endpoint and requires authentic
 ```
 
 </TabItem>
+<TabItem value="js" label="JavaScript">
 
+:::info Not Available
+Authentication is not yet supported in JS
+:::
+</TabItem>
 </Tabs>
