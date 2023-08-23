@@ -720,68 +720,109 @@ You can configure Chroma to use authentication when in server/client mode only.
 
 Supported authentication methods are:
 
-| Authentication Method | Description                                                                                                               | Status  |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------|---------|
-| Basic (Pre-emptive)   | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | `Alpha` |
+| Authentication Method | Description                                                                                                               | Status  | Server-Side Support | Client/Python | Client/JS |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------|---------|---------------------|---------------|-----------|
+| Basic (Pre-emptive)   | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | `Alpha` |    ✅ `Alpha`                 |     ✅          |     ➖      |
 
-Client-side supported authentication methods per client:
-
-| Authentication Method | Python | JS | Javascript | Ruby | Java | Go | C# | Rust |
-|-----------------------|--------|----|------------|------|------|----|----|------|
-| Basic Auth            | ✅      | ➖  | ➖          | ➖    | ➖    | ➖  | ➖  | ➖    |
-
-Server-side supported authentication methods per server:
-
-| Authentication Method | Status    | 
-|-----------------------|-----------|
-| Basic Auth            | ✅ `Alpha` | 
+### Basic Authentication
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-### Server Setup
+#### Server Setup
 
-#### CLI
+
+##### Generate Server-Side Credentials
+
+:::note Security Practices
+A good security practice is to store the password securely. In the example below we use bcrypt (currently the only supported hash in Chroma server side auth) to hash the plaintext password.
+:::
+
+**_Linux/MacOS:_**
 
 ```bash
 export CHROMA_USER=admin
 export CHROMA_PASSWORD=admin
 docker run --rm --entrypoint htpasswd httpd:2 -Bbn ${CHROMA_USER} ${CHROMA_PASSWORD} > server.htpasswd
+```
+
+**_Windows:_**
+
+```bash
+set CHROMA_USER=admin
+set CHROMA_PASSWORD=admin
+
+docker run --rm --entrypoint htpasswd httpd:2 -Bbn %CHROMA_USER% %CHROMA_PASSWORD% > server.htpasswd
+```
+
+##### CLI
+
+```bash
 CHROMA_SERVER_AUTH_CREDENTIALS_FILE="./server.htpasswd" \
 CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider' \
 CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider' \
 uvicorn chromadb.app:app --workers 1 --host 0.0.0.0 --port 8000  --proxy-headers --log-config log_config.yml
 ```
 
-#### Docker
+##### Docker
+
+**_Linux/MacOS:_**
 
 ```bash
-export CHROMA_USER=admin
-export CHROMA_PASSWORD=admin
-docker run --rm --entrypoint htpasswd httpd:2 -Bbn ${CHROMA_USER} ${CHROMA_PASSWORD} > server.htpasswd
 cat << EOF > .env
 CHROMA_SERVER_AUTH_CREDENTIALS_FILE="/chroma/server.htpasswd"
 CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider'
 CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider'
 EOF
+
 docker-compose up -d --build
 ```
 
-#### Verify the Server
+**_Windows:_**
 
-Success:
+```bash
+echo CHROMA_SERVER_AUTH_CREDENTIALS_FILE="/chroma/server.htpasswd" > .env
+echo CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider' >> .env
+echo CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider' >> .env
+
+docker-compose up -d --build
+```
+
+##### Verify the Server
+
+Now let's verify that the server is running and that authentication is working.
+
+**Success:**
+
+**_Linux/MacOS:_**
 
 ```bash
 curl -v http://localhost:8000/api/v1/collections -u admin:admin
 ```
 
-Auth failure:
+**_Windows:_**
+
+```bash
+$headers = @{ Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("admin:admin")) }
+Invoke-RestMethod -Uri 'http://localhost:8000/api/v1/collections' -Headers $headers -Verbose
+```
+
+**Auth failure:**
+
+**_Linux/MacOS:_**
 
 ```bash
 curl -v http://localhost:8000/api/v1/collections -u admin:admin1
 ```
 
-### Client Setup
+**_Windows:_**
+
+```bash
+$headers = @{ Authorization = 'Basic ' + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes("admin:admin1")) }
+Invoke-RestMethod -Uri 'http://localhost:8000/api/v1/collections' -Headers $headers -Verbose
+````
+
+#### Client Setup
 
 ```python
 import chromadb
