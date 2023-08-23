@@ -718,11 +718,15 @@ await collection.delete({
 
 You can configure Chroma to use authentication when in server/client mode only.
 
-Supported authentication methods are:
+Supported authentication methods:
 
-| Authentication Method | Description                                                                                                               | Status  | Server-Side Support | Client/Python | Client/JS |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------|---------|---------------------|---------------|-----------|
-| Basic (Pre-emptive)   | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | `Alpha` |    ✅ `Alpha`                 |     ✅          |     ➖      |
+| Authentication Method | Basic Auth (Pre-emptive)                                                                                                  |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
+| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. |
+| Status                | `Alpha`                                                                                                                   |
+| Server-Side Support   | ✅ `Alpha`                                                                                                                |
+| Client/Python         | ✅                                                                                                                        |
+| Client/JS             | ➖                                                                                                                        |
 
 ### Basic Authentication
 
