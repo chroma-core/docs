@@ -7,6 +7,38 @@ sidebar_position: 4
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+## Language Support
+
+### First-Party Clients
+
+<div class="special_table"></div>
+
+| Embedding Function    | Python | JavaScript |
+| --------------------- | ------ | ---------- |
+| Default EF (miniLM)   | ✅     | ✅         |
+| Sentence Transformers | ✅     | ✅         |
+| OpenAI                | ✅     | ✅         |
+| Cohere                | ✅     | ✅         |
+| Instructor models     | ✅     | ➖         |
+| Google PaLM           | ✅     | ➖         |
+| HuggingFace           | ✅     | ➖         |
+| Custom                | ✅     | ✅         |
+
+### Third-Party Clients
+
+<div class="special_table"></div>
+
+| Embedding Function    | Java | Go  | Ruby | C#  | Rust |
+| --------------------- | ---- | --- | ---- | --- | ---- |
+| Default EF (miniLM)   | ➖   | ➖  | ➖   | ➖  | ➖   |
+| Sentence Transformers | ➖   | ➖  | ➖   | ➖  | ✅   |
+| OpenAI                | ✅   | ✅  | ➖   | ✅  | ✅   |
+| Cohere                | ✅   | ✅  | ➖   | ➖  | ➖   |
+| Instructor models     | ➖   | ➖  | ➖   | ➖  | ➖   |
+| Google PaLM           | ➖   | ➖  | ➖   | ➖  | ➖   |
+| HuggingFace           | ✅   | ✅  | ✅   | ➖  | ➖   |
+| Custom                | ➖   | ➖  | ➖   | ➖  | ✅   |
+
 <div class="select-language">Select a language</div>
 
 <Tabs queryString groupId="lang">
@@ -14,7 +46,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
 
-***
+---
 
 Embeddings are the A.I-native way to represent any kind of data, making them the perfect fit for working with all kinds of A.I-powered tools and algorithms. They can represent text, images, and soon audio and video. There are many options for creating embeddings, whether locally using an installed library, or by calling an API.
 
@@ -29,7 +61,6 @@ To get Chroma's embedding functions, import the `chromadb.utils.embedding_functi
 from chromadb.utils import embedding_functions
 ```
 
-
 ## Default: all-MiniLM-L6-v2
 
 By default, Chroma uses the [Sentence Transformers](https://www.sbert.net/) `all-MiniLM-L6-v2` model to create embeddings. This embedding model can create sentence and document embeddings that can be used for a wide variety of tasks. This embedding function runs locally on your machine, and may require you download the model files (this will happen automatically).
@@ -39,48 +70,53 @@ default_ef = embedding_functions.DefaultEmbeddingFunction()
 ```
 
 :::tip
-Embedding functions can linked to a collection, which are used whenever you call `add`, `update`, `upsert` or `query`. You can also be use them directly which can be handy for debugging. 
+Embedding functions can linked to a collection, which are used whenever you call `add`, `update`, `upsert` or `query`. You can also be use them directly which can be handy for debugging.
+
 ```py
 val = default_ef("foo")
 ```
+
 -> [[0.05035809800028801, 0.0626462921500206, -0.061827320605516434...]]
 :::
 
 </TabItem>
 
-
 <TabItem value="js" label="JavaScript">
-
-
 
 ## Transformers.js
 
-Chroma can use [Transformers.js](https://github.com/xenova/transformers.js) to create embeddings locally on the machine. Transformers uses the 'Xenova/all-MiniLM-L6-v2' model. Make sure you have installed Transformers.js by running ```npm install @xenova/transformers``` from the commandline. 
+Chroma can use [Transformers.js](https://github.com/xenova/transformers.js) to create embeddings locally on the machine. Transformers uses the 'Xenova/all-MiniLM-L6-v2' model. Make sure you have installed Transformers.js by running `npm install @xenova/transformers` from the commandline.
 
 ```javascript
-const {ChromaClient} = require('chromadb');
-const client = new ChromaClient({path: "http://localhost:8000"});
-const {TransformersEmbeddingFunction} = require('chromadb');
+const { ChromaClient } = require('chromadb');
+const client = new ChromaClient({ path: 'http://localhost:8000' });
+const { TransformersEmbeddingFunction } = require('chromadb');
 const embedder = new TransformersEmbeddingFunction();
 
 (async () => {
-    // create the collection called name
-    const collection = await client.getOrCreateCollection({name: "name", embeddingFunction: embedder})
+	// create the collection called name
+	const collection = await client.getOrCreateCollection({
+		name: 'name',
+		embeddingFunction: embedder,
+	});
 
-    // add documents to the collection
-    await collection.add({
-        ids: ["id1", "id2", "id3"],
-        metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}], 
-        documents: ["lorem ipsum...", "doc2", "doc3"], 
-    })
+	// add documents to the collection
+	await collection.add({
+		ids: ['id1', 'id2', 'id3'],
+		metadatas: [
+			{ chapter: '3', verse: '16' },
+			{ chapter: '3', verse: '5' },
+			{ chapter: '29', verse: '11' },
+		],
+		documents: ['lorem ipsum...', 'doc2', 'doc3'],
+	});
 
-    // query the collection
-    const results = await collection.query({
-        nResults: 2, 
-        queryTexts: ["lorem ipsum"]
-    }) 
+	// query the collection
+	const results = await collection.query({
+		nResults: 2,
+		queryTexts: ['lorem ipsum'],
+	});
 })();
-
 ```
 
 </TabItem>
@@ -104,7 +140,6 @@ You can pass in an optional `model_name` argument, which lets you choose which S
 </TabItem>
 </Tabs>
 
-
 ## OpenAI
 
 Chroma provides a convenient wrapper around OpenAI's embedding API. This embedding function runs remotely on OpenAI's servers, and requires an API key. You can get an API key by signing up for an account at [OpenAI](https://openai.com/api/).
@@ -121,7 +156,8 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
             )
 ```
 
-To use the OpenAI embedding models on other platforms such as Azure, you can use the `api_base` and `api_type` parameters: 
+To use the OpenAI embedding models on other platforms such as Azure, you can use the `api_base` and `api_type` parameters:
+
 ```python
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(
                 api_key="YOUR_API_KEY",
@@ -135,21 +171,34 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-const {OpenAIEmbeddingFunction} = require('chromadb');
-const embedder = new OpenAIEmbeddingFunction({openai_api_key: "apiKey"})
-
-// use directly 
-const embeddings = embedder.generate(["document1","document2"])
+const { OpenAIEmbeddingFunction } = require('chromadb');
+const embedder = new OpenAIEmbeddingFunction({ openai_api_key: 'apiKey' });
 
 // pass documents to query for .add and .query
-const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
-const collection = await client.getCollection({name: "name", embeddingFunction: embedder})
+const collection = await client.createCollection({
+	name: 'name',
+	embeddingFunction: embedder,
+});
+const collection = await client.getCollection({
+	name: 'name',
+	embeddingFunction: embedder,
+});
+
+// use directly
+const embeddings = await embedder.generate(['document1', 'document2']);
+
+// Add documents to the collection along with their associated embeddings.
+// Chroma will store these documents without generating its own embeddings.
+await collection.add({
+	ids: ['id1', 'id2'],
+	embeddings: embeddings,
+	documents: ['document1', 'document2'],
+});
 ```
 
 </TabItem>
 
 </Tabs>
-
 
 You can pass in an optional `model_name` argument, which lets you choose which OpenAI embeddings model to use. By default, Chroma uses `text-embedding-ada-002`. You can see a list of all available models [here](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings).
 
@@ -171,22 +220,34 @@ cohere_ef(texts=["document1","document2"])
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-const {CohereEmbeddingFunction} = require('chromadb');
-const embedder = new CohereEmbeddingFunction("apiKey")
-
-// use directly 
-const embeddings = embedder.generate(["document1","document2"])
+const { CohereEmbeddingFunction } = require('chromadb');
+const embedder = new CohereEmbeddingFunction('apiKey');
 
 // pass documents to query for .add and .query
-const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
-const collectionGet = await client.getCollection({name:"name", embeddingFunction: embedder})
+const collection = await client.createCollection({
+	name: 'name',
+	embeddingFunction: embedder,
+});
+const collectionGet = await client.getCollection({
+	name: 'name',
+	embeddingFunction: embedder,
+});
+
+// use directly
+const embeddings = await embedder.generate(['document1', 'document2']);
+
+// Add documents to the collection along with their associated embeddings.
+// Chroma will store these documents without generating its own embeddings.
+await collection.add({
+	ids: ['id1', 'id2'],
+	embeddings: embeddings,
+	documents: ['document1', 'document2'],
+});
 ```
 
 </TabItem>
 
 </Tabs>
-
-
 
 You can pass in an optional `model_name` argument, which lets you choose which Cohere embeddings model to use. By default, Chroma uses `large` model. You can see the available models under `Get embeddings` section [here](https://docs.cohere.ai/reference/embed).
 
@@ -197,12 +258,12 @@ You can pass in an optional `model_name` argument, which lets you choose which C
 
 ```python
 cohere_ef  = embedding_functions.CohereEmbeddingFunction(
-        api_key="YOUR_API_KEY", 
+        api_key="YOUR_API_KEY",
         model_name="multilingual-22-12")
 
-multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!', 
-        'Hallo von Cohere!', 'Bonjour de Cohere!', 
-        '¡Hola desde Cohere!', 'Olá do Cohere!', 
+multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!',
+        'Hallo von Cohere!', 'Bonjour de Cohere!',
+        '¡Hola desde Cohere!', 'Olá do Cohere!',
         'Ciao da Cohere!', '您好，来自 Cohere！',
         'कोहेरे से नमस्ते!'  ]
 
@@ -214,44 +275,60 @@ cohere_ef(texts=multilingual_texts)
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-const {CohereEmbeddingFunction} = require('chromadb');
-const embedder = new CohereEmbeddingFunction("apiKey")
+const { CohereEmbeddingFunction } = require('chromadb');
+const embedder = new CohereEmbeddingFunction('apiKey');
 
-multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!', 
-        'Hallo von Cohere!', 'Bonjour de Cohere!', 
-        '¡Hola desde Cohere!', 'Olá do Cohere!', 
-        'Ciao da Cohere!', '您好，来自 Cohere！',
-        'कोहेरे से नमस्ते!'  ]
+multilingual_texts = [
+	'Hello from Cohere!',
+	'مرحبًا من كوهير!',
+	'Hallo von Cohere!',
+	'Bonjour de Cohere!',
+	'¡Hola desde Cohere!',
+	'Olá do Cohere!',
+	'Ciao da Cohere!',
+	'您好，来自 Cohere！',
+	'कोहेरे से नमस्ते!',
+];
 
-const embeddings = embedder.generate(multilingual_texts)
-
+const embeddings = embedder.generate(multilingual_texts);
 ```
-
 
 </TabItem>
 
 </Tabs>
 
-
-
 For more information on multilingual model you can read [here](https://docs.cohere.ai/docs/multilingual-language-models).
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
 
 ## Instructor models
 
-The [instructor-embeddings](https://github.com/HKUNLP/instructor-embedding) library is another option, especially when running on a machine with a cuda-capable GPU. They are a good local alternative to OpenAI (see the [Massive Text Embedding Benchmark](https://huggingface.co/blog/mteb) rankings).  The embedding function requires the InstructorEmbedding package. To install it, run ```pip install InstructorEmbedding```.
+The [instructor-embeddings](https://github.com/HKUNLP/instructor-embedding) library is another option, especially when running on a machine with a cuda-capable GPU. They are a good local alternative to OpenAI (see the [Massive Text Embedding Benchmark](https://huggingface.co/blog/mteb) rankings). The embedding function requires the InstructorEmbedding package. To install it, run `pip install InstructorEmbedding`.
 
 There are three models available. The default is `hkunlp/instructor-base`, and for better performance you can use `hkunlp/instructor-large` or `hkunlp/instructor-xl`. You can also specify whether to use `cpu` (default) or `cuda`. For example:
 
 ```python
 #uses base model and cpu
-ef = embedding_functions.InstructorEmbeddingFunction() 
+ef = embedding_functions.InstructorEmbeddingFunction()
 ```
+
 or
+
 ```python
 ef = embedding_functions.InstructorEmbeddingFunction(
 model_name="hkunlp/instructor-xl", device="cuda")
 ```
+
 Keep in mind that the large and xl models are 1.5GB and 5GB respectively, and are best suited to running on a GPU.
+</TabItem>
+<TabItem value="js" label="JavaScript">
+</TabItem>
+
+</Tabs>
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
 
 ## Google PaLM API models
 
@@ -265,12 +342,21 @@ palm_embedding = embedding_functions.GooglePalmEmbeddingFunction(
 
 ```
 
+</TabItem>
+<TabItem value="js" label="JavaScript">
+</TabItem>
+
+</Tabs>
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
 ## HuggingFace
 
 Chroma also provides a convenient wrapper around HuggingFace's embedding API. This embedding function runs remotely on HuggingFace's servers, and requires an API key. You can get an API key by signing up for an account at [HuggingFace](https://huggingface.co/).
 
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
+<!-- <Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python"> -->
 
 This embedding function relies on the `requests` python package, which you can install with `pip install requests`.
 
@@ -286,6 +372,7 @@ You can pass in an optional `model_name` argument, which lets you choose which H
 </TabItem>
 <TabItem value="js" label="JavaScript">
 </TabItem>
+
 </Tabs>
 
 ## Custom Embedding Functions
@@ -305,7 +392,6 @@ class MyEmbeddingFunction(EmbeddingFunction):
 ```
 
 We welcome contributions! If you create an embedding function that you think would be useful to others, please consider [submitting a pull request](https://github.com/chroma-core/chroma) to add it to Chroma's `embedding_functions` module.
-
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
