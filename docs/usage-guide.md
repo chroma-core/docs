@@ -454,8 +454,8 @@ const result = await collection.query({
 
 
 The query will return the `n_results` closest matches to each `query_embedding`, in order.
-An optional `where` filter dictionary can be supplied to filter the results by the `metadata` associated with each document.
-Additionally, an optional `where_document` filter dictionary can be supplied to filter the results by contents of the document.
+An optional `where` filter dictionary can be supplied to filter by the `metadata` associated with each document.
+Additionally, an optional `where_document` filter dictionary can be supplied to filter by contents of the document.
 
 If the supplied `query_embeddings` are not the same dimension as the collection, an exception will be raised.
 
