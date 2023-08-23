@@ -712,3 +712,73 @@ await collection.delete({
 
 
 `.delete` also supports the `where` filter. If no `ids` are supplied, it will delete all items in the collection that match the `where` filter.
+
+
+## Authentication
+
+You can configure Chroma to use authentication when in server/client mode only.
+
+Supported authentication methods:
+
+| Authentication Method | Basic Auth (Pre-emptive)                                                                                                  |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
+| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. |
+| Status                | `Alpha`                                                                                                                   |
+| Server-Side Support   | ✅ `Alpha`                                                                                                                |
+| Client/Python         | ✅                                                                                                                        |
+| Client/JS             | ➖                                                                                                                        |
+
+### Basic Authentication
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+#### Server Setup
+
+##### Generate Server-Side Credentials
+
+:::note Security Practices
+A good security practice is to store the password securely. In the example below we use bcrypt (currently the only supported hash in Chroma server side auth) to hash the plaintext password.
+:::
+
+```bash
+docker run --rm --entrypoint htpasswd httpd:2 -Bbn admin admin > server.htpasswd
+```
+
+##### Running the Server
+
+Create a `.chroma_env` file with the following contents:
+
+```ini title=".chroma_env"
+CHROMA_SERVER_AUTH_CREDENTIALS_FILE="/chroma/server.htpasswd"
+CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider'
+CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider'
+```
+
+```bash
+docker-compose --env-file ./.chroma_env up -d --build
+```
+
+#### Client Setup
+
+```python
+import chromadb
+from chromadb.config import Settings
+
+client = chromadb.HttpClient(
+  settings=Settings(chroma_client_auth_provider="chromadb.auth.basic.BasicAuthClientProvider",chroma_client_auth_credentials="admin:admin"))
+client.heartbeat()  # this should work with or without authentication - it is a public endpoint
+
+client.get_version()  # this should work with or without authentication - it is a public endpoint
+
+client.list_collections()  # this is a protected endpoint and requires authentication
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+:::info Not Available
+Authentication is not yet supported in JS
+:::
+</TabItem>
+</Tabs>
