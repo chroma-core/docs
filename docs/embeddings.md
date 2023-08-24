@@ -134,6 +134,12 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
+:::warning Breaking Changes
+OpenAI npm package v4+ is not yet supported. Please use v3.
+:::
+
+This embedding function relies on the `openai` npm package, which you can install with `npm install openai@3`.
+
 ```javascript
 const {OpenAIEmbeddingFunction} = require('chromadb');
 const embedder = new OpenAIEmbeddingFunction({openai_api_key: "apiKey"})
