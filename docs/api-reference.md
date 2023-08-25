@@ -47,7 +47,7 @@ client = chromadb.PersistentClient(path="/path/to/data")
 
 ### Run chroma just as a client to talk to a backend service
 
-For many use cases, an in-memory database will not cut it. Run `docker-compose up -d --build` to run a persistent backend in Docker. Simply update your API initialization and then use the API the same way as before.
+For many use cases, an in-memory database will not cut it. Run `chroma run --path /db_path` to run a server. Simply update your API initialization and then use the API the same way as before. (You can also run Chroma in Docker with `docker-compose up -d --build` to run a persistent backend in Docker.)
 
 ```python
 import chromadb
@@ -151,7 +151,7 @@ collection.delete()
 
 ### Run the backend
 
-Run `docker-compose up -d --build` to run a backend in Docker on your local computer. 
+Run `chroma run --path /db_path` (or with Docker `docker-compose up -d --build`) to run a backend on your local computer. 
 
 ## Initialize client - JS
 

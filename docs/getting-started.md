@@ -59,11 +59,13 @@ const {ChromaClient} = require('chromadb');
 const client = new ChromaClient();
 ```
 
-To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma. 
+To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `chroma run --path /db_path` you can run Chroma. 
 
 ```bash
 git clone https://github.com/chroma-core/chroma.git
 cd chroma
+chroma run --path /db_path
+# or run with docker
 docker-compose up -d --build
 ```
 

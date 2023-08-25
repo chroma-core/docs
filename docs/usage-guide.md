@@ -93,9 +93,11 @@ await client.reset() # Empties and completely resets the database. ⚠️ This i
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode, run the docker container:
+Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode:
 
 ```bash
+chroma run --path /db_path
+# or in Docker
 docker-compose up -d --build
 ```
 
@@ -147,9 +149,11 @@ Note that the `chromadb-client` package is a subset of the full Chroma library a
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-Chroma can be run in-memory in Python (without Docker), but this feature is not yet available in JS (this is on our roadmap). To run Chroma in client server mode, run the docker container:
+Chroma can be run in-memory in Python (without Docker), but this feature is not yet available in JS (this is on our roadmap). To run Chroma in client server mode:
 
 ```bash
+chroma run --path /db_path
+# or with Docker
 docker-compose up -d --build
 ```
 

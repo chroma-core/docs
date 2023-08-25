@@ -55,7 +55,7 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import * as fs from "fs";
 
-// to run this first run chroma's docker-container with `docker-compose up -d --build`
+// to run this first run chroma's docker-container with `chroma run --path /db_path` or with Docker: `docker-compose up -d --build`
 
 export const run = async () => {
   /* Initialize the LLM to use to answer the question */
