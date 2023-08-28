@@ -777,6 +777,8 @@ client.list_collections()  # this is a protected endpoint and requires authentic
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
+#### Client Setup
+
 ```js
 import { ChromaClient } from 'chromadb'
 
