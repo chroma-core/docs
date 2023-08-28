@@ -726,12 +726,9 @@ Supported authentication methods:
 | Status                | `Alpha`                                                                                                                   |
 | Server-Side Support   | ✅ `Alpha`                                                                                                                |
 | Client/Python         | ✅                                                                                                                        |
-| Client/JS             | ➖                                                                                                                        |
+| Client/JS             | ✅                                                                                                                        |
 
 ### Basic Authentication
-
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
 
 #### Server Setup
 
@@ -759,6 +756,9 @@ CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider'
 docker-compose --env-file ./.chroma_env up -d --build
 ```
 
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
 #### Client Setup
 
 ```python
@@ -777,8 +777,11 @@ client.list_collections()  # this is a protected endpoint and requires authentic
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-:::info Not Available
-Authentication is not yet supported in JS
-:::
+```js
+import { ChromaClient } from 'chromadb'
+
+const client = new ChromaClient({auth: {provider: "basic", credentials: "admin:admin"}});
+```
+
 </TabItem>
 </Tabs>
