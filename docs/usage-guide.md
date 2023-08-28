@@ -786,6 +786,10 @@ Authentication is not yet supported in JS
 
 ### Static API Token Authentication
 
+:::note Tokens
+Tokens must be alphanumeric ASCII strings. Tokens are case sensitive.
+:::
+
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
