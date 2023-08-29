@@ -720,13 +720,13 @@ You can configure Chroma to use authentication when in server/client mode only.
 
 Supported authentication methods:
 
-| Authentication Method | Basic Auth (Pre-emptive)                                                                                                  |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
-| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. |
-| Status                | `Alpha`                                                                                                                   |
-| Server-Side Support   | ✅ `Alpha`                                                                                                                |
-| Client/Python         | ✅                                                                                                                        |
-| Client/JS             | ✅                                                                                                                        |
+| Authentication Method | Basic Auth (Pre-emptive)                                                                                                  | Static API Token |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. |  Static auth token in `Authorization: Bearer <tokem>` or in `X-Chroma-Token: <token>` headers.|
+| Status                | `Alpha`                                                                                                                   |  `Alpha`                                                                                      |
+| Server-Side Support   | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
+| Client/Python         | ✅                                                                                                                        | ✅                                                                                            |
+| Client/JS             | ✅                                                                                                                        |  ➖                                                                                           |
 
 ### Basic Authentication
 
@@ -785,5 +785,60 @@ import { ChromaClient } from 'chromadb'
 const client = new ChromaClient({auth: {provider: "basic", credentials: "admin:admin"}});
 ```
 
+</TabItem>
+</Tabs>
+
+
+### Static API Token Authentication
+
+:::note Tokens
+Tokens must be alphanumeric ASCII strings. Tokens are case sensitive.
+:::
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+#### Server Setup
+
+:::note Security Note
+Current implementation of static API token auth supports only ENV based tokens. 
+:::
+
+##### Running the Server
+
+Create a `.chroma_env` file with the following contents:
+
+```ini title=".chroma_env"
+CHROMA_SERVER_AUTH_CREDENTIALS="test-token" \
+CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.token.TokenConfigServerAuthCredentialsProvider'
+CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.token.TokenAuthServerProvider'
+```
+
+```bash
+docker-compose --env-file ./.chroma_env up -d --build
+```
+
+#### Client Setup
+
+```python
+import chromadb
+from chromadb.config import Settings
+
+client = chromadb.HttpClient(
+    settings=Settings(chroma_client_auth_provider="chromadb.auth.token.TokenAuthClientProvider",
+                      chroma_client_auth_credentials="test-token"))
+client.heartbeat()  # this should work with or without authentication - it is a public endpoint
+
+client.get_version()  # this should work with or without authentication - it is a public endpoint
+
+client.list_collections()  # this is a protected endpoint and requires authentication
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+:::info Not Available
+Authentication is not yet supported in JS
+:::
 </TabItem>
 </Tabs>
