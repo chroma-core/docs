@@ -621,6 +621,37 @@ An `$or` operator will return results that match any of the filters in the list.
 }
 ```
 
+##### Using inclusion operators (`$in` and `$nin`)
+
+The following inclusion operators are supported:
+
+- `$in` - a value is in predefined list (string, int, float, bool)
+- `$nin` - a value is not in predefined list (string, int, float, bool)
+
+An `$in` operator will return results where the metadata attribute is part of a provided list:
+
+```json
+{
+    "metadata_field": {
+        "$in": ["value1", "value2", "value3"]
+    }
+}
+```
+
+An `$nin` operator will return results where the metadata attribute is not part of a provided list:
+
+```json
+{
+    "metadata_field": {
+        "$nin": ["value1", "value2", "value3"]
+    }
+}
+```
+
+:::note Practical examples
+For additional examples and a demo how to use the inclusion operators, please see provided notebook [here](https://github.com/chroma-core/chroma/blob/main/examples/basic_functionality/in_not_in_filtering.ipynb)
+:::
+
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
