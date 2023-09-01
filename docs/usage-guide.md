@@ -751,8 +751,8 @@ Create a `.chroma_env` file with the following contents:
 
 ```ini title=".chroma_env"
 CHROMA_SERVER_AUTH_CREDENTIALS_FILE="/chroma/server.htpasswd"
-CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider'
-CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider'
+CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider"
+CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.basic.BasicAuthServerProvider"
 ```
 
 ```bash
@@ -805,8 +805,8 @@ Create a `.chroma_env` file with the following contents:
 
 ```ini title=".chroma_env"
 CHROMA_SERVER_AUTH_CREDENTIALS="test-token" \
-CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.token.TokenConfigServerAuthCredentialsProvider'
-CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.token.TokenAuthServerProvider'
+CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
+CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.token.TokenAuthServerProvider"
 ```
 
 ```bash
