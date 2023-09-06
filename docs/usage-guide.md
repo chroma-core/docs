@@ -787,7 +787,7 @@ Authentication is not yet supported in JS
 ### Static API Token Authentication
 
 :::note Tokens
-Tokens must be alphanumeric ASCII strings. Tokens are case sensitive.
+Tokens must be alphanumeric ASCII strings. Tokens are case-sensitive.
 :::
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
@@ -804,7 +804,7 @@ Current implementation of static API token auth supports only ENV based tokens.
 Create a `.chroma_env` file with the following contents:
 
 ```ini title=".chroma_env"
-CHROMA_SERVER_AUTH_CREDENTIALS="test-token" \
+CHROMA_SERVER_AUTH_CREDENTIALS="test-token"
 CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
 CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.token.TokenAuthServerProvider"
 ```
