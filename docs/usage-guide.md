@@ -721,17 +721,14 @@ You can configure Chroma to use authentication when in server/client mode only.
 Supported authentication methods:
 
 | Authentication Method | Basic Auth (Pre-emptive)                                                                                                  | Static API Token |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------|------------------|
-| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. |                  |
-| Status                | `Alpha`                                                                                                                   |                  |
-| Server-Side Support   | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                   |
-| Client/Python         | ✅                                                                                                                        |                  |
-| Client/JS             | ➖                                                                                                                        |  ➖                |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. |  Static auth token in `Authorization: Bearer <tokem>` or in `X-Chroma-Token: <token>` headers.|
+| Status                | `Alpha`                                                                                                                   |  `Alpha`                                                                                      |
+| Server-Side Support   | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
+| Client/Python         | ✅                                                                                                                        | ✅                                                                                            |
+| Client/JS             | ✅                                                                                                                        |  ➖                                                                                           |
 
 ### Basic Authentication
-
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
 
 #### Server Setup
 
@@ -759,6 +756,9 @@ CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.basic.BasicAuthServerProvider"
 docker-compose --env-file ./.chroma_env up -d --build
 ```
 
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
 #### Client Setup
 
 ```python
@@ -777,9 +777,14 @@ client.list_collections()  # this is a protected endpoint and requires authentic
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-:::info Not Available
-Authentication is not yet supported in JS
-:::
+#### Client Setup
+
+```js
+import { ChromaClient } from 'chromadb'
+
+const client = new ChromaClient({auth: {provider: "basic", credentials: "admin:admin"}});
+```
+
 </TabItem>
 </Tabs>
 
