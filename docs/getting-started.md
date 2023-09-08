@@ -61,7 +61,8 @@ const client = new ChromaClient();
 To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma.
 
 :::caution Ephemeral Storage 💀
-When running in Docker, unless you explicitly mount your data directory, your data will be lost when you terminate the container.
+By default docker compose will store your data in a local volume `chroma-data` which will not be lost if upon `docker compose down` unless `--volume` is passed,
+or you manually remove the volume from Docker.
 To mount your data directory, add the following to your `docker-compose.yml` file:
 
 ```yaml

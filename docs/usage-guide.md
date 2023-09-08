@@ -94,7 +94,8 @@ await client.reset() # Empties and completely resets the database. ⚠️ This i
 <TabItem value="py" label="Python">
 
 :::caution Ephemeral Storage 💀
-When running in Docker, unless you explicitly mount your data directory, your data will be lost when you terminate the container.
+By default docker compose will store your data in a local volume `chroma-data` which will not be lost if upon `docker compose down` unless `--volume` is passed, 
+or you manually remove the volume from Docker.
 To mount your data directory, add the following to your `docker-compose.yml` file:
 
 ```yaml
