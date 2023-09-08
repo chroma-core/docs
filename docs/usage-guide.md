@@ -93,6 +93,23 @@ await client.reset() # Empties and completely resets the database. ⚠️ This i
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
+:::caution Ephemeral Storage 💀
+When running in Docker, unless you explicitly mount your data directory, your data will be lost when you terminate the container.
+To mount your data directory, add the following to your `docker-compose.yml` file:
+
+```yaml
+services:
+  server:
+    image: server
+    ...
+    volumes:
+      - ./data:/chroma/chroma
+    ...
+```
+
+Where `./data` is the local path to the directory you want to store your data in.
+:::
+
 Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode, run the docker container:
 
 ```bash
@@ -775,6 +792,10 @@ docker run --rm --entrypoint htpasswd httpd:2 -Bbn admin admin > server.htpasswd
 
 ##### Running the Server
 
+:::caution Ephemeral Storage 💀
+Unless you mount your data directory, your data will be lost when you terminate the container.
+:::
+
 Create a `.chroma_env` file with the following contents:
 
 ```ini title=".chroma_env"
@@ -836,6 +857,10 @@ Current implementation of static API token auth supports only ENV based tokens.
 :::
 
 ##### Running the Server
+
+:::caution Ephemeral Storage 💀
+Unless you mount your data directory, your data will be lost when you terminate the container.
+:::
 
 Create a `.chroma_env` file with the following contents:
 

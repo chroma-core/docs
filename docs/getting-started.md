@@ -58,7 +58,24 @@ const {ChromaClient} = require('chromadb');
 const client = new ChromaClient();
 ```
 
-To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma. 
+To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma.
+
+:::caution Ephemeral Storage 💀
+When running in Docker, unless you explicitly mount your data directory, your data will be lost when you terminate the container.
+To mount your data directory, add the following to your `docker-compose.yml` file:
+
+```yaml
+services:
+  server:
+    image: server
+    ...
+    volumes:
+      - ./data:/chroma/chroma
+    ...
+```
+
+Where `./data` is the local path to the directory you want to store your data in.
+:::
 
 ```bash
 git clone https://github.com/chroma-core/chroma.git
