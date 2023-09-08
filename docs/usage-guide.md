@@ -794,7 +794,8 @@ docker run --rm --entrypoint htpasswd httpd:2 -Bbn admin admin > server.htpasswd
 ##### Running the Server
 
 :::caution Ephemeral Storage 💀
-Unless you mount your data directory, your data will be lost when you terminate the container.
+By default docker compose will store your data in a local volume `chroma-data` which will not be lost if upon `docker compose down` unless `--volume` is passed,
+or you manually remove the volume from Docker.
 :::
 
 Create a `.chroma_env` file with the following contents:
@@ -860,7 +861,8 @@ Current implementation of static API token auth supports only ENV based tokens.
 ##### Running the Server
 
 :::caution Ephemeral Storage 💀
-Unless you mount your data directory, your data will be lost when you terminate the container.
+By default docker compose will store your data in a local volume `chroma-data` which will not be lost if upon `docker compose down` unless `--volume` is passed,
+or you manually remove the volume from Docker.
 :::
 
 Create a `.chroma_env` file with the following contents:
