@@ -61,7 +61,7 @@ const client = new ChromaClient();
 To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma.
 
 :::caution Ephemeral Storage 💀
-By default docker compose will store your data in a local volume `chroma-data` which will not be lost if upon `docker compose down` unless `--volume` is passed,
+By default docker compose will store your data in a local volume `<prefix>_chroma-data` (prefix may vary depending on your root project dir name) which will not be lost if upon `docker compose down` unless `--volume` is passed,
 or you manually remove the volume from Docker.
 To mount your data directory, add the following to your `docker-compose.yml` file:
 
@@ -76,6 +76,13 @@ services:
 ```
 
 Where `./data` is the local path to the directory you want to store your data in.
+
+You can migrate your data from the data volume using the following docker command (ensure the docker compose is down to avoid loosing data):
+
+```bash
+docker run --rm -v <prefix>_chroma-data:/source -v $(pwd)/local-chroma-data:/target alpine sh -c 'cp -r /source/* /target/'
+```
+
 :::
 
 ```bash

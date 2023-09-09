@@ -109,6 +109,12 @@ services:
 ```
 
 Where `./data` is the local path to the directory you want to store your data in.
+
+You can migrate your data from the data volume using the following docker command (ensure the docker compose is down to avoid loosing data):
+
+```bash
+docker run --rm -v <prefix>_chroma-data:/source -v $(pwd)/local-chroma-data:/target alpine sh -c 'cp -r /source/* /target/'
+```
 :::
 
 Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode, run the docker container:
