@@ -52,7 +52,7 @@ val = default_ef(["foo"])
 <TabItem value="js" label="JavaScript">
 
 
-
+<!-- 
 ## Transformers.js
 
 Chroma can use [Transformers.js](https://github.com/xenova/transformers.js) to create embeddings locally on the machine. Transformers uses the 'Xenova/all-MiniLM-L6-v2' model. Make sure you have installed Transformers.js by running ```npm install @xenova/transformers``` from the commandline. 
@@ -81,7 +81,7 @@ const embedder = new TransformersEmbeddingFunction();
     }) 
 })();
 
-```
+``` -->
 
 </TabItem>
 </Tabs>
