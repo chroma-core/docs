@@ -121,14 +121,14 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
             )
 ```
 
-To use the OpenAI embedding models on other platforms such as Azure, you can use the `api_base` and `api_type` parameters: 
+To use the OpenAI embedding models on other platforms such as Azure, you can use the `api_base` and `api_type` parameters. In this case you have to pass the deployment name of your deployed OpenAI embeddings model as `model_name` parameter: 
 ```python
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(
                 api_key="YOUR_API_KEY",
                 api_base="YOUR_API_BASE_PATH",
                 api_type="azure",
                 api_version="YOUR_API_VERSION",
-                model_name="text-embedding-ada-002"
+                model_name="YOUR_EMBEDDINGS_DEPLOYMENT_NAME"
             )
 ```
 
