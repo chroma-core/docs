@@ -25,7 +25,12 @@ client = chromadb.Client(Settings(anonymized_telemetry=False))
 We will only track usage details that help us make product decisions, specifically:
 
 - Chroma version and environment
-- The Collection commands `add` or `delete`. We track the anonymized uuid of a collection as well as the number of items added or deleted.
+- Collection commands. We track the anonymized uuid of a collection as well as the number of items.
+  - `add`
+  - `update`
+  - `query`
+  - `get`
+  - `delete`
 
 We **do not** collect personally-identifiable or sensitive information, such as: usernames, hostnames, file names, environment variables, or hostnames of systems being tested.
 
