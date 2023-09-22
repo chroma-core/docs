@@ -25,7 +25,8 @@ client = chromadb.Client(Settings(anonymized_telemetry=False))
 We will only track usage details that help us make product decisions, specifically:
 
 - Chroma version and environment
-- Collection commands. We track the anonymized uuid of a collection as well as the number of items.
+- Usage of embedding functions that ship with Chroma and and aggregated usage of custom embeddings (we collect no information about the custom embeddings themselves)
+- Collection commands. We track the anonymized uuid of a collection as well as the number of items
   - `add`
   - `update`
   - `query`
