@@ -13,11 +13,25 @@ We use this information to help us understand how Chroma is used, to help us pri
 
 ## **Opting out**
 
-Set `anonymized_telemetry` in your clients settings to `false` to opt out of telemetry.
+If you prefer to opt out of telemetry, you can do this in two ways.
+
+###### In Client Code
+
+Set `anonymized_telemetry` to `false` in your client's settings:
 
 ```python
 from chromadb.config import Settings
 client = chromadb.Client(Settings(anonymized_telemetry=False))
+```
+
+###### In Chroma's Backend Using Environment Variables
+
+Set `ANONYMIZED_TELEMETRY` to `False` in your shell or server environment.
+
+If you are running Chroma on your local computer with `docker-compose` you can set this value in an `.env` file placed in the same directory as the `docker-compose.yml` file:
+
+```
+ANONYMIZED_TELEMETRY=False
 ```
 
 ## **What do you track?**
