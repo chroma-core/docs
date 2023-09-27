@@ -751,13 +751,13 @@ You can configure Chroma to use authentication when in server/client mode only.
 
 Supported authentication methods:
 
-| Authentication Method | Basic Auth (Pre-emptive)                                                                                                  | Static API Token |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. |  Static auth token in `Authorization: Bearer <tokem>` or in `X-Chroma-Token: <token>` headers.|
-| Status                | `Alpha`                                                                                                                   |  `Alpha`                                                                                      |
+| Authentication Method | Basic Auth (Pre-emptive)                                                                                                  | Static API Token                                                                             |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | Static auth token in `Authorization: Bearer <tokem>` or in `X-Chroma-Token: <token>` headers. |
+| Status                | `Alpha`                                                                                                                   | `Alpha`                                                                                      |
 | Server-Side Support   | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
-| Client/Python         | ✅                                                                                                                        | ✅                                                                                            |
-| Client/JS             | ✅                                                                                                                        |  ➖                                                                                           |
+| Client/Python         | ✅ `Alpha`                                                                                                                       | ✅ `Alpha`                                                                                    |
+| Client/JS             | ✅ `Alpha`                                                                                                                       | ✅ `Alpha`                                                                                     |
 
 ### Basic Authentication
 
@@ -868,8 +868,25 @@ client.list_collections()  # this is a protected endpoint and requires authentic
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-:::info Not Available
-Authentication is not yet supported in JS
-:::
+#### Client Setup
+
+Using the default `Authorization: Bearer <token>` header:
+
+```js
+import { ChromaClient } from 'chromadb'
+
+const client = new ChromaClient({auth: {provider: "token", credentials: "test-token"}});
+//or explicitly specifying the auth header type
+const client = new ChromaClient({auth: {provider: "token", credentials: "test-token", providerOptions: {headerType: "AUTHORIZATION"}}});
+```
+
+Using custom Chroma auth token `X-Chroma-Token: <token>` header:
+
+```js
+import { ChromaClient } from 'chromadb'
+
+const client = new ChromaClient({auth: {provider: "token", credentials: "test-token", providerOptions: {headerType: "X_CHROMA_TOKEN"}}});
+```
+
 </TabItem>
 </Tabs>
