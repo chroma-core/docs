@@ -84,6 +84,11 @@ const config = {
             docId: "blah"
           },
           {
+            href: 'https://trychroma.notion.site/careers-chroma-9d017c3007c7478ebd85bad854101497',
+            label: 'Careers',
+            position: 'right',
+          },
+          {
             href: 'https://discord.gg/MMeYNTmh3x',
             label: 'Discord',
             position: 'right',
@@ -124,6 +129,10 @@ const config = {
             title: 'Community',
             items: [
               {
+                label: 'GitHub',
+                href: 'https://github.com/chroma-core/chroma',
+              },
+              {
                 label: 'Discord',
                 href: 'https://discord.gg/MMeYNTmh3x',
               },
@@ -141,9 +150,10 @@ const config = {
                 to: '/about',
               },
               {
-                label: 'GitHub',
-                href: 'https://github.com/chroma-core/chroma',
+                href: 'https://trychroma.notion.site/careers-chroma-9d017c3007c7478ebd85bad854101497',
+                label: 'Careers',
               },
+              
               {
                 label: 'Privacy',
                 href: 'https://trychroma.com/privacy',
