@@ -295,7 +295,7 @@ await collection.count() // returns the number of items in the collection
 `createCollection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`
 
 ```js
- let collection = client.createCollection("collection_name", undefined, metadata={ "hnsw:space": "cosine" })
+ let collection = client.createCollection({ name: "collection_name", metadata: { "hnsw:space": "cosine" } })
 ```
 
 </TabItem>
