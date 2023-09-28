@@ -517,12 +517,12 @@ When using get or query you can use the include parameter to specify which data 
 
 # Only get documents and ids
 collection.get({
-    include: [ IncludeEnum.Documents ]
+    include: [ "documents" ]
 })
 
 collection.query({
     queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
-    include: [ IncludeEnum.Documents ]
+    include: [ "documents" ]
 })
 ```
 
