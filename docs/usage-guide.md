@@ -516,14 +516,14 @@ When using get or query you can use the include parameter to specify which data 
 ```python
 
 # Only get documents and ids
-collection.get(
-    include=["documents"]
-)
+collection.get({
+    include: [ "documents" ]
+})
 
-collection.query(
-    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
-    include=["documents"]
-)
+collection.query({
+    queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
+    include: [ "documents" ]
+})
 ```
 
 ### Using Where filters
