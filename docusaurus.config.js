@@ -84,11 +84,6 @@ const config = {
             docId: "blah"
           },
           {
-            href: 'https://trychroma.notion.site/careers-chroma-9d017c3007c7478ebd85bad854101497',
-            label: 'Careers',
-            position: 'right',
-          },
-          {
             href: 'https://discord.gg/MMeYNTmh3x',
             label: 'Discord',
             position: 'right',
