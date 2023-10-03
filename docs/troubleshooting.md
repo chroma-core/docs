@@ -33,7 +33,7 @@ We may change `None` to something else to more clearly communicate why they were
 
 Users report that they are using Chroma, happily adding data, and then they go to check the `count()` or `query()` and only a single item or a very small fraction of their data is in Chroma.
 
-Chroma has 3 clients: `Ephemeral`, `Persistent`, and `Http` (coming soon). The `Ephemeral` and `Persistent` clients should treated as a **singleton**.
+Chroma has 3 clients: `Ephemeral`, `Persistent`, and `Http`. The `Ephemeral` and `Persistent` clients should treated as **singletons**.
 
 Here is what commonly happens.
 
