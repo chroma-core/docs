@@ -49,45 +49,21 @@ cd chroma
 docker-compose up -d --build
 ```
 
-### Authentication with Docker
-
-By default, the Docker image will run with no authentication. Follow the instructions below to enable authentication.
-
-:::note Security Practices
-A good security practice is to store the password securely. In the example below we use bcrypt (currently the only supported hash in Chroma server side auth) to hash the plaintext password.
-:::
-
-#### Running the Server
-
-```bash
-docker run --rm --entrypoint htpasswd httpd:2 -Bbn admin admin > server.htpasswd
-```
-
-Create a `.chroma_env` file with the following contents:
-
-```ini title=".chroma_env"
-CHROMA_SERVER_AUTH_CREDENTIALS_FILE="/chroma/server.htpasswd"
-CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider'
-CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider'
-```
-
-```bash
-docker-compose --env-file ./.chroma_env up -d --build
-```
-
-#### Client Setup
+The Chroma client can then be configured to connect to the server running in the Docker container.
 
 ```python
 import chromadb
-from chromadb.config import Settings
+chroma_client = chromadb.HttpClient(host='localhost', port=8000)
+```
 
-client = chromadb.HttpClient(
-  settings=Settings(chroma_client_auth_provider="chromadb.auth.basic.BasicAuthClientProvider",chroma_client_auth_credentials="admin:admin"))
-client.heartbeat()  # this should work with or without authentication - it is a public endpoint
+### Authentication with Docker
 
-client.get_version()  # this should work with or without authentication - it is a public endpoint
+By default, the Docker image will run with no authentication. Follow the [Authentication](./usage-guide#authentication) section of the Usage Guide to configure authentication in the Docker container.
 
-client.list_collections()  # this is a protected endpoint and requires authentication
+You can also create a `.chroma_env` file setting the required environment variables and pass it to the Docker container with the `--env-file` flag when running the container.
+
+```sh
+docker run --env-file ./.chroma_env -p 8000:8000 chromadb/chroma
 ```
 
 ## Simple AWS Deployment

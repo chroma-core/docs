@@ -746,9 +746,6 @@ await collection.delete({
 
 ## Authentication
 
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
-
 You can configure Chroma to use authentication when in server/client mode only.
 
 Supported authentication methods:
@@ -833,9 +830,6 @@ const client = new ChromaClient({
 Tokens must be alphanumeric ASCII strings. Tokens are case-sensitive.
 :::
 
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
-
 #### Server Setup
 
 :::note Security Note
@@ -844,17 +838,16 @@ Current implementation of static API token auth supports only ENV based tokens.
 
 ##### Running the Server
 
-Create a `.chroma_env` file with the following contents:
-
-```ini title=".chroma_env"
-CHROMA_SERVER_AUTH_CREDENTIALS="test-token"
-CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
-CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.token.TokenAuthServerProvider"
-```
+Set the following environment variables:
 
 ```bash
-docker-compose --env-file ./.chroma_env up -d --build
+export CHROMA_SERVER_AUTH_CREDENTIALS="test-token"
+export CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
+export CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.token.TokenAuthServerProvider"
 ```
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
 
 #### Client Setup
 
