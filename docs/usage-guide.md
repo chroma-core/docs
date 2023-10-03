@@ -5,7 +5,6 @@ title: "🧪 Usage Guide"
 
 # 🧪 Usage Guide
 
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -16,7 +15,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
 
-***
+---
 
 ## Initiating a persistent Chroma client
 
@@ -43,13 +42,12 @@ Having many clients that are loading and saving to the same path can cause stran
 <TabItem value="js" label="JavaScript">
 
 ```js
-import { ChromaClient } from 'chromadb'
+import { ChromaClient } from "chromadb";
 ```
-:::note Connecting to the backend
-To connect with the JS client, you must connect to a backend running Chroma. See `Running Chroma in client/server mode` for how to do this. 
-:::
 
-The JS client talks to a chroma server backend. This can run on your local computer via `docker` (see below) or be easily deployed to AWS.
+:::note Connecting to the backend
+To connect with the JS client, you must connect to a backend running Chroma. See `Running Chroma in client/server mode` for how to do this.
+:::
 
 ```js
 const client = new ChromaClient();
@@ -58,7 +56,6 @@ const client = new ChromaClient();
 </TabItem>
 
 </Tabs>
-
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
@@ -79,29 +76,24 @@ The client object has a few useful convenience methods.
 await client.reset() # Empties and completely resets the database. ⚠️ This is destructive and not reversible.
 ```
 
-
-
 </TabItem>
 
 </Tabs>
-
-
-
 
 ## Running Chroma in client/server mode
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-Chroma can also be configured to use an on-disk database, useful for larger data which doesn't fit in memory. To run Chroma in client server mode:
+Chroma can also be configured to run in client/server mode. In this mode, the Chroma client connects to a Chroma server running in a separate process.
+
+To start the Chroma server, run the following command:
 
 ```bash
 chroma run --path /db_path
-# or in Docker
-docker-compose up -d --build
 ```
 
-Then update your chroma client to point at the docker container. Default: `localhost:8000`
+Then use the Chroma HTTP client to connect to the server:
 
 ```python
 import chromadb
@@ -109,7 +101,6 @@ chroma_client = chromadb.HttpClient(host='localhost', port=8000)
 ```
 
 That's it! Chroma's API will run in `client-server` mode with just this change.
-
 
 <!-- #### Run Chroma inside your application
 
@@ -128,7 +119,8 @@ This is distructive command. With this command volumes created earlier will be d
 
 #### Using the python http-only client
 
-If you are running chroma in client-server mode. You may not require the full Chroma library and instead only the client library on your client machine. In this case, you can install the `chromadb-client` package. This package is a lightweight HTTP client for the server with a minimal dependency footprint.
+If you are running chroma in client-server mode, you may not need the full Chroma library. Instead, you can use the lightweight client-only library.
+In this case, you can install the `chromadb-client` package. This package is a lightweight HTTP client for the server with a minimal dependency footprint.
 
 ```python
 pip install chromadb-client
@@ -136,40 +128,40 @@ pip install chromadb-client
 
 ```python
 import chromadb
-from chromadb.config import Settings
 # Example setup of the client to connect to your chroma server
 client = chromadb.HttpClient(host='localhost', port=8000)
 ```
 
-Note that the `chromadb-client` package is a subset of the full Chroma library and does not include all the dependencies. If you want to use the full Chroma library, you can install the `chromadb` package instead. Most importantly, there is no default embedding function. If you add() documents without embeddings, you must have manually specified an embedding function and installed the dependencies for it.
-
-
-
+Note that the `chromadb-client` package is a subset of the full Chroma library and does not include all the dependencies. If you want to use the full Chroma library, you can install the `chromadb` package instead.
+Most importantly, there is no default embedding function. If you add() documents without embeddings, you must have manually specified an embedding function and installed the dependencies for it.
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-Chroma can be run in-memory in Python (without Docker), but this feature is not yet available in JS (this is on our roadmap). To run Chroma in client server mode:
+To run Chroma in client server mode, first install the chroma library and CLI via pypi:
+
+```bash
+pip install chromadb
+```
+
+Then start the Chroma server:
 
 ```bash
 chroma run --path /db_path
-# or with Docker
-docker-compose up -d --build
 ```
 
-Then update your chroma client to point at the docker container. Default: `localhost:8000`
-
-The JS client then talks to the chroma server backend. This can run on your local computer or be easily deployed to AWS.
+The JS client then talks to the chroma server backend.
 
 ```js
-import { ChromaClient } from 'chromadb'
+import { ChromaClient } from "chromadb";
 const client = new ChromaClient();
 ```
+
+You can also run the Chroma server in a docker container, or deployed to a cloud provider. See the [deployment docs](./deployment.md) for more information.
 
 </TabItem>
 
 </Tabs>
-
 
 ## Using collections
 
@@ -204,35 +196,38 @@ The embedding function takes text as input, and performs tokenization and embedd
 <TabItem value="js" label="JavaScript">
 
 ```js
-import { ChromaClient } from 'chromadb'
+import { ChromaClient } from "chromadb";
 ```
 
 The JS client talks to a chroma server backend. This can run on your local computer or be easily deployed to AWS.
 
 ```js
-let collection = await client.createCollection({name:"my_collection", embeddingFunction: emb_fn})
-let collection2 = await client.getCollection({name:"my_collection", embeddingFunction: emb_fn})
+let collection = await client.createCollection({
+  name: "my_collection",
+  embeddingFunction: emb_fn,
+});
+let collection2 = await client.getCollection({
+  name: "my_collection",
+  embeddingFunction: emb_fn,
+});
 ```
 
 :::caution
 If you later wish to `getCollection`, you MUST do so with the embedding function you supplied while creating the collection
 :::
 
-The embedding function takes text as input, and performs tokenization and embedding. 
+The embedding function takes text as input, and performs tokenization and embedding.
 
 </TabItem>
 
 </Tabs>
 
-
 You can learn more about [🧬 embedding functions](./embeddings.md), and how to create your own.
-
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
 Existing collections can be retrieved by name with `.get_collection`, and deleted with `.delete_collection`. You can also use `.get_or_create_collection` to get a collection if it exists, or create it if it doesn't.
-
 
 ```python
 collection = client.get_collection(name="test") # Get a collection object from an existing collection, by name. Will raise an exception if it's not found.
@@ -254,7 +249,6 @@ await client.deleteCollection({name: "my_collection"}) # Delete a collection and
 
 </Tabs>
 
-
 Collections have a few useful convenience methods.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
@@ -270,8 +264,8 @@ collection.modify(name="new_name") # Rename the collection
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-await collection.peek() // returns a list of the first 10 items in the collection
-await collection.count() // returns the number of items in the collection
+await collection.peek(); // returns a list of the first 10 items in the collection
+await collection.count(); // returns the number of items in the collection
 ```
 
 </TabItem>
@@ -283,7 +277,7 @@ await collection.count() // returns the number of items in the collection
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-`create_collection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`. 
+`create_collection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`.
 
 ```python
  collection = client.create_collection(
@@ -299,7 +293,11 @@ await collection.count() // returns the number of items in the collection
 `createCollection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`
 
 ```js
- let collection = client.createCollection("collection_name", undefined, metadata={ "hnsw:space": "cosine" })
+let collection = client.createCollection(
+  "collection_name",
+  undefined,
+  (metadata = { "hnsw:space": "cosine" })
+);
 ```
 
 </TabItem>
@@ -307,7 +305,6 @@ await collection.count() // returns the number of items in the collection
 </Tabs>
 
 Valid options for `hnsw:space` are "l2", "ip, "or "cosine". The **default** is "l2". The equations for each can be found in the docs for Hnswlib [here](https://github.com/nmslib/hnswlib/tree/master#python-bindings).
-
 
 ### Adding data to a Collection
 
@@ -332,8 +329,8 @@ collection.add(
 ```javascript
 await collection.add({
     ids: ["id1", "id2", "id3", ...],
-    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
-    documents: ["lorem ipsum...", "doc2", "doc3", ...], 
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
+    documents: ["lorem ipsum...", "doc2", "doc3", ...],
 })
 // input order
 // ids - required
@@ -345,8 +342,6 @@ await collection.add({
 </TabItem>
 
 </Tabs>
-
-
 
 If Chroma is passed a list of `documents`, it will automatically tokenize and embed them with the collection's embedding function (the default will be used if none was supplied at collection creation). Chroma will also store the `documents` themselves. If the documents are too large to embed using the chosen embedding function, an exception will be raised.
 
@@ -371,10 +366,10 @@ collection.add(
 
 ```javascript
 await collection.add({
-    ids: ["id1", "id2", "id3", ...], 
+    ids: ["id1", "id2", "id3", ...],
     embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
-    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
-    documents: ["lorem ipsum...", "doc2", "doc3", ...], 
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
+    documents: ["lorem ipsum...", "doc2", "doc3", ...],
 })
 
 ```
@@ -382,8 +377,6 @@ await collection.add({
 </TabItem>
 
 </Tabs>
-
-
 
 If the supplied `embeddings` are not the same dimension as the collection, an exception will be raised.
 
@@ -405,17 +398,15 @@ collection.add(
 
 ```javascript
 await collection.add({
-    ids: ["id1", "id2", "id3", ...], 
-    embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...], 
-    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...], 
+    ids: ["id1", "id2", "id3", ...],
+    embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2], ...],
+    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}, ...],
 })
 ```
 
 </TabItem>
 
 </Tabs>
-
-
 
 ### Querying a Collection
 
@@ -441,8 +432,8 @@ collection.query(
 ```javascript
 const result = await collection.query({
     queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
-    nResults: 10, 
-    where: {"metadata_field": "is_equal_to_this"}, 
+    nResults: 10,
+    where: {"metadata_field": "is_equal_to_this"},
 })
 // input order
 // query_embeddings - optional
@@ -454,8 +445,6 @@ const result = await collection.query({
 </TabItem>
 
 </Tabs>
-
-
 
 The query will return the `n_results` closest matches to each `query_embedding`, in order.
 An optional `where` filter dictionary can be supplied to filter by the `metadata` associated with each document.
@@ -510,11 +499,10 @@ await collection.get({
 
 </Tabs>
 
-
-
 `.get` also supports the `where` and `where_document` filters. If no `ids` are supplied, it will return all items in the collection that match the `where` and `where_document` filters.
 
 ##### Choosing which data is returned
+
 When using get or query you can use the include parameter to specify which data you want returned - any of `embeddings`, `documents`, `metadatas`, and for query, `distances`. By default, Chroma will return the `documents`, `metadatas` and in the case of query, the `distances` of the results. `embeddings` are excluded by default for performance and the `ids` are always returned. You can specify which of these you want returned by passing an array of included field names to the includes parameter of the query or get method.
 
 ```python
@@ -535,6 +523,7 @@ collection.query(
 Chroma supports filtering queries by `metadata` and `document` contents. The `where` filter is used to filter by `metadata`, and the `where_document` filter is used to filter by `document` contents.
 
 ##### Filtering by metadata
+
 In order to filter on metadata, you must supply a `where` filter dictionary to the query. The dictionary must have the following structure:
 
 ```python
@@ -555,6 +544,7 @@ Filtering metadata supports the following operators:
 - `$lte` - less than or equal to (int, float)
 
 Using the $eq operator is equivalent to using the `where` filter.
+
 ```python
 {
     "metadata_field": "search_string"
@@ -575,6 +565,7 @@ Where filters only search embeddings where the key exists. If you search `collec
 :::
 
 ##### Filtering by document contents
+
 In order to filter on document contents, you must supply a `where_document` filter dictionary to the query. The dictionary must have the following structure:
 
 ```python
@@ -582,14 +573,14 @@ In order to filter on document contents, you must supply a `where_document` filt
 {
     "$contains": "search_string"
 }
-``` 
-
+```
 
 ##### Using logical operators
 
 You can also use the logical operators `$and` and `$or` to combine multiple filters.
 
 An `$and` operator will return results that match all of the filters in the list.
+
 ```python
 {
     "$and": [
@@ -608,6 +599,7 @@ An `$and` operator will return results that match all of the filters in the list
 ```
 
 An `$or` operator will return results that match any of the filters in the list.
+
 ```python
 {
     "$or": [
@@ -648,8 +640,6 @@ collection.update(
 
 </Tabs>
 
-
-
 If an `id` is not found in the collection, an error will be logged and the update will be ignored. If `documents` are supplied without corresponding `embeddings`, the embeddings will be recomupted with the collection's embedding function.
 
 If the supplied `embeddings` are not the same dimension as the collection, an exception will be raised.
@@ -673,12 +663,21 @@ collection.upsert(
 
 ```javascript
 await collection.upsert({
-    ids: ["id1", "id2", "id3"],
-    embeddings: [[1.1, 2.3, 3.2], [4.5, 6.9, 4.4], [1.1, 2.3, 3.2]],
-    metadatas: [{"chapter": "3", "verse": "16"}, {"chapter": "3", "verse": "5"}, {"chapter": "29", "verse": "11"}],
-    documents: ["doc1", "doc2", "doc3"]
-})
+  ids: ["id1", "id2", "id3"],
+  embeddings: [
+    [1.1, 2.3, 3.2],
+    [4.5, 6.9, 4.4],
+    [1.1, 2.3, 3.2],
+  ],
+  metadatas: [
+    { chapter: "3", verse: "16" },
+    { chapter: "3", verse: "5" },
+    { chapter: "29", verse: "11" },
+  ],
+  documents: ["doc1", "doc2", "doc3"],
+});
 ```
+
 </TabItem>
 </Tabs>
 
@@ -713,19 +712,19 @@ await collection.delete({
 
 </Tabs>
 
-
-
 `.delete` also supports the `where` filter. If no `ids` are supplied, it will delete all items in the collection that match the `where` filter.
 
-
 ## Authentication
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
 
 You can configure Chroma to use authentication when in server/client mode only.
 
 Supported authentication methods:
 
 | Authentication Method | Basic Auth (Pre-emptive)                                                                                                  |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------|
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. |
 | Status                | `Alpha`                                                                                                                   |
 | Server-Side Support   | ✅ `Alpha`                                                                                                                |
@@ -733,9 +732,6 @@ Supported authentication methods:
 | Client/JS             | ➖                                                                                                                        |
 
 ### Basic Authentication
-
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
 
 #### Server Setup
 
@@ -745,22 +741,26 @@ Supported authentication methods:
 A good security practice is to store the password securely. In the example below we use bcrypt (currently the only supported hash in Chroma server side auth) to hash the plaintext password.
 :::
 
+To generate the password hash, run the following command. Note that you will need to have `htpasswd` installed on your system.
+
 ```bash
-docker run --rm --entrypoint htpasswd httpd:2 -Bbn admin admin > server.htpasswd
+htpasswd -Bbn admin admin > server.htpasswd
 ```
 
 ##### Running the Server
 
-Create a `.chroma_env` file with the following contents:
-
-```ini title=".chroma_env"
-CHROMA_SERVER_AUTH_CREDENTIALS_FILE="/chroma/server.htpasswd"
-CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider'
-CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider'
-```
+Set the following environment variables:
 
 ```bash
-docker-compose --env-file ./.chroma_env up -d --build
+export CHROMA_SERVER_AUTH_CREDENTIALS_FILE="server.htpasswd"
+export CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER='chromadb.auth.providers.HtpasswdFileServerAuthCredentialsProvider'
+export CHROMA_SERVER_AUTH_PROVIDER='chromadb.auth.basic.BasicAuthServerProvider'
+```
+
+And run the server as normal:
+
+```bash
+chroma run --path /db_path
 ```
 
 #### Client Setup
@@ -782,7 +782,7 @@ client.list_collections()  # this is a protected endpoint and requires authentic
 <TabItem value="js" label="JavaScript">
 
 :::info Not Available
-Authentication is not yet supported in JS
+Authentication is not yet natively supported in the JS Chronma client.
 :::
 </TabItem>
 </Tabs>
