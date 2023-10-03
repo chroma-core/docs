@@ -293,11 +293,10 @@ await collection.count(); // returns the number of items in the collection
 `createCollection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`
 
 ```js
-let collection = client.createCollection(
-  "collection_name",
-  undefined,
-  (metadata = { "hnsw:space": "cosine" })
-);
+let collection = client.createCollection({
+  name: "collection_name",
+  metadata: { "hnsw:space": "cosine" },
+});
 ```
 
 </TabItem>
@@ -508,14 +507,14 @@ When using get or query you can use the include parameter to specify which data 
 ```python
 
 # Only get documents and ids
-collection.get(
-    include=["documents"]
-)
+collection.get({
+    include: [ "documents" ]
+})
 
-collection.query(
-    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
-    include=["documents"]
-)
+collection.query({
+    queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
+    include: [ "documents" ]
+})
 ```
 
 ### Using Where filters
@@ -616,6 +615,37 @@ An `$or` operator will return results that match any of the filters in the list.
     ]
 }
 ```
+
+##### Using inclusion operators (`$in` and `$nin`)
+
+The following inclusion operators are supported:
+
+- `$in` - a value is in predefined list (string, int, float, bool)
+- `$nin` - a value is not in predefined list (string, int, float, bool)
+
+An `$in` operator will return results where the metadata attribute is part of a provided list:
+
+```json
+{
+  "metadata_field": {
+    "$in": ["value1", "value2", "value3"]
+  }
+}
+```
+
+An `$nin` operator will return results where the metadata attribute is not part of a provided list:
+
+```json
+{
+  "metadata_field": {
+    "$nin": ["value1", "value2", "value3"]
+  }
+}
+```
+
+:::note Practical examples
+For additional examples and a demo how to use the inclusion operators, please see provided notebook [here](https://github.com/chroma-core/chroma/blob/main/examples/basic_functionality/in_not_in_filtering.ipynb)
+:::
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
@@ -723,13 +753,13 @@ You can configure Chroma to use authentication when in server/client mode only.
 
 Supported authentication methods:
 
-| Authentication Method | Basic Auth (Pre-emptive)                                                                                                  |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. |
-| Status                | `Alpha`                                                                                                                   |
-| Server-Side Support   | ✅ `Alpha`                                                                                                                |
-| Client/Python         | ✅                                                                                                                        |
-| Client/JS             | ➖                                                                                                                        |
+| Authentication Method | Basic Auth (Pre-emptive)                                                                                                  | Static API Token                                                                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | Static auth token in `Authorization: Bearer <tokem>` or in `X-Chroma-Token: <token>` headers. |
+| Status                | `Alpha`                                                                                                                   | `Alpha`                                                                                       |
+| Server-Side Support   | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
+| Client/Python         | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
+| Client/JS             | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
 
 ### Basic Authentication
 
@@ -763,6 +793,9 @@ And run the server as normal:
 chroma run --path /db_path
 ```
 
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
 #### Client Setup
 
 ```python
@@ -781,8 +814,100 @@ client.list_collections()  # this is a protected endpoint and requires authentic
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-:::info Not Available
-Authentication is not yet natively supported in the JS Chronma client.
+#### Client Setup
+
+```js
+import { ChromaClient } from "chromadb";
+
+const client = new ChromaClient({
+  auth: { provider: "basic", credentials: "admin:admin" },
+});
+```
+
+</TabItem>
+</Tabs>
+
+### Static API Token Authentication
+
+:::note Tokens
+Tokens must be alphanumeric ASCII strings. Tokens are case-sensitive.
 :::
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+#### Server Setup
+
+:::note Security Note
+Current implementation of static API token auth supports only ENV based tokens.
+:::
+
+##### Running the Server
+
+Create a `.chroma_env` file with the following contents:
+
+```ini title=".chroma_env"
+CHROMA_SERVER_AUTH_CREDENTIALS="test-token"
+CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
+CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.token.TokenAuthServerProvider"
+```
+
+```bash
+docker-compose --env-file ./.chroma_env up -d --build
+```
+
+#### Client Setup
+
+```python
+import chromadb
+from chromadb.config import Settings
+
+client = chromadb.HttpClient(
+    settings=Settings(chroma_client_auth_provider="chromadb.auth.token.TokenAuthClientProvider",
+                      chroma_client_auth_credentials="test-token"))
+client.heartbeat()  # this should work with or without authentication - it is a public endpoint
+
+client.get_version()  # this should work with or without authentication - it is a public endpoint
+
+client.list_collections()  # this is a protected endpoint and requires authentication
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+#### Client Setup
+
+Using the default `Authorization: Bearer <token>` header:
+
+```js
+import { ChromaClient } from "chromadb";
+
+const client = new ChromaClient({
+  auth: { provider: "token", credentials: "test-token" },
+});
+//or explicitly specifying the auth header type
+const client = new ChromaClient({
+  auth: {
+    provider: "token",
+    credentials: "test-token",
+    providerOptions: { headerType: "AUTHORIZATION" },
+  },
+});
+```
+
+Using custom Chroma auth token `X-Chroma-Token: <token>` header:
+
+```js
+import { ChromaClient } from "chromadb";
+
+const client = new ChromaClient({
+  auth: {
+    provider: "token",
+    credentials: "test-token",
+    providerOptions: { headerType: "X_CHROMA_TOKEN" },
+  },
+});
+```
+
 </TabItem>
 </Tabs>

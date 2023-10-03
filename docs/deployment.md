@@ -4,7 +4,7 @@ title: "☁️ Deployment"
 ---
 
 :::caution Alpha Status
-Chroma Server is currently in Alpha. We are working hard to move Chroma from a in-memory single-process oriented library to a distributed production-grade DB!
+Chroma Server is currently in Alpha. We are working hard to move Chroma from an in-memory single-process oriented library to a distributed production-grade DB!
 
 - [x] Alpha <- Currently
 - [ ] Technical Preview - ~1 month away, powered by a completely new backend
@@ -24,9 +24,9 @@ deploying Chroma to EC2 on AWS.
 
 ## Hosted Chroma
 
-We want to offer hosted Chroma and we need your help.
+We want to offer hosted Chroma, and we need your help.
 
-Fill out the survey to jump the waitlist. Coming Q3 2023.
+Fill out the survey to jump the wait-list. Coming Q3 2023.
 
 [📝 30 second survey](https://airtable.com/shrOAiDUtS2ILy5vZ)
 
@@ -106,7 +106,7 @@ authenticating proxy.
 
 :warning: By default, this template saves all data on a single
 volume. When you delete or replace it, the data will disappear. For
-serious production use (with high availability, backups, etc) please
+serious production use (with high availability, backups, etc.) please
 read and understand the CloudFormation template and use it as a basis
 for what you need, or reach out to the Chroma team for assistance.
 
@@ -232,12 +232,4 @@ unless you've taken a snapshot or otherwise backed it up.
 
 ### Troubleshooting
 
-If you get an error saying `No default VPC for this user` when creating `ChromaInstanceSecurityGroup`, head to [AWS VPC section](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#vpcs) and create deafault VPC for your user
-
-```
-
-```
-
-```
-
-```
+If you get an error saying `No default VPC for this user` when creating `ChromaInstanceSecurityGroup`, head to [AWS VPC section](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#vpcs) and create a default VPC for your user.

@@ -41,7 +41,7 @@ default_ef = embedding_functions.DefaultEmbeddingFunction()
 :::tip
 Embedding functions can linked to a collection, which are used whenever you call `add`, `update`, `upsert` or `query`. You can also be use them directly which can be handy for debugging. 
 ```py
-val = default_ef("foo")
+val = default_ef(["foo"])
 ```
 -> [[0.05035809800028801, 0.0626462921500206, -0.061827320605516434...]]
 :::
@@ -52,7 +52,7 @@ val = default_ef("foo")
 <TabItem value="js" label="JavaScript">
 
 
-
+<!-- 
 ## Transformers.js
 
 Chroma can use [Transformers.js](https://github.com/xenova/transformers.js) to create embeddings locally on the machine. Transformers uses the 'Xenova/all-MiniLM-L6-v2' model. Make sure you have installed Transformers.js by running ```npm install @xenova/transformers``` from the commandline. 
@@ -81,7 +81,7 @@ const embedder = new TransformersEmbeddingFunction();
     }) 
 })();
 
-```
+``` -->
 
 </TabItem>
 </Tabs>
@@ -127,6 +127,7 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
                 api_key="YOUR_API_KEY",
                 api_base="YOUR_API_BASE_PATH",
                 api_type="azure",
+                api_version="YOUR_API_VERSION",
                 model_name="text-embedding-ada-002"
             )
 ```

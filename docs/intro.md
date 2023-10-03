@@ -65,15 +65,17 @@ Continue with the full [getting started guide](./getting-started.md).
 
 <div class="special_table"></div>
 
-|              | in-memory | client & server |
+|              | in-memory | client |
 |--------------|-----------|---------------|
-| Python       | ✅        | ✅            |
-| Javascript   | ➖        | ✅            |
+| Python       | ✅        | ✅ (by Chroma)           |
+| Javascript   | ➖        | ✅ (by Chroma)          |
 | Ruby   | ➖        | ✅ [from @mariochavez](https://github.com/mariochavez/chroma)           |
 | Java | ➖  | ✅ [from @t_azarov](https://github.com/amikos-tech/chromadb-java-client) |
 | Go | ➖  | ✅ [from @t_azarov](https://github.com/amikos-tech/chroma-go) |
 | C#   | ➖        | ✅ [from @microsoft](https://github.com/microsoft/semantic-kernel/tree/main/dotnet/src/Connectors/Connectors.Memory.Chroma)       |
 | Rust | ➖ | ✅ [from @Anush008](https://crates.io/crates/chromadb) |
+| Elixir | ➖ | ✅ [from @3zcurdia](https://hex.pm/packages/chroma/) |
+| Dart | ➖ | ✅ [from @davidmigloz](https://pub.dev/packages/chromadb) |
 | Other?       | ❓    | ❓            |
 
 <br/>
