@@ -303,7 +303,13 @@ let collection = client.createCollection({
 	
 </Tabs>
 
-Valid options for `hnsw:space` are "l2", "ip, "or "cosine". The **default** is "l2". The equations for each can be found in the docs for Hnswlib [here](https://github.com/nmslib/hnswlib/tree/master#python-bindings).
+Valid options for `hnsw:space` are "l2", "ip, "or "cosine". The **default** is "l2" which is the squared L2 norm.
+
+| Distance          | parameter |                                                 Equation |
+| ----------------- | :-------: | -------------------------------------------------------: |
+| Squared L2        |   'l2'    |                                       d = sum((Ai-Bi)^2) |
+| Inner product     |   'ip'    |                                    d = 1.0 - sum(Ai\*Bi) |
+| Cosine similarity | 'cosine'  | d = 1.0 - sum(Ai\*Bi) / sqrt(sum(Ai\*Ai) \* sum(Bi\*Bi)) |
 
 ### Adding data to a Collection
 
