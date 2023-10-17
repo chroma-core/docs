@@ -307,9 +307,9 @@ Valid options for `hnsw:space` are "l2", "ip, "or "cosine". The **default** is "
 
 | Distance          | parameter |                                                 Equation |
 | ----------------- | :-------: | -------------------------------------------------------: |
-| Squared L2        |   'l2'    |                                       d = sum((Ai-Bi)^2) |
-| Inner product     |   'ip'    |                                    d = 1.0 - sum(Ai\*Bi) |
-| Cosine similarity | 'cosine'  | d = 1.0 - sum(Ai\*Bi) / sqrt(sum(Ai\*Ai) \* sum(Bi\*Bi)) |
+| Squared L2        |   'l2'    |                                       $d = \sum\left(A_i-B_i\right)^2$ |
+| Inner product     |   'ip'    |                                    $d = 1.0 - \sum\left(A_i \times B_i\right) $ |
+| Cosine similarity | 'cosine'  | $d = 1.0 - \frac{\sum\left(A_i \times B_i\right)}{\sqrt{\sum\left(A_i^2\right)} \cdot \sqrt{\sum\left(B_i^2\right)}}$ |
 
 ### Adding data to a Collection
 
