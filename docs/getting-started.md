@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
 
-***
+---
 
 Chroma is a database for building AI applications with embeddings. It comes with everything you need to get started built in, and runs on your machine. A [hosted version](https://airtable.com/shrOAiDUtS2ILy5vZ) is coming soon!
 
@@ -31,10 +31,17 @@ pip install chromadb
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-
 ```sh
 npm install --save chromadb # yarn add chromadb
 ```
+
+You will need to install the Chroma python package to use the Chroma CLI and backend server.
+
+```sh
+pip install chromadb
+```
+
+Alternatively, you can use a Docker container to run the Chroma backend server.
 
 </TabItem>
 
@@ -53,15 +60,16 @@ chroma_client = chromadb.Client()
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-```js
-const {ChromaClient} = require('chromadb');
-const client = new ChromaClient();
+Start the Chroma backend server:
+
+```sh
+chroma run --path /db_path
 ```
 
 To connect to Chroma's backend - you either need to connect to a hosted version of Chroma, or run it on your local computer. If you can run `docker-compose up -d --build` you can run Chroma.
 
 :::caution Ephemeral Storage 💀
-By default docker compose will store your data in a local volume `<prefix>_chroma-data` (prefix may vary depending on your root project dir name) which will not be lost if upon `docker compose down` unless `--volume` is passed,
+By default docker-compose will store your data in a local volume `<prefix>_chroma-data` (prefix may vary depending on your root project dir name) which will not be lost if upon `docker compose down` unless `--volume` is passed,
 or you manually remove the volume from Docker.
 To mount your data directory, add the following to your `docker-compose.yml` file:
 
@@ -84,14 +92,13 @@ docker run --rm -v <prefix>_chroma-data:/source -v $(pwd)/local-chroma-data:/tar
 ```
 
 :::
+  
+Then create a client which connects to it:
 
-```bash
-git clone https://github.com/chroma-core/chroma.git
-cd chroma
-docker-compose up -d --build
+```js
+const { ChromaClient } = require("chromadb");
+const client = new ChromaClient();
 ```
-
-If you have build issues, please reach out for help in the active [Community Discord](https://discord.gg/MMeYNTmh3x). Most issues get fixed in a few minutes.
 
 </TabItem>
 
@@ -118,16 +125,19 @@ Please take steps to secure your API when interacting with frontend systems.
 :::
 
 ```js
-const {OpenAIEmbeddingFunction} = require('chromadb');
-const embedder = new OpenAIEmbeddingFunction({openai_api_key: "your_api_key"})
-const collection = await client.createCollection({name: "my_collection", embeddingFunction: embedder})
+const { OpenAIEmbeddingFunction } = require("chromadb");
+const embedder = new OpenAIEmbeddingFunction({
+  openai_api_key: "your_api_key",
+});
+const collection = await client.createCollection({
+  name: "my_collection",
+  embeddingFunction: embedder,
+});
 ```
 
 </TabItem>
 
 </Tabs>
-
-
 
 ### 4. Add some text documents to the collection
 
@@ -151,17 +161,15 @@ Chroma will store your text, and handle tokenization, embedding, and indexing au
 
 ```js
 await collection.add({
-    ids: ["id1", "id2"],
-    metadatas: [{"source": "my_source"}, {"source": "my_source"}],
-    documents: ["This is a document", "This is another document"],
-}) 
+  ids: ["id1", "id2"],
+  metadatas: [{ source: "my_source" }, { source: "my_source" }],
+  documents: ["This is a document", "This is another document"],
+});
 ```
 
 </TabItem>
 
 </Tabs>
-
-
 
 If you have already generated embeddings yourself, you can load them directly in:
 
@@ -182,18 +190,19 @@ collection.add(
 
 ```js
 await collection.add({
-    ids: ["id1", "id2"],
-    embeddings: [[1.2, 2.3, 4.5], [6.7, 8.2, 9.2]],
-    where: [{"source": "my_source"}, {"source": "my_source"}],
-    documents: ["This is a document", "This is another document"]
-}) 
+  ids: ["id1", "id2"],
+  embeddings: [
+    [1.2, 2.3, 4.5],
+    [6.7, 8.2, 9.2],
+  ],
+  where: [{ source: "my_source" }, { source: "my_source" }],
+  documents: ["This is a document", "This is another document"],
+});
 ```
 
 </TabItem>
 
 </Tabs>
-
-
 
 ### 5. Query the collection
 
@@ -213,15 +222,14 @@ By default data stored in Chroma is ephemeral making it easy to prototype script
 
 Find [chromadb on PyPI](https://pypi.org/project/chromadb/).
 
-
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```js
 const results = await collection.query({
-    nResults: 2, 
-    queryTexts: ["This is a query document"]
-}) 
+  nResults: 2,
+  queryTexts: ["This is a query document"],
+});
 ```
 
 Find [chromadb on npm](https://www.npmjs.com/package/chromadb).
@@ -229,7 +237,6 @@ Find [chromadb on npm](https://www.npmjs.com/package/chromadb).
 </TabItem>
 
 </Tabs>
-
 
 ## 📚 Next steps
 

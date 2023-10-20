@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
 
-***
+---
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
@@ -32,16 +32,14 @@ import TabItem from '@theme/TabItem';
 
 ## 🦙 LlamaIndex
 
-> *formerly known as GPT-index*
+> _formerly known as GPT-index_
 
 - `LlamaIndex` [Vector Store page](https://gpt-index.readthedocs.io/en/latest/how_to/integrations/vector_stores.html)
 - Demo: https://github.com/jerryjliu/llama_index/blob/main/docs/examples/vector_stores/ChromaIndexDemo.ipynb
 - [Chroma Loader on Llamahub](https://llamahub.ai/l/chroma)
 
-
 </TabItem>
 <TabItem value="js" label="JavaScript">
-
 
 ## 🦜️🔗 LangchainJS
 
@@ -55,7 +53,7 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import * as fs from "fs";
 
-// to run this first run chroma's docker-container with `docker-compose up -d --build`
+// to run this first run a chroma server with `chroma run --path /path/to/data`
 
 export const run = async () => {
   /* Initialize the LLM to use to answer the question */
@@ -66,13 +64,14 @@ export const run = async () => {
   const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000 });
   const docs = await textSplitter.createDocuments([text]);
   /* Create the vectorstore */
-  const vectorStore = await Chroma.fromDocuments(
-    docs,
-    new OpenAIEmbeddings(),
-    { collectionName: "state_of_the_union" }
-  );
+  const vectorStore = await Chroma.fromDocuments(docs, new OpenAIEmbeddings(), {
+    collectionName: "state_of_the_union",
+  });
   /* Create the chain */
-  const chain = ConversationalRetrievalQAChain.fromLLM(model, vectorStore.asRetriever());
+  const chain = ConversationalRetrievalQAChain.fromLLM(
+    model,
+    vectorStore.asRetriever()
+  );
   /* Ask it a question */
   const question = "What did the president say about Justice Breyer?";
   const res = await chain.call({ question, chat_history: [] });
@@ -85,5 +84,3 @@ export const run = async () => {
 </TabItem>
 
 </Tabs>
-
-

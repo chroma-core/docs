@@ -4,11 +4,13 @@ title: "☁️ Deployment"
 ---
 
 :::caution Alpha Status
-Chroma Server is currently in Alpha. We are working hard to move Chroma from a in-memory single-process oriented library to a distributed production-grade DB!
+Chroma Server is currently in Alpha. We are working hard to move Chroma from an in-memory single-process oriented library to a distributed production-grade DB!
+
 - [x] Alpha <- Currently
 - [ ] Technical Preview - ~1 month away, powered by a completely new backend
 - [ ] Full production
 - [ ] GA - General Availability
+
 :::
 
 # ☁️ Deployment
@@ -21,11 +23,48 @@ provided a very simple AWS CloudFormation template to experiment with
 deploying Chroma to EC2 on AWS.
 
 ## Hosted Chroma
-We want to offer hosted Chroma and we need your help. 
 
-Fill out the survey to jump the waitlist. Coming Q3 2023.
+We want to offer hosted Chroma, and we need your help.
+
+Fill out the survey to jump the wait-list. Coming Q3 2023.
 
 [📝 30 second survey](https://airtable.com/shrOAiDUtS2ILy5vZ)
+
+## Docker
+
+You can run a Chroma server in a Docker container.
+
+You can get the Chroma Docker image from [Docker Hub](https://hub.docker.com/r/chromadb/chroma), or from the [Chroma GitHub Container Registry](https://github.com/chroma-core/chroma/pkgs/container/chroma)
+
+```sh
+docker pull chromadb/chroma
+docker run -p 8000:8000 chromadb/chroma
+```
+
+You can also build the Docker image yourself from the Dockerfile in the [Chroma GitHub repository](https://github.com/chroma-core/chroma)
+
+```sh
+git clone git@github.com:chroma-core/chroma.git
+cd chroma
+docker-compose up -d --build
+```
+
+The Chroma client can then be configured to connect to the server running in the Docker container.
+
+```python
+import chromadb
+chroma_client = chromadb.HttpClient(host='localhost', port=8000)
+```
+
+### Authentication with Docker
+
+By default, the Docker image will run with no authentication. Follow the [Authentication](./usage-guide#authentication) section of the Usage Guide to configure authentication in the Docker container.
+
+You can also create a `.chroma_env` file setting the required environment variables and pass it to the Docker container with the `--env-file` flag when running the container.
+
+```sh
+docker run --env-file ./.chroma_env -p 8000:8000 chromadb/chroma
+```
 
 ## Simple AWS Deployment
 
@@ -43,10 +82,9 @@ authenticating proxy.
 
 :warning: By default, this template saves all data on a single
 volume. When you delete or replace it, the data will disappear. For
-serious production use (with high availability, backups, etc) please
+serious production use (with high availability, backups, etc.) please
 read and understand the CloudFormation template and use it as a basis
 for what you need, or reach out to the Chroma team for assistance.
-
 
 ### Step 1: Get an AWS Account
 
@@ -65,17 +103,20 @@ and will be using environment variables to configure AWS.
 
 Export the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables in your shell:
 
-
 ```
-export AWS_ACCESS_KEY_ID=****************
-export AWS_SECRET_ACCESS_KEY=**********************
+
+export AWS_ACCESS_KEY_ID=**\*\***\*\*\*\***\*\***
+export AWS_SECRET_ACCESS_KEY=****\*\*****\*\*****\*\*****
+
 ```
 
 You can also configure AWS to use a region of your choice using the
 `AWS_REGION` environment variable:
 
 ```
+
 export AWS_REGION=us-east-1
+
 ```
 
 ### Step 3: Run CloudFormation
@@ -85,7 +126,9 @@ Chroma publishes Cloudformation templates to S3 for each release.
 To launch the template using AWS CloudFormation, run the following command line invocation:
 
 ```
+
 aws cloudformation create-stack --stack-name my-chroma-stack --template-url https://s3.amazonaws.com/public.trychroma.com/cloudformation/latest/chroma.cf.json
+
 ```
 
 Replace `--stack-name my-chroma-stack` with a different stack name, if you wish.
@@ -94,7 +137,9 @@ Wait a few minutes for the server to boot up, and Chroma will be
 available! You can get the public IP address of your new Chroma server using the AWS console, or using the following command:
 
 ```
+
 aws cloudformation describe-stacks --stack-name my-chroma-stack --query 'Stacks[0].Outputs'
+
 ```
 
 ### Step 4: Customize the Stack (optional)
@@ -114,15 +159,13 @@ above, but on a `m5.4xlarge` EC2 instance, and adding a KeyPair named
 `mykey` so anyone with the associated private key can SSH into the
 machine:
 
-
 ```
+
 aws cloudformation create-stack --stack-name my-chroma-stack --template-url https://s3.amazonaws.com/public.trychroma.com/cloudformation/latest/chroma.cf.json \
-    --parameters ParameterKey=KeyName,ParameterValue=mykey \
-                 ParameterKey=InstanceType,ParameterValue=m5.4xlarge
+ --parameters ParameterKey=KeyName,ParameterValue=mykey \
+ ParameterKey=InstanceType,ParameterValue=m5.4xlarge
+
 ```
-
-
-
 
 ### Step 5: Configure the Chroma Library
 
@@ -132,20 +175,22 @@ you need to do is configure it to use the server's IP address and port
 
 ###### Using Environment Variables
 
-
 ```
+
 export CHROMA_API_IMPL=rest
 export CHROMA_SERVER_HOST=<server IP address>
 export CHROMA_SERVER_HTTP_PORT=8000
-```
 
+```
 
 ###### In Code
 
 ```
+
 import chromadb
 from chromadb.config import Settings
 chroma = chromadb.HttpClient(host=<server IP address>, port=8000)
+
 ```
 
 ### Step 6: Clean Up (optional).
@@ -153,7 +198,9 @@ chroma = chromadb.HttpClient(host=<server IP address>, port=8000)
 To destroy the stack and remove all AWS resources, use the AWS CLI `delete-stack` command.
 
 ```
+
 aws cloudformation delete-stack --stack-name my-chroma-stack
+
 ```
 
 :warning: This will destroy all the data in your Chroma database,
@@ -161,4 +208,4 @@ unless you've taken a snapshot or otherwise backed it up.
 
 ### Troubleshooting
 
-If you get an error saying `No default VPC for this user` when creating `ChromaInstanceSecurityGroup`, head to [AWS VPC section]( https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#vpcs) and create deafault VPC for your user
+If you get an error saying `No default VPC for this user` when creating `ChromaInstanceSecurityGroup`, head to [AWS VPC section](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#vpcs) and create a default VPC for your user.
