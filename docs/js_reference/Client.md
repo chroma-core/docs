@@ -47,7 +47,7 @@ If there is an issue creating the collection.
 const collection = await client.createCollection({
   name: "my_collection",
   metadata: {
-    "description": "My first collection"
+    description: "My first collection"
   }
 });
 ```
@@ -152,7 +152,7 @@ If there is an issue getting or creating the collection.
 const collection = await client.getOrCreateCollection({
   name: "my_collection",
   metadata: {
-    "description": "My first collection"
+    description: "My first collection"
   }
 });
 ```
