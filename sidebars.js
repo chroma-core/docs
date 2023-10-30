@@ -108,7 +108,7 @@ const sidebars = {
       items: [
         'migration',
         'deployment',
-        // 'observability',
+        'observability',
       ],
     },
   ]
