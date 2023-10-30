@@ -289,6 +289,26 @@ You can pass in an optional `model_name` argument, which lets you choose which H
 </TabItem>
 </Tabs>
 
+## Jina AI
+
+Chroma provides a convenient wrapper around JinaAI's embedding API. This embedding function runs remotely on JinaAI's servers, and requires an API key. You can get an API key by signing up for an account at [JinaAI](#TODO: Check link).
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+This embedding function relies on the `requests` python package, which you can install with `pip install requests`.
+
+```python
+jinaai_ef = embedding_functions.JinaAIEmbeddingFunction(
+                api_key="YOUR_API_KEY",
+                model_name="jina-embedding-v2-base-en"
+            )
+jinaai_ef(texts=["This is my first text to embed", "This is my second document"])
+```
+
+You can pass in an optional `model_name` argument, which lets you choose which JinaAI model to use. By default, Chroma uses `jina-embedding-v2-base-en`. You can see a list of all available models [here](#TODO: Check link).
+
+
 ## Custom Embedding Functions
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
