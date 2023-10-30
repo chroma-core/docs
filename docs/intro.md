@@ -1,7 +1,6 @@
 ---
 sidebar_position: 0
 slug: /
-id: my-home-doc
 title: 🏡 Home
 hide_title: true
 ---
