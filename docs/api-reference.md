@@ -7,6 +7,8 @@ title: "📖 API Cheatsheet"
 
 :::note
 This is a quick cheatsheet of the API. For full API docs, refer to the JS and Python docs in the sidebar.
+
+REST API docs can be viewed at http://localhost:8000/docs (the URL may vary depending on where and how you run the Chroma server).
 :::
 
 ---
