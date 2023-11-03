@@ -289,6 +289,30 @@ You can pass in an optional `model_name` argument, which lets you choose which H
 </TabItem>
 </Tabs>
 
+
+## VoyageAI
+
+Chroma also provides a convenient wrapper around VoyageAI's embedding API. This embedding function calls voyageai embedding APIs directly, and requires an API key. You can get an API key by signing up for an account at [VoyageAI](https://voyageai.com/).
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+This embedding function relies on the `voyageai` python package, which you can install with `pip install voyageai`.
+
+```python
+voyage_ef = embedding_functions.VoyageAIEmbeddingFunction(
+    api_key="YOUR_API_KEY",
+    model_name="voyage-01"
+)
+```
+
+You can pass in an optional `batch_size` and `model_name` argument which lets you choose which VoyageAI embedding model to use. By default, Chroma uses `voyage-01`. You can see a list of all available models [here](https://docs.voyageai.com/embeddings/).
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+</TabItem>
+</Tabs>
+
 ## Custom Embedding Functions
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
