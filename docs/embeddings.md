@@ -301,12 +301,17 @@ This embedding function relies on the `requests` python package, which you can i
 ```python
 jinaai_ef = embedding_functions.JinaAIEmbeddingFunction(
                 api_key="YOUR_API_KEY",
-                model_name="jina-embedding-v2-base-en"
+                model_name="jina-embeddings-v2-base-en"
             )
 jinaai_ef(texts=["This is my first text to embed", "This is my second document"])
 ```
 
 You can pass in an optional `model_name` argument, which lets you choose which JinaAI model to use. By default, Chroma uses `jina-embedding-v2-base-en`.
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+</TabItem>
+</Tabs>
 
 ## Custom Embedding Functions
 
