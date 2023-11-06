@@ -21,19 +21,22 @@ const sidebars = {
     'intro',
     'getting-started',
     'usage-guide',
-    'embeddings',
+    {
+      type: 'link',
+      href: '/embeddings',
+      label: '🧬 Embeddings',
+      className: 'category-link',
+    },
     'about',
     'api-reference',
     'telemetry',
     'roadmap',
     'contributing',
     'troubleshooting',
-    {
-      type: 'link',
-      href: '/production',
-      label: '☁️ Production',
-      className: 'category-link',
-    },
+    'migration',
+    'deployment',
+    'observability',
+    
     {
       type: 'link',
       href: '/integrations',
@@ -65,6 +68,27 @@ const sidebars = {
       ],
     },
   ],
+  embeddings: [
+    {
+      type: 'link',
+      label: '← Home',
+      href: '/'  
+    },
+    'embeddings',
+    {
+      type: 'category',
+      label: 'Integrations',
+      collapsed: false,
+      className: 'category-header',
+      items: [
+        'embeddings/openai',
+        'embeddings/cohere',
+        'embeddings/hugging-face',
+        'embeddings/google-palm',
+        'embeddings/instructor'
+      ],
+    },
+  ],
   api: [
     {
       type: 'link',
@@ -93,25 +117,6 @@ const sidebars = {
       ],
     },
   ],
-  production: [
-    {
-      type: 'link',
-      label: '← Home',
-      href: '/'  
-    },
-    'production',
-    {
-      type: 'category',
-      label: 'Topics',
-      collapsed: false,
-      className: 'category-header',
-      items: [
-        'migration',
-        'deployment',
-        'observability',
-      ],
-    },
-  ]
 };
 
 module.exports = sidebars;
