@@ -69,7 +69,12 @@ chroma run --path /db_path
 Then create a client which connects to it:
 
 ```js
+// CJS
 const { ChromaClient } = require("chromadb");
+
+// ESM
+import { ChromaClient } from 'chromadb'
+
 const client = new ChromaClient();
 ```
 
@@ -98,7 +103,12 @@ Please take steps to secure your API when interacting with frontend systems.
 :::
 
 ```js
+// CJS
 const { OpenAIEmbeddingFunction } = require("chromadb");
+
+// ESM
+import { OpenAIEmbeddingFunction } from 'chromadb'
+
 const embedder = new OpenAIEmbeddingFunction({
   openai_api_key: "your_api_key",
 });

@@ -136,7 +136,13 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
 <TabItem value="js" label="JavaScript">
 
 ```javascript
+//CJS
 const {OpenAIEmbeddingFunction} = require('chromadb');
+
+//ESM
+import {OpenAIEmbeddingFunction} from 'chromadb'
+
+
 const embedder = new OpenAIEmbeddingFunction({openai_api_key: "apiKey"})
 
 // use directly 
@@ -172,7 +178,12 @@ cohere_ef(texts=["document1","document2"])
 <TabItem value="js" label="JavaScript">
 
 ```javascript
+//CJS
 const {CohereEmbeddingFunction} = require('chromadb');
+
+//ESM
+import {CohereEmbeddingFunction} from 'chromadb'
+
 const embedder = new CohereEmbeddingFunction("apiKey")
 
 // use directly 
@@ -215,7 +226,12 @@ cohere_ef(texts=multilingual_texts)
 <TabItem value="js" label="JavaScript">
 
 ```javascript
+//CJS
 const {CohereEmbeddingFunction} = require('chromadb');
+
+//ESM
+import {CohereEmbeddingFunction} from 'chromadb'
+
 const embedder = new CohereEmbeddingFunction("apiKey")
 
 multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!', 
