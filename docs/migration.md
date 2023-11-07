@@ -22,6 +22,38 @@ We will aim to provide:
 
 ## Migration Log
 
+### Migration to 0.4.16 - November 7, 2023
+
+This release adds support for multi-modal embeddings, with an accompanying change to the definitions of `EmbeddingFunction`.
+This change mainly affects users who have implemented their own `EmbeddingFunction` classes. If you are using Chroma's built-in embedding functions, you do not need to take any action.
+
+**EmbeddingFunction**
+
+Previously, `EmbeddingFunction`s were defined as:
+
+```python
+class EmbeddingFunction(Protocol):
+    def __call__(self, texts: Documents) -> Embeddings:
+        ...
+```
+
+After this update, `EmbeddingFunction`s are defined as:
+
+```python
+Embeddable = Union[Documents, Images]
+D = TypeVar("D", bound=Embeddable, contravariant=True)
+
+class EmbeddingFunction(Protocol[D]):
+    def __call__(self, input: D) -> Embeddings:
+        ...
+```
+
+The key differences are:
+- `EmbeddingFunction` is now generic, and takes a type parameter `D` which is a subtype of `Embeddable`. This allows us to define `EmbeddingFunction`s which can embed multiple modalities.
+- `__call__` now takes a single argument, `input`, to support data of any type `D`. The `texts` argument has been removed.
+
+
+
 ### Migration from >0.4.0 to 0.4.0 - July 17, 2023
 
 What's new in this version?

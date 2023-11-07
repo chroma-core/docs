@@ -121,7 +121,7 @@ Additionally, if a data loader is set for the collection, and URIs are available
 
 ```python
 results = collection.query(
-    query_images[...], # # list of numpy arrays representing images
+    query_images=[...], # # list of numpy arrays representing images
     includes=['data']
 )
 ```
