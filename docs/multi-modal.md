@@ -22,6 +22,8 @@ import TabItem from '@theme/TabItem';
 
 Chroma supports multimodal collections, i.e. collections which can store, and can be queried by, multiple modalities of data.
 
+Try it out in Colab: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/chroma-core/chroma/blob/main/examples/multimodal/multimodal_retrieval.ipynb)
+
 ## Multi-modal Embedding Functions
 
 Chroma supports multi-modal embedding functions, which can be used to embed data from multiple modalities into a single embedding space.
