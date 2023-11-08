@@ -316,7 +316,7 @@ You can create your own embedding function to use with Chroma, it just needs to 
 from chromadb import Documents, EmbeddingFunction, Embeddings
 
 class MyEmbeddingFunction(EmbeddingFunction):
-    def __call__(self, texts: Documents) -> Embeddings:
+    def __call__(self, input: D) -> Embeddings:
         # embed the documents somehow
         return embeddings
 ```
