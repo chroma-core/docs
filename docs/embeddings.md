@@ -303,7 +303,7 @@ jinaai_ef = embedding_functions.JinaEmbeddingFunction(
                 api_key="YOUR_API_KEY",
                 model_name="jina-embeddings-v2-base-en"
             )
-jinaai_ef(texts=["This is my first text to embed", "This is my second document"])
+jinaai_ef(input=["This is my first text to embed", "This is my second document"])
 ```
 
 You can pass in an optional `model_name` argument, which lets you choose which Jina model to use. By default, Chroma uses `jina-embedding-v2-base-en`.
