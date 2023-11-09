@@ -1,6 +1,5 @@
 ---
-sidebar_position: 7
-title: Integrationsold
+sidebar_position: 8
 ---
 
 # 🔌 Integrations

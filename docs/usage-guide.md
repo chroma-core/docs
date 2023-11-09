@@ -42,7 +42,11 @@ Having many clients that are loading and saving to the same path can cause stran
 <TabItem value="js" label="JavaScript">
 
 ```js
-import { ChromaClient } from "chromadb";
+// CJS
+const { ChromaClient } = require("chromadb");
+
+// ESM
+import { ChromaClient } from 'chromadb'
 ```
 
 :::note Connecting to the backend
@@ -153,7 +157,12 @@ chroma run --path /db_path
 The JS client then talks to the chroma server backend.
 
 ```js
-import { ChromaClient } from "chromadb";
+// CJS
+const { ChromaClient } = require("chromadb");
+
+// ESM
+import { ChromaClient } from 'chromadb'
+
 const client = new ChromaClient();
 ```
 
@@ -196,7 +205,11 @@ The embedding function takes text as input, and performs tokenization and embedd
 <TabItem value="js" label="JavaScript">
 
 ```js
-import { ChromaClient } from "chromadb";
+// CJS
+const { ChromaClient } = require("chromadb");
+
+// ESM
+import { ChromaClient } from 'chromadb'
 ```
 
 The JS client talks to a chroma server backend. This can run on your local computer or be easily deployed to AWS.
