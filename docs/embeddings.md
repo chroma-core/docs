@@ -12,12 +12,11 @@ Chroma provides lightweight wrappers around popular embedding providers, making 
 
 |              | Python | JS |
 |--------------|-----------|---------------|
-| [Default](/integrations/langchain) | ✅  | ➖ |
-| [OpenAI](/integrations/langchain) | ✅  | ✅ |
-| [Cohere](/integrations/llama-index) | ✅  | ✅ |
-| [Google PaLM](/integrations/llama-index) | ✅  | ➖ |
-| [Hugging Face](/integrations/llama-index) | ✅  | ➖ |
-| [Instructor](/integrations/llama-index) | ✅  | ➖ |
+| [OpenAI](/embeddings/openai) | ✅  | ✅ |
+| [Cohere](/embeddings/cohere) | ✅  | ✅ |
+| [Google PaLM](/embeddings/google-palm) | ✅  | ➖ |
+| [Hugging Face](/embeddings/hugging-face) | ✅  | ➖ |
+| [Instructor](/embeddings/instructor) | ✅  | ➖ |
 
 We welcome pull requests to add new Embedding Functions to the community.
 
