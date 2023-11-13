@@ -43,7 +43,7 @@ Chroma has an data loader for loading images from a filesystem built in.
 
 ```python
 from chromadb.utils.data_loaders import ImageDataLoader
-data_loader = ImageDataLoader()
+data_loader = ImageLoader()
 ```
 
 ## Multi-modal Collections
@@ -58,7 +58,7 @@ client = chromadb.Client()
 collection = client.create_collection(
     name='multimodal_collection', 
     embedding_function=embedding_function, 
-    data_loader=image_loader)
+    data_loader=data_loader)
 
 ```
 
