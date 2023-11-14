@@ -1,7 +1,6 @@
 ---
 sidebar_position: 0
 slug: /
-id: my-home-doc
 title: 🏡 Home
 hide_title: true
 ---
@@ -11,7 +10,7 @@ hide_title: true
 **Chroma is the open-source embedding database**. Chroma makes it easy to build LLM apps by making knowledge, facts, and skills pluggable for LLMs.
 
 [![Discord](https://img.shields.io/discord/1073293645303795742)](https://discord.gg/MMeYNTmh3x)
-[![GitHub stars](https://img.shields.io/github/stars/chroma-core/chroma.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/chroma-core/chroma/stargazers/)
+[![GitHub stars](https://img.shields.io/github/stars/chroma-core/chroma.svg?style=social&label=Star&maxAge=2400)](https://GitHub.com/chroma-core/chroma/stargazers/)
 
 
 <img src="/img/hrm4.svg" />

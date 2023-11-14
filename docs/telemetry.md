@@ -1,5 +1,5 @@
 ---
-sidebar_position: 8
+sidebar_position: 12
 title: "📏 Telemetry"
 ---
 
@@ -49,7 +49,7 @@ We will only track usage details that help us make product decisions, specifical
 
 We **do not** collect personally-identifiable or sensitive information, such as: usernames, hostnames, file names, environment variables, or hostnames of systems being tested.
 
-To view the list of events we track, you may reference the **[code](https://github.com/chroma-core/chroma/blob/main/chromadb/telemetry/events.py)**
+To view the list of events we track, you may reference the **[code](https://github.com/chroma-core/chroma/blob/main/chromadb/telemetry/product/events.py)**
 
 ## **Where is telemetry information stored?**
 

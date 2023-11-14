@@ -1,12 +1,12 @@
 ---
-sidebar_position: 9
+sidebar_position: 13
 title: "🛣️ Roadmap"
 ---
 
 # 🛣️ Roadmap
 
 :::note Last updated
-`Sep 27, 2023`
+`Nov 11, 2023`
 :::
 
 The goal of this doc is to align *core* and *community* efforts for the project and to share what's in store for this year!
