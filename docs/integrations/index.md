@@ -16,8 +16,9 @@ We welcome pull requests to add new Integrations to the community.
 |--------------|-----------|---------------|
 | [🦜️🔗 Langchain](/integrations/langchain) | ✅  | ✅ |
 | [🦙 LlamaIndex](/integrations/llama-index) | ✅  | :soon: |
+| [Braintrust](/integrations/braintrust) | ✅  | ✅ |
 
-*Coming soon* - integrations with LangSmith, JinaAI, Braintrust and more.
+*Coming soon* - integrations with LangSmith, JinaAI, and more.
 
 *** 
 
