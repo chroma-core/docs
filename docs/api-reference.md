@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: "📖 API Cheatsheet"
 ---
 
@@ -157,7 +157,12 @@ Run `chroma run --path /db_path` to run the Chroma backend as a standalone serve
 ## Initialize client - JS
 
 ```javascript
-import { ChromaClient } from "chromadb";
+// CJS
+const { ChromaClient } = require("chromadb");
+
+// ESM
+import { ChromaClient } from 'chromadb'
+
 const client = new ChromaClient();
 ```
 
