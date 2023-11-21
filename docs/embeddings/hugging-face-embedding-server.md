@@ -52,7 +52,7 @@ The embedding model is configured on the server side. Check the docker-compose f
 
 
 ```javascript
-const {HuggingFaceEmbeddingServerFunction} = require('chromadb');
+import  {HuggingFaceEmbeddingServerFunction} from 'chromadb';
 const embedder = new HuggingFaceEmbeddingServerFunction({url:"http://localhost:8001/embed"})
 
 // use directly 
