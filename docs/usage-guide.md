@@ -853,12 +853,21 @@ Current implementation of static API token auth supports only ENV based tokens.
 
 ##### Running the Server
 
-Set the following environment variables:
+Set the following environment variables to use `Authorization: Bearer test-token` to be your authentication header.
 
 ```bash
 export CHROMA_SERVER_AUTH_CREDENTIALS="test-token"
 export CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
 export CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.token.TokenAuthServerProvider"
+```
+
+to use `X-Chroma-Token: test-token` type of authentication header you can set an additional environment variable.
+
+```bash
+export CHROMA_SERVER_AUTH_CREDENTIALS="test-token"
+export CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
+export CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.token.TokenAuthServerProvider"
+export CHROMA_SERVER_AUTH_TOKEN_TRANSPORT_HEADER="X_CHROMA_TOKEN"
 ```
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
