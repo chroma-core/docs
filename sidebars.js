@@ -54,7 +54,7 @@ const sidebars = {
     {
       type: 'link',
       label: '← Home',
-      href: '/'  
+      href: '/'
     },
     'integrations/index',
     {
@@ -73,7 +73,7 @@ const sidebars = {
     {
       type: 'link',
       label: '← Home',
-      href: '/'  
+      href: '/'
     },
     'embeddings',
     {
@@ -87,8 +87,9 @@ const sidebars = {
         'embeddings/cohere',
         'embeddings/hugging-face',
         'embeddings/google-palm',
+        'embeddings/hugging-face-embedding-server',
         'embeddings/instructor',
-        'embeddings/hugging-face-embedding-server'
+        'embeddings/roboflow'
       ],
     },
   ],
@@ -96,7 +97,7 @@ const sidebars = {
     {
       type: 'link',
       label: '← Home',
-      href: '/'  
+      href: '/'
     },
     'api/index',
     {
