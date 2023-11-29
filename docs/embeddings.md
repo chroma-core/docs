@@ -17,6 +17,7 @@ Chroma provides lightweight wrappers around popular embedding providers, making 
 | [Google PaLM](/embeddings/google-palm) | ✅  | ➖ |
 | [Hugging Face](/embeddings/hugging-face) | ✅  | ➖ |
 | [Instructor](/embeddings/instructor) | ✅  | ➖ |
+| [Hugging Face Embedding Server](/embeddings/hugging-face-embedding-server) | ✅  | ✅ |
 
 We welcome pull requests to add new Embedding Functions to the community.
 
