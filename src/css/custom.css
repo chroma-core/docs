@@ -559,3 +559,33 @@ div.special_table + table, th, td {
 .em {
   font-style: italic;
 }
+
+.category-header .menu__list-item-collapsible {
+  pointer-events: none;
+}
+
+.category-header .menu__link--sublist {
+  text-transform: uppercase;
+  font-size: small;
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+.category-header .menu__link--sublist-caret:after {
+  display: none;
+}
+
+.category-link a::after {
+  content: "\2192";
+  font-size: 20px;
+  margin-left: 5px;  /* for spacing */
+  transform: scaleX(-1) rotate(180deg);
+  margin-left: 9px;
+  position: absolute;
+  right: 30px;
+  opacity: 0.3;
+}
+
+.main-wrapper {
+  min-height: 100vh;
+}
