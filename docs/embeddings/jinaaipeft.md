@@ -1,7 +1,7 @@
 ---
 ---
 
-# Jina AI with PEFT and GPU acceleration
+# Local Jina AI with PEFT and GPU acceleration
 
 This component provides a convenient wrapper around JinaAI's alpine base embeddings model or with optional PEFT config. This embedding function runs completely local, and does not require an API key.
 
