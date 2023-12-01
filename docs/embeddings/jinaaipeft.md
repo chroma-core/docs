@@ -5,6 +5,8 @@
 
 This component provides a convenient wrapper around JinaAI's alpine base embeddings model or with optional PEFT config. This embedding function runs completely local, and does not require an API key.
 
+Detailed Guide for LoRA PEFT for semantic search can be found [here](https://huggingface.co/docs/peft/task_guides/semantic-similarity-lora).
+
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
