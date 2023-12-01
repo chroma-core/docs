@@ -19,11 +19,11 @@ This component provides a convenient wrapper around JinaAI's alpine base embeddi
 <TabItem value="py" label="Python">
 
 This embedding function relies on the `peft`, `torch` & `transformers` python package, which you can install with `pip install transformers torch peft`.
-for CPU inference
+## CPU inference
 ```python
 chroma_embedding_fnc = embedding_functions.JinaAIEmbeddingsFunction(device = "cpu")
 ```
-for GPU inference with PEFT
+## GPU inference with PEFT
 ```python
 path_to_lora_config_directory = your_lora_path
 chroma_embedding_fnc = embedding_functions.JinaAIEmbeddingsFunction(device = "cuda", adapters_path = path_to_lora_config_directory)
