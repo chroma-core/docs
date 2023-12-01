@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="js" label="JavaScript"></TabItem>
 </Tabs>
 
-This component provides a convenient wrapper around JinaAI's alpine base embeddings model or as well as the optional of additional PEFT config. This embedding function runs completely local, and does not require an API key. Ask @Luke on discord if you need help with PEFT on your data.
+This component provides a convenient wrapper around JinaAI's alpine base embeddings model or with optional PEFT config. This embedding function runs completely local, and does not require an API key.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
@@ -23,16 +23,18 @@ for CPU inference
 ```python
 chroma_embedding_fnc = embedding_functions.JinaAIEmbeddingsFunction(device = "cpu")
 ```
-for GPU inference
+for GPU inference with PEFT
 ```python
-chroma_embedding_fnc = embedding_functions.JinaAIEmbeddingsFunction(device = "cuda")
+path_to_lora_config_directory = your_lora_path
+chroma_embedding_fnc = embedding_functions.JinaAIEmbeddingsFunction(device = "cuda", adapters_path = path_to_lora_config_directory)
 chroma_collection = chroma_client.get_or_create_collection(
     name="test_collection",
     embedding_function=chroma_embedding_fnc,
     metadata={
+        # https://github.com/nmslib/hnswlib
         "hnsw:space": "cosine",  # "l2", "ip, "or "cosine". The default is "l2".
-        "hnsw:construction_ef": 10240,  # Number of docs # https://github.com/nmslib/hnswlib
-        "hnsw:M": 640,  # Docs retrieved
+        "hnsw:construction_ef": 1024,  
+        "hnsw:M": 64,
     },
 )
 chroma_collection.add(
