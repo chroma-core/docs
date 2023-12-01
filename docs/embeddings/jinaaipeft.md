@@ -19,7 +19,7 @@ This component provides a convenient wrapper around JinaAI's alpine base embeddi
 <TabItem value="py" label="Python">
 
 This embedding function relies on the `peft`, `torch` & `transformers` python package, which you can install with `pip install transformers torch peft`.
-## CPU inference
+## CPU inference with Base Model
 ```python
 chroma_embedding_fnc = embedding_functions.JinaAIEmbeddingsFunction(device = "cpu")
 ```
