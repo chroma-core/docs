@@ -3,16 +3,6 @@
 
 # Jina AI with PEFT and GPU acceleration
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-<div class="select-language">Select a language</div>
-
-<Tabs queryString groupId="lang">
-<TabItem value="py" label="Python"></TabItem>
-<TabItem value="js" label="JavaScript"></TabItem>
-</Tabs>
-
 This component provides a convenient wrapper around JinaAI's alpine base embeddings model or with optional PEFT config. This embedding function runs completely local, and does not require an API key.
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
