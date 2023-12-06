@@ -65,6 +65,7 @@ const sidebars = {
       items: [
         'integrations/langchain',
         'integrations/llama-index',
+        'integrations/openllmetry',
       ],
     },
   ],
