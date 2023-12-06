@@ -86,7 +86,8 @@ const sidebars = {
         'embeddings/cohere',
         'embeddings/hugging-face',
         'embeddings/google-palm',
-        'embeddings/instructor'
+        'embeddings/instructor',
+        'embeddings/hugging-face-embedding-server'
       ],
     },
   ],
