@@ -589,6 +589,13 @@ In order to filter on document contents, you must supply a `where_document` filt
 }
 ```
 
+```python
+# Filtering for not contains
+{
+    "$not_contains": "search_string"
+}
+```
+
 ##### Using logical operators
 
 You can also use the logical operators `$and` and `$or` to combine multiple filters.
