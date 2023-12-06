@@ -580,7 +580,7 @@ Where filters only search embeddings where the key exists. If you search `collec
 
 ##### Filtering by document contents
 
-In order to filter on document contents, you must supply a `where_document` filter dictionary to the query. The dictionary must have the following structure:
+In order to filter on document contents, you must supply a `where_document` filter dictionary to the query. We support two filtering keys: `$contains` and `$not_contains`. The dictionary must have the following structure:
 
 ```python
 # Filtering for a search_string
