@@ -22,5 +22,5 @@ You can configure Chroma with both the HTTP and persistent storage client via `m
 ? Select default human: cs_phd
 ? Select storage backend for archival data: chroma
 ? Select chroma backend: persistent
-? Enter persistent storage location: /Users/sarahwooders/.memgpt/config/chroma
+? Enter persistent storage location: /path/to/your/.memgpt/config/chroma
 ```
