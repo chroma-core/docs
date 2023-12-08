@@ -1,5 +1,5 @@
 ---
-slug: /integrations/llama-index
+slug: /integrations/openllmetry
 title: 🔭 OpenLLMetry
 ---
 
