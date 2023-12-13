@@ -32,5 +32,20 @@ You can pass in an optional `model_name` argument, which lets you choose which J
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
+
+```javascript
+const {JinaEmbeddingFunction} = require('chromadb');
+const embedder = new JinaEmbeddingFunction({
+  jinaai_api_key: 'jina_****',
+  model_name: 'jina-embeddings-v2-base-en',
+});
+
+// use directly
+const embeddings = embedder.generate(['document1', 'document2']);
+
+// pass documents to query for .add and .query
+const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
+const collectionGet = await client.getCollection({name:"name", embeddingFunction: embedder})
+```
 </TabItem>
 </Tabs>
