@@ -1,0 +1,63 @@
+---
+---
+
+# Google Generative AI
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<div class="select-language">Select a language</div>
+
+<Tabs queryString groupId="lang">
+<TabItem value="py" label="Python"></TabItem>
+<TabItem value="js" label="JavaScript"></TabItem>
+</Tabs>
+
+Chroma provides a convenient wrapper around Google's Generative AI embedding API. This embedding function runs remotely on Google's servers, and requires an API key. 
+
+You can get an API key by signing up for an account at [Google MakerSuite](https://makersuite.google.com/).
+
+<Tabs queryString groupId="lang" className="hideTabSwitcher">
+<TabItem value="py" label="Python">
+
+This embedding function relies on the `google-generativeai` python package, which you can install with `pip install google-generativeai`.
+
+```python
+# import
+import chromadb
+from chromadb.utils import embedding_functions
+
+# use directly
+google_ef  = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key="YOUR_API_KEY")
+google_ef(["document1","document2"])
+
+# pass documents to query for .add and .query
+collection = client.create_collection(name="name", embedding_function=google_ef)
+collection = client.get_collection(name="name", embedding_function=google_ef)
+```
+
+For more info - please visit the [official Google python docs](https://ai.google.dev/tutorials/python_quickstart).
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+This embedding function relies on the `@google/generative-ai` npm package, which you can install with `yarn add @google/generative-ai`.
+
+```javascript
+import { ChromaClient, GoogleGenerativeAiEmbeddingFunction } from 'chromadb'
+const embedder = new GoogleGenerativeAiEmbeddingFunction({googleApiKey: "<YOUR API KEY>"})
+
+// use directly 
+const embeddings = await embedder.generate(["document1","document2"])
+
+// pass documents to query for .add and .query
+const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
+const collectionGet = await client.getCollection({name:"name", embeddingFunction: embedder})
+```
+
+For more info - please visit the [official Google JS docs](https://ai.google.dev/tutorials/node_quickstart).
+
+</TabItem>
+
+</Tabs>
+

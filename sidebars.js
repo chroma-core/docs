@@ -83,6 +83,7 @@ const sidebars = {
       className: 'category-header',
       items: [
         'embeddings/openai',
+        'embeddings/google-gemini',
         'embeddings/cohere',
         'embeddings/hugging-face',
         'embeddings/google-palm',
