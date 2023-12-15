@@ -36,6 +36,8 @@ collection = client.create_collection(name="name", embedding_function=google_ef)
 collection = client.get_collection(name="name", embedding_function=google_ef)
 ```
 
+You can view a more [complete example](https://github.com/chroma-core/chroma/tree/main/examples/gemini) chatting over documents with Gemini embedding and langauge models.
+
 For more info - please visit the [official Google python docs](https://ai.google.dev/tutorials/python_quickstart).
 
 </TabItem>
@@ -54,6 +56,8 @@ const embeddings = await embedder.generate(["document1","document2"])
 const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
 const collectionGet = await client.getCollection({name:"name", embeddingFunction: embedder})
 ```
+
+You can view a more [complete example using Node](https://github.com/chroma-core/chroma/blob/main/clients/js/examples/node/app.js).
 
 For more info - please visit the [official Google JS docs](https://ai.google.dev/tutorials/node_quickstart).
 
