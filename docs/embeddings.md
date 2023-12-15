@@ -13,6 +13,7 @@ Chroma provides lightweight wrappers around popular embedding providers, making 
 |              | Python | JS |
 |--------------|-----------|---------------|
 | [OpenAI](/embeddings/openai) | ✅  | ✅ |
+| [Google Generative AI](/embeddings/google-gemini) | ✅  | ✅ |
 | [Cohere](/embeddings/cohere) | ✅  | ✅ |
 | [Google PaLM](/embeddings/google-palm) | ✅  | ➖ |
 | [Hugging Face](/embeddings/hugging-face) | ✅  | ➖ |
