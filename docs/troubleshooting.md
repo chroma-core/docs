@@ -1,5 +1,5 @@
 ---
-sidebar_position: 10
+sidebar_position: 7
 title: "🔍 Troubleshooting"
 ---
 
@@ -29,24 +29,6 @@ results = collection.query(
 We may change `None` to something else to more clearly communicate why they were not returned.
 :::
 
-## Your index resets back to just a few number of records
-
-Users report that they are using Chroma, happily adding data, and then they go to check the `count()` or `query()` and only a single item or a very small fraction of their data is in Chroma.
-
-Chroma has 3 clients: `Ephemeral`, `Persistent`, and `Http`. The `Ephemeral` and `Persistent` clients should treated as **singletons**.
-
-Here is what commonly happens.
-
-1. Create a new Chroma client, #1 saving to `./db`, and add 10 items.
-2. Create another new Chroma client, #2 saving to `./db`, and add 10 more items. Call this B.
-3. Chroma does not lock the database between clients, each client maintains its own locking structure, so these clients can overwrite each other.
-
-`Solution`: Don't use multiple `Ephemeral` or `Persistent` clients at the same time. Create one client and use it for all your operations.
-
-:::note
-We may add extra logic to warn if multiple in-memory clients are used with the same path.
-:::
-
 ## Build error when running `pip install chromadb`
 
 If you encounter an error like this during setup
@@ -73,3 +55,7 @@ Chroma requires SQLite > 3.35, if you encounter issues with having too low of a 
 3. If you are on Windows, you can manually download the latest version of SQLite from https://www.sqlite.org/download.html and
    replace the DLL in your python installation's DLLs folder with the latest version. You can find your python installation path by running `os.path.dirname(sys.executable)` in python.
 4. If you are using a Debian based Docker container, older Debian versions do not have an up to date SQLite, please use `bookworm` or higher.
+
+##  Illegal instruction (core dumped)
+
+If you encounter an error like this during setup and are using Docker - you may have built the library on a machine with a different CPU architecture than the one you are running it on. Try rebuilding the Docker image on the machine you are running it on.

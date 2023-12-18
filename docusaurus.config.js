@@ -94,7 +94,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/chroma-core/chroma',
+          href: 'https://github.com/chroma-core/chroma',
             label: 'GitHub',
             position: 'right',
           },

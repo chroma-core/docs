@@ -1,9 +1,11 @@
 ---
-sidebar_position: 8
+sidebar_position: 11
 title: "👀 Observability"
 ---
 
 # 👀 Observability
+
+## Backend Observability
 
 Chroma is instrumented with [OpenTelemetry](https://opentelemetry.io/) hooks for observability.
 
@@ -11,11 +13,11 @@ Chroma is instrumented with [OpenTelemetry](https://opentelemetry.io/) hooks for
 "[Telemetry](/telemetry)" refers to anonymous product usage statistics we collect. "Observability" refers to metrics, logging, and tracing which can be used by anyone operating a Chroma deployment. Observability features listed on this page are **never** sent back to Chroma; they are for end-users to better understand how their Chroma deployment is behaving.
 :::
 
-## Available Observability
+### Available Observability
 
 Chroma currently only exports OpenTelemetry [traces](https://opentelemetry.io/docs/concepts/signals/traces/). Traces allow a Chroma operator to understand how requests flow through the system and quickly identify bottlenecks.
 
-## Configuration
+### Configuration
 
 Tracing is configured with four environment variables:
 
@@ -39,3 +41,7 @@ Once the stack is running, you can access Zipkin at http://localhost:9411
 :::tip Traces
 Traces in Zipkin will start appearing after you make a request to Chroma.
 :::
+
+## Client (SDK) Observability
+
+See [OpenLLMetry Integration](/integrations/openllmetry).
