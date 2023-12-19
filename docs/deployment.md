@@ -87,7 +87,8 @@ Below are instructions for deploying Chroma with Terraform on the following publ
 Generate a key:
 
 ```bash
-ssh-keygen -t RSA -b 4096 -C "Chroma SSH Keypair" -N "" -f ./chroma_id_rsa && chmod 400 ./chroma_id_rsa
+ssh-keygen -t RSA -b 4096 -C "Chroma SSH Keypair" -N "" -f ./chroma_id_rsa && \
+chmod 400 ./chroma_id_rsa
 ```
 
 The key pair will allow you to connect to your Chroma instance via SSH (applicable only for AWS, GCP and DO
@@ -98,27 +99,28 @@ applicable only for AWS deployments).
 
 AWS Configuration variables
 
-| Parameter Name                             | Description                                                                                                         | Default Value         |
-|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------|-----------------------|
-| chroma_release                             | The chroma release to deploy                                                                                        | 0.4.20                |
-| region                                     | AWS Region                                                                                                          | us-west-1             |
-| instance_type                              | AWS EC2 Instance Type                                                                                               | t3.medium             |
-| public_access                              | Enable public ingress on port 8000                                                                                  | true                  |
-| enable_auth                                | Enable authentication                                                                                               | true                  |
-| auth_type                                  | Authentication type                                                                                                 | token                 |
-| import_keypair                             | Whether to import the keypair in AWS. Set this to `false` if your keypair is already available in AWS.              | true                  |
-| keypair_name                               | The name of the keypair to import                                                                                   | chroma_keypair        |
-| ssh_public_key                             | SSH Public Key                                                                                                      | ./chroma_id_rsa.pub   |
-| ssh_private_key                            | SSH Private Key                                                                                                     | ./chroma_id_rsa       |
-| chroma_instance_volume_size                | The size of the instance volume - the root volume                                                                   | 30                    |
-| chroma_data_volume_size                    | EBS Volume Size of the attached data volume where your chroma data is stored                                        | 20                    |
-| chroma_data_volume_snapshot_before_destroy | Take a snapshot of the chroma data volume before destroying it                                                      | false                 |
-| chroma_data_restore_from_snapshot_id       | Restore the chroma data volume from a snapshot                                                                      | null                  |
-| chroma_port                                | The port that chroma listens on                                                                                     | 8000                  |
-| source_ranges                              | List of CIDR ranges to allow through the firewall                                                                   | ["0.0.0.0/0", "::/0"] |
-| mgmt_source_ranges                         | List of CIDR ranges to allow for management of the Chroma instance. This is used for SSH incoming traffic filtering | ["0.0.0.0/0", "::/0"] |
+| Parameter Name                             | Description                                                                                                         | Default Value       |
+|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------|---------------------|
+| chroma_release                             | The chroma release to deploy                                                                                        | 0.4.20              |
+| region                                     | AWS Region                                                                                                          | us-west-1           |
+| instance_type                              | AWS EC2 Instance Type                                                                                               | t3.medium           |
+| public_access                              | Enable public ingress on port 8000                                                                                  | true                |
+| enable_auth                                | Enable authentication                                                                                               | true                |
+| auth_type                                  | Authentication type                                                                                                 | token               |
+| import_keypair                             | Whether to import the keypair in AWS. Set this to `false` if your keypair is already available in AWS.              | true                |
+| keypair_name                               | The name of the keypair to import                                                                                   | chroma_keypair      |
+| ssh_public_key                             | SSH Public Key                                                                                                      | ./chroma_id_rsa.pub |
+| ssh_private_key                            | SSH Private Key                                                                                                     | ./chroma_id_rsa     |
+| chroma_instance_volume_size                | The size of the instance volume - the root volume                                                                   | 30                  |
+| chroma_data_volume_size                    | EBS Volume Size of the attached data volume where your chroma data is stored                                        | 20                  |
+| chroma_data_volume_snapshot_before_destroy | Take a snapshot of the chroma data volume before destroying it                                                      | false               |
+| chroma_data_restore_from_snapshot_id       | Restore the chroma data volume from a snapshot                                                                      | null                |
+| chroma_port                                | The port that chroma listens on                                                                                     | 8000                |
+| source_ranges                              | List of CIDR ranges to allow through the firewall                                                                   | ["0.0.0.0/0"]       |
+| mgmt_source_ranges                         | List of CIDR ranges to allow for management of the Chroma instance. This is used for SSH incoming traffic filtering | ["0.0.0.0/0"]       |
 
-> Note: All of the above variables can be exported via environment variables (`TF_<variable_name>=<var_value>`) or set in a `.tfvars` file.
+> Note: All of the above variables can be exported via environment variables (`TF_<variable_name>=<var_value>`) or set
+> in a `.tfvars` file.
 
 Set up your Terraform variables and deploy your instance:
 
@@ -187,7 +189,8 @@ GCP Configuration parameters:
 | chroma_port                       | The port that chroma listens on                                                        | 8000                   |
 | source_ranges                     | List of CIDR ranges to allow through the firewall                                      | ["0.0.0.0/0"]          |
 
-> Note: All of the above variables can be exported via environment variables (`TF_<variable_name>=<var_value>`) or set in a `.tfvars` file.
+> Note: All of the above variables can be exported via environment variables (`TF_<variable_name>=<var_value>`) or set
+> in a `.tfvars` file.
 
 Set up your Terraform variables and deploy your instance:
 
@@ -242,7 +245,8 @@ Digital Ocean Configuration parameters:
 | source_ranges           | List of CIDR ranges to allow through the firewall                                                                   | ["0.0.0.0/0", "::/0"] |
 | mgmt_source_ranges      | List of CIDR ranges to allow for management of the Chroma instance. This is used for SSH incoming traffic filtering | ["0.0.0.0/0", "::/0"] |
 
-> Note: All of the above variables can be exported via environment variables (`TF_<variable_name>=<var_value>`) or set in a `.tfvars` file.
+> Note: All of the above variables can be exported via environment variables (`TF_<variable_name>=<var_value>`) or set
+> in a `.tfvars` file.
 
 Set up your Terraform variables and deploy your instance:
 
