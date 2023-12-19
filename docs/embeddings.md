@@ -13,10 +13,13 @@ Chroma provides lightweight wrappers around popular embedding providers, making 
 |              | Python | JS |
 |--------------|-----------|---------------|
 | [OpenAI](/embeddings/openai) | ✅  | ✅ |
+| [Google Generative AI](/embeddings/google-gemini) | ✅  | ✅ |
 | [Cohere](/embeddings/cohere) | ✅  | ✅ |
 | [Google PaLM](/embeddings/google-palm) | ✅  | ➖ |
 | [Hugging Face](/embeddings/hugging-face) | ✅  | ➖ |
 | [Instructor](/embeddings/instructor) | ✅  | ➖ |
+| [Hugging Face Embedding Server](/embeddings/hugging-face-embedding-server) | ✅  | ✅ |
+| [Jina AI](/embeddings/jinaai) | ✅  | ✅ |
 
 We welcome pull requests to add new Embedding Functions to the community.
 
@@ -114,7 +117,7 @@ You can create your own embedding function to use with Chroma, it just needs to 
 from chromadb import Documents, EmbeddingFunction, Embeddings
 
 class MyEmbeddingFunction(EmbeddingFunction):
-    def __call__(self, texts: Documents) -> Embeddings:
+    def __call__(self, input: Documents) -> Embeddings:
         # embed the documents somehow
         return embeddings
 ```
