@@ -3,9 +3,9 @@ slug: /integrations/braintrust
 title: Braintrust
 ---
 
-[Braintrust](braintrustdata.com) is the enterprise-grade stack for building AI products. They provide tools including: evaluations, prompt playground, dataset management, tracing, etc.
+[Braintrust](braintrustdata.com) is an enterprise-grade stack for building AI products including: evaluations, prompt playground, dataset management, tracing, etc.
 
-It's easy to use Braintrust to evaluate AI retrieval apps built with Chroma. Braintrust provides a Typescript and Python library to run and log evaluations.
+Braintrust provides a Typescript and Python library to run and log evaluations and integrates well with Chroma.
 
 - [Tutorial: Evaluate Chroma Retrieval app w/ Braintrust](https://www.braintrustdata.com/docs/examples/rag)
 
@@ -58,4 +58,4 @@ await Eval(
 )
 ```
 
-Learn more on their [docs](https://www.braintrustdata.com/docs).
+Learn more: [docs](https://www.braintrustdata.com/docs).
