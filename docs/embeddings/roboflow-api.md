@@ -17,13 +17,13 @@ from chromadb.utils.embedding_functions import RoboflowEmbeddingFunction
 roboflow_ef = RoboflowEmbeddingFunction(api_key=API_KEY)
 ```
 
-Or else you can set it as an environment variable:
+Alternatively, you can set your API key as an environment variable:
 
 ```bash
 export ROBOFLOW_API_KEY=YOUR_API_KEY
 ```
 
-Then, you can create the `RoboflowEmbeddingFunction` without passing the API key:
+Then, you can create the `RoboflowEmbeddingFunction` without passing an API key directly:
 
 ```python
 from chromadb.utils.embedding_functions import RoboflowEmbeddingFunction
@@ -33,6 +33,34 @@ roboflow_ef = RoboflowEmbeddingFunction()
 
 ## Local Inference
 
-TODO: add instructions for running inference locally
+You can run Inference on your own hardware.
+
+To install Inference, you will need Docker installed. Follow the [official Docker installation instructions](https://docs.docker.com/engine/install/) for guidance on how to install Docker on the device on which you are working.
+
+Then, you can install Inference with pip:
+
+```bash
+pip install inference inference-cli
+```
+
+With Inference installed, you can start an Inference server. This server will run in the background. The server will accept HTTP requests from the `RoboflowEmbeddingFunction` to calculate CLIP text and image embeddings for use in your application:
+
+To start an Inference server, run:
+
+```bash
+inference server start
+```
+
+Your Inference server will run at `http://localhost:9001`.
+
+Then, you can create the `RoboflowEmbeddingFunction`:
+
+```python
+from chromadb.utils.embedding_functions import RoboflowEmbeddingFunction
+
+roboflow_ef = RoboflowEmbeddingFunction(api_key=API_KEY, server_url="http://localhost:9001")
+```
+
+This function will calculate embeddings using your local Inference server instead of the Roboflow cloud.
 
 For a full tutorial on using Roboflow Inference with Chroma, refer to the [Roboflow Chroma integration tutorial](https://github.com/chroma-core/chroma/blob/main/examples/use_with/roboflow/embeddings.ipynb). 
