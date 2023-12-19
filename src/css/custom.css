@@ -596,6 +596,7 @@ div.data_table + table {
   border: none;
   padding-top: 20px;
   padding-bottom: 20px;
+  zoom: 0.8;
 }
 
 div.data_table + table thead {

@@ -7,9 +7,9 @@ Chroma provides a convenient wrapper around OpenAI's embedding API. This embeddi
 
 <div class="data_table"></div>
 
-| Models | Input | Dimensionality | Context Size| Default |
+| Models | Input | Dimensionality | Context Size| 
 |--|--|--|--|--|
-|`ada-002` | English | 1536 | 2048 | ✅ |
+|`ada-002` | English | 1536 | 2048 | 
 
 ## Basic Usage
 
