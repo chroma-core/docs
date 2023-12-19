@@ -88,7 +88,8 @@ const sidebars = {
         'embeddings/hugging-face',
         'embeddings/google-palm',
         'embeddings/instructor',
-        'embeddings/hugging-face-embedding-server'
+        'embeddings/hugging-face-embedding-server',
+        'embeddings/jinaai',
       ],
     },
   ],
