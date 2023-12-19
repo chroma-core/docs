@@ -1,11 +1,18 @@
 ---
 slug: /integrations/langchain
-title: 🦜️🔗 Langchain
+title: 🦜️🔗 LangChain
 ---
 
 LangChain is a popular open-source framework for developing applications powered by language models. 
 
-> Insert star counter... other stuff like that
+<img src="https://img.shields.io/github/stars/langchain-ai/langchain.svg?style=social&label=Star&maxAge=2400"/> 
+
+[MIT License](https://github.com/langchain-ai/langchain/blob/master/LICENSE) &nbsp;&bull;&nbsp;[Site](https://www.langchain.com/) 
+
+| Languages | Docs | Github |
+|---|---|--|--|
+|Python | [Docs](https://python.langchain.com/docs/get_started/introduction) | [Code](https://github.com/langchain-ai/langchain)
+|JS | [Docs](https://js.langchain.com/docs/get_started/introduction) | [Code](https://github.com/langchain-ai/langchainjs)
 
 ### Install
 
@@ -13,9 +20,9 @@ LangChain is a popular open-source framework for developing applications powered
 
 ### Main Benefits
 
-- 1
-- 2
-- 3
+- Common Patterns for chain-of-thought and prompt templating
+- Many integrations and data loaders
+- Deep integration to LangSmith monitoring (developed by the same team)
 
 ### Simple Example
 
@@ -48,7 +55,37 @@ print("There are", langchain_chroma._collection.count(), "in the collection")
 #### Javascript
 
 ```js
-// stuff goes here
+import { OpenAI } from "langchain/llms/openai";
+import { ConversationalRetrievalQAChain } from "langchain/chains";
+import { Chroma } from "langchain/vectorstores/chroma";
+import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import * as fs from "fs";
+
+// to run this first run a chroma server with `chroma run --path /path/to/data`
+
+export const run = async () => {
+  /* Initialize the LLM to use to answer the question */
+  const model = new OpenAI();
+  /* Load in the file we want to do question answering over */
+  const text = fs.readFileSync("state_of_the_union.txt", "utf8");
+  /* Split the text into chunks */
+  const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000 });
+  const docs = await textSplitter.createDocuments([text]);
+  /* Create the vectorstore */
+  const vectorStore = await Chroma.fromDocuments(docs, new OpenAIEmbeddings(), {
+    collectionName: "state_of_the_union",
+  });
+  /* Create the chain */
+  const chain = ConversationalRetrievalQAChain.fromLLM(
+    model,
+    vectorStore.asRetriever()
+  );
+  /* Ask it a question */
+  const question = "What did the president say about Justice Breyer?";
+  const res = await chain.call({ question, chat_history: [] });
+  console.log(res);
+};
 ```
 
 ### Resources
