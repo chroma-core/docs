@@ -34,10 +34,6 @@ client = chromadb.PersistentClient(path="/path/to/save/to")
 
 The `path` is where Chroma will store its database files on disk, and load them on start.
 
-:::info Use a single client at-a-time
-Having many clients that are loading and saving to the same path can cause strange behavior including data deletion. As a general practice, create a Chroma client once in your application, and pass it around instead of creating many clients.
-:::
-
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
@@ -584,12 +580,19 @@ Where filters only search embeddings where the key exists. If you search `collec
 
 ##### Filtering by document contents
 
-In order to filter on document contents, you must supply a `where_document` filter dictionary to the query. The dictionary must have the following structure:
+In order to filter on document contents, you must supply a `where_document` filter dictionary to the query. We support two filtering keys: `$contains` and `$not_contains`. The dictionary must have the following structure:
 
 ```python
 # Filtering for a search_string
 {
     "$contains": "search_string"
+}
+```
+
+```python
+# Filtering for not contains
+{
+    "$not_contains": "search_string"
 }
 ```
 
@@ -857,12 +860,21 @@ Current implementation of static API token auth supports only ENV based tokens.
 
 ##### Running the Server
 
-Set the following environment variables:
+Set the following environment variables to use `Authorization: Bearer test-token` to be your authentication header.
 
 ```bash
 export CHROMA_SERVER_AUTH_CREDENTIALS="test-token"
 export CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
 export CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.token.TokenAuthServerProvider"
+```
+
+to use `X-Chroma-Token: test-token` type of authentication header you can set an additional environment variable.
+
+```bash
+export CHROMA_SERVER_AUTH_CREDENTIALS="test-token"
+export CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER="chromadb.auth.token.TokenConfigServerAuthCredentialsProvider"
+export CHROMA_SERVER_AUTH_PROVIDER="chromadb.auth.token.TokenAuthServerProvider"
+export CHROMA_SERVER_AUTH_TOKEN_TRANSPORT_HEADER="X_CHROMA_TOKEN"
 ```
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
