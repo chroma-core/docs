@@ -53,8 +53,8 @@ st.dataframe(documents_collection_df)
 
 - [Instructions for using `streamlit-chromadb-connection` to connect your Streamlit app to Chroma](https://github.com/Dev317/streamlit_chromadb_connection/blob/main/README.md)
 - [Demo app for `streamlit-chromadb-connection`](https://app-chromadbconnection-mfzxl3nzozmaxh3mrkd6zm.streamlit.app/)
+- - [Streamlit's `st.connection` documentation](https://docs.streamlit.io/library/api-reference/connections/st.connection)
 - [Guide to using vector databases with Streamlit](https://pub.towardsai.net/vector-databases-for-your-streamlit-ai-apps-56cd0af7bbba)
-- [Streamlit's `st.connection` documentation](https://docs.streamlit.io/library/api-reference/connections/st.connection)
 
 #### Tutorials
 
