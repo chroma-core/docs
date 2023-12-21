@@ -7,58 +7,58 @@ Streamlit is an open-source Python library that makes it easy to create and shar
 
 <img src="https://img.shields.io/github/stars/streamlit/streamlit.svg?style=social&label=Star&maxAge=2400"/> 
 
-[Apache 2.0 License](https://github.com/langchain-ai/langchain/blob/master/LICENSE) &nbsp;&bull;&nbsp;[Site](https://streamlit.io/) 
+[Apache 2.0 License](https://github.com/streamlit/streamlit/blob/develop/LICENSE) &nbsp;&bull;&nbsp;[Site](https://streamlit.io/) 
 
 | Languages | Docs | Github | <br>
 |Python | [Docs](https://docs.streamlit.io/) | [Code](https://github.com/streamlit/streamlit)
 
 ### Install
 
+Install Streamlit:
 `pip install streamlit`
+
+Install the streamlit-chromadb-connection, which makes it easy to connect your Streamlit app to Chroma DB with [`st.connection`](https://docs.streamlit.io/1.11.0/library/api-reference/connections/st.connection)"
+`pip install streamlit-chromadb-connection`
 
 ### Main Benefits
 
-- Common Patterns for chain-of-thought and prompt templating
-- Many integrations and data loaders
-- Deep integration to LangSmith monitoring (developed by the same team)
+- Easy to get started with Streamlit's straightforward syntax
+- Built-in [chatbot functionality](https://docs.streamlit.io/library/api-reference/chat)
+- Pre-built integration with Chroma via `streamlit-chromadb-connection`
+- Deploy apps for free on [Streamlit Community Cloud](https://share.streamlit.io/)
 
 ### Simple Example
 
 #### Python
 
 ```python
-import chromadb
-from langchain.vectorstores import Chroma
-from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddings
+import streamlit as st
+from streamlit_chromadb_connection.chromadb_connection import ChromadbConnection
 
-# Chroma code
-persistent_client = chromadb.PersistentClient()
-collection = persistent_client.get_or_create_collection("collection_name")
-collection.add(ids=["1", "2", "3"], documents=["a", "b", "c"])
+configuration = {
+    "client": "PersistentClient",
+    "path": "/tmp/.chroma"
+}
 
-# LangChain Code
-embedding_function = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+collection_name = "documents_collection"
 
-langchain_chroma = Chroma(
-    client=persistent_client,
-    collection_name="collection_name",
-    embedding_function=embedding_function,
-)
-# Important! - the embedding functiion passed to langchain is their wrapper, not Chroma's
-
-
-print("There are", langchain_chroma._collection.count(), "in the collection")
+conn = st.connection("chromadb",
+                     type=ChromaDBConnection,
+                     **configuration)
+documents_collection_df = conn.get_collection_data(collection_name)
+st.dataframe(documents_collection_df)
 ```
 
 ### Resources
 
-- [LangChain + Chroma Announcement Post](https://blog.langchain.dev/langchain-chroma/) on the LangChain blog
-- [LangChain's Chroma Documentation](https://python.langchain.com/en/latest/modules/indexes/vectorstores.html?highlight=chroma#langchain.vectorstores.Chroma)
+- [Guide to using vector databases with Streamlit](https://pub.towardsai.net/vector-databases-for-your-streamlit-ai-apps-56cd0af7bbba)
+- [Streamlit's `st.connection` documentation](https://docs.streamlit.io/library/api-reference/connections/st.connection)
+- [Demo app for `streamlit-chromadb-connection`](https://app-chromadbconnection-mfzxl3nzozmaxh3mrkd6zm.streamlit.app/)
 
 #### Tutorials
 
- - [Chroma and LangChain tutorial](https://github.com/grumpyp/chroma-langchain-tutorial) - The demo showcases how to pull data from the English Wikipedia using their API. The project also demonstrates how to vectorize data in chunks and get embeddings using OpenAI embeddings model.
-  - [Create a Voice-based ChatGPT Clone That Can Search on the Internet and local files](https://betterprogramming.pub/how-to-create-a-voice-based-chatgpt-clone-that-can-search-on-the-internet-24d7f570ea8)
-- [Harrison's `chroma-langchain` demo repo](https://github.com/hwchase17/chroma-langchain)
-  - [question answering over documents](https://github.com/hwchase17/chroma-langchain/blob/master/qa.ipynb) - ([Replit version](https://replit.com/@swyx/LangChainChromaStarter#main.py))
-  - [to use Chroma as a persistent database](https://github.com/hwchase17/chroma-langchain/blob/master/persistent-qa.ipynb)
+- [Build an "Ask the Doc" app using Chroma, Streamlit, and LangChain](https://blog.streamlit.io/langchain-tutorial-4-build-an-ask-the-doc-app/)
+- [Summarize documents with Chroma, Streamlit, and LangChain](https://alphasec.io/summarize-documents-with-langchain-and-chroma/)(https://alphasec.io/summarize-documents-with-langchain-and-chroma/)
+- [Build a custom chatbot with Chroma, Streamlit, and LangChain](https://blog.streamlit.io/how-in-app-feedback-can-increase-your-chatbots-performance/)
+- [Build a RAG bot using Chroma, Streamlit, and LangChain](https://levelup.gitconnected.com/building-a-generative-ai-app-with-streamlit-and-openai-95ec31fe8efd)
+- [Build a PDF QA chatbot with Chroma, Streamlit, and OpenAI](https://www.confident-ai.com/blog/how-to-build-a-pdf-qa-chatbot-using-openai-and-chromadb)https://www.confident-ai.com/blog/how-to-build-a-pdf-qa-chatbot-using-openai-and-chromadb
