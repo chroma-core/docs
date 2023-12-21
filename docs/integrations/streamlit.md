@@ -17,7 +17,7 @@ Streamlit is an open-source Python library that makes it easy to create and shar
 Install Streamlit:
 `pip install streamlit`
 
-Install the streamlit-chromadb-connection, which makes it easy to connect your Streamlit app to Chroma DB with [`st.connection`](https://docs.streamlit.io/1.11.0/library/api-reference/connections/st.connection)"
+Install `streamlit-chromadb-connection`, which connects your Streamlit app to Chroma DB through [`st.connection`](https://docs.streamlit.io/1.11.0/library/api-reference/connections/st.connection):
 `pip install streamlit-chromadb-connection`
 
 ### Main Benefits
