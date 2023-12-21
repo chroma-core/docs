@@ -3,11 +3,11 @@ slug: /integrations/streamlit
 title: 🎈 Streamlit
 ---
 
-LangChain is a popular open-source framework for developing applications powered by language models. 
+Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science. In just a few minutes you can build and deploy powerful data apps.
 
 <img src="https://img.shields.io/github/stars/streamlit/streamlit.svg?style=social&label=Star&maxAge=2400"/> 
 
-[Apache 2.0 License](https://github.com/langchain-ai/langchain/blob/master/LICENSE) &nbsp;&bull;&nbsp;[Site]([https://www.langchain.com/](https://streamlit.io/)) 
+[Apache 2.0 License](https://github.com/langchain-ai/langchain/blob/master/LICENSE) &nbsp;&bull;&nbsp;[Site](https://streamlit.io/) 
 
 | Languages | Docs | Github |
 |---|---|--|--|
