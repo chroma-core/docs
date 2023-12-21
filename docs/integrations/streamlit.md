@@ -14,10 +14,10 @@ Streamlit is an open-source Python library that makes it easy to create and shar
 
 ### Install
 
-Install Streamlit:
+Install Streamlit: <br>
 `pip install streamlit`
 
-Install `streamlit-chromadb-connection`, which connects your Streamlit app to Chroma DB through [`st.connection`](https://docs.streamlit.io/1.11.0/library/api-reference/connections/st.connection):
+Install `streamlit-chromadb-connection`, which connects your Streamlit app to Chroma DB through [`st.connection`](https://docs.streamlit.io/1.11.0/library/api-reference/connections/st.connection): <br>
 `pip install streamlit-chromadb-connection`
 
 ### Main Benefits
