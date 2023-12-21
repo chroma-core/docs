@@ -58,7 +58,7 @@ st.dataframe(documents_collection_df)
 #### Tutorials
 
 - [Build an "Ask the Doc" app using Chroma, Streamlit, and LangChain](https://blog.streamlit.io/langchain-tutorial-4-build-an-ask-the-doc-app/)
-- [Summarize documents with Chroma, Streamlit, and LangChain](https://alphasec.io/summarize-documents-with-langchain-and-chroma/)(https://alphasec.io/summarize-documents-with-langchain-and-chroma/)
+- [Summarize documents with Chroma, Streamlit, and LangChain](https://alphasec.io/summarize-documents-with-langchain-and-chroma/)
 - [Build a custom chatbot with Chroma, Streamlit, and LangChain](https://blog.streamlit.io/how-in-app-feedback-can-increase-your-chatbots-performance/)
 - [Build a RAG bot using Chroma, Streamlit, and LangChain](https://levelup.gitconnected.com/building-a-generative-ai-app-with-streamlit-and-openai-95ec31fe8efd)
-- [Build a PDF QA chatbot with Chroma, Streamlit, and OpenAI](https://www.confident-ai.com/blog/how-to-build-a-pdf-qa-chatbot-using-openai-and-chromadb)https://www.confident-ai.com/blog/how-to-build-a-pdf-qa-chatbot-using-openai-and-chromadb
+- [Build a PDF QA chatbot with Chroma, Streamlit, and OpenAI](https://www.confident-ai.com/blog/how-to-build-a-pdf-qa-chatbot-using-openai-and-chromadb)
