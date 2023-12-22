@@ -28,6 +28,8 @@ LangChain is a popular open-source framework for developing applications powered
 
 #### Python
 
+[Langchain Python Docs - Chroma Integration](https://python.langchain.com/docs/integrations/vectorstores/chroma)
+
 ```python
 import chromadb
 from langchain.vectorstores import Chroma
@@ -53,6 +55,8 @@ print("There are", langchain_chroma._collection.count(), "in the collection")
 ```
 
 #### Javascript
+
+[Langchain JS Docs - Chroma Integration](https://js.langchain.com/docs/integrations/vectorstores/chroma)
 
 ```js
 import { OpenAI } from "langchain/llms/openai";
