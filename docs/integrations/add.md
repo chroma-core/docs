@@ -27,6 +27,7 @@ We strongly encourage having the following sections:
 - Relavent links (site, docs, repo)
 - Languages supported (Chroma has 1st party Python and JS support)
 - How to install
+- Main benefits (optimize for clear, non-markety language)
 - A simple getting-started example
 - Resource and Tutorial links
 

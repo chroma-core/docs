@@ -79,6 +79,7 @@ const sidebars = {
       href: '/'  
     },
     'embeddings',
+    'embeddings/add',
     {
       type: 'category',
       label: 'Integrations',

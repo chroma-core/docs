@@ -23,6 +23,8 @@ Chroma provides lightweight wrappers around popular embedding providers, making 
 
 We welcome pull requests to add new Embedding Functions to the community.
 
+[➕ Add New](/embeddings/add)
+
 ***
 
 ## Default: all-MiniLM-L6-v2
