@@ -57,6 +57,7 @@ const sidebars = {
       href: '/'  
     },
     'integrations/index',
+    'integrations/add',
     {
       type: 'category',
       label: 'Integrations',
@@ -65,6 +66,7 @@ const sidebars = {
       items: [
         'integrations/langchain',
         'integrations/llama-index',
+        
       ],
     },
   ],
