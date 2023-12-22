@@ -22,6 +22,8 @@ We welcome pull requests to add new Integrations to the community.
 
 *Coming soon* - integrations with LangSmith, JinaAI, and more.
 
+[➕ Add New](/integrations/add)
+
 *** 
 
 ### 🧬 Embeddings

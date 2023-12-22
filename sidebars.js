@@ -57,6 +57,7 @@ const sidebars = {
       href: '/'  
     },
     'integrations/index',
+    'integrations/add',
     {
       type: 'category',
       label: 'Integrations',
@@ -78,6 +79,7 @@ const sidebars = {
       href: '/'  
     },
     'embeddings',
+    'embeddings/add',
     {
       type: 'category',
       label: 'Integrations',

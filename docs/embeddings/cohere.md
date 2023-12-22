@@ -3,56 +3,88 @@
 
 # Cohere
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-<div class="select-language">Select a language</div>
-
-<Tabs queryString groupId="lang">
-<TabItem value="py" label="Python"></TabItem>
-<TabItem value="js" label="JavaScript"></TabItem>
-</Tabs>
-
 Chroma also provides a convenient wrapper around Cohere's embedding API. This embedding function runs remotely on Cohere’s servers, and requires an API key. You can get an API key by signing up for an account at [Cohere](https://dashboard.cohere.ai/welcome/register).
 
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
+<div class="data_table"></div>
 
-This embedding function relies on the `cohere` python package, which you can install with `pip install cohere`.
+| Models | Input | Dimensionality | Context Size| 
+|--|--|--|--|--|
+|`embed-english-v3.0` | English | 1024 | 512 (recommended) | 
+|`embed-multilingual-v3.0` | [Full List](https://docs.cohere.com/docs/supported-languages) | 1024 | 512 (recommended) | 
+|`embed-english-light-v3.0` | English | 384 | 512 (recommended) | 
+|`embed-multilingual-light-v3.0` | [Full List](https://docs.cohere.com/docs/supported-languages) | 384 | 512 (recommended) | 
+|`embed-english-v2.0` | English | 4096 | 512 (recommended) | 
+|`embed-english-light-v2.0` | English | 1024 | 512 (recommended) |
+|`embed-multilingual-v2.0` | [Full List](https://docs.cohere.com/docs/supported-languages) | 768 | 512 (recommended) | 
+
+
+## Basic Usage
+
+### Python
+
+```bash
+pip install cohere
+```
 
 ```python
-cohere_ef  = embedding_functions.CohereEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="large")
-cohere_ef(texts=["document1","document2"])
+
+from chromadb.utils import embedding_functions
+
+embedder = embedding_functions.CohereEmbeddingFunction(
+        api_key="YOUR_API_KEY")
+
+collection = client.create_collection(
+        name="cohere_ef", 
+        embedding_function=embedder)
 ```
 
-</TabItem>
-<TabItem value="js" label="JavaScript">
+### Javascript
+
+```bash
+yarn add cohere-ai
+```
 
 ```javascript
-const {CohereEmbeddingFunction} = require('chromadb');
-const embedder = new CohereEmbeddingFunction("apiKey")
+import { ChromaClient, CohereEmbeddingFunction } from 'chromadb'
 
-// use directly 
-const embeddings = embedder.generate(["document1","document2"])
+const embedder = new CohereEmbeddingFunction({
+    apiKey: "YOUR_API_KEY"
+})
 
-// pass documents to query for .add and .query
-const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
-const collectionGet = await client.getCollection({name:"name", embeddingFunction: embedder})
+const collection = await client.createCollection({
+    name: "cohere_ef", 
+    embeddingFunction: embedder
+})
 ```
 
-</TabItem>
+## Advanced Usage
 
-</Tabs>
+### Call directly 
 
+By passing the embedding function to a Collection, Chroma handles the embedding of documents and queries for you. However in some cases you may want to generate the embeddings outside and handle them yourself.
 
+#### Python
+
+```python
+embeddings = embedder(["document1","document2"])
+# [[0.04565250128507614, 0.01611952856183052...], [0.030171213671565056, 0.007690359838306904...]]
+```
+
+#### Javascript
+
+```javascript
+const embeddings = embedder.generate(["document1","document2"])
+// [[0.04565250128507614, 0.01611952856183052...], [0.030171213671565056, 0.007690359838306904...]]
+```
+
+### Using a different model
 
 You can pass in an optional `model_name` argument, which lets you choose which Cohere embeddings model to use. By default, Chroma uses `large` model. You can see the available models under `Get embeddings` section [here](https://docs.cohere.ai/reference/embed).
 
 
 ### Multilingual model example
 
-<Tabs queryString groupId="lang" className="hideTabSwitcher">
-<TabItem value="py" label="Python">
+#### Python
 
 ```python
 cohere_ef  = embedding_functions.CohereEmbeddingFunction(
@@ -69,11 +101,10 @@ cohere_ef(texts=multilingual_texts)
 
 ```
 
-</TabItem>
-<TabItem value="js" label="JavaScript">
+#### Javascript
 
 ```javascript
-const {CohereEmbeddingFunction} = require('chromadb');
+import { CohereEmbeddingFunction } from 'chromadb'
 const embedder = new CohereEmbeddingFunction("apiKey")
 
 multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!', 
@@ -85,12 +116,5 @@ multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!',
 const embeddings = embedder.generate(multilingual_texts)
 
 ```
-
-
-</TabItem>
-
-</Tabs>
-
-
 
 For more information on multilingual model you can read [here](https://docs.cohere.ai/docs/multilingual-language-models).
