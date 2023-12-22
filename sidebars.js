@@ -67,6 +67,7 @@ const sidebars = {
         'integrations/llama-index',
         'integrations/braintrust',
         'integrations/openllmetry',
+        'integrations/streamlit',
       ],
     },
   ],
