@@ -3,7 +3,7 @@ slug: /integrations/haystack
 title: 💙 Haystack
 ---
 
-[Haystack](https://github.com/deepset-ai/haystack) is an open-source LLM framework in Python. It provides tooling for all steps of the NLP application building life-cycle. This includes tooling to prepare and embed documents into vector databases, as well as building fully customizable LLM pipelines such as retrieval-augmented generative (RAG) pipelines.
+[Haystack](https://github.com/deepset-ai/haystack) is an open-source LLM framework in Python. It provides [embedders](https://docs.haystack.deepset.ai/v2.0/docs/embedders), [generators](https://docs.haystack.deepset.ai/v2.0/docs/generators) and [rankers](https://docs.haystack.deepset.ai/v2.0/docs/rankers) via a number of LLM providers, tooling for [preprocessing](https://docs.haystack.deepset.ai/v2.0/docs/preprocessors) and data preparation, connectors to a number of vector databases including Chroma and more. Haystack allows you to build custom LLM applications using both components readily available in Haystack and [custom components](https://docs.haystack.deepset.ai/v2.0/docs/custom-components). Some of the most common applications you can build with Haystack are retrieval-augmented generation pipelines (RAG), question-answering and semantic search.
 
 <img src="https://img.shields.io/github/stars/deepset-ai/haystack.svg?style=social&label=Star&maxAge=2400"/>
 
