@@ -68,6 +68,7 @@ const sidebars = {
         'integrations/braintrust',
         'integrations/openllmetry',
         'integrations/streamlit',
+        'integrations/haystack',
       ],
     },
   ],
