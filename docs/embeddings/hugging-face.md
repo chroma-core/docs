@@ -21,6 +21,7 @@ Chroma also provides a convenient wrapper around HuggingFace's embedding API. Th
 This embedding function relies on the `requests` python package, which you can install with `pip install requests`.
 
 ```python
+import chromadb.utils.embedding_functions as embedding_functions
 huggingface_ef = embedding_functions.HuggingFaceEmbeddingFunction(
     api_key="YOUR_API_KEY",
     model_name="sentence-transformers/all-MiniLM-L6-v2"
