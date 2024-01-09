@@ -21,6 +21,7 @@ Chroma provides a convenient wrapper around JinaAI's embedding API. This embeddi
 This embedding function relies on the `requests` python package, which you can install with `pip install requests`.
 
 ```python
+import chromadb.utils.embedding_functions as embedding_functions
 jinaai_ef = embedding_functions.JinaEmbeddingFunction(
                 api_key="YOUR_API_KEY",
                 model_name="jina-embeddings-v2-base-en"

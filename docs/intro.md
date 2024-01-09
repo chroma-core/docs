@@ -75,7 +75,8 @@ Continue with the full [getting started guide](./getting-started.md).
 | Rust | ➖ | ✅ [from @Anush008](https://crates.io/crates/chromadb) |
 | Elixir | ➖ | ✅ [from @3zcurdia](https://hex.pm/packages/chroma/) |
 | Dart | ➖ | ✅ [from @davidmigloz](https://pub.dev/packages/chromadb) |
-| PHP | ➖ | ✅ [from @HelgeSverre](https://github.com/helgeSverre/chromadb)                                                            |
+| PHP | ➖ | ✅ [from @CodeWithKyrian](https://github.com/CodeWithKyrian/chromadb-php) |
+| PHP (Laravel) | ➖ | ✅ [from @HelgeSverre](https://github.com/helgeSverre/chromadb)                                                            |
 | Other?       | ❓    | ❓            |
 
 <br/>

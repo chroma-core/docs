@@ -8,6 +8,7 @@
 To use the PaLM embedding API, you must have `google.generativeai` Python package installed and have the API key. To use:
 
 ```python
+import chromadb.utils.embedding_functions as embedding_functions
 palm_embedding = embedding_functions.GooglePalmEmbeddingFunction(
     api_key=api_key, model=model_name)
 
