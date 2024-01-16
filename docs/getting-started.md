@@ -32,7 +32,7 @@ pip install chromadb
 <TabItem value="js" label="JavaScript">
 
 ```sh
-npm install --save chromadb # yarn add chromadb
+npm install --save chromadb chromadb-default-embed # yarn add chromadb chromadb-default-embed
 ```
 
 You will need to install the Chroma python package to use the Chroma CLI and backend server.
@@ -41,7 +41,7 @@ You will need to install the Chroma python package to use the Chroma CLI and bac
 pip install chromadb
 ```
 
-Alternatively, you can use a Docker container to run the Chroma backend server.
+(You can use a Docker container to run the Chroma backend server.)
 
 </TabItem>
 
@@ -60,10 +60,10 @@ chroma_client = chromadb.Client()
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-Start the Chroma backend server:
+Start the Chroma backend server. `--path` is wherever you want to persist the DB.
 
 ```sh
-chroma run --path /db_path
+chroma run --path /save_path
 ```
 
 Then create a client which connects to it:
@@ -96,13 +96,21 @@ collection = chroma_client.create_collection(name="my_collection")
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-For this example, we want to generate embeddings from text. OpenAI's `ada-002` model is popular, free, and a quick [signup](https://openai.com/api/). Grab your API key and come back. Chroma's API is polymorphic (it can run in the browser or server-side), but OpenAIs is not. So run this example server-side.
+For this example, we will use the default embedding function integrated into Chroma. (all-MiniLM-L6-v2 from HF Sentence Transformers). 
+
+<!-- For this example, we want to generate embeddings from text. OpenAI's `ada-002` model is popular, free, and a quick [signup](https://openai.com/api/). Grab your API key and come back. Chroma's API is polymorphic (it can run in the browser or server-side), but OpenAIs is not. So run this example server-side. -->
 
 :::caution
 Please take steps to secure your API when interacting with frontend systems.
 :::
 
 ```js
+const collection = await client.createCollection({
+  name: "my_collection"
+});
+```
+
+<!-- ```js
 // CJS
 const { OpenAIEmbeddingFunction } = require("chromadb");
 
@@ -116,7 +124,7 @@ const collection = await client.createCollection({
   name: "my_collection",
   embeddingFunction: embedder,
 });
-```
+``` -->
 
 </TabItem>
 
@@ -229,5 +237,5 @@ Find [chromadb on npm](https://www.npmjs.com/package/chromadb).
 
 ## Coming Soon
 
-- A hosted version of Chroma, with an easy to use web UI and API
+- A [hosted version](https://airtable.com/shrOAiDUtS2ILy5vZ) of Chroma, with an easy to use web UI and API
 - Multiple datatypes, including images, audio, video, and more
