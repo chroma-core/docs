@@ -20,6 +20,7 @@ Chroma provides lightweight wrappers around popular embedding providers, making 
 | [Instructor](/embeddings/instructor) | ✅  | ➖ |
 | [Hugging Face Embedding Server](/embeddings/hugging-face-embedding-server) | ✅  | ✅ |
 | [Jina AI](/embeddings/jinaai) | ✅  | ✅ |
+| [Amazon Bedrock](/embeddings/amazon-bedrock) | ✅  | ✅ |
 
 We welcome pull requests to add new Embedding Functions to the community.
 
