@@ -692,7 +692,7 @@ collection.update(
 
 </Tabs>
 
-If an `id` is not found in the collection, an error will be logged and the update will be ignored. If `documents` are supplied without corresponding `embeddings`, the embeddings will be recomupted with the collection's embedding function.
+If an `id` is not found in the collection, an error will be logged and the update will be ignored. If `documents` are supplied without corresponding `embeddings`, the embeddings will be recomputed with the collection's embedding function.
 
 If the supplied `embeddings` are not the same dimension as the collection, an exception will be raised.
 
