@@ -19,7 +19,15 @@ Chroma provides a convinient wrapper for [Amazon Bedrock](https://aws.amazon.com
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
-To use Amazon Bedrock embedding API, you must have `boto3` Python package installed and create an instance of `boto3.Session` with your AWS credentials. To use:
+To use Amazon Bedrock embedding API, you must have `boto3` Python package installed.
+
+```sh
+pip install boto3
+```
+
+To pass AWS credential, create an instance of `boto3.Session` with your AWS credentials.
+
+Here is the example:
 
 ```python
 import boto3
@@ -45,14 +53,22 @@ bedrock(["こんにちは", "你们好"])
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
-To use Amazon Bedrock embedding API, you must have `@aws-sdk/client-bedrock-runtime` installed. To use:
+To use Amazon Bedrock embedding API, you must have `@aws-sdk/client-bedrock-runtime` installed.
+
+You can pass AWS credentials to the constructor of `AmazonBedrockEmbeddingFunction` like this:
 
 ```javascript
 import  { AmazonBedrockEmbeddingFunction } from 'chromadb';
-import { fromSSO } = from '@aws-sdk/credential-providers';
 
-const c = await fromSSO({profile: "my-profile"})
-const ef = new AmazonBedrockEmbeddingFunction({config: {credentials: c, region: "us-east-1"}})
+const ef = new AmazonBedrockEmbeddingFunction({
+    config: {
+        credentials: {
+            accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        },
+        region: "us-east-1" // Default region. You can change it to your region.
+    },
+})
 
 // use directly
 const embeddings = await ef.generate(["foo"])
@@ -60,6 +76,26 @@ const embeddings = await ef.generate(["foo"])
 // pass documents to query for .add and .query
 const collection = await client.createCollection({name: "name", embeddingFunction: ef})
 const collection = await client.getCollection({name: "name", embeddingFunction: ef})
+```
+
+If you want to use other credentials, you need to install `@aws-sdk/credential-providers`.
+
+See [AWS SDK for JavaScript v3](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/setting-credentials.html) for more information.
+
+Here is the example using SSO credentials:
+
+```javascript
+import  { AmazonBedrockEmbeddingFunction } from 'chromadb';
+import { fromSSO } = from '@aws-sdk/credential-providers';
+
+const c = await fromSSO({profile: "my-profile"})
+
+const ef = new AmazonBedrockEmbeddingFunction({
+    config: {
+        credentials: c,
+        region: "us-east-1"
+    },
+})
 ```
 
 </TabItem>
