@@ -9,10 +9,12 @@ There are three models available. The default is `hkunlp/instructor-base`, and f
 
 ```python
 #uses base model and cpu
+import chromadb.utils.embedding_functions as embedding_functions
 ef = embedding_functions.InstructorEmbeddingFunction() 
 ```
 or
 ```python
+import chromadb.utils.embedding_functions as embedding_functions
 ef = embedding_functions.InstructorEmbeddingFunction(
 model_name="hkunlp/instructor-xl", device="cuda")
 ```

@@ -42,7 +42,7 @@ Chroma supports data loaders, for storing and querying with data stored outside 
 Chroma has an data loader for loading images from a filesystem built in.
 
 ```python
-from chromadb.utils.data_loaders import ImageDataLoader
+from chromadb.utils.data_loaders import ImageLoader
 data_loader = ImageLoader()
 ```
 

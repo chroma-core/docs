@@ -65,7 +65,10 @@ const sidebars = {
       items: [
         'integrations/langchain',
         'integrations/llama-index',
+        'integrations/braintrust',
         'integrations/openllmetry',
+        'integrations/streamlit',
+        'integrations/haystack',
       ],
     },
   ],
@@ -88,7 +91,8 @@ const sidebars = {
         'embeddings/hugging-face',
         'embeddings/google-palm',
         'embeddings/instructor',
-        'embeddings/hugging-face-embedding-server'
+        'embeddings/hugging-face-embedding-server',
+        'embeddings/jinaai',
       ],
     },
   ],
