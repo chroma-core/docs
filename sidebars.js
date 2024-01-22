@@ -65,7 +65,10 @@ const sidebars = {
       items: [
         'integrations/langchain',
         'integrations/llama-index',
+        'integrations/braintrust',
         'integrations/openllmetry',
+        'integrations/streamlit',
+        'integrations/haystack',
       ],
     },
   ],
@@ -83,11 +86,13 @@ const sidebars = {
       className: 'category-header',
       items: [
         'embeddings/openai',
+        'embeddings/google-gemini',
         'embeddings/cohere',
         'embeddings/hugging-face',
         'embeddings/google-palm',
         'embeddings/instructor',
-        'embeddings/hugging-face-embedding-server'
+        'embeddings/hugging-face-embedding-server',
+        'embeddings/jinaai',
       ],
     },
   ],

@@ -41,6 +41,14 @@ import TabItem from '@theme/TabItem';
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
+## Braintrust
+
+Braintrust is the enterprise-grade stack for building AI products. From evaluations, to prompt playground, to data management,
+we take uncertainty and tedium out of incorporating AI into
+your business.
+
+- [Evaluate a Chroma RAG app using Braintrust](https://www.braintrustdata.com/docs/examples/rag)
+
 ## 🦜️🔗 LangchainJS
 
 Here is an [example in LangChainJS](https://github.com/hwchase17/langchainjs/blob/main/examples/src/chains/chat_vector_db_chroma.ts)

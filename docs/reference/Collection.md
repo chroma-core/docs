@@ -51,7 +51,7 @@ Add embeddings to the data store.
 - `ValueError` - If you don't provide either embeddings or documents
 - `ValueError` - If the length of ids, embeddings, metadatas, or documents don't match
 - `ValueError` - If you don't provide an embedding function and don't provide embeddings
-- `ValueError` - If you provide an id that already exists
+- `DuplicateIDError` - If you provide an id that already exists
 
 ### get
 

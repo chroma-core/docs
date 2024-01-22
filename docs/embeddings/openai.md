@@ -21,6 +21,7 @@ Chroma provides a convenient wrapper around OpenAI's embedding API. This embeddi
 This embedding function relies on the `openai` python package, which you can install with `pip install openai`.
 
 ```python
+import chromadb.utils.embedding_functions as embedding_functions
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(
                 api_key="YOUR_API_KEY",
                 model_name="text-embedding-ada-002"
@@ -29,6 +30,7 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
 
 To use the OpenAI embedding models on other platforms such as Azure, you can use the `api_base` and `api_type` parameters: 
 ```python
+import chromadb.utils.embedding_functions as embedding_functions
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(
                 api_key="YOUR_API_KEY",
                 api_base="YOUR_API_BASE_PATH",

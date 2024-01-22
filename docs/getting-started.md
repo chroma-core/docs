@@ -178,7 +178,7 @@ await collection.add({
     [1.2, 2.3, 4.5],
     [6.7, 8.2, 9.2],
   ],
-  where: [{ source: "my_source" }, { source: "my_source" }],
+  metadatas: [{ source: "my_source" }, { source: "my_source" }],
   documents: ["This is a document", "This is another document"],
 });
 ```
