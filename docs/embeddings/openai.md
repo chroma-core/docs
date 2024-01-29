@@ -30,11 +30,13 @@ Visit OpenAI Embeddings [documentation](https://platform.openai.com/docs/guides/
 
 This embedding function relies on the `openai` python package, which you can install with `pip install openai`.
 
+You can pass in an optional `model_name` argument, which lets you choose which OpenAI embeddings model to use. By default, Chroma uses `text-embedding-ada-002`.
+
 ```python
 import chromadb.utils.embedding_functions as embedding_functions
 openai_ef = embedding_functions.OpenAIEmbeddingFunction(
                 api_key="YOUR_API_KEY",
-                model_name="text-embedding-ada-002"
+                model_name="text-embedding-3-small"
             )
 ```
 
@@ -46,18 +48,20 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
                 api_base="YOUR_API_BASE_PATH",
                 api_type="azure",
                 api_version="YOUR_API_VERSION",
-                model_name="text-embedding-ada-002"
+                model_name="text-embedding-3-small"
             )
 ```
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
+You can pass in an optional `model` argument, which lets you choose which OpenAI embeddings model to use. By default, Chroma uses `text-embedding-ada-002`.
+
 ```javascript
 const {OpenAIEmbeddingFunction} = require('chromadb');
 const embedder = new OpenAIEmbeddingFunction({
     openai_api_key: "apiKey", 
-    model: "text-embedding-ada-002"
+    model: "text-embedding-3-small"
 })
 
 // use directly 
@@ -77,6 +81,3 @@ const collection = await client.getCollection({
 </TabItem>
 
 </Tabs>
-
-
-You can pass in an optional `model_name` argument, which lets you choose which OpenAI embeddings model to use. By default, Chroma uses `text-embedding-ada-002`. You can see a list of all available models [here](https://platform.openai.com/docs/guides/embeddings/what-are-embeddings).
