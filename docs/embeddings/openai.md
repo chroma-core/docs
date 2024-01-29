@@ -15,6 +15,16 @@ import TabItem from '@theme/TabItem';
 
 Chroma provides a convenient wrapper around OpenAI's embedding API. This embedding function runs remotely on OpenAI's servers, and requires an API key. You can get an API key by signing up for an account at [OpenAI](https://openai.com/api/).
 
+The following OpenAI Embedding Models are supported:
+
+- `text-embedding-ada-002`
+- `text-embedding-3-small`
+- `text-embedding-3-large`
+
+:::note More Info
+Visit OpenAI Embeddings [documentation](https://platform.openai.com/docs/guides/embeddings) for more information.
+:::
+
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
@@ -45,14 +55,23 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
 
 ```javascript
 const {OpenAIEmbeddingFunction} = require('chromadb');
-const embedder = new OpenAIEmbeddingFunction({openai_api_key: "apiKey"})
+const embedder = new OpenAIEmbeddingFunction({
+    openai_api_key: "apiKey", 
+    model: "text-embedding-ada-002"
+})
 
 // use directly 
 const embeddings = embedder.generate(["document1","document2"])
 
 // pass documents to query for .add and .query
-const collection = await client.createCollection({name: "name", embeddingFunction: embedder})
-const collection = await client.getCollection({name: "name", embeddingFunction: embedder})
+const collection = await client.createCollection({
+    name: "name", 
+    embeddingFunction: embedder
+})
+const collection = await client.getCollection({
+    name: "name", 
+    embeddingFunction: embedder
+})
 ```
 
 </TabItem>
