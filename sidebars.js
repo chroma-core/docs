@@ -49,6 +49,12 @@ const sidebars = {
       label: '🔧 API Docs',
       className: 'category-link',
     },
+    {
+      type: 'link',
+      href: '/advanced',
+      label: '🛰 Advanced',
+      className: 'category-link',
+    },
   ],
   integrations: [
     {
@@ -69,6 +75,23 @@ const sidebars = {
         'integrations/openllmetry',
         'integrations/streamlit',
         'integrations/haystack',
+      ],
+    },
+  ],
+  advanced: [
+    {
+      type: 'link',
+      label: '← Home',
+      href: '/'  
+    },
+    'advanced/index',
+    {
+      type: 'category',
+      label: 'Advanced',
+      collapsed: false,
+      className: 'category-header',
+      items: [
+        'advanced/memory',
       ],
     },
   ],
