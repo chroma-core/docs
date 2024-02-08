@@ -774,7 +774,7 @@ Supported authentication methods:
 
 | Authentication Method | Basic Auth (Pre-emptive)                                                                                                  | Static API Token                                                                              |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | Static auth token in `Authorization: Bearer <tokem>` or in `X-Chroma-Token: <token>` headers. |
+| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | Static auth token in `Authorization: Bearer <token>` or in `X-Chroma-Token: <token>` headers. |
 | Status                | `Alpha`                                                                                                                   | `Alpha`                                                                                       |
 | Server-Side Support   | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
 | Client/Python         | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
