@@ -16,7 +16,9 @@ import TabItem from '@theme/TabItem';
 
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
-Chroma also provides a convenient wrapper around [Universal Sentence Encoder](https://research.google.com/pubs/archive/46808.pdf). This embedding function uses `https://tfhub.dev/google/universal-sentence-encoder/4` available on Tensorflow Hub.
+Chroma also provides a convenient wrapper around [Universal Sentence Encoder](https://research.google.com/pubs/archive/46808.pdf).
+
+This embedding function uses `https://tfhub.dev/google/universal-sentence-encoder/4` available on Tensorflow Hub
 
 This embedding function relies on the `tensforflow_hub` python package, which you can install with `pip install tensforflow_hub`.
 
@@ -25,7 +27,7 @@ import chromadb.utils.embedding_functions as embedding_functions
 huggingface_ef = embedding_functions.UniversalSentenceEncoderEmbeddingFunction()
 ```
 
-You can pass in an optional `model_name` argument, which lets you choose which model to use. By default, Chroma uses `[https://tfhub.dev/google/universal-sentence-encoder/4](https://tfhub.dev/google/universal-sentence-encoder/4)`.
+You can pass in an optional `model_name` argument, which lets you choose which model to use. By default, Chroma uses [https://tfhub.dev/google/universal-sentence-encoder/4](https://tfhub.dev/google/universal-sentence-encoder/4).
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
