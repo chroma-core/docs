@@ -78,7 +78,7 @@ const collection = await client.createCollection({name: "name", embeddingFunctio
 const collection = await client.getCollection({name: "name", embeddingFunction: ef})
 ```
 
-If you want to use other credentials, you need to install `@aws-sdk/credential-providers`.
+If you want to use other credentials, e.g., SSO, Temporary Credential, etc., you need to install `@aws-sdk/credential-providers`.
 
 See [AWS SDK for JavaScript v3](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/setting-credentials.html) for more information.
 
