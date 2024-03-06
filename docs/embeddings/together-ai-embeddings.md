@@ -9,7 +9,7 @@ A list of available embedding models can be seen [here](https://docs.together.ai
 
 ```python
 import chromadb.utils.embedding_functions as embedding_functions
-palm_embedding = embedding_functions.TogetherAIEmbeddingFunction(
+together_embedding = embedding_functions.TogetherAIEmbeddingFunction(
     api_key=api_key, model=model_name)
 
 ```
