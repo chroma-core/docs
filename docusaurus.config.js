@@ -36,6 +36,7 @@ const config = {
         enableInDevelopment: true, // optional
       },
     ],
+    require.resolve('@cmfcmf/docusaurus-search-local'),
   ],
 
   presets: [
