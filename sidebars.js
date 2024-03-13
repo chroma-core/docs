@@ -36,7 +36,12 @@ const sidebars = {
       label: '🔌 Integrations',
       className: 'category-link',
     },
-    'deployment',
+    {
+      type: 'link',
+      href: '/deployment',
+      label: '☁️ Deployment',
+      className: 'category-link',
+    },
     'migration',
     'observability',
     'telemetry',
@@ -69,6 +74,25 @@ const sidebars = {
         'integrations/openllmetry',
         'integrations/streamlit',
         'integrations/haystack',
+      ],
+    },
+  ],
+  deployment: [
+    {
+      type: 'link',
+      label: '← Home',
+      href: '/'
+    },
+    'deployment/index',
+    {
+      type: 'category',
+      label: 'Deployments',
+      collapsed: false,
+      className: 'category-header',
+      items: [
+        'deployment/aws',
+        'deployment/gcp',
+        'deployment/digital-ocean',
       ],
     },
   ],
