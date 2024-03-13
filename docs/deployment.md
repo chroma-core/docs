@@ -38,7 +38,8 @@ You can get the Chroma Docker image from [Docker Hub](https://hub.docker.com/r/c
 
 ```sh
 docker pull chromadb/chroma
-docker run -p 8000:8000 chromadb/chroma
+docker volume create chroma-data
+docker run --rm -p 8000:8000 -v chroma-data:/chroma/chroma chromadb/chroma
 ```
 
 You can also build the Docker image yourself from the Dockerfile in the [Chroma GitHub repository](https://github.com/chroma-core/chroma)
