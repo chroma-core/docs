@@ -6,6 +6,12 @@ sidebar_position: 1
 
 # Class: ChromaClient
 
+## Hierarchy
+
+- **`ChromaClient`**
+
+  ↳ [`CloudClient`](CloudClient.md)
+
 ## Constructors
 
 ### constructor
@@ -26,10 +32,57 @@ const client = new ChromaClient({
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `params` | `Object` | The parameters for creating a new client |
-| `params.path?` | `string` | The base path for the Chroma API. |
+| `params` | [`ChromaClientParams`](../modules.md#chromaclientparams) | The parameters for creating a new client |
+
+## Properties
+
+### \_adminClient
+
+• `Private` `Optional` **\_adminClient**: [`AdminClient`](AdminClient.md)
+
+___
+
+### apiAdapter
+
+• `Private` **apiAdapter**: `undefined` \| `ClientAuthProtocolAdapter`<`any`\>
+
+___
+
+### database
+
+• `Private` **database**: `string` = `DEFAULT_DATABASE`
+
+___
+
+### tenant
+
+• `Private` **tenant**: `string` = `DEFAULT_TENANT`
 
 ## Methods
+
+### countCollections
+
+▸ **countCollections**(): `Promise`<`number`\>
+
+Counts all collections.
+
+**`Throws`**
+
+If there is an issue counting the collections.
+
+**`Example`**
+
+```typescript
+const collections = await client.countCollections();
+```
+
+#### Returns
+
+`Promise`<`number`\>
+
+A promise that resolves to the number of collections.
+
+___
 
 ### createCollection
 
@@ -47,7 +100,7 @@ If there is an issue creating the collection.
 const collection = await client.createCollection({
   name: "my_collection",
   metadata: {
-    description: "My first collection"
+    "description": "My first collection"
   }
 });
 ```
@@ -56,10 +109,7 @@ const collection = await client.createCollection({
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `params` | `Object` | The parameters for creating a new collection. |
-| `params.embeddingFunction?` | [`IEmbeddingFunction`](../interfaces/IEmbeddingFunction.md) | Optional custom embedding function for the collection. |
-| `params.metadata?` | `CollectionMetadata` | Optional metadata associated with the collection. |
-| `params.name` | `string` | The name of the collection. |
+| `params` | [`CreateCollectionParams`](../modules.md#createcollectionparams) | The parameters for creating a new collection. |
 
 #### Returns
 
@@ -91,8 +141,7 @@ await client.deleteCollection({
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `params` | `Object` | The parameters for deleting a collection. |
-| `params.name` | `string` | The name of the collection. |
+| `params` | [`DeleteCollectionParams`](../modules.md#deletecollectionparams) | The parameters for deleting a collection. |
 
 #### Returns
 
@@ -124,9 +173,7 @@ const collection = await client.getCollection({
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `params` | `Object` | The parameters for getting a collection. |
-| `params.embeddingFunction?` | [`IEmbeddingFunction`](../interfaces/IEmbeddingFunction.md) | Optional custom embedding function for the collection. |
-| `params.name` | `string` | The name of the collection. |
+| `params` | [`GetCollectionParams`](../modules.md#getcollectionparams) | The parameters for getting a collection. |
 
 #### Returns
 
@@ -152,7 +199,7 @@ If there is an issue getting or creating the collection.
 const collection = await client.getOrCreateCollection({
   name: "my_collection",
   metadata: {
-    description: "My first collection"
+    "description": "My first collection"
   }
 });
 ```
@@ -161,10 +208,7 @@ const collection = await client.getOrCreateCollection({
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `params` | `Object` | The parameters for creating a new collection. |
-| `params.embeddingFunction?` | [`IEmbeddingFunction`](../interfaces/IEmbeddingFunction.md) | Optional custom embedding function for the collection. |
-| `params.metadata?` | `CollectionMetadata` | Optional metadata associated with the collection. |
-| `params.name` | `string` | The name of the collection. |
+| `params` | [`CreateCollectionParams`](../modules.md#createcollectionparams) | The parameters for creating a new collection. |
 
 #### Returns
 
@@ -196,7 +240,7 @@ ___
 
 ### listCollections
 
-▸ **listCollections**(): `Promise`<`CollectionType`[]\>
+▸ **listCollections**(`«destructured»?`): `Promise`<[`CollectionType`](../modules.md#collectiontype)[]\>
 
 Lists all collections.
 
@@ -207,12 +251,21 @@ If there is an issue listing the collections.
 **`Example`**
 
 ```typescript
-const collections = await client.listCollections();
+const collections = await client.listCollections({
+    limit: 10,
+    offset: 0,
+});
 ```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `«destructured»` | [`ListCollectionsParams`](../modules.md#listcollectionsparams) |
 
 #### Returns
 
-`Promise`<`CollectionType`[]\>
+`Promise`<[`CollectionType`](../modules.md#collectiontype)[]\>
 
 A promise that resolves to a list of collection names.
 
@@ -220,7 +273,7 @@ ___
 
 ### reset
 
-▸ **reset**(): `Promise`<`Reset200Response`\>
+▸ **reset**(): `Promise`<`boolean`\>
 
 Resets the state of the object by making an API call to the reset endpoint.
 
@@ -236,7 +289,7 @@ await client.reset();
 
 #### Returns
 
-`Promise`<`Reset200Response`\>
+`Promise`<`boolean`\>
 
 A promise that resolves when the reset operation is complete.
 

@@ -12,13 +12,13 @@ sidebar_position: 2
 
 • **id**: `string`
 
----
+___
 
 ### metadata
 
-• **metadata**: `undefined` \| `CollectionMetadata`
+• **metadata**: `undefined` \| [`CollectionMetadata`](../modules.md#collectionmetadata)
 
----
+___
 
 ### name
 
@@ -37,24 +37,17 @@ Add items to the collection
 ```typescript
 const response = await collection.add({
   ids: ["id1", "id2"],
-  embeddings: [
-    [1, 2, 3],
-    [4, 5, 6],
-  ],
-  metadatas: [{ key: "value" }, { key: "value" }],
-  documents: ["document1", "document2"],
+  embeddings: [[1, 2, 3], [4, 5, 6]],
+  metadatas: [{ "key": "value" }, { "key": "value" }],
+  documents: ["document1", "document2"]
 });
 ```
 
 #### Parameters
 
-| Name                 | Type                        | Description                              |
-| :------------------- | :-------------------------- | :--------------------------------------- |
-| `params`             | `Object`                    | The parameters for the query.            |
-| `params.documents?`  | `string` \| `Documents`     | Optional documents of the items to add.  |
-| `params.embeddings?` | `Embedding` \| `Embeddings` | Optional embeddings of the items to add. |
-| `params.ids`         | `string` \| `IDs`           | IDs of the items to add.                 |
-| `params.metadatas?`  | `Metadata` \| `Metadatas`   | Optional metadata of the items to add.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`AddParams`](../modules.md#addparams) | The parameters for the query. |
 
 #### Returns
 
@@ -62,7 +55,7 @@ const response = await collection.add({
 
 - The response from the API. True if successful.
 
----
+___
 
 ### count
 
@@ -82,7 +75,7 @@ const response = await collection.count();
 
 - The response from the API.
 
----
+___
 
 ### delete
 
@@ -99,19 +92,16 @@ If there is an issue deleting items from the collection.
 ```typescript
 const results = await collection.delete({
   ids: "some_id",
-  where: {"$and": ["name": {"$eq": "John Doe"}, "age": {"$gte": 30}]},
+  where: {"name": {"$eq": "John Doe"}},
   whereDocument: {"$contains":"search_string"}
 });
 ```
 
 #### Parameters
 
-| Name                    | Type              | Description                                                                   |
-| :---------------------- | :---------------- | :---------------------------------------------------------------------------- |
-| `params`                | `Object`          | The parameters for deleting items from the collection.                        |
-| `params.ids?`           | `string` \| `IDs` | Optional ID or array of IDs of items to delete.                               |
-| `params.where?`         | `Where`           | Optional query condition to filter items to delete based on metadata values.  |
-| `params.whereDocument?` | `WhereDocument`   | Optional query condition to filter items to delete based on document content. |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`DeleteParams`](../modules.md#deleteparams) | The parameters for deleting items from the collection. |
 
 #### Returns
 
@@ -119,11 +109,11 @@ const results = await collection.delete({
 
 A promise that resolves to the IDs of the deleted items.
 
----
+___
 
 ### get
 
-▸ **get**(`params?`): `Promise`<`GetResponse`\>
+▸ **get**(`params?`): `Promise`<[`GetResponse`](../modules.md#getresponse)\>
 
 Get items from the collection
 
@@ -132,7 +122,7 @@ Get items from the collection
 ```typescript
 const response = await collection.get({
   ids: ["id1", "id2"],
-  where: { key: "value" },
+  where: { "key": "value" },
   limit: 10,
   offset: 0,
   include: ["embeddings", "metadatas", "documents"],
@@ -142,23 +132,17 @@ const response = await collection.get({
 
 #### Parameters
 
-| Name                    | Type              | Description                                        |
-| :---------------------- | :---------------- | :------------------------------------------------- |
-| `params`                | `Object`          | The parameters for the query.                      |
-| `params.ids?`           | `string` \| `IDs` | Optional IDs of the items to get.                  |
-| `params.include?`       | `IncludeEnum`[]   | Optional list of items to include in the response. |
-| `params.limit?`         | `number`          | Optional limit on the number of items to get.      |
-| `params.offset?`        | `number`          | Optional offset on the items to get.               |
-| `params.where?`         | `Where`           | Optional where clause to filter items by.          |
-| `params.whereDocument?` | `WhereDocument`   | Optional where clause to filter items by.          |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`GetParams`](../modules.md#getparams) | The parameters for the query. |
 
 #### Returns
 
-`Promise`<`GetResponse`\>
+`Promise`<[`GetResponse`](../modules.md#getresponse)\>
 
 - The response from the server.
 
----
+___
 
 ### modify
 
@@ -171,17 +155,15 @@ Modify the collection name or metadata
 ```typescript
 const response = await collection.modify({
   name: "new name",
-  metadata: { key: "value" },
+  metadata: { "key": "value" },
 });
 ```
 
 #### Parameters
 
-| Name               | Type                 | Description                               |
-| :----------------- | :------------------- | :---------------------------------------- |
-| `params`           | `Object`             | The parameters for the query.             |
-| `params.metadata?` | `CollectionMetadata` | Optional new metadata for the collection. |
-| `params.name?`     | `string`             | Optional new name for the collection.     |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`ModifyCollectionParams`](../modules.md#modifycollectionparams) | The parameters for the query. |
 
 #### Returns
 
@@ -189,11 +171,11 @@ const response = await collection.modify({
 
 - The response from the API.
 
----
+___
 
 ### peek
 
-▸ **peek**(`params?`): `Promise`<`GetResponse`\>
+▸ **peek**(`params?`): `Promise`<[`GetResponse`](../modules.md#getresponse)\>
 
 Peek inside the collection
 
@@ -205,28 +187,27 @@ If there is an issue executing the query.
 
 ```typescript
 const results = await collection.peek({
-  limit: 10,
+  limit: 10
 });
 ```
 
 #### Parameters
 
-| Name            | Type     | Description                                           |
-| :-------------- | :------- | :---------------------------------------------------- |
-| `params`        | `Object` | The parameters for the query.                         |
-| `params.limit?` | `number` | Optional number of results to return (default is 10). |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`PeekParams`](../modules.md#peekparams) | The parameters for the query. |
 
 #### Returns
 
-`Promise`<`GetResponse`\>
+`Promise`<[`GetResponse`](../modules.md#getresponse)\>
 
 A promise that resolves to the query results.
 
----
+___
 
 ### query
 
-▸ **query**(`params`): `Promise`<`QueryResponse`\>
+▸ **query**(`params`): `Promise`<[`QueryResponse`](../modules.md#queryresponse)\>
 
 Performs a query on the collection using the specified parameters.
 
@@ -241,7 +222,7 @@ If there is an issue executing the query.
 const results = await collection.query({
   queryEmbeddings: [[0.1, 0.2, ...], ...],
   nResults: 10,
-  where: {"$and": ["name": {"$eq": "John Doe"}, "age": {"$gte": 30}]},
+  where: {"name": {"$eq": "John Doe"}},
   include: ["metadata", "document"]
 });
 ```
@@ -253,30 +234,24 @@ const results = await collection.query({
 const results = await collection.query({
   queryTexts: "some text",
   nResults: 10,
-  where: { $and: [("name": { $eq: "John Doe" }), ("age": { $gte: 30 })] },
-  include: ["metadata", "document"],
+  where: {"name": {"$eq": "John Doe"}},
+  include: ["metadata", "document"]
 });
 ```
 
 #### Parameters
 
-| Name                      | Type                        | Description                                                                           |
-| :------------------------ | :-------------------------- | :------------------------------------------------------------------------------------ |
-| `params`                  | `Object`                    | The parameters for the query.                                                         |
-| `params.include?`         | `IncludeEnum`[]             | Optional array of fields to include in the result, such as "metadata" and "document". |
-| `params.nResults?`        | `number`                    | Optional number of results to return (default is 10).                                 |
-| `params.queryEmbeddings?` | `Embedding` \| `Embeddings` | Optional query embeddings to use for the search.                                      |
-| `params.queryTexts?`      | `string` \| `string`[]      | Optional query text(s) to search for in the collection.                               |
-| `params.where?`           | `Where`                     | Optional query condition to filter results based on metadata values.                  |
-| `params.whereDocument?`   | `WhereDocument`             | Optional query condition to filter results based on document content.                 |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`QueryParams`](../modules.md#queryparams) | The parameters for the query. |
 
 #### Returns
 
-`Promise`<`QueryResponse`\>
+`Promise`<[`QueryResponse`](../modules.md#queryresponse)\>
 
 A promise that resolves to the query results.
 
----
+___
 
 ### update
 
@@ -289,24 +264,17 @@ Update the embeddings, documents, and/or metadatas of existing items
 ```typescript
 const response = await collection.update({
   ids: ["id1", "id2"],
-  embeddings: [
-    [1, 2, 3],
-    [4, 5, 6],
-  ],
-  metadatas: [{ key: "value" }, { key: "value" }],
+  embeddings: [[1, 2, 3], [4, 5, 6]],
+  metadatas: [{ "key": "value" }, { "key": "value" }],
   documents: ["new document 1", "new document 2"],
 });
 ```
 
 #### Parameters
 
-| Name                 | Type                        | Description                     |
-| :------------------- | :-------------------------- | :------------------------------ |
-| `params`             | `Object`                    | The parameters for the query.   |
-| `params.documents?`  | `string` \| `Documents`     | Optional documents to update.   |
-| `params.embeddings?` | `Embedding` \| `Embeddings` | Optional embeddings to update.  |
-| `params.ids`         | `string` \| `IDs`           | The IDs of the items to update. |
-| `params.metadatas?`  | `Metadata` \| `Metadatas`   | Optional metadatas to update.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`AddParams`](../modules.md#addparams) | The parameters for the query. |
 
 #### Returns
 
@@ -314,7 +282,7 @@ const response = await collection.update({
 
 - The API Response. True if successful. Else, error.
 
----
+___
 
 ### upsert
 
@@ -327,24 +295,17 @@ Upsert items to the collection
 ```typescript
 const response = await collection.upsert({
   ids: ["id1", "id2"],
-  embeddings: [
-    [1, 2, 3],
-    [4, 5, 6],
-  ],
-  metadatas: [{ key: "value" }, { key: "value" }],
+  embeddings: [[1, 2, 3], [4, 5, 6]],
+  metadatas: [{ "key": "value" }, { "key": "value" }],
   documents: ["document1", "document2"],
 });
 ```
 
 #### Parameters
 
-| Name                 | Type                        | Description                              |
-| :------------------- | :-------------------------- | :--------------------------------------- |
-| `params`             | `Object`                    | The parameters for the query.            |
-| `params.documents?`  | `string` \| `Documents`     | Optional documents of the items to add.  |
-| `params.embeddings?` | `Embedding` \| `Embeddings` | Optional embeddings of the items to add. |
-| `params.ids`         | `string` \| `IDs`           | IDs of the items to add.                 |
-| `params.metadatas?`  | `Metadata` \| `Metadatas`   | Optional metadata of the items to add.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `params` | [`AddParams`](../modules.md#addparams) | The parameters for the query. |
 
 #### Returns
 
