@@ -258,4 +258,4 @@ const version = await client.version();
 
 `Promise`<`string`\>
 
-A promise that resolves to the version of the Chroma API.
+A promise that resolves to the version of the Chroma API. 
