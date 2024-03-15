@@ -350,4 +350,4 @@ const response = await collection.upsert({
 
 `Promise`<`boolean`\>
 
-- The response from the API. True if successful. 
+- The response from the API. True if successful.
