@@ -93,6 +93,7 @@ const sidebars = {
         'embeddings/instructor',
         'embeddings/hugging-face-embedding-server',
         'embeddings/jinaai',
+        'embeddings/voyageai',
       ],
     },
   ],
