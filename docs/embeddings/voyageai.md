@@ -21,17 +21,17 @@ Chroma also provides a convenient wrapper around VoyageAI's embedding API. This 
 This embedding function relies on the `voyageai` python package, which you can install with `pip install voyageai`.
 
 ```python
-import chromadb.utils.embedding_functions as embedding_functions
-voyageai_ef  = embedding_functions.VoyageAIEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="voyage-large-2")
-voyageai_ef(texts=["document1","document2"])
+from chromadb.utils.embedding_functions import VoyageAIEmbeddingFunction
+voyageai_ef  = VoyageAIEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="voyage-large-2", input_type=VoyageAIEmbeddingFunction.InputType.DOCUMENT)
+result = voyageai_ef(input=["document1","document2"])
 ```
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-const {VoyageAIEmbeddingFunction} = require('chromadb');
-const embedder = new VoyageAIEmbeddingFunction("apiKey", "voyage-large-2")
+const {VoyageAIEmbeddingFunction, InputType} = require('chromadb');
+const embedder = new VoyageAIEmbeddingFunction("apiKey", "voyage-large-2", InputType.DOCUMENT)
 
 // use directly 
 const embeddings = embedder.generate(["document1","document2"])
