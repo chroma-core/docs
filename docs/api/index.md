@@ -19,7 +19,7 @@ Chroma currently maintains 1st party clients for Python and Javascript. For othe
 |              | Client | Collection |
 |--------------|-----------|---------------|
 | Python | [Client](/reference/Client) | [Collection](/reference/Collection) |
-| Javascript | [Client](/js_reference/Client)   | [Collection](/reference/Collection) |
+| Javascript | [Client](/js_reference/Client)   | [Collection](/js_reference/Collection) |
 
 *** 
 
