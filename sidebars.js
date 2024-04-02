@@ -92,7 +92,7 @@ const sidebars = {
         'embeddings/google-palm',
         'embeddings/hugging-face-embedding-server',
         'embeddings/instructor',
-        'embeddings/roboflow-api'
+        'embeddings/roboflow-api',
         'embeddings/hugging-face-embedding-server',
         'embeddings/jinaai',
       ],
