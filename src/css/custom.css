@@ -589,3 +589,8 @@ div.special_table + table, th, td {
 .main-wrapper {
   min-height: 100vh;
 }
+
+table {
+  display: table;
+  width: -webkit-fill-available;
+}
