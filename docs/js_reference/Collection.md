@@ -242,7 +242,7 @@ const results = await collection.query({
   queryEmbeddings: [[0.1, 0.2, ...], ...],
   nResults: 10,
   where: {"$and": ["name": {"$eq": "John Doe"}, "age": {"$gte": 30}]},
-  include: ["metadata", "document"]
+  include: ["metadatas", "documenst"]
 });
 ```
 
@@ -254,7 +254,7 @@ const results = await collection.query({
   queryTexts: "some text",
   nResults: 10,
   where: { $and: [("name": { $eq: "John Doe" }), ("age": { $gte: 30 })] },
-  include: ["metadata", "document"],
+  include: ["metadatas", "documents"],
 });
 ```
 
