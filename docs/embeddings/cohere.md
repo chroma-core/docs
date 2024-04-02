@@ -21,6 +21,7 @@ Chroma also provides a convenient wrapper around Cohere's embedding API. This em
 This embedding function relies on the `cohere` python package, which you can install with `pip install cohere`.
 
 ```python
+import chromadb.utils.embedding_functions as embedding_functions
 cohere_ef  = embedding_functions.CohereEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="large")
 cohere_ef(texts=["document1","document2"])
 ```
@@ -63,7 +64,7 @@ multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!',
         'Hallo von Cohere!', 'Bonjour de Cohere!', 
         '¡Hola desde Cohere!', 'Olá do Cohere!', 
         'Ciao da Cohere!', '您好，来自 Cohere！',
-        'कोहेरे से नमस्ते!'  ]
+        'कोहिअर से नमस्ते!'  ]
 
 cohere_ef(texts=multilingual_texts)
 
@@ -80,7 +81,7 @@ multilingual_texts  = [ 'Hello from Cohere!', 'مرحبًا من كوهير!',
         'Hallo von Cohere!', 'Bonjour de Cohere!', 
         '¡Hola desde Cohere!', 'Olá do Cohere!', 
         'Ciao da Cohere!', '您好，来自 Cohere！',
-        'कोहेरे से नमस्ते!'  ]
+        'कोहिअर से नमस्ते!'  ]
 
 const embeddings = embedder.generate(multilingual_texts)
 

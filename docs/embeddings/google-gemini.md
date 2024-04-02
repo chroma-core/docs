@@ -24,8 +24,7 @@ This embedding function relies on the `google-generativeai` python package, whic
 
 ```python
 # import
-import chromadb
-from chromadb.utils import embedding_functions
+import chromadb.utils.embedding_functions as embedding_functions
 
 # use directly
 google_ef  = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key="YOUR_API_KEY")

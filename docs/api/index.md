@@ -7,11 +7,11 @@ title: 🔧 API
 
 ## Client APIs
 
-Chroma currently maintains 1st party clients for Python and Javscript. For other clients in other languages, use their repos for documentation.
+Chroma currently maintains 1st party clients for Python and Javascript. For other clients in other languages, use their repos for documentation.
 
 `Client` - is the object that wraps a connection to a backing Chroma DB
 
-`Collection` - is the object that wraps a collectiom
+`Collection` - is the object that wraps a collection
 
 
 <div class="special_table"></div>
@@ -19,7 +19,7 @@ Chroma currently maintains 1st party clients for Python and Javscript. For other
 |              | Client | Collection |
 |--------------|-----------|---------------|
 | Python | [Client](/reference/Client) | [Collection](/reference/Collection) |
-| Javascript | [Client](/js_reference/Client)   | [Collection](/reference/Collection) |
+| Javascript | [Client](/js_reference/Client)   | [Collection](/js_reference/Collection) |
 
 *** 
 
