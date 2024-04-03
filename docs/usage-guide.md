@@ -195,7 +195,7 @@ collection = client.get_collection(name="my_collection", embedding_function=emb_
 If you later wish to `get_collection`, you MUST do so with the embedding function you supplied while creating the collection
 :::
 
-The embedding function takes text as input, and performs tokenization and embedding. If no embedding function is supplied, Chroma will use [sentence transfomer](https://www.sbert.net/index.html) as a default.
+The embedding function takes text as input, and performs tokenization and embedding. If no embedding function is supplied, Chroma will use [sentence transformer](https://www.sbert.net/index.html) as a default.
 
 </TabItem>
 <TabItem value="js" label="JavaScript">
@@ -522,14 +522,14 @@ When using get or query you can use the include parameter to specify which data 
 ```python
 
 # Only get documents and ids
-collection.get({
-    include: [ "documents" ]
-})
+collection.get(
+    include=[ "documents" ]
+)
 
-collection.query({
-    queryEmbeddings: [[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
-    include: [ "documents" ]
-})
+collection.query(
+    query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
+    include=[ "documents" ]
+)
 ```
 
 ### Using Where filters
@@ -692,7 +692,7 @@ collection.update(
 
 </Tabs>
 
-If an `id` is not found in the collection, an error will be logged and the update will be ignored. If `documents` are supplied without corresponding `embeddings`, the embeddings will be recomupted with the collection's embedding function.
+If an `id` is not found in the collection, an error will be logged and the update will be ignored. If `documents` are supplied without corresponding `embeddings`, the embeddings will be recomputed with the collection's embedding function.
 
 If the supplied `embeddings` are not the same dimension as the collection, an exception will be raised.
 
@@ -774,7 +774,7 @@ Supported authentication methods:
 
 | Authentication Method | Basic Auth (Pre-emptive)                                                                                                  | Static API Token                                                                              |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | Static auth token in `Authorization: Bearer <tokem>` or in `X-Chroma-Token: <token>` headers. |
+| Description           | [RFC 7617](https://www.rfc-editor.org/rfc/rfc7617) Basic Auth with `user:password` base64-encoded `Authorization` header. | Static auth token in `Authorization: Bearer <token>` or in `X-Chroma-Token: <token>` headers. |
 | Status                | `Alpha`                                                                                                                   | `Alpha`                                                                                       |
 | Server-Side Support   | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
 | Client/Python         | ✅ `Alpha`                                                                                                                | ✅ `Alpha`                                                                                    |
