@@ -37,7 +37,8 @@ embeddings = ollama_ef(["This is my first text to embed",
 <TabItem value="js" label="JavaScript">
 
 ```javascript
-const {OllamaEmbeddingFunction} = require('chromadb');
+// const {OllamaEmbeddingFunction} = require('chromadb'); //CJS import
+import {OllamaEmbeddingFunction}  from "chromadb"; //ESM import
 const embedder = new OllamaEmbeddingFunction({
     url: "http://127.0.0.1:11434/api/embeddings",
     model: "llama2"
