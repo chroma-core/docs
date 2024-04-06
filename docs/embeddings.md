@@ -10,17 +10,18 @@ Chroma provides lightweight wrappers around popular embedding providers, making 
 
 <div class="special_table"></div>
 
-|              | Python | JS |
-|--------------|-----------|---------------|
-| [OpenAI](/embeddings/openai) | ✅  | ✅ |
-| [Google Generative AI](/embeddings/google-gemini) | ✅  | ✅ |
-| [Cohere](/embeddings/cohere) | ✅  | ✅ |
-| [Google PaLM](/embeddings/google-palm) | ✅  | ➖ |
-| [Hugging Face](/embeddings/hugging-face) | ✅  | ➖ |
-| [Instructor](/embeddings/instructor) | ✅  | ➖ |
-| [Hugging Face Embedding Server](/embeddings/hugging-face-embedding-server) | ✅  | ✅ |
-| [Jina AI](/embeddings/jinaai) | ✅  | ✅ |
-| [Roboflow](/embeddings/roboflow-api) | ✅  | ➖ |
+|                                                                            | Python | JS |
+|----------------------------------------------------------------------------|--------|----|
+| [OpenAI](/embeddings/openai)                                               | ✅      | ✅  |
+| [Google Generative AI](/embeddings/google-gemini)                          | ✅      | ✅  |
+| [Cohere](/embeddings/cohere)                                               | ✅      | ✅  |
+| [Google PaLM](/embeddings/google-palm)                                     | ✅      | ➖  |
+| [Hugging Face](/embeddings/hugging-face)                                   | ✅      | ➖  |
+| [Instructor](/embeddings/instructor)                                       | ✅      | ➖  |
+| [Hugging Face Embedding Server](/embeddings/hugging-face-embedding-server) | ✅      | ✅  |
+| [Jina AI](/embeddings/jinaai)                                              | ✅      | ✅  |
+| [Roboflow](/embeddings/roboflow-api)                                       | ✅      | ➖  |
+| [Cloudflare Workers AI](/embeddings/cloudflare)                            | ✅      | ✅  |
 
 We welcome pull requests to add new Embedding Functions to the community.
 
