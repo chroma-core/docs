@@ -17,6 +17,10 @@ Chroma provides a convenient wrapper around Cloudflare Workers AI REST API. This
 
 Visit the [Cloudflare Workers AI documentation](https://developers.cloudflare.com/workers-ai/) for more information on getting started.
 
+:::note
+Currently cloudflare embeddings endpoints allow batches of maximum 100 documents in a single request. The EF has a hard limit of 100 documents per request, and will raise an error if you try to pass more than 100 documents.
+:::
+
 <Tabs queryString groupId="lang" className="hideTabSwitcher">
 <TabItem value="py" label="Python">
 
@@ -24,7 +28,7 @@ Visit the [Cloudflare Workers AI documentation](https://developers.cloudflare.co
 import chromadb.utils.embedding_functions as embedding_functions
 cf_ef = embedding_functions.CloudflareWorkersAIEmbeddingFunction(
                 api_key = "YOUR_API_KEY",
-                account_id = "YOUR_ACCOUNT_ID",
+                account_id = "YOUR_ACCOUNT_ID", # or gateway_endpoint
                 model_name = "@cf/baai/bge-base-en-v1.5",
             )
 cf_ef(input=["This is my first text to embed", "This is my second document"])
@@ -39,9 +43,9 @@ You can pass in an optional `model_name` argument, which lets you choose which C
 // const {CloudflareWorkersAIEmbeddingFunction} = require('chromadb'); //CJS import
 import {CloudflareWorkersAIEmbeddingFunction}  from "chromadb"; //ESM import
 const embedder = new CloudflareWorkersAIEmbeddingFunction({
-    api_key: 'YOUR_API_KEY',
-    account_id: "YOUR_ACCOUNT_ID",
-    model_name: '@cf/baai/bge-base-en-v1.5',
+    apiToken: 'YOUR_API_KEY',
+    accountId: "YOUR_ACCOUNT_ID", // or gatewayEndpoint
+    model: '@cf/baai/bge-base-en-v1.5',
 });
 
 // use directly
