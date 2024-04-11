@@ -93,7 +93,6 @@ const sidebars = {
         'embeddings/hugging-face-embedding-server',
         'embeddings/instructor',
         'embeddings/roboflow-api',
-        'embeddings/hugging-face-embedding-server',
         'embeddings/jinaai',
         'embeddings/universal-sentence-encoder',
       ],
