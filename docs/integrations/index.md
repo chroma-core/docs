@@ -6,24 +6,25 @@ hide_title: true
 
 # 🔌 Integrations
 
-Chroma maintains integrations with many popular tools. These tools can be used to define the business logic of an AI-native application, curate data, fine-tune embedding spaces and more. 
+Chroma maintains integrations with many popular tools. These tools can be used to define the business logic of an AI-native application, curate data, fine-tune embedding spaces and more.
 
 We welcome pull requests to add new Integrations to the community.
 
 <div class="special_table"></div>
 
-|              | Python | JS |
-|--------------|-----------|---------------|
-| [🦜️🔗 Langchain](/integrations/langchain) | ✅  | ✅ |
-| [🦙 LlamaIndex](/integrations/llama-index) | ✅  | :soon: |
-| [Braintrust](/integrations/braintrust) | ✅  | ✅ |
+|                                             | Python | JS     |
+| ------------------------------------------- | ------ | ------ |
+| [🦜️🔗 Langchain](/integrations/langchain)  | ✅     | ✅     |
+| [🦙 LlamaIndex](/integrations/llama-index)  | ✅     | :soon: |
+| [Braintrust](/integrations/braintrust)      | ✅     | ✅     |
 | [🔭 OpenLLMetry](/integrations/openllmetry) | ✅     | :soon: |
-| [🎈 Streamlit](/integrations/streamlit) | ✅     | ➖ |
-| [💙 Haystack](/integrations/haystack) | ✅     | ➖ |
+| [🎈 Streamlit](/integrations/streamlit)     | ✅     | ➖     |
+| [💙 Haystack](/integrations/haystack)       | ✅     | ➖     |
+| [ 📊 Langtrace](/integrations/langtrace)    | ✅     | ✅     |
 
-*Coming soon* - integrations with LangSmith, JinaAI, and more.
+_Coming soon_ - integrations with LangSmith, JinaAI, and more.
 
-*** 
+---
 
 ### 🧬 Embeddings
 
