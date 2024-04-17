@@ -24,12 +24,13 @@ We will aim to provide:
 
 ### Auth overhaul - April 20, 2024
 
+**If you are not using Chroma's [built-in auth system](https://docs.trychroma.com/usage-guide#authentication), you do not need to take any action.**
+
 This release overhauls and simplifies our authentication and authorization systems.
 If you are you using Chroma's built-in auth system, you will need to update your configuration and
 any code you wrote to implement your own authentication or authorization providers.
 This change is mostly to pay down some of Chroma's technical debt and make future changes easier,
 but it also changes and simplifies user configuration.
-If you are not using Chroma's built-in auth system, you do not need to take any action.
 
 Previously, Chroma's authentication and authorization relied on many objects with many configuration options, including:
 
@@ -48,10 +49,12 @@ We have consolidated these into three classes:
 - `ServerAuthorizationProvider`
 
 `ClientAuthProvider`s are now responsible for their own configuration and credential management. Credentials can be given to them with the `chroma_client_auth_credentials` setting. The value for `chroma_client_auth_credentials` depends on the `ServerAuthenticationProvider`; for `TokenAuthenticationServerProvider` it should just be the token, and for `BasicAuthenticationServerProvider` it should be `username:password`.
+
 `ServerAuthenticationProvider`s are responsible for turning a request's authorization information into a `UserIdentity` containing any information necessary to make an authorization decision. They are now responsible for their own configuration and credential management. Configured via the `chroma_server_authn_credentials` and `chroma_server_authn_credentials_file` settings.
+
 `ServerAuthorizationProvider`s are responsible for turning information about the request and the `UserIdentity` which issued the request into an authorization decision. Configured via the `chroma_server_authz_config` and `chroma_server_authz_config_file` settings.
 
-*Either `_authn_credentials` or `authn_credentials_file` can be set, never both. Same for `authz_config` and `authz_config_file`. The value of the config (or data in the config file) will depend on your authn and authz providers. See [here](https://github.com/chroma-core/chroma/tree/main/examples) for more information.
+*Either `_authn_credentials` or `authn_credentials_file` can be set, never both. Same for `authz_config` and `authz_config_file`. The value of the config (or data in the config file) will depend on your authn and authz providers. See [here](https://github.com/chroma-core/chroma/tree/main/examples/basic_functionality/authz) for more information.
 
 The two auth systems Chroma ships with are `Basic` and `Token`. We have a small migration guide for each.
 
