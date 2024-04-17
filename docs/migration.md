@@ -41,7 +41,7 @@ Previously, Chroma's authentication and authorization relied on many objects wit
 
 and others.
 
-We have consolidated all of this complexity into three classes:
+We have consolidated these into three classes:
 
 - `ClientAuthProvider`
 - `ServerAuthenticationProvider`
