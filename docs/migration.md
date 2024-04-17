@@ -54,7 +54,7 @@ We have consolidated these into three classes:
 
 `ServerAuthorizationProvider`s are responsible for turning information about the request and the `UserIdentity` which issued the request into an authorization decision. Configured via the `chroma_server_authz_config` and `chroma_server_authz_config_file` settings.
 
-*Either `_authn_credentials` or `authn_credentials_file` can be set, never both. Same for `authz_config` and `authz_config_file`. The value of the config (or data in the config file) will depend on your authn and authz providers. See [here](https://github.com/chroma-core/chroma/tree/main/examples/basic_functionality/authz) for more information.
+*Either `_authn_credentials` or `authn_credentials_file` can be set, never both. Same for `authz_config` and `authz_config_file`. The value of the config (or data in the config file) will depend on your authn and authz providers. See [here](https://github.com/chroma-core/chroma/tree/main/examples/basic_functionality/authz) for more information.*
 
 The two auth systems Chroma ships with are `Basic` and `Token`. We have a small migration guide for each.
 
