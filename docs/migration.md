@@ -22,7 +22,7 @@ We will aim to provide:
 
 ## Migration Log
 
-### Non-included fields - April 19, 2024
+### Non-included fields - April 20, 2024
 
 Previously, `collection.get()` and `collection.query()` returned `None` for the `embeddings` field when `embeddings` was not specified in the `include` parameter. This led to confusion as users weren't sure if embeddings had actually been computed and stored.
 
