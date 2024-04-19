@@ -22,6 +22,50 @@ We will aim to provide:
 
 ## Migration Log
 
+### Non-included fields - April 19, 2024
+
+Previously, `collection.get()` and `collection.query()` returned `None` for the `embeddings` field when `embeddings` was not specified in the `include` parameter. This led to confusion as users weren't sure if embeddings had actually been computed and stored.
+
+`embeddings` is now an instance of a new `Omitted()` class when it's unspecified in the `include` parameter. The new class includes a help message (shown when the document or field is printed) and will raise a `ValueError` on any property access.
+
+We have applied this new behavior to all the optional response fields:
+
+- `embeddings`
+- `documents`
+- `metadatas`
+- `uris`
+- `data`
+- `distances`
+
+**Any `is None` assertions on these fields will have to be changed**. For example, if you previously had an assertion like this:
+
+```python
+document = collection.get(ids="id1")
+
+if document["embeddings"] is None:
+  print("Embeddings are not returned by default")
+```
+
+the updated version would be:
+
+```python
+from chromadb.api.types import Omitted
+
+document = collection.get(ids="id1")
+
+if isinstance(document["embeddings"], Omitted):
+  print("Embeddings are not returned by default")
+```
+
+Note that the inverse of this assertion would generally be simpler, e.g.
+
+```python
+document = collection.get(ids="id1", include=["embeddings"])
+
+if isinstance(document["embeddings"], list):
+  print("Embeddings were returned")
+```
+
 ### Auth overhaul - April 20, 2024
 
 **If you are not using Chroma's [built-in auth system](https://docs.trychroma.com/usage-guide#authentication), you do not need to take any action.**
@@ -244,13 +288,13 @@ You can still also access the underlying `.Client()` method. If you want to turn
 import chromadb
 from chromadb.config import Settings
 client = chromadb.PersistentClient(
-    path="/path/to/persist/directory", 
+    path="/path/to/persist/directory",
     settings=Settings(anonymized_telemetry=False))
 ```
 
 **New data layout**
 
-This version of Chroma drops `duckdb` and `clickhouse` in favor of `sqlite` for metadata storage. This means migrating data over. We have created a migration CLI utility to do this. 
+This version of Chroma drops `duckdb` and `clickhouse` in favor of `sqlite` for metadata storage. This means migrating data over. We have created a migration CLI utility to do this.
 
 If you upgrade to `0.4.0` and try to access data stored in the old way, you will see this error message
 
