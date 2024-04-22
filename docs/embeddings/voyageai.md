@@ -22,7 +22,7 @@ This embedding function relies on the `voyageai` python package, which you can i
 
 ```python
 from chromadb.utils.embedding_functions import VoyageAIEmbeddingFunction
-voyageai_ef  = VoyageAIEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="voyage-large-2", input_type=VoyageAIEmbeddingFunction.InputType.DOCUMENT)
+voyageai_ef  = VoyageAIEmbeddingFunction(api_key="YOUR_API_KEY",  model_name="voyage-law-2", input_type=VoyageAIEmbeddingFunction.InputType.DOCUMENT)
 result = voyageai_ef(input=["document1","document2"])
 ```
 
@@ -31,7 +31,8 @@ result = voyageai_ef(input=["document1","document2"])
 
 ```javascript
 const {VoyageAIEmbeddingFunction, InputType} = require('chromadb');
-const embedder = new VoyageAIEmbeddingFunction("apiKey", "voyage-large-2", InputType.DOCUMENT)
+// const {VoyageAIEmbeddingFunction, InputType}  from "chromadb"; // ESM import
+const embedder = new VoyageAIEmbeddingFunction("apiKey", "voyage-law-2", InputType.DOCUMENT)
 
 // use directly 
 const embeddings = embedder.generate(["document1","document2"])
