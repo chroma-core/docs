@@ -145,7 +145,7 @@ const config = {
                 to: '/about',
               },
               {
-                href: 'https://trychroma.notion.site/careers-chroma-9d017c3007c7478ebd85bad854101497',
+                href: 'https://careers.trychroma.com/',
                 label: 'Careers',
               },
               
