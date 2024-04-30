@@ -25,6 +25,8 @@ results = collection.query(
 )
 ```
 
+You can always inspect `results["included"]` to see what fields were populated in the response. In the above example, `results["included"] == ["embeddings", "documents", "metadatas", "distances"]`.
+
 :::note
 We may change `None` to something else to more clearly communicate why they were not returned.
 :::
