@@ -296,7 +296,7 @@ await collection.count(); // returns the number of items in the collection
 ```
 
 </TabItem>
-	
+
 <TabItem value="js" label="Javascript">
 
 `createCollection` also takes an optional `metadata` argument which can be used to customize the distance method of the embedding space by setting the value of `hnsw:space`
@@ -309,7 +309,7 @@ let collection = client.createCollection({
 ```
 
 </TabItem>
-	
+
 </Tabs>
 
 Valid options for `hnsw:space` are "l2", "ip, "or "cosine". The **default** is "l2" which is the squared L2 norm.
@@ -530,6 +530,14 @@ collection.query(
     query_embeddings=[[11.1, 12.1, 13.1],[1.1, 2.3, 3.2], ...],
     include=[ "documents" ]
 )
+```
+
+The dict returned from `.get` and `.query` has a `included` key that's a list of the fields that were included in the response, including fields returned by default. For example:
+
+```python
+result = collection.get()
+
+assert result["included"] == ["metadatas", "documents", "distances"]
 ```
 
 ### Using Where filters
