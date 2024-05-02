@@ -13,6 +13,6 @@ For the list models please visit: [spacy-models](https://spacy.io/models/)
 
 ```python
 import chromadb.utils.embedding_functions as embedding_functions
-ef = embedding_functions.SpacyEmbeddingFunction(model_name)
+ef = embedding_functions.SpacyEmbeddingFunction(model_name="en_core_web_md")
 embeddings = ef(["text-1", "text-2"])
 ```
