@@ -22,6 +22,7 @@ Chroma provides lightweight wrappers around popular embedding providers, making 
 | [Jina AI](/embeddings/jinaai) | ✅  | ✅ |
 | [Roboflow](/embeddings/roboflow-api) | ✅  | ➖ |
 | [Amazon Bedrock](/embeddings/amazon-bedrock) | ✅  | ✅ |
+| [Ollama](/embeddings/ollama)                                               | ✅  | ✅ |    
 
 We welcome pull requests to add new Embedding Functions to the community.
 
