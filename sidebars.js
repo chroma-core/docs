@@ -96,6 +96,7 @@ const sidebars = {
         'embeddings/hugging-face-embedding-server',
         'embeddings/jinaai',
         'embeddings/voyageai',
+        'embeddings/ollama',
       ],
     },
   ],
