@@ -60,7 +60,7 @@ The two auth systems Chroma ships with are `Basic` and `Token`. We have a small 
 
 #### Basic
 
-If you're using `Token` auth, your server configuration might look like:
+If you're using `Basic` auth, your server configuration might look like:
 
 ```yaml
 CHROMA_SERVER_AUTH_CREDENTIALS="admin:admin"
