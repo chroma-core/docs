@@ -20,6 +20,7 @@ We welcome pull requests to add new Integrations to the community.
 | [🔭 OpenLLMetry](/integrations/openllmetry) | ✅     | :soon: |
 | [🎈 Streamlit](/integrations/streamlit) | ✅     | ➖ |
 | [💙 Haystack](/integrations/haystack) | ✅     | ➖ |
+| [MindsDB](/integrations/mindsdb) | ✅     | ✅ |
 
 *Coming soon* - integrations with LangSmith, JinaAI, and more.
 
