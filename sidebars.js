@@ -95,6 +95,7 @@ const sidebars = {
         'embeddings/roboflow-api',
         'embeddings/hugging-face-embedding-server',
         'embeddings/jinaai',
+        'embeddings/amazon-bedrock',
         'embeddings/ollama',
       ],
     },
