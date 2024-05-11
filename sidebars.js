@@ -27,6 +27,7 @@ const sidebars = {
       label: '🧬 Embeddings',
       className: 'category-link',
     },
+    'cli',
     'multi-modal',
     'api-reference',
     'troubleshooting',
