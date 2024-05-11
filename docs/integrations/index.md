@@ -16,6 +16,7 @@ We welcome pull requests to add new Integrations to the community.
 |--------------|-----------|---------------|
 | [🦜️🔗 Langchain](/integrations/langchain) | ✅  | ✅ |
 | [🦙 LlamaIndex](/integrations/llama-index) | ✅  | :soon: |
+| [📚🦙 MemGPT](/integrations/memgpt) | ✅  |  |
 | [Braintrust](/integrations/braintrust) | ✅  | ✅ |
 | [🔭 OpenLLMetry](/integrations/openllmetry) | ✅     | :soon: |
 | [🎈 Streamlit](/integrations/streamlit) | ✅     | ➖ |
