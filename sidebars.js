@@ -69,6 +69,7 @@ const sidebars = {
         'integrations/openllmetry',
         'integrations/streamlit',
         'integrations/haystack',
+        'integrations/langtrace',
       ],
     },
   ],
