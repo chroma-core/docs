@@ -1,3 +1,14 @@
+# Deprecated
+
+The docs are now in a monorepo with the rest of the codebase. 
+
+Read the new readme here: 
+
+https://github.com/chroma-core/chroma/tree/main/docs/docs.trychroma.com
+
+
+***
+
 # Chroma docs
 
 These docs are built using [Docusaurus 2](https://docusaurus.io/)
